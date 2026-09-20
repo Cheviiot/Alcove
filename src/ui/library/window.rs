@@ -903,13 +903,7 @@ pub(crate) fn render_utilities<P: IsA<gtk::Application>>(application: &P) -> any
     };
     for (name, availability) in [
         ("missing", EngineAvailability::Missing),
-        (
-            "installed",
-            EngineAvailability::Available(crate::engines::chromium::ChromiumCapabilities {
-                protocol_version: crate::engines::native_chromium::WORKER_PROTOCOL,
-                features: Default::default(),
-            }),
-        ),
+        ("installed", EngineAvailability::Available),
         (
             "incompatible",
             EngineAvailability::Incompatible("Unsupported add-on protocol version".into()),

@@ -12,10 +12,7 @@ use crate::{
     domain::repository::{
         AppRepository, AppSnapshot, BackgroundLock, LoadReport, ProfileLock, StagedProfile,
     },
-    engines::chromium::{
-        ChromiumBackend, ChromiumCapabilities, ChromiumClient, EngineAvailability,
-        RUNTIME_SHELL_FEATURE,
-    },
+    engines::chromium::{ChromiumBackend, ChromiumClient, EngineAvailability},
     system::background::{BackgroundBackend, PortalBackground},
     system::launcher::{LauncherBackend, PortalLauncher, UninstallOutcome},
 };
@@ -121,22 +118,16 @@ impl<L: LauncherBackend, B: BackgroundBackend, C: ChromiumBackend> AppService<L,
     pub fn contains_any_data(&self, id: &AppId) -> bool {
         self.repository.contains_any_data(id)
     }
-    pub fn chromium_capabilities(&self) -> Result<ChromiumCapabilities> {
-        let capabilities = self.chromium.capabilities()?;
-        Ok(capabilities)
+    pub fn chromium_capabilities(&self) -> Result<()> {
+        self.chromium.probe()
     }
 
     pub fn chromium_availability(&self) -> EngineAvailability {
         if !self.chromium.installed() {
             return EngineAvailability::Missing;
         }
-        match self.chromium.capabilities() {
-            Ok(capabilities) if capabilities.features.contains(RUNTIME_SHELL_FEATURE) => {
-                EngineAvailability::Available(capabilities)
-            }
-            Ok(_) => EngineAvailability::Incompatible(format!(
-                "the Chromium add-on does not support required feature {RUNTIME_SHELL_FEATURE}"
-            )),
+        match self.chromium.probe() {
+            Ok(()) => EngineAvailability::Available,
             Err(error) if error.to_string().contains("incompatible") => {
                 EngineAvailability::Incompatible(error.to_string())
             }
@@ -145,13 +136,7 @@ impl<L: LauncherBackend, B: BackgroundBackend, C: ChromiumBackend> AppService<L,
     }
 
     pub fn open_chromium(&self, app: &AppConfigV3, start_in_background: bool) -> Result<()> {
-        let capabilities = self.chromium_capabilities()?;
-        capabilities.require("open-app")?;
-        capabilities.require("policy-v2")?;
-        capabilities.require(RUNTIME_SHELL_FEATURE)?;
-        if start_in_background {
-            capabilities.require("background")?;
-        }
+        self.chromium_capabilities()?;
         let policy = self.repository.load_policy(&app.id)?;
         self.chromium.open_app(app, &policy, start_in_background)
     }
@@ -584,7 +569,7 @@ impl AppService<PortalLauncher, PortalBackground, ChromiumClient> {
 mod tests {
     use std::{
         cell::{Cell, RefCell},
-        collections::{BTreeSet, HashMap, HashSet},
+        collections::{HashMap, HashSet},
         rc::Rc,
         str::FromStr,
     };
@@ -694,9 +679,8 @@ mod tests {
     #[derive(Debug, Clone)]
     struct FakeChromium {
         available: Rc<Cell<bool>>,
-        protocol_version: Rc<Cell<u32>>,
-        runtime_shell: Rc<Cell<bool>>,
-        broken: Rc<Cell<bool>>,
+        /// What `probe` fails with once the add-on is present at all.
+        failure: Rc<RefCell<Option<String>>>,
         opened: Rc<RefCell<Vec<(AppId, bool)>>>,
     }
 
@@ -704,11 +688,7 @@ mod tests {
         fn default() -> Self {
             Self {
                 available: Rc::new(Cell::new(false)),
-                protocol_version: Rc::new(Cell::new(
-                    crate::engines::native_chromium::WORKER_PROTOCOL,
-                )),
-                runtime_shell: Rc::new(Cell::new(true)),
-                broken: Rc::new(Cell::new(false)),
+                failure: Rc::default(),
                 opened: Rc::default(),
             }
         }
@@ -719,32 +699,14 @@ mod tests {
             self.available.get()
         }
 
-        fn capabilities(&self) -> Result<ChromiumCapabilities> {
+        fn probe(&self) -> Result<()> {
             if !self.available.get() {
-                bail!("Chromium engine unavailable");
+                bail!("the Chromium add-on service could not be activated");
             }
-            if self.broken.get() {
-                bail!("Chromium add-on failed its health check");
+            match self.failure.borrow().as_deref() {
+                Some(message) => bail!("{message}"),
+                None => Ok(()),
             }
-            let protocol_version = self.protocol_version.get();
-            if protocol_version != crate::engines::native_chromium::WORKER_PROTOCOL {
-                bail!(
-                    "incompatible Chromium add-on protocol {protocol_version}; Alcove requires {}",
-                    crate::engines::native_chromium::WORKER_PROTOCOL
-                );
-            }
-            let mut features = BTreeSet::from([
-                "open-app".to_owned(),
-                "policy-v2".to_owned(),
-                "profile-delete".to_owned(),
-            ]);
-            if self.runtime_shell.get() {
-                features.insert(crate::engines::chromium::RUNTIME_SHELL_FEATURE.to_owned());
-            }
-            Ok(ChromiumCapabilities {
-                protocol_version,
-                features,
-            })
         }
 
         fn open_app(
@@ -935,30 +897,24 @@ mod tests {
         assert_eq!(service.chromium_availability(), EngineAvailability::Missing);
 
         chromium.available.set(true);
-        assert!(matches!(
+        assert_eq!(
             service.chromium_availability(),
-            EngineAvailability::Available(_)
-        ));
+            EngineAvailability::Available
+        );
 
-        chromium.runtime_shell.set(false);
-        assert!(matches!(
-            service.chromium_availability(),
-            EngineAvailability::Incompatible(_)
-        ));
-
-        chromium.runtime_shell.set(true);
+        // A stale add-on after an application update: the manifest names a
+        // protocol or CEF version this build does not speak.
         chromium
-            .protocol_version
-            .set(crate::engines::native_chromium::WORKER_PROTOCOL + 1);
+            .failure
+            .replace(Some("incompatible native Chromium add-on".to_owned()));
         assert!(matches!(
             service.chromium_availability(),
             EngineAvailability::Incompatible(_)
         ));
 
         chromium
-            .protocol_version
-            .set(crate::engines::native_chromium::WORKER_PROTOCOL);
-        chromium.broken.set(true);
+            .failure
+            .replace(Some("native Chromium add-on is incomplete".to_owned()));
         assert!(matches!(
             service.chromium_availability(),
             EngineAvailability::Broken(_)

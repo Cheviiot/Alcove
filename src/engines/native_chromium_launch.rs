@@ -16,7 +16,6 @@ use crate::{
     app::application::AlcoveApplication,
     domain::model::{AppConfigV3, AppId, WindowState},
     domain::policy::{AppPolicyV2, Origin, PermissionDecision, PermissionKind},
-    engines::chromium::{ChromiumCapabilities, RUNTIME_SHELL_FEATURE},
     system::service::AppService,
 };
 
@@ -80,23 +79,11 @@ pub fn installed() -> bool {
     std::env::var_os(ADDON_ENV).is_some_and(|path| Path::new(&path).try_exists().unwrap_or(true))
 }
 
-pub fn capabilities() -> Result<ChromiumCapabilities> {
+pub fn probe() -> Result<()> {
     let manifest =
         std::env::var_os(ADDON_ENV).context("native Chromium add-on is not configured")?;
     read_addon(Path::new(&manifest))?;
-    Ok(ChromiumCapabilities {
-        protocol_version: crate::engines::native_chromium::WORKER_PROTOCOL,
-        features: [
-            "open-app",
-            "policy-v2",
-            "background",
-            "native-cef",
-            RUNTIME_SHELL_FEATURE,
-        ]
-        .into_iter()
-        .map(String::from)
-        .collect(),
-    })
+    Ok(())
 }
 
 pub fn existing_window(app: &AlcoveApplication, id: &AppId) -> Option<gtk::Window> {
@@ -228,15 +215,20 @@ mod tests {
             .to_string()
             .contains("incompatible"));
     }
-    /// The engine must accept the capabilities the engine itself reports. A
-    /// second protocol check anywhere else can disagree with the manifest and
-    /// make a working add-on look incompatible.
+    /// A manifest the adapter itself considers valid must also satisfy the
+    /// availability layer. A second protocol check anywhere else can disagree
+    /// with the manifest and make a working add-on look incompatible.
     #[test]
-    fn the_adapter_reports_capabilities_the_engine_accepts() {
+    fn a_valid_addon_is_accepted_by_the_engine() {
         let root = tempfile::tempdir().expect("temporary add-on root");
         std::fs::create_dir_all(root.path().join("cef/Resources")).expect("cef root");
         std::fs::write(root.path().join("cef/Resources/icudtl.dat"), b"").expect("icu data");
-        std::fs::write(root.path().join("worker"), b"#!/bin/sh\n").expect("worker");
+        std::fs::write(
+            root.path().join("worker"),
+            b"#!/bin/sh
+",
+        )
+        .expect("worker");
         let manifest = root.path().join("addon.json");
         std::fs::write(
             &manifest,
@@ -252,13 +244,11 @@ mod tests {
         .expect("write manifest");
 
         std::env::set_var(ADDON_ENV, &manifest);
-        let reported = capabilities().expect("the adapter reports its capabilities");
-        let accepted = crate::engines::chromium::ChromiumClient.capabilities();
+        let installed = installed();
+        let probed = crate::engines::chromium::ChromiumClient.probe();
         std::env::remove_var(ADDON_ENV);
 
-        assert_eq!(
-            accepted.expect("the engine accepts its own capabilities"),
-            reported
-        );
+        assert!(installed);
+        probed.expect("the engine accepts a manifest the adapter wrote");
     }
 }

@@ -1,38 +1,29 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
-use std::collections::BTreeSet;
-
-use anyhow::{bail, Result};
+use anyhow::Result;
 
 use crate::{domain::model::AppConfigV3, domain::policy::AppPolicyV2};
 
-pub const RUNTIME_SHELL_FEATURE: &str = "runtime-shell-v1";
 pub const ADDON_REF_URL: &str =
     "https://cheviiot.github.io/Alcove/alcove-chromium-native.flatpakref";
 
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub struct ChromiumCapabilities {
-    pub protocol_version: u32,
-    pub features: BTreeSet<String>,
-}
-
-#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum EngineAvailability {
     Missing,
-    Available(ChromiumCapabilities),
+    Available,
     Incompatible(String),
     Broken(String),
 }
 
 impl EngineAvailability {
     pub fn is_available(&self) -> bool {
-        matches!(self, Self::Available(_))
+        matches!(self, Self::Available)
     }
 
     pub fn diagnostic(&self) -> Option<&str> {
         match self {
             Self::Incompatible(message) | Self::Broken(message) => Some(message),
-            Self::Missing | Self::Available(_) => None,
+            Self::Missing | Self::Available => None,
         }
     }
 }
@@ -42,7 +33,8 @@ pub struct ChromiumClient;
 
 pub trait ChromiumBackend: Clone {
     fn installed(&self) -> bool;
-    fn capabilities(&self) -> Result<ChromiumCapabilities>;
+    /// Confirms the engine can run, or explains why it cannot.
+    fn probe(&self) -> Result<()>;
     fn open_app(
         &self,
         app: &AppConfigV3,
@@ -56,11 +48,10 @@ impl ChromiumBackend for ChromiumClient {
         crate::engines::native_chromium_launch::installed()
     }
 
-    fn capabilities(&self) -> Result<ChromiumCapabilities> {
-        // The worker protocol is checked against the add-on manifest in
-        // `native_chromium_launch::read_addon`; a second check here would be a
-        // copy that can disagree with it.
-        crate::engines::native_chromium_launch::capabilities()
+    fn probe(&self) -> Result<()> {
+        // The worker protocol and CEF version are checked against the add-on
+        // manifest in `native_chromium_launch::read_addon`.
+        crate::engines::native_chromium_launch::probe()
     }
 
     fn open_app(
@@ -72,15 +63,6 @@ impl ChromiumBackend for ChromiumClient {
         // The engine runs inside the application's own process, so switching to
         // it means starting that process; it then opens the window natively.
         crate::app::application::spawn_app_process(&app.id, start_in_background)
-    }
-}
-
-impl ChromiumCapabilities {
-    pub fn require(&self, feature: &str) -> Result<()> {
-        if !self.features.contains(feature) {
-            bail!("the Chromium add-on does not support required feature {feature}");
-        }
-        Ok(())
     }
 }
 

@@ -70,7 +70,7 @@ pub fn present(parent: &gtk::Window, availability: &EngineAvailability) {
 fn availability_subtitle(availability: &EngineAvailability) -> String {
     match availability {
         EngineAvailability::Missing => gettext("Not installed — WebKitGTK remains the default"),
-        EngineAvailability::Available(_) => gettext("Installed and ready"),
+        EngineAvailability::Available => gettext("Installed and ready"),
         EngineAvailability::Incompatible(message) => {
             format!("{}: {message}", gettext("Update required"))
         }
@@ -83,7 +83,7 @@ fn availability_subtitle(availability: &EngineAvailability) -> String {
 fn availability_action(availability: &EngineAvailability) -> String {
     match availability {
         EngineAvailability::Missing => gettext("Install"),
-        EngineAvailability::Available(_) => gettext("Manage"),
+        EngineAvailability::Available => gettext("Manage"),
         EngineAvailability::Incompatible(_) | EngineAvailability::Broken(_) => gettext("Reinstall"),
     }
 }

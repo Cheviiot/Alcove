@@ -582,14 +582,7 @@ pub(crate) fn run_ui_smoke_test<P: IsA<gtk::Application>>(application: &P) -> an
     adw::StyleManager::default().set_color_scheme(adw::ColorScheme::ForceLight);
     dialog.force_close();
     crate::ui::test_support::settle();
-    let dialog = CreateAppDialog::new(EngineAvailability::Available(
-        crate::engines::chromium::ChromiumCapabilities {
-            protocol_version: crate::engines::native_chromium::WORKER_PROTOCOL,
-            features: std::collections::BTreeSet::from([
-                crate::engines::chromium::RUNTIME_SHELL_FEATURE.to_owned(),
-            ]),
-        },
-    ));
+    let dialog = CreateAppDialog::new(EngineAvailability::Available);
     dialog.present(Some(&window));
     dialog.imp().url_entry.set_text("https://example.org/");
     dialog.imp().title_entry.set_text("Chromium application");
