@@ -6,4 +6,3 @@ pub mod content_filters;
 pub mod native_chromium;
 #[cfg(feature = "native-chromium")]
 pub mod native_chromium_launch;
-pub mod site_icon_provider;

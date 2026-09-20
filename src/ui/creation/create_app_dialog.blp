@@ -152,7 +152,6 @@ template $AlcoveCreateAppDialog: Adw.Dialog {
               }
               Adw.PreferencesGroup {
                 title: _("Icon");
-                description: _("Getting a site icon sends the website domain to Icon Horse.");
                 Adw.ActionRow {
                   use-markup: false;
                   title: _("Choose Icon File");
@@ -162,14 +161,6 @@ template $AlcoveCreateAppDialog: Adw.Dialog {
                   Image icon_image { pixel-size: 40; }
                   [suffix]
                   Image { icon-name: "document-open-symbolic"; }
-                }
-                Adw.ActionRow site_icon_button {
-                  use-markup: false;
-                  title: _("Get Site Icon");
-                  activatable: true;
-                  activated => $on_site_icon_clicked() swapped;
-                  [suffix]
-                  Image { icon-name: "folder-download-symbolic"; }
                 }
               }
               Label icon_provider_status {

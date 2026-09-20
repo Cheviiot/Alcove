@@ -97,14 +97,6 @@ template $AlcoveAppPage: Adw.NavigationPage {
                 [suffix]
                 Image { icon-name: "document-open-symbolic"; }
               }
-              Adw.ActionRow site_icon_button {
-                title: _("Get Site Icon");
-                subtitle: _("Getting a site icon sends the website domain to Icon Horse.");
-                activatable: true;
-                activated => $on_site_icon_clicked() swapped;
-                [suffix]
-                Image { icon-name: "folder-download-symbolic"; }
-              }
             }
             Adw.SwitchRow titlebar_color {
               title: _("Website Titlebar Color");

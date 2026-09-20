@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: alcove 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-21 00:15+1000\n"
+"POT-Creation-Date: 2026-09-21 00:19+1000\n"
 "PO-Revision-Date: 2026-09-19 00:00+1000\n"
 "Last-Translator: Alcove contributors\n"
 "Language-Team: Russian\n"
@@ -12,8 +12,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: data/io.github.cheviiot.alcove.desktop.in:3
 #: data/io.github.cheviiot.alcove.metainfo.xml.in:5 src/system/background.rs:24
@@ -66,11 +66,11 @@ msgstr "Создание, изменение, восстановление и у
 
 #: data/io.github.cheviiot.alcove.metainfo.xml.in:42
 msgid ""
-"Fetch and safely normalize website icons with an offline fallback; an "
-"optional Icon Horse request is made only by explicit user action"
+"Fetch and safely normalize website icons, with a working fallback when the "
+"site offers none"
 msgstr ""
-"Загрузка и безопасная обработка значков сайтов с запасным вариантом без "
-"сети; запрос к Icon Horse выполняется только по действию пользователя"
+"Безопасная загрузка и нормализация значков сайтов с рабочим запасным "
+"вариантом, когда сайт его не отдаёт"
 
 #: data/io.github.cheviiot.alcove.metainfo.xml.in:43
 msgid ""
@@ -118,15 +118,7 @@ msgstr "Вдохновение для интерфейса"
 msgid "Cartridges — interface inspiration"
 msgstr "Cartridges — источник идей для интерфейса"
 
-#: src/app/application.rs:677
-msgid "Website icon provider"
-msgstr "Провайдер иконок сайтов"
-
-#: src/app/application.rs:678
-msgid "Icon Horse — website favicon fallback"
-msgstr "Icon Horse — резервный источник favicon сайтов"
-
-#: src/app/application.rs:699
+#: src/app/application.rs:696
 msgid ""
 "The Chromium add-on could not start. Install or update the add-on, or run "
 "this application once with WebKitGTK. Your engine choice and profiles will "
@@ -136,35 +128,35 @@ msgstr ""
 "либо один раз запустите это приложение через WebKitGTK. Выбор движка и "
 "профили не изменятся."
 
-#: src/app/application.rs:703
+#: src/app/application.rs:700
 msgid "Chromium Engine Unavailable"
 msgstr "Движок Chromium недоступен"
 
 #. Leave room for the primary action with enlarged text. The icon has
 #. the same accessible name and dismissal behavior as the wide button.
-#: src/app/application.rs:705 src/ui/dialogs/backup_dialog.rs:271
+#: src/app/application.rs:702 src/ui/dialogs/backup_dialog.rs:271
 #: src/ui/dialogs/common.rs:119 src/ui/dialogs/common.rs:120
 #: src/ui/library/window.rs:567
 msgid "Cancel"
 msgstr "Отмена"
 
-#: src/app/application.rs:706 src/ui/shell/app_window.rs:1184
+#: src/app/application.rs:703 src/ui/shell/app_window.rs:1184
 msgid "Get Chromium Add-on"
 msgstr "Установить дополнение Chromium"
 
-#: src/app/application.rs:707
+#: src/app/application.rs:704
 msgid "Report Problem"
 msgstr "Сообщить о проблеме"
 
-#: src/app/application.rs:708
+#: src/app/application.rs:705
 msgid "Run Once with WebKit"
 msgstr "Запустить один раз через WebKit"
 
-#: src/app/application.rs:722
+#: src/app/application.rs:719
 msgid "Could Not Open the Issue Tracker"
 msgstr "Не удалось открыть трекер задач"
 
-#: src/app/application.rs:729 src/ui/dialogs/addons_dialog.rs:63
+#: src/app/application.rs:726 src/ui/dialogs/addons_dialog.rs:63
 #: src/ui/shell/app_window.rs:1203
 msgid "Could Not Open the Add-on Installer"
 msgstr "Не удалось открыть установщик дополнения"
@@ -431,7 +423,7 @@ msgstr "Документы"
 msgid "Back"
 msgstr "Назад"
 
-#: src/ui/app_page/app_page.blp:57 src/ui/app_page/mod.rs:603
+#: src/ui/app_page/app_page.blp:57 src/ui/app_page/mod.rs:571
 msgid "This application needs the optional Chromium add-on."
 msgstr "Попробовать это приложение с Chromium?"
 
@@ -465,125 +457,113 @@ msgstr "Внешний вид"
 msgid "Icon"
 msgstr "Значок"
 
-#: src/ui/app_page/app_page.blp:94 src/ui/creation/create_app_dialog.blp:158
+#: src/ui/app_page/app_page.blp:94 src/ui/creation/create_app_dialog.blp:157
 msgid "Choose Icon File"
 msgstr "Выбрать файл иконки"
 
-#: src/ui/app_page/app_page.blp:101 src/ui/creation/create_app_dialog.blp:168
-msgid "Get Site Icon"
-msgstr "Получить иконку сайта"
-
-#: src/ui/app_page/app_page.blp:102 src/ui/creation/create_app_dialog.blp:155
-msgid "Getting a site icon sends the website domain to Icon Horse."
-msgstr "При загрузке значка домен сайта передаётся сервису Icon Horse."
-
-#: src/ui/app_page/app_page.blp:110
+#: src/ui/app_page/app_page.blp:102
 msgid "Website Titlebar Color"
 msgstr "Цвет заголовка"
 
-#: src/ui/app_page/app_page.blp:111
+#: src/ui/app_page/app_page.blp:103
 msgid "Use a valid theme color supplied by the website"
 msgstr "Использовать корректный цвет темы, указанный сайтом"
 
-#: src/ui/app_page/app_page.blp:118 src/ui/dialogs/permissions_dialog.rs:36
+#: src/ui/app_page/app_page.blp:110 src/ui/dialogs/permissions_dialog.rs:36
 msgid "Permissions"
 msgstr "Разрешения"
 
-#: src/ui/app_page/app_page.blp:119
+#: src/ui/app_page/app_page.blp:111
 msgid "Camera, microphone, location and more"
 msgstr "Камера, микрофон, местоположение и другое"
 
-#: src/ui/app_page/app_page.blp:128 src/ui/dialogs/privacy_dialog.rs:80
+#: src/ui/app_page/app_page.blp:120 src/ui/dialogs/privacy_dialog.rs:80
 msgid "Privacy and Power"
 msgstr "Приватность и питание"
 
-#: src/ui/app_page/app_page.blp:129
+#: src/ui/app_page/app_page.blp:121
 msgid "Navigation, network and background activity"
 msgstr "Навигация, сеть и работа в фоне"
 
-#: src/ui/app_page/app_page.blp:139 src/ui/creation/create_app_dialog.blp:199
+#: src/ui/app_page/app_page.blp:131 src/ui/creation/create_app_dialog.blp:190
 msgid "Advanced"
 msgstr "Дополнительно"
 
-#: src/ui/app_page/app_page.blp:141
+#: src/ui/app_page/app_page.blp:133
 msgid "Engine"
 msgstr "Движок"
 
-#: src/ui/app_page/app_page.blp:145
+#: src/ui/app_page/app_page.blp:137
 msgid "Profiles and cookies are never transferred between engines"
 msgstr "Профили и cookie не переносятся между движками"
 
-#: src/ui/app_page/app_page.blp:157 src/ui/creation/create_app_dialog.blp:185
+#: src/ui/app_page/app_page.blp:149 src/ui/creation/create_app_dialog.blp:176
 msgid "Chromium Recommended"
 msgstr "Рекомендуется Chromium"
 
-#: src/ui/app_page/app_page.blp:159
+#: src/ui/app_page/app_page.blp:151
 msgid "Custom User Agent"
 msgstr "Собственный User-Agent"
 
-#: src/ui/app_page/app_page.blp:161
+#: src/ui/app_page/app_page.blp:153
 msgid "User Agent"
 msgstr "User-Agent"
 
-#: src/ui/app_page/app_page.blp:166
+#: src/ui/app_page/app_page.blp:158
 msgid "Repair Launcher"
 msgstr "Восстановить ярлык"
 
-#: src/ui/app_page/app_page.blp:167
+#: src/ui/app_page/app_page.blp:159
 msgid "Restore the app in your desktop application menu"
 msgstr "Восстановление приложения в системном меню"
 
-#: src/ui/app_page/app_page.blp:178
+#: src/ui/app_page/app_page.blp:170
 msgid "Delete…"
 msgstr "Удалить…"
 
-#: src/ui/app_page/mod.rs:273 src/ui/creation/mod.rs:258
-msgid "The site icon provider is unavailable."
-msgstr "Провайдер иконок сайта недоступен."
-
-#: src/ui/app_page/mod.rs:365 src/ui/creation/mod.rs:367
+#: src/ui/app_page/mod.rs:333 src/ui/creation/mod.rs:320
 msgid "Chromium (add-on)"
 msgstr "Chromium (дополнение)"
 
-#: src/ui/app_page/mod.rs:383
+#: src/ui/app_page/mod.rs:351
 msgid "Chromium · Ready"
 msgstr "Рекомендуется Chromium"
 
-#: src/ui/app_page/mod.rs:384 src/ui/creation/mod.rs:374
+#: src/ui/app_page/mod.rs:352 src/ui/creation/mod.rs:327
 #: src/ui/library/app_row.rs:80
 msgid "Chromium · Add-on Required"
 msgstr "Установить дополнение Chromium"
 
-#: src/ui/app_page/mod.rs:443 src/ui/creation/create_app_dialog.blp:148
+#: src/ui/app_page/mod.rs:411 src/ui/creation/create_app_dialog.blp:148
 msgid "Enter a name for the application."
 msgstr "Введите название приложения."
 
-#: src/ui/app_page/mod.rs:444 src/ui/creation/create_app_dialog.blp:74
+#: src/ui/app_page/mod.rs:412 src/ui/creation/create_app_dialog.blp:74
 msgid "Enter a valid HTTP or HTTPS address."
 msgstr "Введите правильный адрес HTTP или HTTPS."
 
-#: src/ui/app_page/mod.rs:446
+#: src/ui/app_page/mod.rs:414
 msgid "Enter a user agent without line breaks (up to 4096 bytes)."
 msgstr "Введите User Agent без переносов строк (до 4096 байт)."
 
-#: src/ui/app_page/mod.rs:678 src/ui/dialogs/common.rs:21
+#: src/ui/app_page/mod.rs:646 src/ui/dialogs/common.rs:21
 msgid "Changes could not be saved."
 msgstr "Не удалось сохранить изменения."
 
-#: src/ui/app_page/mod.rs:772 src/ui/dialogs/privacy_dialog.rs:662
+#: src/ui/app_page/mod.rs:740 src/ui/dialogs/privacy_dialog.rs:662
 msgid "Discard Unsaved Changes?"
 msgstr "Отменить несохранённые изменения?"
 
-#: src/ui/app_page/mod.rs:774 src/ui/dialogs/privacy_dialog.rs:664
+#: src/ui/app_page/mod.rs:742 src/ui/dialogs/privacy_dialog.rs:664
 msgid "Your unsaved changes will be lost. Saved settings will be kept."
 msgstr ""
 "Несохранённые изменения будут потеряны. Сохранённые настройки останутся."
 
-#: src/ui/app_page/mod.rs:778 src/ui/dialogs/privacy_dialog.rs:668
+#: src/ui/app_page/mod.rs:746 src/ui/dialogs/privacy_dialog.rs:668
 msgid "Keep Editing"
 msgstr "Продолжить редактирование"
 
-#: src/ui/app_page/mod.rs:779 src/ui/dialogs/privacy_dialog.rs:669
+#: src/ui/app_page/mod.rs:747 src/ui/dialogs/privacy_dialog.rs:669
 msgid "Discard"
 msgstr "Отменить изменения"
 
@@ -616,49 +596,31 @@ msgstr "Ввести вручную"
 msgid "Review Application"
 msgstr "Проверка приложения"
 
-#: src/ui/creation/create_app_dialog.blp:111 src/ui/creation/mod.rs:105
+#: src/ui/creation/create_app_dialog.blp:111 src/ui/creation/mod.rs:104
 msgid "Create"
 msgstr "Создать"
 
-#: src/ui/creation/create_app_dialog.blp:192
-
+#: src/ui/creation/create_app_dialog.blp:183
 msgid "Get Add-on"
 msgstr "Получить дополнение"
 
-#: src/ui/creation/create_app_dialog.blp:193
-
+#: src/ui/creation/create_app_dialog.blp:184
 msgid "Install the Chromium add-on"
 msgstr "Установить дополнение Chromium"
 
-#: src/ui/creation/create_app_dialog.blp:200
+#: src/ui/creation/create_app_dialog.blp:191
 msgid "Browser Engine"
 msgstr "Браузерный движок"
 
-#: src/ui/creation/mod.rs:173
+#: src/ui/creation/mod.rs:172
 msgid "Website details were not checked. You can edit them below."
 msgstr "Данные сайта не проверены. Вы можете заполнить их ниже."
 
-#: src/ui/creation/mod.rs:228
-msgid "Enter a valid website URL first."
-msgstr "Сначала укажите корректный адрес сайта."
-
-#: src/ui/creation/mod.rs:233
-msgid "The website URL has no hostname."
-msgstr "В адресе сайта отсутствует имя хоста."
-
-#: src/ui/creation/mod.rs:238
-msgid "Getting the website icon…"
-msgstr "Получение иконки сайта…"
-
-#: src/ui/creation/mod.rs:252
-msgid "Icon from Icon Horse"
-msgstr "Иконка из Icon Horse"
-
-#: src/ui/creation/mod.rs:346
+#: src/ui/creation/mod.rs:299
 msgid "The application could not be created."
 msgstr "Не удалось создать приложение."
 
-#: src/ui/creation/mod.rs:453 src/ui/creation/mod.rs:592
+#: src/ui/creation/mod.rs:406 src/ui/creation/mod.rs:545
 msgid ""
 "The website could not be reached. You can still create this application."
 msgstr "Сайт недоступен. Приложение всё равно можно создать."
@@ -1388,7 +1350,6 @@ msgid "Unknown (interface unavailable)"
 msgstr "Неизвестно (интерфейс недоступен)"
 
 #: src/ui/shell/app_window.rs:85
-
 msgid "The link could not be opened"
 msgstr "Не удалось открыть ссылку"
 
@@ -1528,443 +1489,3 @@ msgstr "_Полноэкранный режим"
 #: src/ui/shell/web_app_shell.rs:130
 msgid "Menu"
 msgstr "Меню"
-
-#~ msgid "Fetch and safely normalize website icons with an offline fallback"
-#~ msgstr ""
-#~ "Безопасная загрузка и нормализация значков с резервным офлайн-вариантом"
-
-#~ msgid ""
-#~ "Redesign the library as an adaptive card grid with search, sorting, and "
-#~ "application details"
-#~ msgstr ""
-#~ "Библиотека переработана в адаптивную сетку карточек с поиском, "
-#~ "сортировкой и подробной страницей приложения"
-
-#~ msgid ""
-#~ "Add a trusted local Chromium toolbar built with secure WebContentsView "
-#~ "isolation"
-#~ msgstr ""
-#~ "Добавлена защищённая локальная панель Chromium с изоляцией через "
-#~ "WebContentsView"
-
-#~ msgid ""
-#~ "Add explicit add-on diagnostics, restart guidance, and one-time WebKit "
-#~ "fallback"
-#~ msgstr ""
-#~ "Добавлена диагностика дополнения, подсказка о перезапуске и разовый "
-#~ "запуск через WebKit"
-
-#~ msgid "Move the Chromium payload from the main app into a Flatpak add-on"
-#~ msgstr ""
-#~ "Компоненты Chromium вынесены из основного приложения в Flatpak-дополнение"
-
-#~ msgid ""
-#~ "Publish the app and add-on together from the signed Alcove repository"
-#~ msgstr ""
-#~ "Приложение и дополнение публикуются вместе в подписанном репозитории "
-#~ "Alcove"
-
-#~ msgid "Add clear installation and compatibility diagnostics for the add-on"
-#~ msgstr "Добавлена понятная диагностика установки и совместимости дополнения"
-
-#~ msgid "Embed the Chromium engine into the single Alcove Flatpak"
-#~ msgstr "Движок Chromium встроен в единый Flatpak Alcove"
-
-#~ msgid "Remove the need to install or update a separate Chromium package"
-#~ msgstr ""
-#~ "Отдельный пакет Chromium больше не нужно устанавливать или обновлять"
-
-#~ msgid ""
-#~ "Keep WebKitGTK as the default and retain separate per-engine profiles"
-#~ msgstr ""
-#~ "WebKitGTK остаётся движком по умолчанию, а профили движков хранятся "
-#~ "раздельно"
-
-#~ msgid ""
-#~ "Activate Chromium through an internal service owned by the Alcove app ID"
-#~ msgstr ""
-#~ "Chromium запускается через внутреннюю службу с идентификатором Alcove"
-
-#~ msgid ""
-#~ "Publish a GPG-signed project Flatpak repository for x86_64 and aarch64"
-#~ msgstr ""
-#~ "Публикация подписанного GPG Flatpak-репозитория проекта для x86_64 и "
-#~ "aarch64"
-
-#~ msgid "Clarify the GPL-3.0-only license and preserved Spider authorship"
-#~ msgstr "Уточнение лицензии GPL-3.0-only и сохранённого авторства Spider"
-
-#~ msgid ""
-#~ "Add an explicit WebKitGTK or Chromium engine choice with local "
-#~ "compatibility recommendations"
-#~ msgstr ""
-#~ "Добавлен явный выбор движка WebKitGTK или Chromium с локальными "
-#~ "рекомендациями по совместимости"
-
-#~ msgid ""
-#~ "Integrate the separately sandboxed Chromium companion through an "
-#~ "authenticated D-Bus protocol"
-#~ msgstr ""
-#~ "Отдельно изолированный Chromium-компонент интегрирован через "
-#~ "аутентифицированный протокол D-Bus"
-
-#~ msgid ""
-#~ "Keep engine profiles separate and safely retry deferred companion profile "
-#~ "cleanup"
-#~ msgstr ""
-#~ "Профили движков хранятся раздельно, а отложенная очистка профиля "
-#~ "companion безопасно повторяется"
-
-#~ msgid ""
-#~ "Diagnose Dynamic Launcher, File Chooser, and Documents portal "
-#~ "capabilities independently"
-#~ msgstr ""
-#~ "Возможности порталов Dynamic Launcher, выбора файлов и документов "
-#~ "диагностируются независимо"
-
-#~ msgid ""
-#~ "Distinguish unavailable, unsupported, cancelled, denied, and failed "
-#~ "portal operations"
-#~ msgstr ""
-#~ "Различаются недоступные, неподдерживаемые, отменённые, отклонённые и "
-#~ "завершившиеся ошибкой операции портала"
-
-#~ msgid ""
-#~ "Add opt-in navigation allowlists, proxy settings, background mode, "
-#~ "autostart, and content filters"
-#~ msgstr ""
-#~ "Добавлены необязательные списки разрешённых адресов навигации, настройки "
-#~ "прокси, фоновый режим, автозапуск и фильтры содержимого"
-
-#~ msgid ""
-#~ "Add a threat model for websites, profiles, portals, backups, and the "
-#~ "future companion boundary"
-#~ msgstr ""
-#~ "Добавлена модель угроз для сайтов, профилей, порталов, резервных копий и "
-#~ "границы будущего companion-компонента"
-
-#~ msgid ""
-#~ "Keep every new privacy and power feature disabled until the user enables "
-#~ "it"
-#~ msgstr ""
-#~ "Все новые функции приватности и дополнительные возможности остаются "
-#~ "выключенными, пока пользователь их не включит"
-
-#~ msgid ""
-#~ "Serialize portal reconciliation and safely merge concurrent policy edits"
-#~ msgstr ""
-#~ "Согласование с порталом выполняется последовательно, а одновременные "
-#~ "изменения правил безопасно объединяются"
-
-#~ msgid ""
-#~ "Require fresh background authorization after restore while preserving "
-#~ "other policy"
-#~ msgstr ""
-#~ "После восстановления требуется новая авторизация фонового режима, а "
-#~ "остальные правила сохраняются"
-
-#~ msgid ""
-#~ "Add versioned metadata backups with transactional per-application restore"
-#~ msgstr ""
-#~ "Версионированные резервные копии метаданных с транзакционным "
-#~ "восстановлением приложений"
-
-#~ msgid ""
-#~ "Add optional passphrase-encrypted transfer of cookies and site storage"
-#~ msgstr ""
-#~ "Опциональный зашифрованный перенос cookie и данных сайтов по парольной "
-#~ "фразе"
-
-#~ msgid ""
-#~ "Add conflict preview, partial-failure reporting, and runtime profile locks"
-#~ msgstr ""
-#~ "Предпросмотр конфликтов, отчёт о частичных сбоях и блокировки запущенных "
-#~ "профилей"
-
-#~ msgid "Add portal capability diagnostics and native aarch64 release bundles"
-#~ msgstr ""
-#~ "Диагностика возможностей portal и нативные release-сборки для aarch64"
-
-#~ msgid ""
-#~ "Harden archive extraction, resource limits, and concurrent profile "
-#~ "operations"
-#~ msgstr ""
-#~ "Защищённое извлечение архивов, лимиты ресурсов и безопасные параллельные "
-#~ "операции с профилями"
-
-#~ msgid ""
-#~ "Add per-origin website permissions with session and persistent choices"
-#~ msgstr "Разрешения сайтов по origin с выбором на сессию или постоянно"
-
-#~ msgid ""
-#~ "Add popup and OAuth windows, native notifications, and managed downloads"
-#~ msgstr "Всплывающие окна и OAuth, системные уведомления и менеджер загрузок"
-
-#~ msgid "Add navigation, zoom, and fullscreen runtime controls"
-#~ msgstr "Навигация, масштабирование и полноэкранный режим"
-
-#~ msgid ""
-#~ "Migrate Alcove data to schema v2 and remove Spider runtime compatibility"
-#~ msgstr ""
-#~ "Миграция данных Alcove на схему v2 и удаление совместимости со Spider"
-
-#~ msgid "Prevent a crash when opening an application card for editing"
-#~ msgstr ""
-#~ "Исправление сбоя при открытии карточки приложения для редактирования"
-
-#~ msgid "Add a headless regression test for editor state changes"
-#~ msgstr "Headless regression-тест изменений состояния редактора"
-
-#~ msgid "Introduce the Alcove identity and isolated JSON-based storage"
-#~ msgstr "Новая идентичность Alcove и изолированное хранилище на основе JSON"
-
-#~ msgid "Add transactional launcher operations and repair support"
-#~ msgstr "Транзакционные операции с ярлыками и их восстановление"
-
-#~ msgid "Add an explicit, settings-only Spider importer"
-#~ msgstr "Явный импорт только настроек Spider"
-
-#~ msgid "Harden URL, metadata, icon, download, and theme-color handling"
-#~ msgstr ""
-#~ "Безопасная обработка URL, метаданных, значков, загрузок и цветов темы"
-
-#~ msgid "Save"
-#~ msgstr "Сохранить"
-
-#~ msgid "Launch"
-#~ msgstr "Запустить"
-
-#~ msgid "Edit"
-#~ msgstr "Изменить"
-
-#~ msgid "Privacy & Power"
-#~ msgstr "Конфиденциальность и фоновые функции"
-
-#~ msgid "Delete Application"
-#~ msgstr "Удалить приложение"
-
-#~ msgid "Application"
-#~ msgstr "Приложения"
-
-#~ msgid "Identity and start address"
-#~ msgstr "Название и адрес запуска"
-
-#~ msgid "URL"
-#~ msgstr "URL"
-
-#~ msgid "Title"
-#~ msgstr "Название"
-
-#~ msgid "Automatically normalized to 256×256"
-#~ msgstr "Автоматически приводится к размеру 256×256"
-
-#~ msgid "Window"
-#~ msgstr "Окно веб-приложения"
-
-#~ msgid "Choose Destination"
-#~ msgstr "Выберите место сохранения"
-
-#~ msgid "Include cookies and site storage (requires encryption)"
-#~ msgstr "Включить cookies и данные сайтов (требуется шифрование)"
-
-#~ msgid "Restore Preview"
-#~ msgstr "Предпросмотр восстановления"
-
-#~ msgid "Restore with the original ID"
-#~ msgstr "Восстановить с исходным ID"
-
-#~ msgid "ID conflict: restore with a new ID"
-#~ msgstr "Конфликт ID: восстановить с новым ID"
-
-#~ msgid "Add a New Application"
-#~ msgstr "Добавить новое приложение"
-
-#~ msgid "WebKitGTK is the default; Chromium is available as a Alcove add-on"
-#~ msgstr ""
-#~ "WebKitGTK используется по умолчанию; Chromium доступен как дополнение "
-#~ "Alcove"
-
-#~ msgctxt "shortcut window"
-#~ msgid "General"
-#~ msgstr "Общие"
-
-#~ msgctxt "shortcut window"
-#~ msgid "Show Shortcuts"
-#~ msgstr "Показать комбинации клавиш"
-
-#~ msgctxt "shortcut window"
-#~ msgid "Quit"
-#~ msgstr "Выйти"
-
-#~ msgctxt "shortcut window"
-#~ msgid "Navigation"
-#~ msgstr "Навигация"
-
-#~ msgctxt "shortcut window"
-#~ msgid "Back"
-#~ msgstr "Назад"
-
-#~ msgctxt "shortcut window"
-#~ msgid "Forward"
-#~ msgstr "Вперёд"
-
-#~ msgctxt "shortcut window"
-#~ msgid "Reload"
-#~ msgstr "Перезагрузить"
-
-#~ msgctxt "shortcut window"
-#~ msgid "Reload Without Cache"
-#~ msgstr "Перезагрузить без кэша"
-
-#~ msgctxt "shortcut window"
-#~ msgid "Home"
-#~ msgstr "На главную"
-
-#~ msgctxt "shortcut window"
-#~ msgid "View"
-#~ msgstr "Вид"
-
-#~ msgctxt "shortcut window"
-#~ msgid "Zoom In"
-#~ msgstr "Увеличить масштаб"
-
-#~ msgctxt "shortcut window"
-#~ msgid "Zoom Out"
-#~ msgstr "Уменьшить масштаб"
-
-#~ msgctxt "shortcut window"
-#~ msgid "Reset Zoom"
-#~ msgstr "Сбросить масштаб"
-
-#~ msgctxt "shortcut window"
-#~ msgid "Toggle Fullscreen"
-#~ msgstr "Переключить полноэкранный режим"
-
-#~ msgid "Welcome to Alcove"
-#~ msgstr "Добро пожаловать в Alcove"
-
-#~ msgid "Give each website its own isolated space."
-#~ msgstr "Создайте для каждого сайта отдельное изолированное пространство."
-
-#~ msgid "Top-Level Navigation"
-#~ msgstr "Навигация верхнего уровня"
-
-#~ msgid ""
-#~ "Restrict which origins may replace the application's main page. "
-#~ "Subresources are not blocked."
-#~ msgstr ""
-#~ "Ограничение определяет, какие origin могут заменить главную страницу "
-#~ "приложения. Подресурсы не блокируются."
-
-#~ msgid "Content filter imported"
-#~ msgstr "Фильтр содержимого импортирован"
-
-#~ msgid ""
-#~ "Privacy settings saved; restart the web application to apply runtime "
-#~ "changes"
-#~ msgstr ""
-#~ "Настройки конфиденциальности сохранены; перезапустите веб-приложение, "
-#~ "чтобы применить изменения"
-
-#~ msgid ""
-#~ "Creating and repairing applications requires Application launcher "
-#~ "support. Backup restore also requires File Chooser and Documents portal "
-#~ "access."
-#~ msgstr ""
-#~ "Для создания и восстановления приложений нужна поддержка ярлыков типа "
-#~ "Application. Для восстановления резервных копий также нужен доступ к "
-#~ "порталам выбора файлов и документов."
-
-#~ msgid "Website favicon, Icon Horse, or a local file"
-#~ msgstr "Favicon сайта, Icon Horse или локальный файл"
-
-#~ msgid "Launch Application"
-#~ msgstr "Запустить приложение"
-
-#~ msgid "WebKitGTK"
-#~ msgstr "WebKitGTK"
-
-#~ msgid "Chromium"
-#~ msgstr "Chromium"
-
-#~ msgid ""
-#~ "Replace the library grid with an adaptive GNOME list, search, sorting, "
-#~ "and keyboard navigation"
-#~ msgstr ""
-#~ "Адаптивный список GNOME с поиском, сортировкой и управлением с клавиатуры "
-#~ "вместо сетки приложений"
-
-#~ msgid ""
-#~ "Add a site-only Icon Horse favicon fallback with safe hostname checks, "
-#~ "cache, and PNG normalization"
-#~ msgstr ""
-#~ "Загрузка значков через Icon Horse с проверкой домена, кэшированием и "
-#~ "преобразованием в PNG"
-
-#~ msgid ""
-#~ "Add accessible application details actions and explicit site-icon "
-#~ "controls for creation and editing"
-#~ msgstr ""
-#~ "Доступные действия на странице приложения и выбор значка при создании и "
-#~ "редактировании"
-
-#~ msgid "Edit Application"
-#~ msgstr "Изменение приложения"
-
-#~ msgid "_Save"
-#~ msgstr "_Сохранить"
-
-#~ msgid "Application Settings"
-#~ msgstr "Настройки приложения"
-
-#~ msgid "Name & Appearance"
-#~ msgstr "Название и оформление"
-
-#~ msgid "Address, icon and browser engine"
-#~ msgstr "Адрес, значок и движок браузера"
-
-#~ msgid "Maintenance"
-#~ msgstr "Обслуживание"
-
-#~ msgid "Delete Application…"
-#~ msgstr "Удалить приложение…"
-
-#~ msgid "Discard Changes?"
-#~ msgstr "Отменить изменения?"
-
-#~ msgid "Your changes to this application will be lost."
-#~ msgstr "Изменения настроек этого приложения будут потеряны."
-
-#~ msgid "Turn a website into an app with its own window and private storage."
-#~ msgstr ""
-#~ "Превратите сайт в приложение с отдельным окном и собственным хранилищем "
-#~ "данных."
-
-#~ msgid ""
-#~ "Enter an address, then use the arrow to look up its name and icon. You "
-#~ "can also enter them yourself."
-#~ msgstr ""
-#~ "Введите адрес и нажмите стрелку, чтобы загрузить название и значок. Их "
-#~ "можно указать и вручную."
-
-#~ msgid ""
-#~ "Reset saved choices so websites ask again. Changes take effect when you "
-#~ "save."
-#~ msgstr ""
-#~ "Сбросьте сохранённые разрешения, чтобы сайты запросили их снова. "
-#~ "Изменения вступят в силу после сохранения."
-
-#~ msgid "Application Menu"
-#~ msgstr "Меню приложения"
-
-#~ msgid "Name and Appearance"
-#~ msgstr "Название и оформление"
-
-#~ msgid "Permissions and Behavior"
-#~ msgstr "Разрешения и поведение"
-
-#~ msgid ""
-#~ "Some fields could not be saved. Discard only those changes and leave?"
-#~ msgstr ""
-#~ "Некоторые поля не удалось сохранить. Отменить только эти изменения и "
-#~ "выйти?"

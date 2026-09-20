@@ -14,7 +14,6 @@ use crate::{
     domain::util,
     engines::chromium::{self, EngineAvailability},
     engines::compatibility::{reason_description, CompatibilityCatalogV1},
-    engines::site_icon_provider::{IconHorseProvider, SiteIconProvider},
     system::service::AppService,
     ui::dialogs::common,
 };
@@ -215,52 +214,6 @@ mod imp {
                     }
                 }
             }
-        }
-
-        #[template_callback]
-        async fn on_site_icon_clicked(&self, _row: adw::ActionRow) {
-            if self.obj().loading() || self.obj().provider_loading() {
-                return;
-            }
-            let generation = self.generation.get();
-            let Ok(url) = parse_web_url(&self.url_entry.text()) else {
-                self.obj()
-                    .set_icon_provider_status(&gettext("Enter a valid website URL first."));
-                return;
-            };
-            let Some(host) = url.host_str().map(ToOwned::to_owned) else {
-                self.obj()
-                    .set_icon_provider_status(&gettext("The website URL has no hostname."));
-                return;
-            };
-            self.obj().set_provider_loading(true);
-            self.obj()
-                .set_icon_provider_status(&gettext("Getting the website icon…"));
-            let result = IconHorseProvider.fetch(&host).await;
-            if self.generation.get() != generation {
-                return;
-            }
-            match result {
-                Ok(icon) => match util::load_texture(icon.clone()).await {
-                    Ok(texture) => {
-                        if self.generation.get() != generation {
-                            return;
-                        }
-                        self.icon_image.set_paintable(Some(&texture));
-                        self.pending_icon.replace(Some(icon));
-                        self.obj()
-                            .set_icon_provider_status(&gettext("Icon from Icon Horse"));
-                    }
-                    Err(error) => self.obj().set_icon_provider_status(&error.to_string()),
-                },
-                Err(error) => self.obj().set_icon_provider_status(&format!(
-                    "{} {}",
-                    gettext("The site icon provider is unavailable."),
-                    error
-                )),
-            }
-            self.obj().set_provider_loading(false);
-            self.obj().validate_input();
         }
 
         #[template_callback]

@@ -37,8 +37,7 @@ ship a custom GTK theme.
   an adaptive dialog. Next fetches the site's own name/icon with a 15-second
   total deadline; Cancel and Enter Manually interrupt the lookup. An unreachable
   site has an editable hostname fallback. Returning to the same address
-  preserves edited details. Icon Horse remains an explicit action with its
-  disclosure. Engine choice is under Advanced; only installed engines are
+  preserves edited details. Engine choice is under Advanced; only installed engines are
   selectable. Invalid fields and installation errors stay inline. Portal
   cancellation keeps the draft. Successful creation returns to the library,
   clears its filter and focuses the new row after the modal dialog closes.

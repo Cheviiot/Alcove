@@ -15,7 +15,6 @@ use crate::{
     domain::util,
     engines::chromium::EngineAvailability,
     engines::compatibility::{reason_description, CompatibilityCatalogV1},
-    engines::site_icon_provider::{IconHorseProvider, SiteIconProvider},
     system::service::{AppService, AppSetting},
 };
 
@@ -242,37 +241,6 @@ mod imp {
                         page.set_error(&AppSetting::Icon(Vec::new()), &error.to_string());
                     }
                 }
-            }
-            page.continue_leave();
-        }
-        #[template_callback]
-        async fn on_site_icon_clicked(&self, _row: adw::ActionRow) {
-            if self.saving.get() || !self.obj().validate_text(TextField::Url) {
-                return;
-            }
-            let page = self.obj();
-            let Ok(url) = crate::domain::model::parse_web_url(&self.url_entry.text()) else {
-                return;
-            };
-            let Some(host) = url.host_str() else {
-                return;
-            };
-            page.set_busy(true);
-            self.icon_generation
-                .set(self.icon_generation.get().wrapping_add(1));
-            let result = IconHorseProvider.fetch(host).await;
-            page.set_busy(false);
-            match result {
-                Ok(icon) => {
-                    page.save_setting(AppSetting::Icon(icon)).await;
-                }
-                Err(error) => page.set_error(
-                    &AppSetting::Icon(Vec::new()),
-                    &format!(
-                        "{} {error}",
-                        gettext("The site icon provider is unavailable.")
-                    ),
-                ),
             }
             page.continue_leave();
         }

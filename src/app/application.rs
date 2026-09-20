@@ -674,9 +674,6 @@ impl AlcoveApplication {
         let ux_inspiration = gettext("UX inspiration");
         let cartridges = gettext("Cartridges — interface inspiration");
         dialog.add_acknowledgement_section(Some(&ux_inspiration), &[cartridges.as_str()]);
-        let website_icons = gettext("Website icon provider");
-        let icon_horse = gettext("Icon Horse — website favicon fallback");
-        dialog.add_acknowledgement_section(Some(&website_icons), &[icon_horse.as_str()]);
         dialog.present(self.active_window().as_ref());
     }
 

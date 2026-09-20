@@ -39,7 +39,7 @@
     </p>
     <ul>
       <li>Create, edit, repair, and remove portal-installed launchers</li>
-      <li>Fetch and safely normalize website icons with an offline fallback; an optional Icon Horse request is made only by explicit user action</li>
+      <li>Fetch and safely normalize website icons, with a working fallback when the site offers none</li>
       <li>Keep each application's configuration, policy, profile, and cache separate</li>
     </ul>
   </description>

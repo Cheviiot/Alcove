@@ -47,10 +47,8 @@ in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Privacy
 
-No analytics, no third-party calls, no reporting of the addresses you open. The
-one optional outbound request is a site icon through
-[Icon Horse](https://icon.horse/) on an explicit click, and only the hostname
-leaves the machine.
+No analytics, no third-party calls, no reporting of the addresses you open.
+The only thing Alcove reaches out to is the websites you opened yourself.
 
 ## Contributing
 

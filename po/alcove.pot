@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: alcove\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-21 00:15+1000\n"
+"POT-Creation-Date: 2026-09-21 00:19+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,8 +61,8 @@ msgstr ""
 
 #: data/io.github.cheviiot.alcove.metainfo.xml.in:42
 msgid ""
-"Fetch and safely normalize website icons with an offline fallback; an "
-"optional Icon Horse request is made only by explicit user action"
+"Fetch and safely normalize website icons, with a working fallback when the "
+"site offers none"
 msgstr ""
 
 #: data/io.github.cheviiot.alcove.metainfo.xml.in:43
@@ -110,50 +110,42 @@ msgstr ""
 msgid "Cartridges — interface inspiration"
 msgstr ""
 
-#: src/app/application.rs:677
-msgid "Website icon provider"
-msgstr ""
-
-#: src/app/application.rs:678
-msgid "Icon Horse — website favicon fallback"
-msgstr ""
-
-#: src/app/application.rs:699
+#: src/app/application.rs:696
 msgid ""
 "The Chromium add-on could not start. Install or update the add-on, or run "
 "this application once with WebKitGTK. Your engine choice and profiles will "
 "not be changed."
 msgstr ""
 
-#: src/app/application.rs:703
+#: src/app/application.rs:700
 msgid "Chromium Engine Unavailable"
 msgstr ""
 
 #. Leave room for the primary action with enlarged text. The icon has
 #. the same accessible name and dismissal behavior as the wide button.
-#: src/app/application.rs:705 src/ui/dialogs/backup_dialog.rs:271
+#: src/app/application.rs:702 src/ui/dialogs/backup_dialog.rs:271
 #: src/ui/dialogs/common.rs:119 src/ui/dialogs/common.rs:120
 #: src/ui/library/window.rs:567
 msgid "Cancel"
 msgstr ""
 
-#: src/app/application.rs:706 src/ui/shell/app_window.rs:1184
+#: src/app/application.rs:703 src/ui/shell/app_window.rs:1184
 msgid "Get Chromium Add-on"
 msgstr ""
 
-#: src/app/application.rs:707
+#: src/app/application.rs:704
 msgid "Report Problem"
 msgstr ""
 
-#: src/app/application.rs:708
+#: src/app/application.rs:705
 msgid "Run Once with WebKit"
 msgstr ""
 
-#: src/app/application.rs:722
+#: src/app/application.rs:719
 msgid "Could Not Open the Issue Tracker"
 msgstr ""
 
-#: src/app/application.rs:729 src/ui/dialogs/addons_dialog.rs:63
+#: src/app/application.rs:726 src/ui/dialogs/addons_dialog.rs:63
 #: src/ui/shell/app_window.rs:1203
 msgid "Could Not Open the Add-on Installer"
 msgstr ""
@@ -420,7 +412,7 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
-#: src/ui/app_page/app_page.blp:57 src/ui/app_page/mod.rs:603
+#: src/ui/app_page/app_page.blp:57 src/ui/app_page/mod.rs:571
 msgid "This application needs the optional Chromium add-on."
 msgstr ""
 
@@ -454,124 +446,112 @@ msgstr ""
 msgid "Icon"
 msgstr ""
 
-#: src/ui/app_page/app_page.blp:94 src/ui/creation/create_app_dialog.blp:158
+#: src/ui/app_page/app_page.blp:94 src/ui/creation/create_app_dialog.blp:157
 msgid "Choose Icon File"
 msgstr ""
 
-#: src/ui/app_page/app_page.blp:101 src/ui/creation/create_app_dialog.blp:168
-msgid "Get Site Icon"
-msgstr ""
-
-#: src/ui/app_page/app_page.blp:102 src/ui/creation/create_app_dialog.blp:155
-msgid "Getting a site icon sends the website domain to Icon Horse."
-msgstr ""
-
-#: src/ui/app_page/app_page.blp:110
+#: src/ui/app_page/app_page.blp:102
 msgid "Website Titlebar Color"
 msgstr ""
 
-#: src/ui/app_page/app_page.blp:111
+#: src/ui/app_page/app_page.blp:103
 msgid "Use a valid theme color supplied by the website"
 msgstr ""
 
-#: src/ui/app_page/app_page.blp:118 src/ui/dialogs/permissions_dialog.rs:36
+#: src/ui/app_page/app_page.blp:110 src/ui/dialogs/permissions_dialog.rs:36
 msgid "Permissions"
 msgstr ""
 
-#: src/ui/app_page/app_page.blp:119
+#: src/ui/app_page/app_page.blp:111
 msgid "Camera, microphone, location and more"
 msgstr ""
 
-#: src/ui/app_page/app_page.blp:128 src/ui/dialogs/privacy_dialog.rs:80
+#: src/ui/app_page/app_page.blp:120 src/ui/dialogs/privacy_dialog.rs:80
 msgid "Privacy and Power"
 msgstr ""
 
-#: src/ui/app_page/app_page.blp:129
+#: src/ui/app_page/app_page.blp:121
 msgid "Navigation, network and background activity"
 msgstr ""
 
-#: src/ui/app_page/app_page.blp:139 src/ui/creation/create_app_dialog.blp:199
+#: src/ui/app_page/app_page.blp:131 src/ui/creation/create_app_dialog.blp:190
 msgid "Advanced"
 msgstr ""
 
-#: src/ui/app_page/app_page.blp:141
+#: src/ui/app_page/app_page.blp:133
 msgid "Engine"
 msgstr ""
 
-#: src/ui/app_page/app_page.blp:145
+#: src/ui/app_page/app_page.blp:137
 msgid "Profiles and cookies are never transferred between engines"
 msgstr ""
 
-#: src/ui/app_page/app_page.blp:157 src/ui/creation/create_app_dialog.blp:185
+#: src/ui/app_page/app_page.blp:149 src/ui/creation/create_app_dialog.blp:176
 msgid "Chromium Recommended"
 msgstr ""
 
-#: src/ui/app_page/app_page.blp:159
+#: src/ui/app_page/app_page.blp:151
 msgid "Custom User Agent"
 msgstr ""
 
-#: src/ui/app_page/app_page.blp:161
+#: src/ui/app_page/app_page.blp:153
 msgid "User Agent"
 msgstr ""
 
-#: src/ui/app_page/app_page.blp:166
+#: src/ui/app_page/app_page.blp:158
 msgid "Repair Launcher"
 msgstr ""
 
-#: src/ui/app_page/app_page.blp:167
+#: src/ui/app_page/app_page.blp:159
 msgid "Restore the app in your desktop application menu"
 msgstr ""
 
-#: src/ui/app_page/app_page.blp:178
+#: src/ui/app_page/app_page.blp:170
 msgid "Delete…"
 msgstr ""
 
-#: src/ui/app_page/mod.rs:273 src/ui/creation/mod.rs:258
-msgid "The site icon provider is unavailable."
-msgstr ""
-
-#: src/ui/app_page/mod.rs:365 src/ui/creation/mod.rs:367
+#: src/ui/app_page/mod.rs:333 src/ui/creation/mod.rs:320
 msgid "Chromium (add-on)"
 msgstr ""
 
-#: src/ui/app_page/mod.rs:383
+#: src/ui/app_page/mod.rs:351
 msgid "Chromium · Ready"
 msgstr ""
 
-#: src/ui/app_page/mod.rs:384 src/ui/creation/mod.rs:374
+#: src/ui/app_page/mod.rs:352 src/ui/creation/mod.rs:327
 #: src/ui/library/app_row.rs:80
 msgid "Chromium · Add-on Required"
 msgstr ""
 
-#: src/ui/app_page/mod.rs:443 src/ui/creation/create_app_dialog.blp:148
+#: src/ui/app_page/mod.rs:411 src/ui/creation/create_app_dialog.blp:148
 msgid "Enter a name for the application."
 msgstr ""
 
-#: src/ui/app_page/mod.rs:444 src/ui/creation/create_app_dialog.blp:74
+#: src/ui/app_page/mod.rs:412 src/ui/creation/create_app_dialog.blp:74
 msgid "Enter a valid HTTP or HTTPS address."
 msgstr ""
 
-#: src/ui/app_page/mod.rs:446
+#: src/ui/app_page/mod.rs:414
 msgid "Enter a user agent without line breaks (up to 4096 bytes)."
 msgstr ""
 
-#: src/ui/app_page/mod.rs:678 src/ui/dialogs/common.rs:21
+#: src/ui/app_page/mod.rs:646 src/ui/dialogs/common.rs:21
 msgid "Changes could not be saved."
 msgstr ""
 
-#: src/ui/app_page/mod.rs:772 src/ui/dialogs/privacy_dialog.rs:662
+#: src/ui/app_page/mod.rs:740 src/ui/dialogs/privacy_dialog.rs:662
 msgid "Discard Unsaved Changes?"
 msgstr ""
 
-#: src/ui/app_page/mod.rs:774 src/ui/dialogs/privacy_dialog.rs:664
+#: src/ui/app_page/mod.rs:742 src/ui/dialogs/privacy_dialog.rs:664
 msgid "Your unsaved changes will be lost. Saved settings will be kept."
 msgstr ""
 
-#: src/ui/app_page/mod.rs:778 src/ui/dialogs/privacy_dialog.rs:668
+#: src/ui/app_page/mod.rs:746 src/ui/dialogs/privacy_dialog.rs:668
 msgid "Keep Editing"
 msgstr ""
 
-#: src/ui/app_page/mod.rs:779 src/ui/dialogs/privacy_dialog.rs:669
+#: src/ui/app_page/mod.rs:747 src/ui/dialogs/privacy_dialog.rs:669
 msgid "Discard"
 msgstr ""
 
@@ -604,47 +584,31 @@ msgstr ""
 msgid "Review Application"
 msgstr ""
 
-#: src/ui/creation/create_app_dialog.blp:111 src/ui/creation/mod.rs:105
+#: src/ui/creation/create_app_dialog.blp:111 src/ui/creation/mod.rs:104
 msgid "Create"
 msgstr ""
 
-#: src/ui/creation/create_app_dialog.blp:192
+#: src/ui/creation/create_app_dialog.blp:183
 msgid "Get Add-on"
 msgstr ""
 
-#: src/ui/creation/create_app_dialog.blp:193
+#: src/ui/creation/create_app_dialog.blp:184
 msgid "Install the Chromium add-on"
 msgstr ""
 
-#: src/ui/creation/create_app_dialog.blp:200
+#: src/ui/creation/create_app_dialog.blp:191
 msgid "Browser Engine"
 msgstr ""
 
-#: src/ui/creation/mod.rs:173
+#: src/ui/creation/mod.rs:172
 msgid "Website details were not checked. You can edit them below."
 msgstr ""
 
-#: src/ui/creation/mod.rs:228
-msgid "Enter a valid website URL first."
-msgstr ""
-
-#: src/ui/creation/mod.rs:233
-msgid "The website URL has no hostname."
-msgstr ""
-
-#: src/ui/creation/mod.rs:238
-msgid "Getting the website icon…"
-msgstr ""
-
-#: src/ui/creation/mod.rs:252
-msgid "Icon from Icon Horse"
-msgstr ""
-
-#: src/ui/creation/mod.rs:346
+#: src/ui/creation/mod.rs:299
 msgid "The application could not be created."
 msgstr ""
 
-#: src/ui/creation/mod.rs:453 src/ui/creation/mod.rs:592
+#: src/ui/creation/mod.rs:406 src/ui/creation/mod.rs:545
 msgid ""
 "The website could not be reached. You can still create this application."
 msgstr ""

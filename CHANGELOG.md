@@ -24,8 +24,6 @@ Changelog and versions follow Semantic Versioning.
 - Manage per-application policy: permissions, navigation allowlists, proxies,
   background behavior and content filters.
 - Create portable backups and encrypt archives that contain website data.
-- Add an explicit, site-only Icon Horse favicon fallback with hostname checks,
-  a local cache, PNG normalization and offline-safe behavior.
 - Add an optional, opt-in native Chromium (CEF) adapter behind the
   `native-chromium` build feature, alongside reproducible UI and engine audit
   harnesses.
