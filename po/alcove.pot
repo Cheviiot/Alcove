@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: alcove\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-21 00:19+1000\n"
+"POT-Creation-Date: 2026-09-21 01:05+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -86,66 +86,66 @@ msgstr ""
 msgid "Integrate with GNOME through desktop portals and encrypted backups"
 msgstr ""
 
-#: src/app/application.rs:600
+#: src/app/application.rs:590
 msgid "Website Notification"
 msgstr ""
 
-#: src/app/application.rs:667
+#: src/app/application.rs:657
 msgid "Original Spider project"
 msgstr ""
 
-#: src/app/application.rs:668
+#: src/app/application.rs:658
 msgid "Zaedus — original Spider author"
 msgstr ""
 
-#: src/app/application.rs:669
+#: src/app/application.rs:659
 msgid "Cameron Radmore — Spider contributor"
 msgstr ""
 
-#: src/app/application.rs:674
+#: src/app/application.rs:664
 msgid "UX inspiration"
 msgstr ""
 
-#: src/app/application.rs:675
+#: src/app/application.rs:665
 msgid "Cartridges — interface inspiration"
 msgstr ""
 
-#: src/app/application.rs:696
+#: src/app/application.rs:686
 msgid ""
 "The Chromium add-on could not start. Install or update the add-on, or run "
 "this application once with WebKitGTK. Your engine choice and profiles will "
 "not be changed."
 msgstr ""
 
-#: src/app/application.rs:700
+#: src/app/application.rs:690
 msgid "Chromium Engine Unavailable"
 msgstr ""
 
 #. Leave room for the primary action with enlarged text. The icon has
 #. the same accessible name and dismissal behavior as the wide button.
-#: src/app/application.rs:702 src/ui/dialogs/backup_dialog.rs:271
+#: src/app/application.rs:692 src/ui/dialogs/backup_dialog.rs:271
 #: src/ui/dialogs/common.rs:119 src/ui/dialogs/common.rs:120
 #: src/ui/library/window.rs:567
 msgid "Cancel"
 msgstr ""
 
-#: src/app/application.rs:703 src/ui/shell/app_window.rs:1184
+#: src/app/application.rs:693 src/ui/shell/app_window.rs:1184
 msgid "Get Chromium Add-on"
 msgstr ""
 
-#: src/app/application.rs:704
+#: src/app/application.rs:694
 msgid "Report Problem"
 msgstr ""
 
-#: src/app/application.rs:705
+#: src/app/application.rs:695
 msgid "Run Once with WebKit"
 msgstr ""
 
-#: src/app/application.rs:719
+#: src/app/application.rs:709
 msgid "Could Not Open the Issue Tracker"
 msgstr ""
 
-#: src/app/application.rs:726 src/ui/dialogs/addons_dialog.rs:63
+#: src/app/application.rs:716 src/ui/dialogs/addons_dialog.rs:63
 #: src/ui/shell/app_window.rs:1203
 msgid "Could Not Open the Add-on Installer"
 msgstr ""

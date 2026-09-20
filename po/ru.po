@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: alcove 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-21 00:19+1000\n"
+"POT-Creation-Date: 2026-09-21 01:05+1000\n"
 "PO-Revision-Date: 2026-09-19 00:00+1000\n"
 "Last-Translator: Alcove contributors\n"
 "Language-Team: Russian\n"
@@ -94,31 +94,31 @@ msgstr "По умолчанию WebKitGTK, Chromium доступен отдел�
 msgid "Integrate with GNOME through desktop portals and encrypted backups"
 msgstr "Интегрируется с GNOME через порталы рабочего стола и шифрованные копии"
 
-#: src/app/application.rs:600
+#: src/app/application.rs:590
 msgid "Website Notification"
 msgstr "Уведомление сайта"
 
-#: src/app/application.rs:667
+#: src/app/application.rs:657
 msgid "Original Spider project"
 msgstr "Исходный проект Spider"
 
-#: src/app/application.rs:668
+#: src/app/application.rs:658
 msgid "Zaedus — original Spider author"
 msgstr "Zaedus — автор исходного Spider"
 
-#: src/app/application.rs:669
+#: src/app/application.rs:659
 msgid "Cameron Radmore — Spider contributor"
 msgstr "Cameron Radmore — участник разработки Spider"
 
-#: src/app/application.rs:674
+#: src/app/application.rs:664
 msgid "UX inspiration"
 msgstr "Вдохновение для интерфейса"
 
-#: src/app/application.rs:675
+#: src/app/application.rs:665
 msgid "Cartridges — interface inspiration"
 msgstr "Cartridges — источник идей для интерфейса"
 
-#: src/app/application.rs:696
+#: src/app/application.rs:686
 msgid ""
 "The Chromium add-on could not start. Install or update the add-on, or run "
 "this application once with WebKitGTK. Your engine choice and profiles will "
@@ -128,35 +128,35 @@ msgstr ""
 "либо один раз запустите это приложение через WebKitGTK. Выбор движка и "
 "профили не изменятся."
 
-#: src/app/application.rs:700
+#: src/app/application.rs:690
 msgid "Chromium Engine Unavailable"
 msgstr "Движок Chromium недоступен"
 
 #. Leave room for the primary action with enlarged text. The icon has
 #. the same accessible name and dismissal behavior as the wide button.
-#: src/app/application.rs:702 src/ui/dialogs/backup_dialog.rs:271
+#: src/app/application.rs:692 src/ui/dialogs/backup_dialog.rs:271
 #: src/ui/dialogs/common.rs:119 src/ui/dialogs/common.rs:120
 #: src/ui/library/window.rs:567
 msgid "Cancel"
 msgstr "Отмена"
 
-#: src/app/application.rs:703 src/ui/shell/app_window.rs:1184
+#: src/app/application.rs:693 src/ui/shell/app_window.rs:1184
 msgid "Get Chromium Add-on"
 msgstr "Установить дополнение Chromium"
 
-#: src/app/application.rs:704
+#: src/app/application.rs:694
 msgid "Report Problem"
 msgstr "Сообщить о проблеме"
 
-#: src/app/application.rs:705
+#: src/app/application.rs:695
 msgid "Run Once with WebKit"
 msgstr "Запустить один раз через WebKit"
 
-#: src/app/application.rs:719
+#: src/app/application.rs:709
 msgid "Could Not Open the Issue Tracker"
 msgstr "Не удалось открыть трекер задач"
 
-#: src/app/application.rs:726 src/ui/dialogs/addons_dialog.rs:63
+#: src/app/application.rs:716 src/ui/dialogs/addons_dialog.rs:63
 #: src/ui/shell/app_window.rs:1203
 msgid "Could Not Open the Add-on Installer"
 msgstr "Не удалось открыть установщик дополнения"
