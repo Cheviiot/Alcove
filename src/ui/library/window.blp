@@ -1,0 +1,158 @@
+// SPDX-License-Identifier: GPL-3.0-only
+
+using Gtk 4.0;
+using Adw 1;
+
+template $AlcoveWindow: Adw.ApplicationWindow {
+  title: _("Alcove");
+  default-width: 800;
+  default-height: 640;
+  width-request: 360;
+  height-request: 294;
+
+  content: Adw.ToastOverlay toast_overlay {
+    Adw.NavigationView navigation_view {
+      Adw.NavigationPage library_page {
+        title: _("Applications");
+        tag: "library";
+
+        Adw.ToolbarView {
+          [top]
+          Adw.HeaderBar {
+            [start]
+            Button {
+              action-name: "win.add";
+              icon-name: "list-add-symbolic";
+              tooltip-text: _("Add Application");
+            }
+
+            title-widget: Adw.WindowTitle {
+              title: _("Alcove");
+            };
+
+            [end]
+            MenuButton {
+              primary: true;
+              icon-name: "open-menu-symbolic";
+              tooltip-text: _("Main Menu");
+              menu-model: primary_menu;
+            }
+
+            [end]
+            ToggleButton search_button {
+              icon-name: "system-search-symbolic";
+              tooltip-text: _("Search");
+            }
+          }
+
+          [top]
+          SearchBar search_bar {
+            search-mode-enabled: bind search_button.active bidirectional;
+
+            Adw.Clamp {
+              maximum-size: 720;
+              hexpand: true;
+
+              SearchEntry search_entry {
+                hexpand: true;
+                placeholder-text: _("Search applications");
+                tooltip-text: _("Search by title or domain");
+              }
+            }
+          }
+
+          [top]
+          Adw.Banner diagnostics_banner {
+            revealed: false;
+            button-label: _("Details");
+            title: _("Some application data could not be loaded");
+            button-clicked => $on_diagnostics_clicked() swapped;
+          }
+
+          content: Adw.ViewStack view_stack {
+            enable-transitions: true;
+
+            Adw.ViewStackPage {
+              name: "list";
+
+              child: ScrolledWindow {
+                hscrollbar-policy: never;
+
+                Adw.ClampScrollable {
+                  maximum-size: 720;
+                  tightening-threshold: 560;
+                  margin-top: 24;
+                  margin-bottom: 24;
+                  margin-start: 18;
+                  margin-end: 18;
+
+                  ListView apps_list {
+                    name: "apps-list";
+                    single-click-activate: true;
+
+                    styles ["navigation-sidebar"]
+                  }
+                }
+              };
+            }
+
+            Adw.ViewStackPage {
+              name: "empty";
+
+              child: Adw.StatusPage {
+                icon-name: "io.github.cheviiot.alcove-symbolic";
+                title: _("No Applications Yet");
+                description: _("Add a website to give it an isolated space.");
+
+                Button {
+                  action-name: "win.add";
+                  label: _("Add");
+                  halign: center;
+
+                  styles ["pill", "suggested-action"]
+                }
+              };
+            }
+
+            Adw.ViewStackPage {
+              name: "no-results";
+
+              child: Adw.StatusPage {
+                icon-name: "system-search-symbolic";
+                title: _("No Applications Found");
+                description: _("Try a different title or domain.");
+
+                Button {
+                  label: _("Clear Search");
+                  action-name: "win.clear-search";
+                  halign: center;
+                  styles ["pill"]
+                }
+              };
+            }
+          };
+        }
+      }
+    }
+  };
+}
+
+menu primary_menu {
+  submenu {
+    label: _("Sort Applications");
+    item { label: _("A–Z"); action: "win.sort"; target: "title-asc"; }
+    item { label: _("Z–A"); action: "win.sort"; target: "title-desc"; }
+    item { label: _("Newest First"); action: "win.sort"; target: "newest"; }
+    item { label: _("Oldest First"); action: "win.sort"; target: "oldest"; }
+  }
+  item (_("_Add-ons"), "win.addons")
+  section {
+    item (_("_Back Up…"), "win.backup")
+    item (_("_Restore…"), "win.restore")
+  }
+  section {
+    item (_("System _Capabilities"), "win.capabilities")
+    item (_("_Keyboard Shortcuts"), "win.shortcuts")
+    item (_("_About Alcove"), "app.about")
+  }
+}

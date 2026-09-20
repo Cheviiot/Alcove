@@ -1,0 +1,51 @@
+// SPDX-License-Identifier: GPL-3.0-only
+
+using Gtk 4.0;
+
+template $AlcoveAppRow: Box {
+  spacing: 12;
+  margin-top: 12;
+  margin-bottom: 12;
+  margin-start: 12;
+  margin-end: 12;
+
+  Image icon {
+    icon-name: "io.github.cheviiot.alcove";
+    pixel-size: 48;
+    valign: center;
+    accessible-role: presentation;
+  }
+
+  Box {
+    orientation: vertical;
+    spacing: 3;
+    hexpand: true;
+    valign: center;
+
+    Label title {
+      ellipsize: end;
+      xalign: 0;
+      styles ["heading"]
+    }
+
+    Label subtitle {
+      ellipsize: middle;
+      xalign: 0;
+      styles ["dim-label"]
+    }
+
+    Label engine_status {
+      visible: false;
+      ellipsize: end;
+      xalign: 0;
+      styles ["dim-label", "caption"]
+    }
+  }
+
+  Image {
+    icon-name: "go-next-symbolic";
+    accessible-role: presentation;
+    valign: center;
+    styles ["dim-label"]
+  }
+}
