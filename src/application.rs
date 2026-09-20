@@ -645,8 +645,8 @@ impl AlcoveApplication {
             .copyright("© 2024–2026 Zaedus and Alcove contributors")
             .license_type(gtk::License::Custom)
             .license("GNU General Public License version 3 only (GPL-3.0-only)")
-            .website("https://github.com/Cheviiot/alcove")
-            .issue_url("https://github.com/Cheviiot/alcove/issues")
+            .website("https://github.com/Cheviiot/Alcove")
+            .issue_url("https://github.com/Cheviiot/Alcove/issues")
             .build();
         let original_project = gettext("Original Spider project");
         let zaedus = gettext("Zaedus — original Spider author");
@@ -701,13 +701,13 @@ impl AlcoveApplication {
                 }
                 "report" => {
                     let _ = gio::AppInfo::launch_default_for_uri(
-                        "https://github.com/Cheviiot/alcove/issues/new",
+                        "https://github.com/Cheviiot/Alcove/issues/new",
                         None::<&gio::AppLaunchContext>,
                     );
                 }
                 "install" => {
                     if let Err(error) = gio::AppInfo::launch_default_for_uri(
-                        "https://cheviiot.github.io/alcove/alcove-chromium.flatpakref",
+                        "https://cheviiot.github.io/Alcove/alcove-chromium.flatpakref",
                         None::<&gio::AppLaunchContext>,
                     ) {
                         manager.toast(&error.to_string());

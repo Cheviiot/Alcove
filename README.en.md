@@ -5,7 +5,7 @@
   <h1>Alcove</h1>
   <p><strong>Every website, its own application.</strong></p>
   <p>
-    <a href="https://github.com/Cheviiot/alcove/actions/workflows/ci.yml"><img alt="Build" src="https://img.shields.io/github/actions/workflow/status/Cheviiot/alcove/ci.yml?branch=main&amp;style=flat-square&amp;label=build"></a>
+    <a href="https://github.com/Cheviiot/Alcove/actions/workflows/ci.yml"><img alt="Build" src="https://img.shields.io/github/actions/workflow/status/Cheviiot/Alcove/ci.yml?branch=main&amp;style=flat-square&amp;label=build"></a>
     <a href="COPYING"><img alt="GPL-3.0-only license" src="https://img.shields.io/badge/license-GPL--3.0--only-6f7782?style=flat-square"></a>
     <img alt="GNOME" src="https://img.shields.io/badge/GTK%204-libadwaita-4a86cf?style=flat-square">
     <img alt="Flatpak" src="https://img.shields.io/badge/package-Flatpak-1c1d22?style=flat-square">
@@ -49,7 +49,7 @@ The project is at version 0.1.0 and has no published releases yet. Building
 from source is the working path:
 
 ```sh
-git clone https://github.com/Cheviiot/alcove.git
+git clone https://github.com/Cheviiot/Alcove.git
 cd alcove
 flatpak-builder --disable-rofiles-fuse --user --install --force-clean \
   --install-deps-from=flathub .flatpak-build \

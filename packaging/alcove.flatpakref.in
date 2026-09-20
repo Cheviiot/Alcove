@@ -2,10 +2,10 @@
 Title=Alcove
 Name=io.github.cheviiot.alcove
 Branch=master
-Url=https://cheviiot.github.io/alcove/repo/
+Url=https://cheviiot.github.io/Alcove/repo/
 SuggestRemoteName=alcove
-Homepage=https://github.com/Cheviiot/alcove
-Icon=https://cheviiot.github.io/alcove/io.github.cheviiot.alcove.svg
+Homepage=https://github.com/Cheviiot/Alcove
+Icon=https://cheviiot.github.io/Alcove/io.github.cheviiot.alcove.svg
 RuntimeRepo=https://dl.flathub.org/repo/flathub.flatpakrepo
 IsRuntime=false
 GPGKey=@GPG_KEY@

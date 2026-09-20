@@ -6,7 +6,7 @@ use gtk::gio;
 
 use crate::chromium::EngineAvailability;
 
-const CHROMIUM_REF: &str = "https://cheviiot.github.io/alcove/alcove-chromium.flatpakref";
+const CHROMIUM_REF: &str = "https://cheviiot.github.io/Alcove/alcove-chromium.flatpakref";
 
 pub fn present(parent: &gtk::Window, availability: &EngineAvailability) {
     let dialog = adw::PreferencesDialog::builder()

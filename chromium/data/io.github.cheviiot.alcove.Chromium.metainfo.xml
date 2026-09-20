@@ -21,8 +21,8 @@
       требует подтверждения пользователя.
     </p>
   </description>
-  <url type="homepage">https://github.com/Cheviiot/alcove</url>
-  <url type="bugtracker">https://github.com/Cheviiot/alcove/issues</url>
+  <url type="homepage">https://github.com/Cheviiot/Alcove</url>
+  <url type="bugtracker">https://github.com/Cheviiot/Alcove/issues</url>
   <releases>
     <release version="0.1.0" date="2026-09-20" />
   </releases>

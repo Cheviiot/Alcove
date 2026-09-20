@@ -8,7 +8,7 @@ and the archived Spider project are not covered by this policy.
 ## Reporting a vulnerability
 
 Please use GitHub's private vulnerability reporting for
-`Cheviiot/alcove`. Do not open a public issue containing exploit details,
+`Cheviiot/Alcove`. Do not open a public issue containing exploit details,
 credentials, cookies, profiles, or other private site data.
 
 Include the Alcove version, Flatpak runtime version, reproduction steps, impact,

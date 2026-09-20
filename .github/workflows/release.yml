@@ -94,8 +94,8 @@ jobs:
             --title=Alcove \
             --comment='Official Alcove project repository' \
             --description='GPG-signed Alcove releases published directly from GitHub' \
-            --homepage='https://github.com/Cheviiot/alcove' \
-            --icon='https://cheviiot.github.io/alcove/io.github.cheviiot.alcove.svg' \
+            --homepage='https://github.com/Cheviiot/Alcove' \
+            --icon='https://cheviiot.github.io/Alcove/io.github.cheviiot.alcove.svg' \
             --default-branch=master \
             --gpg-sign="$GPG_FINGERPRINT" \
             --prune \
@@ -129,26 +129,26 @@ jobs:
           install -Dm644 data/icons/hicolor/scalable/apps/io.github.cheviiot.alcove.svg public/io.github.cheviiot.alcove.svg
           flatpak build-bundle \
             --arch=x86_64 \
-            --repo-url='https://cheviiot.github.io/alcove/repo/' \
+            --repo-url='https://cheviiot.github.io/Alcove/repo/' \
             --runtime-repo='https://dl.flathub.org/repo/flathub.flatpakrepo' \
             --gpg-keys=packaging/alcove-repository.gpg \
             public/repo Alcove-x86_64.flatpak io.github.cheviiot.alcove master
           flatpak build-bundle \
             --arch=aarch64 \
-            --repo-url='https://cheviiot.github.io/alcove/repo/' \
+            --repo-url='https://cheviiot.github.io/Alcove/repo/' \
             --runtime-repo='https://dl.flathub.org/repo/flathub.flatpakrepo' \
             --gpg-keys=packaging/alcove-repository.gpg \
             public/repo Alcove-aarch64.flatpak io.github.cheviiot.alcove master
           flatpak build-bundle \
             --runtime \
             --arch=x86_64 \
-            --repo-url='https://cheviiot.github.io/alcove/repo/' \
+            --repo-url='https://cheviiot.github.io/Alcove/repo/' \
             --gpg-keys=packaging/alcove-repository.gpg \
             public/repo Alcove-Chromium-x86_64.flatpak io.github.cheviiot.alcove.Chromium master
           flatpak build-bundle \
             --runtime \
             --arch=aarch64 \
-            --repo-url='https://cheviiot.github.io/alcove/repo/' \
+            --repo-url='https://cheviiot.github.io/Alcove/repo/' \
             --gpg-keys=packaging/alcove-repository.gpg \
             public/repo Alcove-Chromium-aarch64.flatpak io.github.cheviiot.alcove.Chromium master
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

@@ -2,8 +2,8 @@
 Title=Chromium Engine for Alcove
 Name=io.github.cheviiot.alcove.Chromium
 Branch=master
-Url=https://cheviiot.github.io/alcove/repo/
+Url=https://cheviiot.github.io/Alcove/repo/
 SuggestRemoteName=alcove
-Homepage=https://github.com/Cheviiot/alcove
+Homepage=https://github.com/Cheviiot/Alcove
 IsRuntime=true
 GPGKey=@GPG_KEY@

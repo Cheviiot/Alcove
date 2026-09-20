@@ -5,7 +5,7 @@
   <h1>Alcove</h1>
   <p><strong>Любой сайт — отдельное приложение.</strong></p>
   <p>
-    <a href="https://github.com/Cheviiot/alcove/actions/workflows/ci.yml"><img alt="Сборка" src="https://img.shields.io/github/actions/workflow/status/Cheviiot/alcove/ci.yml?branch=main&amp;style=flat-square&amp;label=%D1%81%D0%B1%D0%BE%D1%80%D0%BA%D0%B0"></a>
+    <a href="https://github.com/Cheviiot/Alcove/actions/workflows/ci.yml"><img alt="Сборка" src="https://img.shields.io/github/actions/workflow/status/Cheviiot/Alcove/ci.yml?branch=main&amp;style=flat-square&amp;label=%D1%81%D0%B1%D0%BE%D1%80%D0%BA%D0%B0"></a>
     <a href="COPYING"><img alt="Лицензия GPL-3.0-only" src="https://img.shields.io/badge/%D0%BB%D0%B8%D1%86%D0%B5%D0%BD%D0%B7%D0%B8%D1%8F-GPL--3.0--only-6f7782?style=flat-square"></a>
     <img alt="GNOME" src="https://img.shields.io/badge/GTK%204-libadwaita-4a86cf?style=flat-square">
     <img alt="Flatpak" src="https://img.shields.io/badge/%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-Flatpak-1c1d22?style=flat-square">
@@ -48,7 +48,7 @@ Chromium поставляется отдельным дополнением Flat
 сборка из исходников:
 
 ```sh
-git clone https://github.com/Cheviiot/alcove.git
+git clone https://github.com/Cheviiot/Alcove.git
 cd alcove
 flatpak-builder --disable-rofiles-fuse --user --install --force-clean \
   --install-deps-from=flathub .flatpak-build \
