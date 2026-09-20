@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<gresources>
+  <gresource prefix="/io/github/cheviiot/bastle">
+    <file preprocess="xml-stripblanks">window.ui</file>
+    <file preprocess="xml-stripblanks">create_app_dialog.ui</file>
+    <file preprocess="xml-stripblanks">app_row.ui</file>
+    <file preprocess="xml-stripblanks">app_window.ui</file>
+    <file preprocess="xml-stripblanks">app_page.ui</file>
+  </gresource>
+  <gresource prefix="/io/github/cheviiot/bastle/icons/scalable/apps">
+    <file alias="io.github.cheviiot.bastle.svg">../data/icons/hicolor/scalable/apps/io.github.cheviiot.bastle.svg</file>
+  </gresource>
+  <gresource prefix="/io/github/cheviiot/bastle/icons/symbolic/apps">
+    <file alias="io.github.cheviiot.bastle-symbolic.svg">../data/icons/hicolor/symbolic/apps/io.github.cheviiot.bastle-symbolic.svg</file>
+  </gresource>
+</gresources>
