@@ -69,7 +69,7 @@ jobs:
           test -s AUTHORS.md
           grep -q '<project_license>GPL-3.0-only</project_license>' \
             chromium/data/io.github.cheviiot.alcove.Chromium.metainfo.xml
-      - uses: EmbarkStudios/cargo-deny-action@c3bbe7e4e3f7baeee1a3dd9aec0a3b2aded580fb
+      - uses: EmbarkStudios/cargo-deny-action@3c6349835b2b7b196a839186cb8b78e02f7b5f25
         with:
           command: check
 
