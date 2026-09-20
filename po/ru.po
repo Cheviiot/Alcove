@@ -1,0 +1,1855 @@
+# Russian translation for Bastle.
+# SPDX-License-Identifier: GPL-3.0-only
+msgid ""
+msgstr ""
+"Project-Id-Version: bastle 0.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-06 21:59+1000\n"
+"PO-Revision-Date: 2026-09-19 00:00+1000\n"
+"Last-Translator: Bastle contributors\n"
+"Language-Team: Russian\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: data/io.github.cheviiot.bastle.desktop.in:3
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:5 src/app_window.rs:1147
+#: src/home_page.blp:7 src/window.blp:7
+msgid "Bastle"
+msgstr "Bastle"
+
+#: data/io.github.cheviiot.bastle.desktop.in:4
+msgid "Create isolated web applications"
+msgstr "Создание изолированных веб-приложений"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:6
+msgid "Create isolated web applications for GNOME"
+msgstr "Создание изолированных веб-приложений для GNOME"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:8
+msgid "Cheviiot and Bastle contributors"
+msgstr "Cheviiot и участники проекта Bastle"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:28
+msgid ""
+"Bastle is a GNOME-native manager for isolated web applications. WebKitGTK is "
+"the default engine, and Chromium is available as a Flatpak add-on for "
+"explicitly selected sites. Each website gets separate local data, cookies, "
+"cache, settings, and its own desktop launcher."
+msgstr ""
+"Bastle — нативный для GNOME менеджер изолированных веб-приложений. WebKitGTK "
+"используется по умолчанию, а Chromium доступен как Flatpak-дополнение для "
+"явно выбранных сайтов. Каждый сайт получает отдельные локальные данные, "
+"cookies, кэш, настройки и собственный ярлык рабочего стола."
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:34
+msgid ""
+"Bastle is an independent successor to Spider. The original work by Zaedus, "
+"Cameron Radmore's contribution, and their Git history remain credited. "
+"Bastle is developed independently and does not claim their endorsement or "
+"participation."
+msgstr ""
+"Bastle — независимый преемник Spider. Авторство исходной работы Zaedus, "
+"вклад Cameron Radmore и их история Git сохранены. Bastle развивается "
+"независимо и не заявляет об их одобрении или участии."
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:41
+msgid "Create, edit, repair, and remove portal-installed launchers"
+msgstr "Создание, изменение, восстановление и удаление ярлыков через портал"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:42
+msgid "Fetch and safely normalize website icons with an offline fallback"
+msgstr ""
+"Безопасная загрузка и нормализация значков с резервным офлайн-вариантом"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:43
+msgid ""
+"Keep each application's configuration, policy, profile, and cache separate"
+msgstr ""
+"Хранение конфигурации, правил, профиля и кеша каждого приложения отдельно"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:58
+msgid ""
+"Redesign the library as an adaptive card grid with search, sorting, and "
+"application details"
+msgstr ""
+"Библиотека переработана в адаптивную сетку карточек с поиском, сортировкой и "
+"подробной страницей приложения"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:59
+msgid ""
+"Keep WebKitGTK as the default and make Chromium an optional, manually "
+"installed add-on"
+msgstr ""
+"WebKitGTK остаётся движком по умолчанию, а Chromium устанавливается вручную "
+"как необязательное дополнение"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:60
+msgid ""
+"Add a trusted local Chromium toolbar built with secure WebContentsView "
+"isolation"
+msgstr ""
+"Добавлена защищённая локальная панель Chromium с изоляцией через "
+"WebContentsView"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:61
+msgid ""
+"Add explicit add-on diagnostics, restart guidance, and one-time WebKit "
+"fallback"
+msgstr ""
+"Добавлена диагностика дополнения, подсказка о перезапуске и разовый запуск "
+"через WebKit"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:69
+msgid "Move the Chromium payload from the main app into a Flatpak add-on"
+msgstr ""
+"Компоненты Chromium вынесены из основного приложения в Flatpak-дополнение"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:70
+msgid "Publish the app and add-on together from the signed Bastle repository"
+msgstr ""
+"Приложение и дополнение публикуются вместе в подписанном репозитории Bastle"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:71
+msgid "Keep WebKitGTK usable when the Chromium add-on is not installed"
+msgstr "WebKitGTK продолжает работать без установленного дополнения Chromium"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:72
+msgid "Add clear installation and compatibility diagnostics for the add-on"
+msgstr "Добавлена понятная диагностика установки и совместимости дополнения"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:80
+msgid "Embed the Chromium engine into the single Bastle Flatpak"
+msgstr "Движок Chromium встроен в единый Flatpak Bastle"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:81
+msgid "Remove the need to install or update a separate Chromium package"
+msgstr "Отдельный пакет Chromium больше не нужно устанавливать или обновлять"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:82
+msgid "Keep WebKitGTK as the default and retain separate per-engine profiles"
+msgstr ""
+"WebKitGTK остаётся движком по умолчанию, а профили движков хранятся раздельно"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:83
+msgid ""
+"Activate Chromium through an internal service owned by the Bastle app ID"
+msgstr "Chromium запускается через внутреннюю службу с идентификатором Bastle"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:84
+msgid "Publish a GPG-signed project Flatpak repository for x86_64 and aarch64"
+msgstr ""
+"Публикация подписанного GPG Flatpak-репозитория проекта для x86_64 и aarch64"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:85
+msgid "Clarify the GPL-3.0-only license and preserved Spider authorship"
+msgstr "Уточнение лицензии GPL-3.0-only и сохранённого авторства Spider"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:93
+msgid ""
+"Add an explicit WebKitGTK or Chromium engine choice with local compatibility "
+"recommendations"
+msgstr ""
+"Добавлен явный выбор движка WebKitGTK или Chromium с локальными "
+"рекомендациями по совместимости"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:94
+msgid ""
+"Integrate the separately sandboxed Chromium companion through an "
+"authenticated D-Bus protocol"
+msgstr ""
+"Отдельно изолированный Chromium-компонент интегрирован через "
+"аутентифицированный протокол D-Bus"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:95
+msgid ""
+"Keep engine profiles separate and safely retry deferred companion profile "
+"cleanup"
+msgstr ""
+"Профили движков хранятся раздельно, а отложенная очистка профиля companion "
+"безопасно повторяется"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:96
+msgid ""
+"Diagnose Dynamic Launcher, File Chooser, and Documents portal capabilities "
+"independently"
+msgstr ""
+"Возможности порталов Dynamic Launcher, выбора файлов и документов "
+"диагностируются независимо"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:97
+msgid ""
+"Distinguish unavailable, unsupported, cancelled, denied, and failed portal "
+"operations"
+msgstr ""
+"Различаются недоступные, неподдерживаемые, отменённые, отклонённые и "
+"завершившиеся ошибкой операции портала"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:105
+msgid ""
+"Add opt-in navigation allowlists, proxy settings, background mode, "
+"autostart, and content filters"
+msgstr ""
+"Добавлены необязательные списки разрешённых адресов навигации, настройки "
+"прокси, фоновый режим, автозапуск и фильтры содержимого"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:106
+msgid ""
+"Add a threat model for websites, profiles, portals, backups, and the future "
+"companion boundary"
+msgstr ""
+"Добавлена модель угроз для сайтов, профилей, порталов, резервных копий и "
+"границы будущего companion-компонента"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:107
+msgid ""
+"Keep every new privacy and power feature disabled until the user enables it"
+msgstr ""
+"Все новые функции приватности и дополнительные возможности остаются "
+"выключенными, пока пользователь их не включит"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:108
+msgid ""
+"Serialize portal reconciliation and safely merge concurrent policy edits"
+msgstr ""
+"Согласование с порталом выполняется последовательно, а одновременные "
+"изменения правил безопасно объединяются"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:109
+msgid ""
+"Require fresh background authorization after restore while preserving other "
+"policy"
+msgstr ""
+"После восстановления требуется новая авторизация фонового режима, а "
+"остальные правила сохраняются"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:117
+msgid ""
+"Add versioned metadata backups with transactional per-application restore"
+msgstr ""
+"Версионированные резервные копии метаданных с транзакционным восстановлением "
+"приложений"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:118
+msgid "Add optional passphrase-encrypted transfer of cookies and site storage"
+msgstr ""
+"Опциональный зашифрованный перенос cookie и данных сайтов по парольной фразе"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:119
+msgid ""
+"Add conflict preview, partial-failure reporting, and runtime profile locks"
+msgstr ""
+"Предпросмотр конфликтов, отчёт о частичных сбоях и блокировки запущенных "
+"профилей"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:120
+msgid "Add portal capability diagnostics and native aarch64 release bundles"
+msgstr "Диагностика возможностей portal и нативные release-сборки для aarch64"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:121
+msgid ""
+"Harden archive extraction, resource limits, and concurrent profile operations"
+msgstr ""
+"Защищённое извлечение архивов, лимиты ресурсов и безопасные параллельные "
+"операции с профилями"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:129
+msgid "Add per-origin website permissions with session and persistent choices"
+msgstr "Разрешения сайтов по origin с выбором на сессию или постоянно"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:130
+msgid ""
+"Add popup and OAuth windows, native notifications, and managed downloads"
+msgstr "Всплывающие окна и OAuth, системные уведомления и менеджер загрузок"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:131
+msgid "Add navigation, zoom, and fullscreen runtime controls"
+msgstr "Навигация, масштабирование и полноэкранный режим"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:132
+msgid ""
+"Migrate Bastle data to schema v2 and remove Spider runtime compatibility"
+msgstr "Миграция данных Bastle на схему v2 и удаление совместимости со Spider"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:140
+msgid "Prevent a crash when opening an application card for editing"
+msgstr "Исправление сбоя при открытии карточки приложения для редактирования"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:141
+msgid "Add a headless regression test for editor state changes"
+msgstr "Headless regression-тест изменений состояния редактора"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:149
+msgid "Introduce the Bastle identity and isolated JSON-based storage"
+msgstr "Новая идентичность Bastle и изолированное хранилище на основе JSON"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:150
+msgid "Add transactional launcher operations and repair support"
+msgstr "Транзакционные операции с ярлыками и их восстановление"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:151
+msgid "Add an explicit, settings-only Spider importer"
+msgstr "Явный импорт только настроек Spider"
+
+#: data/io.github.cheviiot.bastle.metainfo.xml.in:152
+msgid "Harden URL, metadata, icon, download, and theme-color handling"
+msgstr "Безопасная обработка URL, метаданных, значков, загрузок и цветов темы"
+
+#: data/io.github.cheviiot.bastle.gschema.xml:19
+msgid "Application library sorting mode"
+msgstr "тип ярлыка Application не поддерживается"
+
+#: src/app_page.blp:21 src/backup_dialog.rs:39 src/backup_dialog.rs:200
+#: src/backup_dialog.rs:233 src/application.rs:528 src/window.rs:436
+msgid "Cancel"
+msgstr "Отмена"
+
+#: src/app_page.blp:27 src/permissions_dialog.rs:38 src/privacy_dialog.rs:56
+msgid "Save"
+msgstr "Сохранить"
+
+#: src/app_page.blp:92
+msgid "This application needs the optional Chromium add-on."
+msgstr "Попробовать это приложение с Chromium?"
+
+#: src/app_page.blp:93 src/app_page.blp:213 src/create_app_dialog.blp:82
+msgid "Add-ons"
+msgstr "Дополнения"
+
+#: src/app_page.blp:98
+msgid "Launch"
+msgstr "Запустить"
+
+#: src/app_page.blp:112
+msgid "Edit"
+msgstr "Изменить"
+
+#: src/app_page.blp:120 src/permissions_dialog.rs:28
+msgid "Permissions"
+msgstr "Разрешения"
+
+#: src/app_page.blp:127 src/privacy_dialog.rs:50 src/privacy_dialog.rs:477
+msgid "Privacy & Power"
+msgstr "Конфиденциальность и фоновые функции"
+
+#: src/app_page.blp:134
+msgid "Repair Launcher"
+msgstr "Восстановить ярлык"
+
+#: src/app_page.blp:141
+msgid "Delete Application"
+msgstr "Удалить приложение"
+
+#: src/app_page.blp:157
+msgid "Application"
+msgstr "Приложения"
+
+#: src/app_page.blp:158
+msgid "Identity and start address"
+msgstr "Название и адрес запуска"
+
+#: src/app_page.blp:161 src/create_app_dialog.blp:32
+msgid "URL"
+msgstr "URL"
+
+#: src/app_page.blp:167 src/create_app_dialog.blp:44
+msgid "Title"
+msgstr "Название"
+
+#: src/app_page.blp:173 src/create_app_dialog.blp:56
+msgid "Icon"
+msgstr "Значок"
+
+#: src/app_page.blp:174 src/create_app_dialog.blp:57
+msgid "Automatically normalized to 256×256"
+msgstr "Автоматически приводится к размеру 256×256"
+
+#: src/app_page.blp:189
+msgid "Window"
+msgstr "Окно веб-приложения"
+
+#: src/app_page.blp:192
+msgid "Website Titlebar Color"
+msgstr "Цвет заголовка"
+
+#: src/app_page.blp:193
+msgid "Use a valid theme color supplied by the website"
+msgstr "Использовать корректный цвет темы, указанный сайтом"
+
+#: src/app_page.blp:199 src/create_app_dialog.blp:71
+msgid "Browser Engine"
+msgstr "Браузерный движок"
+
+#: src/app_page.blp:200
+msgid "Profiles and cookies are never transferred between engines"
+msgstr "Профили и cookie не переносятся между движками"
+
+#: src/app_page.blp:203
+msgid "Engine"
+msgstr "Движок"
+
+#: src/app_page.blp:208 src/create_app_dialog.blp:77
+msgid "Chromium Recommended"
+msgstr "Рекомендуется Chromium"
+
+#: src/app_page.blp:222
+msgid "Advanced"
+msgstr "Дополнительно"
+
+#: src/app_page.blp:227
+msgid "Custom User Agent"
+msgstr "Собственный User-Agent"
+
+#: src/app_page.blp:230
+msgid "User Agent"
+msgstr "User-Agent"
+
+#: src/app_page.rs:229 src/create_app_dialog.rs:199
+msgid "Chromium (add-on)"
+msgstr "Chromium (дополнение)"
+
+#: src/app_page.rs:316
+msgid "Chromium · Ready"
+msgstr "Рекомендуется Chromium"
+
+#: src/app_page.rs:317
+msgid "Chromium · Add-on Required"
+msgstr "Установить дополнение Chromium"
+
+#: src/app_window.blp:42
+msgid "Menu"
+msgstr "Меню"
+
+#: src/app_window.blp:75
+msgid "_Downloads"
+msgstr "_Загрузки"
+
+#: src/app_window.blp:76
+msgid "_Reload"
+msgstr "_Перезагрузить"
+
+#: src/app_window.blp:77
+msgid "Reload Without Cache"
+msgstr "Перезагрузить без кэша"
+
+#: src/app_window.blp:78
+msgid "_Stop Loading"
+msgstr "_Остановить загрузку"
+
+#: src/app_window.blp:79
+msgid "_Home"
+msgstr "_На главную"
+
+#: src/app_window.blp:80
+msgid "Zoom _In"
+msgstr "_Увеличить масштаб"
+
+#: src/app_window.blp:81
+msgid "Zoom _Out"
+msgstr "_Уменьшить масштаб"
+
+#: src/app_window.blp:82
+msgid "_Reset Zoom"
+msgstr "_Сбросить масштаб"
+
+#: src/app_window.blp:83
+msgid "_Fullscreen"
+msgstr "_Полноэкранный режим"
+
+#: src/app_window.blp:84
+msgid "Stop Background Activity"
+msgstr "Остановить фоновую работу"
+
+#: src/app_window.blp:85 src/window.blp:180
+msgid "_Keyboard Shortcuts"
+msgstr "_Комбинации клавиш"
+
+#: src/app_window.rs:142 src/app_window.rs:162
+msgid "Web App Window"
+msgstr "Окно веб-приложения"
+
+#: src/app_window.rs:263
+msgid "Screen sharing is not available"
+msgstr "Демонстрация экрана недоступна"
+
+#: src/app_window.rs:273
+msgid "Allow this website to use the camera?"
+msgstr "Разрешить этому сайту использовать камеру?"
+
+#: src/app_window.rs:274
+msgid "Allow this website to use the microphone?"
+msgstr "Разрешить этому сайту использовать микрофон?"
+
+#: src/app_window.rs:276
+msgid "Allow this website to use the camera and microphone?"
+msgstr "Разрешить этому сайту использовать камеру и микрофон?"
+
+#: src/app_window.rs:278
+msgid "Unknown media device request"
+msgstr "Неизвестный запрос к мультимедийному устройству"
+
+#: src/app_window.rs:285
+msgid "Allow this website to access your location?"
+msgstr "Разрешить этому сайту доступ к вашему местоположению?"
+
+#: src/app_window.rs:291
+msgid "Allow this website to send notifications?"
+msgstr "Разрешить этому сайту отправлять уведомления?"
+
+#: src/app_window.rs:297
+msgid "Allow this website to read the clipboard?"
+msgstr "Разрешить этому сайту читать буфер обмена?"
+
+#: src/app_window.rs:303
+msgid "Allow this website to lock the pointer?"
+msgstr "Разрешить этому сайту захватывать указатель?"
+
+#: src/app_window.rs:309
+msgid "Allow this website to access third-party storage?"
+msgstr "Разрешить этому сайту доступ к стороннему хранилищу?"
+
+#: src/app_window.rs:314
+msgid "This WebKit permission type is not supported"
+msgstr "Этот тип разрешения WebKit не поддерживается"
+
+#: src/app_window.rs:692
+msgid "Privacy policy could not be loaded; web content was not started"
+msgstr ""
+"Не удалось загрузить политику конфиденциальности; веб-содержимое не запущено"
+
+#: src/app_window.rs:716
+msgid "Content filters could not be initialized"
+msgstr "Не удалось инициализировать фильтры содержимого"
+
+#: src/app_window.rs:720
+msgid "Some content filters could not be enabled"
+msgstr "Не удалось включить некоторые фильтры содержимого"
+
+#: src/app_window.rs:902
+msgid "This origin is outside the application's navigation allowlist."
+msgstr "Этот origin отсутствует в списке разрешённой навигации приложения."
+
+#: src/app_window.rs:903
+msgid "Destination"
+msgstr "Назначение"
+
+#: src/app_window.rs:906
+msgid "Open Another Origin?"
+msgstr "Открыть другой origin?"
+
+#: src/app_window.rs:908 src/permissions_dialog.rs:53
+msgid "Block"
+msgstr "Блокировать"
+
+#: src/app_window.rs:909
+msgid "Open Externally"
+msgstr "Открыть во внешнем браузере"
+
+#: src/app_window.rs:910
+msgid "Open Once"
+msgstr "Открыть один раз"
+
+#: src/app_window.rs:911
+msgid "Always Allow Origin"
+msgstr "Всегда разрешать origin"
+
+#: src/app_window.rs:927
+msgid "The origin could not be saved"
+msgstr "Не удалось сохранить origin"
+
+#: src/app_window.rs:937
+msgid "Navigation blocked"
+msgstr "Навигация заблокирована"
+
+#: src/app_window.rs:951
+msgid "Unsupported website permission request"
+msgstr "Неподдерживаемый запрос разрешения сайта"
+
+#: src/app_window.rs:962
+msgid "Website permission origin is unavailable"
+msgstr "Не удалось определить источник запроса разрешения"
+
+#: src/app_window.rs:991
+msgid "Website"
+msgstr "Сайт"
+
+#: src/app_window.rs:992
+msgid "Website Permission"
+msgstr "Разрешение сайта"
+
+#: src/app_window.rs:994
+msgid "Not Now"
+msgstr "Не сейчас"
+
+#: src/app_window.rs:995
+msgid "Always Block"
+msgstr "Всегда блокировать"
+
+#: src/app_window.rs:996
+msgid "Allow for This Session"
+msgstr "Разрешить на эту сессию"
+
+#: src/app_window.rs:997
+msgid "Always Allow"
+msgstr "Всегда разрешать"
+
+#: src/app_window.rs:1026
+msgid "Permission was allowed only for this session"
+msgstr "Разрешение действует только в этом сеансе"
+
+#: src/app_window.rs:1039
+msgid "Permission block could not be saved"
+msgstr "Не удалось сохранить блокировку разрешения"
+
+#: src/app_window.rs:1063
+msgid "System notifications are unavailable"
+msgstr "Системные уведомления недоступны"
+
+#: src/app_window.rs:1148
+msgid "Web App Running in Background"
+msgstr "Веб-приложение работает в фоне"
+
+#: src/app_window.rs:1152
+msgid "is still active. Use Stop to end its process."
+msgstr "всё ещё активно. Нажмите «Остановить», чтобы завершить его процесс."
+
+#: src/app_window.rs:1159
+msgid "Stop"
+msgstr "Остановить"
+
+#: src/app_window.rs:1166
+msgid "Bastle web apps are running"
+msgstr "Веб-приложения Bastle работают"
+
+#: src/app_window.rs:1230
+msgid "Address"
+msgstr "Адрес"
+
+#: src/app_window.rs:1232
+msgid "WebKitGTK error"
+msgstr "Ошибка WebKitGTK"
+
+#: src/app_window.rs:1236
+msgid "Try This Application with Chromium?"
+msgstr "Попробовать это приложение с Chromium?"
+
+#: src/app_window.rs:1240
+msgid "Keep WebKitGTK"
+msgstr "Оставить WebKitGTK"
+
+#: src/app_window.rs:1241
+msgid "Use Chromium"
+msgstr "Использовать Chromium"
+
+#: src/app_window.rs:1270
+msgid "Chromium could not be started"
+msgstr "Не удалось запустить Chromium"
+
+#: src/backup_dialog.rs:23
+msgid "There are no applications to back up"
+msgstr "Нет приложений для резервного копирования"
+
+#: src/backup_dialog.rs:33
+msgid "Back Up Bastle"
+msgstr "Резервная копия Bastle"
+
+#: src/backup_dialog.rs:35
+msgid "Configuration, icons, and permissions are always included."
+msgstr "Конфигурация, значки и разрешения включаются всегда."
+
+#: src/backup_dialog.rs:40
+msgid "Choose Destination"
+msgstr "Выберите место сохранения"
+
+#: src/backup_dialog.rs:51
+msgid "Include cookies and site storage (requires encryption)"
+msgstr "Включить cookies и данные сайтов (требуется шифрование)"
+
+#: src/backup_dialog.rs:54 src/backup_dialog.rs:205
+msgid "Passphrase"
+msgstr "Парольная фраза"
+
+#: src/backup_dialog.rs:59
+msgid "Confirm Passphrase"
+msgstr "Подтвердите парольную фразу"
+
+#: src/backup_dialog.rs:84
+msgid "Passphrases must be non-empty and match"
+msgstr "Парольные фразы не должны быть пустыми и должны совпадать"
+
+#: src/backup_dialog.rs:92
+msgid "Save Bastle Backup"
+msgstr "Сохранить резервную копию Bastle"
+
+#: src/backup_dialog.rs:93
+msgid "Back Up"
+msgstr "Создать копию"
+
+#: src/backup_dialog.rs:101
+msgid "Save backup"
+msgstr "Сохранение резервной копии"
+
+#: src/backup_dialog.rs:109
+msgid "The selected destination is not writable"
+msgstr "В выбранное место нельзя записать файл"
+
+#: src/backup_dialog.rs:122
+msgid "Backup completed"
+msgstr "Резервное копирование завершено"
+
+#: src/backup_dialog.rs:123
+msgid "Backup failed"
+msgstr "Не удалось создать резервную копию"
+
+#: src/backup_dialog.rs:124
+msgid "The backup worker stopped unexpectedly"
+msgstr "Процесс резервного копирования неожиданно завершился"
+
+#: src/backup_dialog.rs:133
+msgid "Bastle Backups"
+msgstr "Резервные копии Bastle"
+
+#: src/backup_dialog.rs:138
+msgid "Open Bastle Backup"
+msgstr "Открыть резервную копию Bastle"
+
+#: src/backup_dialog.rs:139 src/backup_dialog.rs:200
+msgid "Open"
+msgstr "Открыть"
+
+#: src/backup_dialog.rs:147
+msgid "Restore backup"
+msgstr "Восстановление резервной копии"
+
+#: src/backup_dialog.rs:155
+msgid "The selected backup cannot be read"
+msgstr "Не удалось прочитать выбранную резервную копию"
+
+#: src/backup_dialog.rs:182
+msgid "Backup could not be opened"
+msgstr "Не удалось открыть резервную копию"
+
+#: src/backup_dialog.rs:187
+msgid "The restore worker stopped unexpectedly"
+msgstr "Процесс восстановления неожиданно завершился"
+
+#: src/backup_dialog.rs:197
+msgid "Encrypted Backup"
+msgstr "Зашифрованная резервная копия"
+
+#: src/backup_dialog.rs:198
+msgid "Enter the passphrase used to create this backup."
+msgstr "Введите парольную фразу, указанную при создании этой копии."
+
+#: src/backup_dialog.rs:219
+msgid ""
+"This encrypted backup includes cookies and site storage. Select the "
+"applications to restore."
+msgstr ""
+"Эта зашифрованная копия содержит cookies и данные сайтов. Выберите "
+"приложения для восстановления."
+
+#: src/backup_dialog.rs:222
+msgid ""
+"This encrypted backup contains settings only. Select the applications to "
+"restore."
+msgstr ""
+"Эта зашифрованная копия содержит только настройки. Выберите приложения для "
+"восстановления."
+
+#: src/backup_dialog.rs:224
+msgid "Select the applications to restore."
+msgstr "Выберите приложения для восстановления."
+
+#: src/backup_dialog.rs:229
+msgid "Background activity and autostart must be enabled again after restore."
+msgstr ""
+"Фоновую работу и автозапуск после восстановления нужно включить заново."
+
+#: src/backup_dialog.rs:231
+msgid "Restore Preview"
+msgstr "Предпросмотр восстановления"
+
+#: src/backup_dialog.rs:234
+msgid "Restore"
+msgstr "Восстановить"
+
+#: src/backup_dialog.rs:247
+msgid "Restore with the original ID"
+msgstr "Восстановить с исходным ID"
+
+#: src/backup_dialog.rs:248
+msgid "ID conflict: restore with a new ID"
+msgstr "Конфликт ID: восстановить с новым ID"
+
+#: src/backup_dialog.rs:249
+msgid "Identical application already exists"
+msgstr "Такое же приложение уже существует"
+
+#: src/backup_dialog.rs:290
+msgid "No applications were selected"
+msgstr "Не выбрано ни одного приложения"
+
+#: src/backup_dialog.rs:300
+msgid "Restored"
+msgstr "Восстановлено"
+
+#: src/backup_dialog.rs:302
+msgid "Skipped"
+msgstr "Пропущено"
+
+#: src/backup_dialog.rs:308 src/download_manager.rs:132
+msgid "Failed"
+msgstr "Ошибка"
+
+#: src/backup_dialog.rs:328
+msgid "Restore Finished with Errors"
+msgstr "Восстановление завершено с ошибками"
+
+#: src/backup_dialog.rs:330 src/window.rs:384 src/window.rs:416
+msgid "Close"
+msgstr "Закрыть"
+
+#: src/background.rs:73
+msgid "Keep selected Bastle web applications running in the background"
+msgstr "Разрешить выбранным веб-приложениям Bastle работать в фоне"
+
+#: src/application.rs:426
+msgid "Website Notification"
+msgstr "Уведомление сайта"
+
+#: src/application.rs:493
+msgid "Original Spider project"
+msgstr "Исходный проект Spider"
+
+#: src/application.rs:494
+msgid "Zaedus — original Spider author"
+msgstr "Zaedus — автор исходного Spider"
+
+#: src/application.rs:495
+msgid "Cameron Radmore — Spider contributor"
+msgstr "Cameron Radmore — участник разработки Spider"
+
+#: src/application.rs:500
+msgid "UX inspiration"
+msgstr "Вдохновение для интерфейса"
+
+#: src/application.rs:501
+msgid "Cartridges — interface inspiration"
+msgstr "Cartridges — источник идей для интерфейса"
+
+#: src/application.rs:522
+msgid ""
+"The Chromium add-on could not start. Install or update the add-on, or run "
+"this application once with WebKitGTK. Your engine choice and profiles will "
+"not be changed."
+msgstr ""
+"Не удалось запустить дополнение Chromium. Установите или обновите дополнение "
+"либо один раз запустите это приложение через WebKitGTK. Выбор движка и "
+"профили не изменятся."
+
+#: src/application.rs:526
+msgid "Chromium Engine Unavailable"
+msgstr "Движок Chromium недоступен"
+
+#: src/application.rs:529
+msgid "Get Chromium Add-on"
+msgstr "Установить дополнение Chromium"
+
+#: src/application.rs:530
+msgid "Report Problem"
+msgstr "Сообщить о проблеме"
+
+#: src/application.rs:531
+msgid "Run Once with WebKit"
+msgstr "Запустить один раз через WebKit"
+
+#: src/create_app_dialog.blp:9
+msgid "Add a New Application"
+msgstr "Добавить новое приложение"
+
+#: src/create_app_dialog.blp:72
+msgid "WebKitGTK is the default; Chromium is available as a Bastle add-on"
+msgstr ""
+"WebKitGTK используется по умолчанию; Chromium доступен как дополнение Bastle"
+
+#: src/create_app_dialog.blp:104
+msgid "Create"
+msgstr "Создать"
+
+#: src/create_app_dialog.rs:98
+msgid ""
+"The website could not be reached. You can still create this application."
+msgstr "Сайт недоступен. Приложение всё равно можно создать."
+
+#: src/download_manager.rs:41
+msgid "Waiting"
+msgstr "Ожидание"
+
+#: src/download_manager.rs:45
+msgid "Cancel Download"
+msgstr "Отменить загрузку"
+
+#: src/download_manager.rs:50
+msgid "Retry Download"
+msgstr "Повторить загрузку"
+
+#: src/download_manager.rs:56
+msgid "Choose a destination"
+msgstr "Выберите место сохранения"
+
+#: src/download_manager.rs:78
+msgid "Downloading to"
+msgstr "Загрузка в"
+
+#: src/download_manager.rs:98
+msgid "Completed"
+msgstr "Завершено"
+
+#: src/download_manager.rs:102
+msgid "Download completed"
+msgstr "Загрузка завершена"
+
+#: src/download_manager.rs:103
+msgid "Saved to"
+msgstr "Сохранено в"
+
+#: src/download_manager.rs:115
+msgid "Cancelled"
+msgstr "Отменено"
+
+#: src/download_manager.rs:116
+msgid "Download cancelled"
+msgstr "Загрузка отменена"
+
+#: src/download_manager.rs:134
+msgid "Download failed"
+msgstr "Не удалось загрузить файл"
+
+#: src/download_manager.rs:174
+msgid "Download"
+msgstr "Загрузка"
+
+#: src/download_manager.rs:279
+msgid "Downloads"
+msgstr "Загрузки"
+
+#: src/download_manager.rs:289
+msgid "No Downloads"
+msgstr "Нет загрузок"
+
+#: src/download_manager.rs:290
+msgid "Downloads from this app will appear here."
+msgstr "Загрузки из этого приложения появятся здесь."
+
+#: src/download_manager.rs:321
+msgid "The download session is unavailable"
+msgstr "Сеанс загрузки недоступен"
+
+#: src/download_manager.rs:325
+msgid "The download could not be retried"
+msgstr "Не удалось повторить загрузку"
+
+#: src/gtk/help-overlay.blp:13
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Общие"
+
+#: src/gtk/help-overlay.blp:16
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Показать комбинации клавиш"
+
+#: src/gtk/help-overlay.blp:21
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Выйти"
+
+#: src/gtk/help-overlay.blp:27
+msgctxt "shortcut window"
+msgid "Navigation"
+msgstr "Навигация"
+
+#: src/gtk/help-overlay.blp:30
+msgctxt "shortcut window"
+msgid "Back"
+msgstr "Назад"
+
+#: src/gtk/help-overlay.blp:35
+msgctxt "shortcut window"
+msgid "Forward"
+msgstr "Вперёд"
+
+#: src/gtk/help-overlay.blp:40
+msgctxt "shortcut window"
+msgid "Reload"
+msgstr "Перезагрузить"
+
+#: src/gtk/help-overlay.blp:45
+msgctxt "shortcut window"
+msgid "Reload Without Cache"
+msgstr "Перезагрузить без кэша"
+
+#: src/gtk/help-overlay.blp:50
+msgctxt "shortcut window"
+msgid "Home"
+msgstr "На главную"
+
+#: src/gtk/help-overlay.blp:56
+msgctxt "shortcut window"
+msgid "View"
+msgstr "Вид"
+
+#: src/gtk/help-overlay.blp:59
+msgctxt "shortcut window"
+msgid "Zoom In"
+msgstr "Увеличить масштаб"
+
+#: src/gtk/help-overlay.blp:64
+msgctxt "shortcut window"
+msgid "Zoom Out"
+msgstr "Уменьшить масштаб"
+
+#: src/gtk/help-overlay.blp:69
+msgctxt "shortcut window"
+msgid "Reset Zoom"
+msgstr "Сбросить масштаб"
+
+#: src/gtk/help-overlay.blp:74
+msgctxt "shortcut window"
+msgid "Toggle Fullscreen"
+msgstr "Переключить полноэкранный режим"
+
+#: src/home_page.blp:15
+msgid "Welcome to Bastle"
+msgstr "Добро пожаловать в Bastle"
+
+#: src/home_page.blp:16
+msgid "Give each website its own isolated space."
+msgstr "Создайте для каждого сайта отдельное изолированное пространство."
+
+#: src/launcher.rs:61 src/launcher.rs:69 src/portal.rs:151 src/window.rs:400
+msgid "Dynamic Launcher"
+msgstr "Dynamic Launcher"
+
+#: src/launcher.rs:64 src/portal.rs:154
+msgid "Dynamic Launcher capabilities"
+msgstr "Возможности Dynamic Launcher"
+
+#: src/launcher.rs:72
+msgid "Version"
+msgstr "Версия"
+
+#: src/launcher.rs:74
+msgid "Application launcher type is not supported"
+msgstr "тип ярлыка Application не поддерживается"
+
+#: src/launcher.rs:75
+msgid "desktop session"
+msgstr "сеанс рабочего стола"
+
+#: src/launcher.rs:103
+msgid "Open launcher confirmation"
+msgstr "Открытие подтверждения установки ярлыка"
+
+#: src/launcher.rs:107
+msgid "Confirm launcher installation"
+msgstr "Подтверждение установки ярлыка"
+
+#: src/launcher.rs:118
+msgid "Install launcher"
+msgstr "Установка ярлыка"
+
+#: src/launcher.rs:134
+msgid "Remove launcher"
+msgstr "Удаление ярлыка"
+
+#: src/permissions_dialog.rs:34
+msgid "Reset All"
+msgstr "Сбросить всё"
+
+#: src/permissions_dialog.rs:53
+msgid "Ask"
+msgstr "Спрашивать"
+
+#: src/permissions_dialog.rs:53
+msgid "Allow"
+msgstr "Разрешать"
+
+#: src/permissions_dialog.rs:86
+msgid "No Saved Permissions"
+msgstr "Нет сохранённых разрешений"
+
+#: src/permissions_dialog.rs:88
+msgid "Websites will ask before using protected capabilities."
+msgstr "Сайты будут запрашивать доступ к защищённым возможностям."
+
+#: src/permissions_dialog.rs:158
+msgid "Camera"
+msgstr "Камера"
+
+#: src/permissions_dialog.rs:159
+msgid "Microphone"
+msgstr "Микрофон"
+
+#: src/permissions_dialog.rs:160
+msgid "Location"
+msgstr "Местоположение"
+
+#: src/permissions_dialog.rs:161
+msgid "Notifications"
+msgstr "Уведомления"
+
+#: src/permissions_dialog.rs:162
+msgid "Clipboard"
+msgstr "Буфер обмена"
+
+#: src/permissions_dialog.rs:163
+msgid "Pointer Lock"
+msgstr "Захват указателя"
+
+#: src/permissions_dialog.rs:164
+msgid "Third-Party Storage"
+msgstr "Стороннее хранилище"
+
+#: src/portal.rs:54
+msgid "portal interface unavailable"
+msgstr "интерфейс портала недоступен"
+
+#: src/portal.rs:55
+msgid "portal capability unsupported"
+msgstr "возможность портала не поддерживается"
+
+#: src/portal.rs:56
+msgid "portal request cancelled"
+msgstr "запрос к порталу отменён"
+
+#: src/portal.rs:57
+msgid "portal request denied"
+msgstr "портал отклонил запрос"
+
+#: src/portal.rs:58
+msgid "portal request failed"
+msgstr "ошибка запроса к порталу"
+
+#: src/portal.rs:167 src/window.rs:406
+msgid "File Chooser"
+msgstr "Выбор файлов"
+
+#: src/portal.rs:174
+msgid "Documents"
+msgstr "Документы"
+
+#: src/privacy_dialog.rs:64
+msgid "Top-Level Navigation"
+msgstr "Навигация верхнего уровня"
+
+#: src/privacy_dialog.rs:66
+msgid ""
+"Restrict which origins may replace the application's main page. Subresources "
+"are not blocked."
+msgstr ""
+"Ограничение определяет, какие origin могут заменить главную страницу "
+"приложения. Подресурсы не блокируются."
+
+#: src/privacy_dialog.rs:70
+msgid "Restrict Navigation"
+msgstr "Ограничить навигацию"
+
+#: src/privacy_dialog.rs:71
+msgid "Ask before opening an origin outside this list"
+msgstr "Спрашивать перед переходом на сайты вне этого списка"
+
+#: src/privacy_dialog.rs:76
+msgid "Allowed Origins"
+msgstr "Разрешённые сайты"
+
+#: src/privacy_dialog.rs:97
+msgid "Proxy"
+msgstr "Прокси"
+
+#: src/privacy_dialog.rs:99
+msgid ""
+"Applies only to this application's selected engine. Credentials are never "
+"stored."
+msgstr ""
+"Применяется только к выбранному движку этого приложения. Учётные данные "
+"никогда не сохраняются."
+
+#: src/privacy_dialog.rs:103
+msgid "System Settings"
+msgstr "Системные настройки"
+
+#: src/privacy_dialog.rs:104
+msgid "Direct Connection"
+msgstr "Прямое подключение"
+
+#: src/privacy_dialog.rs:105
+msgid "Custom HTTP(S) or SOCKS"
+msgstr "Пользовательский HTTP(S) или SOCKS"
+
+#: src/privacy_dialog.rs:113
+msgid "Proxy Mode"
+msgstr "Режим прокси"
+
+#: src/privacy_dialog.rs:119
+msgid "Proxy URI"
+msgstr "Адрес прокси"
+
+#: src/privacy_dialog.rs:132
+msgid "Background"
+msgstr "Фоновая работа"
+
+#: src/privacy_dialog.rs:134
+msgid ""
+"Background access is requested through the desktop portal. Normal launch "
+"keeps working if access is denied."
+msgstr ""
+"Доступ к фоновой работе запрашивается через портал рабочего стола. При "
+"отказе обычный запуск продолжит работать."
+
+#: src/privacy_dialog.rs:138
+msgid "Keep Running in Background"
+msgstr "Продолжать работу в фоне"
+
+#: src/privacy_dialog.rs:140
+msgid "Closing the window keeps this web application active"
+msgstr "После закрытия окна это веб-приложение останется активным"
+
+#: src/privacy_dialog.rs:146
+msgid "Start at Login"
+msgstr "Запускать при входе"
+
+#: src/privacy_dialog.rs:148
+msgid "Start all opted-in Bastle applications without opening windows"
+msgstr "Запускать все включённые приложения Bastle без открытия окон"
+
+#: src/privacy_dialog.rs:167
+msgid "Content Filters"
+msgstr "Фильтры содержимого"
+
+#: src/privacy_dialog.rs:169
+msgid ""
+"Import WebKit content-extension JSON. Filters affect only this application."
+msgstr ""
+"Импортируйте JSON в формате расширений содержимого WebKit. Фильтры действуют "
+"только в этом приложении."
+
+#: src/privacy_dialog.rs:171
+msgid "Content filters are available only with the WebKitGTK engine."
+msgstr "Фильтры содержимого доступны только с движком WebKitGTK."
+
+#: src/privacy_dialog.rs:180
+msgid "Import Filter List…"
+msgstr "Импортировать список фильтров…"
+
+#: src/privacy_dialog.rs:182
+msgid "The list is validated by WebKit before it is added"
+msgstr "Перед добавлением список проверяется WebKit"
+
+#: src/privacy_dialog.rs:188
+msgid "Content filter imported"
+msgstr "Фильтр содержимого импортирован"
+
+#: src/privacy_dialog.rs:237
+msgid "Keep this Bastle application running in the background"
+msgstr "Разрешить этому приложению Bastle работать в фоне"
+
+#: src/privacy_dialog.rs:238
+msgid "Background access was not enabled"
+msgstr "Фоновая работа не была включена"
+
+#: src/privacy_dialog.rs:240
+msgid ""
+"Privacy settings saved; restart the web application to apply runtime changes"
+msgstr ""
+"Настройки конфиденциальности сохранены; перезапустите веб-приложение, чтобы "
+"применить изменения"
+
+#: src/privacy_dialog.rs:379
+msgid "WebKit content-extension rules"
+msgstr "Правила расширений содержимого WebKit"
+
+#: src/privacy_dialog.rs:384
+msgid "Remove Filter"
+msgstr "Удалить фильтр"
+
+#: src/privacy_dialog.rs:417
+msgid "WebKit Content Filters"
+msgstr "Фильтры содержимого WebKit"
+
+#: src/privacy_dialog.rs:423
+msgid "Import Content Filter"
+msgstr "Импорт фильтра содержимого"
+
+#: src/privacy_dialog.rs:424
+msgid "Import"
+msgstr "Импортировать"
+
+#: src/privacy_dialog.rs:431
+msgid "Import content filter"
+msgstr "Импорт фильтра содержимого"
+
+#: src/privacy_dialog.rs:442
+msgid "Imported Filter"
+msgstr "Импортированный фильтр"
+
+#: src/util.rs:216
+msgid "Images"
+msgstr "Изображения"
+
+#: src/util.rs:221
+msgid "Select"
+msgstr "Выбрать"
+
+#: src/util.rs:223
+msgid "App Icon"
+msgstr "Значок приложения"
+
+#: src/util.rs:229
+msgid "Select application icon"
+msgstr "Выбор значка приложения"
+
+#: src/window.blp:25
+msgid "Applications"
+msgstr "Приложения"
+
+#: src/window.blp:35 src/window.blp:123
+msgid "Add"
+msgstr "Добавить"
+
+msgid "Add Application"
+msgstr "Добавить новое приложение"
+
+#: src/window.blp:44 src/window.blp:79
+msgid "Search applications"
+msgstr "Поиск приложений"
+
+#: src/window.blp:45
+msgid "Search by title or domain"
+msgstr "Поиск по названию или домену"
+
+#: src/window.blp:53
+msgid "Search"
+msgstr "Поиск"
+
+#: src/window.blp:59
+msgid "Sort Applications"
+msgstr "Сортировка"
+
+#: src/window.blp:67
+msgid "Main Menu"
+msgstr "Меню"
+
+#: src/window.blp:86
+msgid "Details"
+msgstr "Подробности"
+
+#: src/window.blp:87
+msgid "Some application data could not be loaded"
+msgstr "Не удалось загрузить часть данных приложений"
+
+#: src/window.blp:118
+msgid "No Applications Yet"
+msgstr "Пока нет приложений"
+
+#: src/window.blp:119
+msgid "Add a website to give it an isolated space."
+msgstr "Создайте для каждого сайта отдельное изолированное пространство."
+
+#: src/window.blp:136
+msgid "No Applications Found"
+msgstr "Ничего не найдено"
+
+#: src/window.blp:137
+msgid "Try a different title or domain."
+msgstr "Попробуйте другое название или домен."
+
+#: src/window.blp:150
+msgid "A–Z"
+msgstr "А–Я"
+
+#: src/window.blp:155
+msgid "Z–A"
+msgstr "Я–А"
+
+#: src/window.blp:160
+msgid "Newest First"
+msgstr "Сначала новые"
+
+#: src/window.blp:165
+msgid "Oldest First"
+msgstr "Сначала старые"
+
+#: src/window.blp:173
+msgid "_Add-ons"
+msgstr "_Дополнения"
+
+#: src/window.blp:175
+msgid "_Back Up…"
+msgstr "_Резервная копия…"
+
+#: src/window.blp:176
+msgid "_Restore…"
+msgstr "_Восстановить…"
+
+#: src/window.blp:179
+msgid "System _Capabilities"
+msgstr "Системные _возможности"
+
+#: src/window.blp:181
+msgid "_About Bastle"
+msgstr "_О Bastle"
+
+#: src/window.rs:383
+msgid "Application Data Diagnostics"
+msgstr "Диагностика данных приложений"
+
+#: src/window.rs:393 src/window.rs:511 src/window.rs:519
+msgid "Available"
+msgstr "Доступно"
+
+#: src/window.rs:394
+msgid "Unavailable"
+msgstr "Недоступно"
+
+#: src/window.rs:398
+msgid "Desktop session"
+msgstr "Сеанс рабочего стола"
+
+#: src/window.rs:402
+msgid "Application launchers"
+msgstr "Ярлыки приложений"
+
+#: src/window.rs:404
+msgid "Web application launchers"
+msgstr "Ярлыки веб-приложений"
+
+#: src/window.rs:408
+msgid "Documents access"
+msgstr "Доступ к документам"
+
+#: src/window.rs:410
+msgid "Background activity"
+msgstr "Фоновая работа"
+
+#: src/window.rs:412
+msgid ""
+"Creating and repairing applications requires Application launcher support. "
+"Backup restore also requires File Chooser and Documents portal access."
+msgstr ""
+"Для создания и восстановления приложений нужна поддержка ярлыков типа "
+"Application. Для восстановления резервных копий также нужен доступ к "
+"порталам выбора файлов и документов."
+
+#: src/window.rs:413
+msgid ""
+"Bastle uses portals only and never writes launchers directly to the host."
+msgstr ""
+"Bastle использует только порталы и никогда не записывает ярлыки напрямую в "
+"основную систему."
+
+#: src/window.rs:415
+msgid "System Capabilities"
+msgstr "Системные возможности"
+
+#: src/window.rs:416
+msgid "Retry"
+msgstr "Повторить"
+
+#: src/window.rs:430
+msgid "Delete this application?"
+msgstr "Удалить это приложение?"
+
+#: src/window.rs:432
+msgid ""
+"Its launcher, settings, and WebKit or Chromium add-on profile—including "
+"cookies and caches—will be removed."
+msgstr ""
+"Будут удалены ярлык, настройки и профиль WebKit или дополнения Chromium, "
+"включая файлы cookie и кэш."
+
+#: src/window.rs:437
+msgid "Delete"
+msgstr "Удалить"
+
+#: src/window.rs:456
+msgid "Application deleted"
+msgstr "Приложение удалено"
+
+#: src/window.rs:469
+msgid "Launcher repaired"
+msgstr "Ярлык восстановлен"
+
+#: src/window.rs:512
+msgid "Unsupported"
+msgstr "Не поддерживается"
+
+#: src/window.rs:513
+msgid "Unknown (interface unavailable)"
+msgstr "Неизвестно (интерфейс недоступен)"
+
+#: src/app_page.blp src/create_app_dialog.blp
+msgid "Website favicon, Icon Horse, or a local file"
+msgstr "Favicon сайта, Icon Horse или локальный файл"
+
+#: src/app_page.blp src/create_app_dialog.blp
+msgid "Get Site Icon"
+msgstr "Получить иконку сайта"
+
+#: src/create_app_dialog.blp
+msgid "Choose Icon File"
+msgstr "Выбрать файл иконки"
+
+#: src/app_row.blp
+msgid "Launch Application"
+msgstr "Запустить приложение"
+
+#: src/app_page.rs src/create_app_dialog.rs
+msgid "Enter a valid website URL first."
+msgstr "Сначала укажите корректный адрес сайта."
+
+#: src/app_page.rs src/create_app_dialog.rs
+msgid "The website URL has no hostname."
+msgstr "В адресе сайта отсутствует имя хоста."
+
+#: src/app_page.rs src/create_app_dialog.rs
+msgid "Getting the website icon…"
+msgstr "Получение иконки сайта…"
+
+#: src/app_page.rs src/create_app_dialog.rs
+msgid "Icon from Icon Horse"
+msgstr "Иконка из Icon Horse"
+
+#: src/app_page.rs src/create_app_dialog.rs
+msgid "The site icon provider is unavailable."
+msgstr "Провайдер иконок сайта недоступен."
+
+#: src/application.rs
+msgid "Website icon provider"
+msgstr "Провайдер иконок сайтов"
+
+#: src/application.rs
+msgid "Icon Horse — website favicon fallback"
+msgstr "Icon Horse — резервный источник favicon сайтов"
+
+#: src/app_row.rs
+msgid "WebKitGTK"
+msgstr "WebKitGTK"
+
+#: src/app_row.rs
+msgid "Chromium"
+msgstr "Chromium"
+
+msgid "Fetch and safely normalize website icons with an offline fallback; an optional Icon Horse request is made only by explicit user action"
+msgstr "Загрузка и безопасная обработка значков сайтов с запасным вариантом без сети; запрос к Icon Horse выполняется только по действию пользователя"
+
+msgid "Replace the library grid with an adaptive GNOME list, search, sorting, and keyboard navigation"
+msgstr "Адаптивный список GNOME с поиском, сортировкой и управлением с клавиатуры вместо сетки приложений"
+
+msgid "Add a site-only Icon Horse favicon fallback with safe hostname checks, cache, and PNG normalization"
+msgstr "Загрузка значков через Icon Horse с проверкой домена, кэшированием и преобразованием в PNG"
+
+msgid "Add accessible application details actions and explicit site-icon controls for creation and editing"
+msgstr "Доступные действия на странице приложения и выбор значка при создании и редактировании"
+
+msgid "Edit Application"
+msgstr "Изменение приложения"
+
+msgid "_Cancel"
+msgstr "_Отмена"
+
+msgid "_Save"
+msgstr "_Сохранить"
+
+msgid "Application Settings"
+msgstr "Настройки приложения"
+
+msgid "Name & Appearance"
+msgstr "Название и оформление"
+
+msgid "Address, icon and browser engine"
+msgstr "Адрес, значок и движок браузера"
+
+msgid "Camera, microphone, location and more"
+msgstr "Камера, микрофон, местоположение и другое"
+
+msgid "Navigation, network and background activity"
+msgstr "Навигация, сеть и работа в фоне"
+
+msgid "Maintenance"
+msgstr "Обслуживание"
+
+msgid "Restore the app in your desktop application menu"
+msgstr "Восстановление приложения в системном меню"
+
+msgid "Delete Application…"
+msgstr "Удалить приложение…"
+
+msgid "Name"
+msgstr "Название"
+
+msgid "Website Address"
+msgstr "Адрес сайта"
+
+msgid "Getting a site icon sends the website domain to Icon Horse."
+msgstr "При загрузке значка домен сайта передаётся сервису Icon Horse."
+
+msgid "Discard Changes?"
+msgstr "Отменить изменения?"
+
+msgid "Your changes to this application will be lost."
+msgstr "Изменения настроек этого приложения будут потеряны."
+
+msgid "Keep Editing"
+msgstr "Продолжить редактирование"
+
+msgid "Discard"
+msgstr "Отменить изменения"
+
+msgid "Back"
+msgstr "Назад"
+
+msgid "Forward"
+msgstr "Вперёд"
+
+msgid "Backup Contents"
+msgstr "Содержимое копии"
+
+msgid "Include Website Data"
+msgstr "Включить данные сайтов"
+
+msgid "Back up cookies and storage in an encrypted archive"
+msgstr "Сохранение файлов cookie и хранилища в зашифрованном архиве"
+
+msgid "Encryption"
+msgstr "Шифрование"
+
+msgid "Use a passphrase to protect your website data."
+msgstr "Защитите данные сайтов парольной фразой."
+
+msgid "Restore Applications"
+msgstr "Восстановление приложений"
+
+msgid "Turn a website into an app with its own window and private storage."
+msgstr "Превратите сайт в приложение с отдельным окном и собственным хранилищем данных."
+
+msgid "Enter an address, then use the arrow to look up its name and icon. You can also enter them yourself."
+msgstr "Введите адрес и нажмите стрелку, чтобы загрузить название и значок. Их можно указать и вручную."
+
+msgid "Reset saved choices so websites ask again. Changes take effect when you save."
+msgstr "Сбросьте сохранённые разрешения, чтобы сайты запросили их снова. Изменения вступят в силу после сохранения."
+
+msgid "Clear Search"
+msgstr "Очистить поиск"
+
+msgid "General"
+msgstr "Общие"
+
+msgid "Keyboard Shortcuts"
+msgstr "Комбинации клавиш"
+
+msgid "Quit"
+msgstr "Выйти"
+
+msgid "Navigation"
+msgstr "Навигация"
+
+msgid "Reload"
+msgstr "Перезагрузить"
+
+msgid "Home"
+msgstr "На главную"
+
+msgid "Zoom In"
+msgstr "Увеличить масштаб"
+
+msgid "Zoom Out"
+msgstr "Уменьшить масштаб"
+
+msgid "Reset Zoom"
+msgstr "Сбросить масштаб"
+
+msgid "Toggle Fullscreen"
+msgstr "Полноэкранный режим"
+
+msgid "Search Applications"
+msgstr "Поиск приложений"
+
+msgid "Close Search or Go Back"
+msgstr "Закрыть поиск или вернуться назад"
+
+msgid "Application Menu"
+msgstr "Меню приложения"
+
+msgid "Browser Engines"
+msgstr "Движки браузера"
+
+msgid "Optional engines are installed separately and become available after Bastle is restarted."
+msgstr "Дополнительные движки устанавливаются отдельно и становятся доступны после перезапуска Bastle."
+
+msgid "Built-in engine for GNOME"
+msgstr "Встроенный движок для GNOME"
+
+msgid "Chromium Engine"
+msgstr "Движок Chromium"
+
+msgid "Restart Required"
+msgstr "Требуется перезапуск"
+
+msgid "Close and reopen Bastle after installing or removing this add-on."
+msgstr "После установки или удаления дополнения закройте и снова откройте Bastle."
+
+msgid "Could Not Open the Add-on Installer"
+msgstr "Не удалось открыть установщик дополнения"
+
+msgid "Not installed — WebKitGTK remains the default"
+msgstr "Не установлен; по умолчанию используется WebKitGTK"
+
+msgid "Installed and ready"
+msgstr "Установлен и готов к работе"
+
+msgid "Update required"
+msgstr "Требуется обновление"
+
+msgid "Installed but unavailable"
+msgstr "Установлен, но недоступен"
+
+msgid "Install"
+msgstr "Установить"
+
+msgid "Manage"
+msgstr "Управление"
+
+msgid "Reinstall"
+msgstr "Переустановить"
+
+msgid "Name and Appearance"
+msgstr "Название и оформление"
+
+msgid "Privacy and Power"
+msgstr "Приватность и питание"
+
+msgid "New Application"
+msgstr "Новое приложение"
+
+#: src/native_chromium/mod.rs
+msgid "Website content"
+msgstr "Содержимое сайта"
+
+#: src/native_chromium/mod.rs
+msgid "Could Not Load the Website"
+msgstr "Не удалось загрузить сайт"
+
+#: src/native_chromium/mod.rs
+msgid "Check your connection and try again."
+msgstr "Проверьте подключение к сети и попробуйте снова."
+
+#: src/native_chromium/mod.rs
+msgid "Chromium Stopped"
+msgstr "Chromium завершил работу"
+
+#: src/native_chromium/mod.rs
+msgid "Close and reopen the application to try again."
+msgstr "Закройте и снова откройте приложение, чтобы повторить попытку."
+
+#: src/native_chromium/mod.rs
+msgid "Website Stopped Responding"
+msgstr "Сайт перестал отвечать"
+
+#: src/native_chromium/mod.rs
+msgid "Reload the website to continue."
+msgstr "Перезагрузите сайт, чтобы продолжить."
+
+msgid "Next"
+msgstr "Далее"
+
+msgid "Review Application"
+msgstr "Проверка приложения"
+
+msgid "Open a website in its own window, with its own cookies and storage."
+msgstr "Откройте сайт в отдельном окне, со своими файлами cookie и хранилищем."
+
+msgid "Enter a valid HTTP or HTTPS address."
+msgstr "Введите правильный адрес HTTP или HTTPS."
+
+msgid "Looking up the website name and icon…"
+msgstr "Загрузка названия и значка сайта…"
+
+msgid "Enter Manually"
+msgstr "Ввести вручную"
+
+msgid "Enter a name for the application."
+msgstr "Введите название приложения."
+
+msgid "Website details were not checked. You can edit them below."
+msgstr "Данные сайта не проверены. Вы можете заполнить их ниже."
+
+msgid "The application could not be created."
+msgstr "Не удалось создать приложение."
+
+msgid "Application Created"
+msgstr "Приложение создано"
+
+msgid "Appearance"
+msgstr "Внешний вид"
+
+msgid "Permissions and Behavior"
+msgstr "Разрешения и поведение"
+
+msgid "Changes take effect the next time you open this application."
+msgstr "Изменения вступят в силу при следующем запуске приложения."
+
+msgid "Enter a user agent without line breaks (up to 4096 bytes)."
+msgstr "Введите User Agent без переносов строк (до 4096 байт)."
+
+msgid "Changes could not be saved."
+msgstr "Не удалось сохранить изменения."
+
+msgid "Discard Unsaved Changes?"
+msgstr "Отменить несохранённые изменения?"
+
+msgid "Some fields could not be saved. Discard only those changes and leave?"
+msgstr "Некоторые поля не удалось сохранить. Отменить только эти изменения и выйти?"
+
+msgid "Your unsaved changes will be lost. Saved settings will be kept."
+msgstr "Несохранённые изменения будут потеряны. Сохранённые настройки останутся."
+
+msgid "Delete…"
+msgstr "Удалить…"
+
+msgid "Reset saved choices so websites ask again."
+msgstr "Удалите сохранённые разрешения, чтобы сайты запрашивали их снова."
+
+msgid "Enter an HTTP(S) or SOCKS proxy address without credentials."
+msgstr "Введите адрес прокси HTTP(S) или SOCKS без логина и пароля."
+
+msgid "Enter valid HTTP or HTTPS origins, separated by commas."
+msgstr "Введите адреса сайтов HTTP или HTTPS через запятую."
+
+msgid "Passphrases do not match."
+msgstr "Пароли не совпадают."
+
+msgid "Creating Backup…"
+msgstr "Создание резервной копии…"
+
+msgid "Opening Backup…"
+msgstr "Открытие резервной копии…"
+
+msgid "Restoring Applications…"
+msgstr "Восстановление приложений…"
+
+msgid "Restore this application"
+msgstr "Восстановить приложение"
+
+msgid "Restore as a separate copy"
+msgstr "Восстановить отдельной копией"
+
+msgid "Could not unlock this backup. Check the passphrase and try again."
+msgstr "Не удалось открыть копию. Проверьте парольную фразу и попробуйте снова."
+
+msgid "Checking…"
+msgstr "Проверка…"
