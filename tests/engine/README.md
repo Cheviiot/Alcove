@@ -1,7 +1,7 @@
-# Native Chromium experiment
+# Chromium engine audits
 
-This is the optional native Chromium adapter experiment for Alcove.
-It does not replace the released Electron add-on. The host is a Rust GTK4/libadwaita application.
+Reproducible checks for Alcove's Chromium engine. The host is a Rust
+GTK4/libadwaita application and the worker uses the official C++ CEF API.
 The separate worker currently uses the official C++ CEF API (not `cef-rs`). Its
 private, versioned transport makes the language binding replaceable without
 changing the GTK window. The test harnesses use disposable Alcove applications
@@ -192,7 +192,7 @@ input and accessibility, popups/OAuth, portals, profile isolation and Flatpak
 sandbox verification. Results and architectural blockers must be recorded
 before replacing Electron or advancing the dependent manager redesign.
 
-The experimental contract is documented in [PROTOCOL.md](PROTOCOL.md). It is
+The experimental contract is documented in [PROTOCOL.md](../../docs/engine-protocol.md). It is
 not yet a new production add-on ABI or a shared WebKit/Chromium adapter.
 
 ## Native site requests
@@ -217,7 +217,7 @@ file portal. It writes `site-requests.json`. It does not claim the ordinary
 input/WebGL/Orca checks ran against this different fixture. Portal services and
 their permission store use the same private bus and XDG directories.
 
-The whole approved plan is tracked in [native-ui-plan-status.md](../../docs/native-ui-plan-status.md).
+The whole approved plan is tracked in [engine-status.md](../../docs/engine-status.md).
 
 ## Native popup / local OAuth diagnostic
 

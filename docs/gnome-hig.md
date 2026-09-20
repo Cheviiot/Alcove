@@ -3,9 +3,9 @@
 The library now follows the accepted design. Creation has the two-step flow
 described below, verified with the real portal and Orca. The main application
 settings, policy pages and supporting dialogs also pass their interaction audits.
-Remaining CEF integration is tracked in [the implementation tracker](native-ui-plan-status.md).
+The engine itself is described in [engine status](engine-status.md).
 Alcove remains a simple website-as-an-application launcher: the shared native
-shell hosts WebKit or the optional CEF adapter, which displays the website.
+shell hosts either engine, and the engine displays the website.
 
 Alcove uses GTK 4.22 and libadwaita 1.9 for its interface. The redesign follows
 [GNOME HIG](https://developer.gnome.org/hig/) and uses the platform's spacing,
@@ -63,8 +63,8 @@ ship a custom GTK theme.
   add-on actions use full-width button rows. Capabilities appear immediately and
   refresh in place with a busy indicator. Closing during a probe never reopens the
   dialog. `AdwShortcutsDialog` shows the shortcuts relevant to its parent window.
-- **WebKit window:** symbolic navigation icons with tooltips and grouped menus.
-  Website content and engine isolation are unchanged.
+- **Runtime window:** symbolic navigation icons with tooltips and grouped menus,
+  identical for both engines. Website content and engine isolation are unchanged.
 
 The library's list-item factory binds recycled widgets to the current model
 entry. Unbinding invalidates outstanding icon decoding, so an old icon cannot

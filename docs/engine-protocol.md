@@ -78,7 +78,7 @@ accessibility events; no renderer-private IPC is introduced for them.
 `native-accessibility-focus` records mirrored focus changes.
 The `focus` command is replayed after the worker handshake and gates native
 accessibility focus on the actual GTK window and site-container focus.
-See [ACCESSIBILITY.md](ACCESSIBILITY.md) for lifetime and event ordering rules.
+See [ACCESSIBILITY.md](../tests/engine/ACCESSIBILITY.md) for lifetime and event ordering rules.
 WebKit and CEF use the shared Alcove window shell. Extended browser audits are
 deferred under the clarified WebView parity scope; website notification delivery,
 recovery and sandboxed packaging remain deployment work.
@@ -129,7 +129,7 @@ reach Chromium while keyboard focus remained in the GTK header.
 Capability v3 adds independent per-view sockets, native root association and
 document retirement. Commands, events and focus acknowledgements carry the
 owning view. The worker rejects native mode on an unvalidated CEF runtime;
-the ordering contract and exact version are in [ACCESSIBILITY.md](ACCESSIBILITY.md).
+the ordering contract and exact version are in [ACCESSIBILITY.md](../tests/engine/ACCESSIBILITY.md).
 
 ## Native windows capability v1
 

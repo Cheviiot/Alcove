@@ -24,9 +24,10 @@ Changelog and versions follow Semantic Versioning.
 - Manage per-application policy: permissions, navigation allowlists, proxies,
   background behavior and content filters.
 - Create portable backups and encrypt archives that contain website data.
-- Add an optional, opt-in native Chromium (CEF) adapter behind the
-  `native-chromium` build feature, alongside reproducible UI and engine audit
-  harnesses.
+- Render the optional Chromium engine with CEF inside the application's own
+  GTK window, keeping the Chromium sandbox through zypak, and ship it as a
+  separately installed Flatpak add-on for x86_64.
+- Add reproducible interface and engine audit harnesses under `tests/`.
 
 [Unreleased]: https://github.com/Cheviiot/Alcove/compare/v0.1.0...HEAD
 [0.1.0]: https://github.com/Cheviiot/Alcove/releases/tag/v0.1.0

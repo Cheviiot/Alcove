@@ -54,7 +54,7 @@ it:
 | --- | --- |
 | `domain/` | Application and policy models, on-disk repository, backups, shared helpers. No GTK. |
 | `system/` | Desktop integration: XDG portals, launcher, background permission, the service layer that ties storage to the system. |
-| `engines/` | Engine availability and compatibility, content filters, site icons, the optional native Chromium adapter. |
+| `engines/` | Engine availability and compatibility, content filters, and the Chromium engine host. |
 | `ui/` | GTK 4 and libadwaita: the runtime window shell, the library, the application page, creation and the preferences dialogs. |
 | `app/` | The GTK application object and its global actions. |
 
@@ -64,9 +64,9 @@ sit next to the widgets they describe.
 
 The interface structure and UI checks are documented in [GNOME interface](docs/gnome-hig.md).
 
-Run production GUI checks on a virtual X11 display. The isolated native
-Chromium experiment also provides its own headless Wayland compositor; see
-[the experiment instructions](tests/engine/README.md).
+Run production GUI checks on a virtual X11 display. The engine audits provide
+their own headless Wayland compositor; see
+[the engine audit instructions](tests/engine/README.md).
 Never allow a GUI check to fall back to the active desktop session:
 
 ```sh
