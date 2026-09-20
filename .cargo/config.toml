@@ -1,9 +1,15 @@
 # SPDX-License-Identifier: GPL-3.0-only
 
-# The repository guards application lifecycle, profile and background state
-# with advisory file locks, which are scoped to a process. Running those tests
-# as parallel threads of a single test binary therefore models a situation that
-# cannot occur in production, where every application is its own process, and
-# makes lock acquisition race against unrelated tests.
+# The suite runs on a single thread while the lock defects below are being
+# fixed. This is a workaround, not a property of the code: an advisory lock
+# belongs to the open file description, not to the process, so two acquisitions
+# inside one process contend — `app_id_lock_serializes_lifecycle_operations`
+# in src/domain/repository.rs demonstrates exactly that in a single thread.
+#
+# Running the suite in parallel therefore reports real in-process contention
+# that the shipped application can hit too, since its whole interface is one
+# process on one main loop. Remove this once the remaining lock work is done:
+# a bounded, non-blocking acquisition for the background and queue locks, and
+# deterministic release of the runtime profile lock when a window closes.
 [env]
 RUST_TEST_THREADS = "1"

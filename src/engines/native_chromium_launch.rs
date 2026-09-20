@@ -197,6 +197,7 @@ impl crate::engines::native_chromium::PolicyStore for RepositoryPolicy {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::engines::chromium::ChromiumBackend;
     #[test]
     fn addon_cannot_escape_its_directory() {
         let root = tempfile::tempdir().unwrap();
@@ -226,5 +227,38 @@ mod tests {
             .unwrap_err()
             .to_string()
             .contains("incompatible"));
+    }
+    /// The engine must accept the capabilities the engine itself reports. A
+    /// second protocol check anywhere else can disagree with the manifest and
+    /// make a working add-on look incompatible.
+    #[test]
+    fn the_adapter_reports_capabilities_the_engine_accepts() {
+        let root = tempfile::tempdir().expect("temporary add-on root");
+        std::fs::create_dir_all(root.path().join("cef/Resources")).expect("cef root");
+        std::fs::write(root.path().join("cef/Resources/icudtl.dat"), b"").expect("icu data");
+        std::fs::write(root.path().join("worker"), b"#!/bin/sh\n").expect("worker");
+        let manifest = root.path().join("addon.json");
+        std::fs::write(
+            &manifest,
+            serde_json::to_vec(&serde_json::json!({
+                "schema_version": 1,
+                "worker_protocol": crate::engines::native_chromium::WORKER_PROTOCOL,
+                "cef_version": CEF_VERSION,
+                "worker": "worker",
+                "cef_root": "cef",
+            }))
+            .expect("manifest"),
+        )
+        .expect("write manifest");
+
+        std::env::set_var(ADDON_ENV, &manifest);
+        let reported = capabilities().expect("the adapter reports its capabilities");
+        let accepted = crate::engines::chromium::ChromiumClient.capabilities();
+        std::env::remove_var(ADDON_ENV);
+
+        assert_eq!(
+            accepted.expect("the engine accepts its own capabilities"),
+            reported
+        );
     }
 }

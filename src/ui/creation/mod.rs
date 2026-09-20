@@ -584,7 +584,7 @@ pub(crate) fn run_ui_smoke_test<P: IsA<gtk::Application>>(application: &P) -> an
     crate::ui::test_support::settle();
     let dialog = CreateAppDialog::new(EngineAvailability::Available(
         crate::engines::chromium::ChromiumCapabilities {
-            protocol_version: crate::engines::chromium::PROTOCOL_VERSION,
+            protocol_version: crate::engines::native_chromium::WORKER_PROTOCOL,
             features: std::collections::BTreeSet::from([
                 crate::engines::chromium::RUNTIME_SHELL_FEATURE.to_owned(),
             ]),

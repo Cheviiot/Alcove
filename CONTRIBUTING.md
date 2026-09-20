@@ -21,10 +21,10 @@ a report and keep each pull request focused on one change.
    ```
 
    The suite runs on a single thread, which `.cargo/config.toml` enforces.
-   Repository state is guarded by advisory file locks, and those are scoped to
-   a process: running the lifecycle tests as parallel threads of one binary
-   models a situation that cannot occur in production, where every application
-   is its own process, and makes lock acquisition race against unrelated tests.
+   This is a temporary workaround. An advisory lock belongs to the open file
+   description rather than the process, so repeated acquisitions inside one
+   process contend; running the suite in parallel surfaces real defects rather
+   than test-harness artefacts. See that file for what remains to be fixed.
 
 5. Open a pull request. Changes are squash-merged after required checks pass.
 

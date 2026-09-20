@@ -511,6 +511,9 @@ impl<L: LauncherBackend, B: BackgroundBackend, C: ChromiumBackend> AppService<L,
         icon: Option<&[u8]>,
         parent: Option<&WindowIdentifier>,
     ) -> Result<AppConfigV3> {
+        // Without this the launcher can be reinstalled for an id that a
+        // concurrent delete has already removed, leaving an orphan entry.
+        let _id_lock = self.repository.lock_app_id(&app.id)?;
         app.normalize_and_validate()?;
         let previous = self.repository.load(&app.id)?;
         let previous_icon = self.repository.read_icon(&app.id)?;
@@ -539,11 +542,14 @@ impl<L: LauncherBackend, B: BackgroundBackend, C: ChromiumBackend> AppService<L,
     }
 
     pub async fn delete(&self, id: &AppId) -> Result<UninstallOutcome> {
+        // Lock order: background first. It is the only wait that can last
+        // indefinitely, and holding a fail-fast lock across it makes unrelated
+        // operations fail with "another lifecycle operation is in progress".
+        let _background_lock = self.lock_background().await?;
         let id_lock = self.repository.lock_app_id(id)?;
         let chromium_token = self.repository.chromium_token_if_exists(id)?;
         let profile_existed = self.repository.profile_dir(id).exists();
         let profile_lock = self.repository.acquire_delete_profile_lock(id)?;
-        let _background_lock = self.lock_background().await?;
         let target_may_use_autostart = self
             .repository
             .load_policy(id)
@@ -602,6 +608,7 @@ impl<L: LauncherBackend, B: BackgroundBackend, C: ChromiumBackend> AppService<L,
     }
 
     pub async fn repair(&self, id: &AppId, parent: Option<&WindowIdentifier>) -> Result<()> {
+        let _id_lock = self.repository.lock_app_id(id)?;
         let app = self.repository.load(id)?;
         let icon = self.repository.read_icon(id)?;
         self.launcher.install(&app, &icon, parent).await
@@ -741,7 +748,9 @@ mod tests {
         fn default() -> Self {
             Self {
                 available: Rc::new(Cell::new(false)),
-                protocol_version: Rc::new(Cell::new(crate::engines::chromium::PROTOCOL_VERSION)),
+                protocol_version: Rc::new(Cell::new(
+                    crate::engines::native_chromium::WORKER_PROTOCOL,
+                )),
                 runtime_shell: Rc::new(Cell::new(true)),
                 broken: Rc::new(Cell::new(false)),
                 opened: Rc::default(),
@@ -765,10 +774,10 @@ mod tests {
                 bail!("Chromium add-on failed its health check");
             }
             let protocol_version = self.protocol_version.get();
-            if protocol_version != crate::engines::chromium::PROTOCOL_VERSION {
+            if protocol_version != crate::engines::native_chromium::WORKER_PROTOCOL {
                 bail!(
                     "incompatible Chromium add-on protocol {protocol_version}; Alcove requires {}",
-                    crate::engines::chromium::PROTOCOL_VERSION
+                    crate::engines::native_chromium::WORKER_PROTOCOL
                 );
             }
             let mut features = BTreeSet::from([
@@ -1005,7 +1014,7 @@ mod tests {
         chromium.runtime_shell.set(true);
         chromium
             .protocol_version
-            .set(crate::engines::chromium::PROTOCOL_VERSION + 1);
+            .set(crate::engines::native_chromium::WORKER_PROTOCOL + 1);
         assert!(matches!(
             service.chromium_availability(),
             EngineAvailability::Incompatible(_)
@@ -1013,7 +1022,7 @@ mod tests {
 
         chromium
             .protocol_version
-            .set(crate::engines::chromium::PROTOCOL_VERSION);
+            .set(crate::engines::native_chromium::WORKER_PROTOCOL);
         chromium.broken.set(true);
         assert!(matches!(
             service.chromium_availability(),

@@ -10,7 +10,6 @@ use crate::{
     domain::repository::AppRepository,
 };
 
-pub const PROTOCOL_VERSION: u32 = 1;
 /// Where the native engine keeps its per-application storage.
 pub const CEF_PROFILE_DIR: &str = "chromium-cef";
 pub const RUNTIME_SHELL_FEATURE: &str = "runtime-shell-v1";
@@ -66,9 +65,10 @@ impl ChromiumBackend for ChromiumClient {
     }
 
     fn capabilities(&self) -> Result<ChromiumCapabilities> {
-        let capabilities = crate::engines::native_chromium_launch::capabilities()?;
-        validate_capabilities(&capabilities)?;
-        Ok(capabilities)
+        // The worker protocol is checked against the add-on manifest in
+        // `native_chromium_launch::read_addon`; a second check here would be a
+        // copy that can disagree with it.
+        crate::engines::native_chromium_launch::capabilities()
     }
 
     fn open_app(
@@ -106,32 +106,9 @@ impl ChromiumCapabilities {
     }
 }
 
-fn validate_capabilities(capabilities: &ChromiumCapabilities) -> Result<()> {
-    if capabilities.protocol_version != PROTOCOL_VERSION {
-        bail!(
-            "incompatible Chromium add-on protocol {}; Alcove requires {}",
-            capabilities.protocol_version,
-            PROTOCOL_VERSION
-        );
-    }
-    Ok(())
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
-
-    #[test]
-    fn protocol_mismatch_is_rejected_before_opening_an_app() {
-        let capabilities = ChromiumCapabilities {
-            protocol_version: PROTOCOL_VERSION + 1,
-            features: BTreeSet::new(),
-        };
-        assert!(validate_capabilities(&capabilities)
-            .unwrap_err()
-            .to_string()
-            .contains("incompatible"));
-    }
 
     #[test]
     fn availability_distinguishes_user_visible_states() {

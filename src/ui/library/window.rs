@@ -906,7 +906,7 @@ pub(crate) fn render_utilities<P: IsA<gtk::Application>>(application: &P) -> any
         (
             "installed",
             EngineAvailability::Available(crate::engines::chromium::ChromiumCapabilities {
-                protocol_version: crate::engines::chromium::PROTOCOL_VERSION,
+                protocol_version: crate::engines::native_chromium::WORKER_PROTOCOL,
                 features: Default::default(),
             }),
         ),
