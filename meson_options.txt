@@ -1,0 +1,3 @@
+option('flatpak', type: 'boolean', value: false)
+option('ui_tests', type: 'boolean', value: false)
+option('native_chromium', type: 'boolean', value: false, description: 'Enable the experimental native Chromium add-on adapter')
