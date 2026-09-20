@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: GPL-3.0-only
+[Desktop Entry]
+Name=Alcove
+Comment=Create isolated web applications
+Exec=alcove
+Icon=io.github.cheviiot.alcove
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=Network;WebBrowser;
+X-Purism-FormFactor=Workstation;Mobile;
