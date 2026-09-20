@@ -8,8 +8,7 @@ use std::{
 
 use anyhow::{anyhow, bail, Context, Result};
 use gtk::glib;
-use rand::RngCore;
-use serde::{Deserialize, Serialize};
+use serde::Serialize;
 use tempfile::{Builder, NamedTempFile, TempDir};
 
 use crate::{
@@ -21,36 +20,11 @@ use crate::{
 const CONFIG_FILE: &str = "app.json";
 const ICON_FILE: &str = "icon.png";
 const POLICY_FILE: &str = "policy.json";
-const CHROMIUM_TOKEN_FILE: &str = "chromium.token";
 const METADATA_LOCK_FILE: &str = ".metadata.lock";
 const POLICY_LOCK_FILE: &str = ".policy.lock";
 const BACKGROUND_LOCK_FILE: &str = ".background.lock";
-const CHROMIUM_QUEUE_FILE: &str = "pending-chromium-deletions.json";
-const CHROMIUM_QUEUE_LOCK_FILE: &str = ".chromium-deletions.lock";
 const APP_ID_LOCKS_DIR: &str = ".app-id-locks";
 pub const RUNTIME_LOCK_FILE: &str = ".runtime.lock";
-const CHROMIUM_QUEUE_SCHEMA_VERSION: u32 = 1;
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-pub struct PendingChromiumDeletion {
-    pub id: AppId,
-    pub token: String,
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-struct PendingChromiumDeletionQueue {
-    schema_version: u32,
-    entries: Vec<PendingChromiumDeletion>,
-}
-
-impl Default for PendingChromiumDeletionQueue {
-    fn default() -> Self {
-        Self {
-            schema_version: CHROMIUM_QUEUE_SCHEMA_VERSION,
-            entries: Vec::new(),
-        }
-    }
-}
 
 #[derive(Debug)]
 pub struct ProfileLock {
@@ -64,7 +38,6 @@ pub struct BackgroundLock {
 
 #[derive(Debug)]
 pub struct AppIdLock {
-    id: AppId,
     _file: fs::File,
 }
 
@@ -195,18 +168,11 @@ impl AppRepository {
             .with_context(|| format!("failed to open {}", path.display()))?;
         rustix::fs::flock(&file, rustix::fs::FlockOperation::NonBlockingLockExclusive)
             .with_context(|| format!("another lifecycle operation is in progress for app {id}"))?;
-        Ok(AppIdLock {
-            id: id.clone(),
-            _file: file,
-        })
+        Ok(AppIdLock { _file: file })
     }
 
     pub fn reserve_app_id(&self, id: &AppId) -> Result<AppIdLock> {
-        let lock = self.lock_app_id(id)?;
-        if self.has_pending_chromium_deletion(id)? {
-            bail!("app id {id} is reserved by a pending Chromium profile deletion");
-        }
-        Ok(lock)
+        self.lock_app_id(id)
     }
 
     pub fn acquire_runtime_lock(&self, id: &AppId) -> Result<ProfileLock> {
@@ -354,131 +320,6 @@ impl AppRepository {
     pub fn contains(&self, id: &AppId) -> bool {
         self.app_dir(id).join(CONFIG_FILE).is_file()
     }
-
-    pub fn chromium_token(&self, id: &AppId) -> Result<String> {
-        let app_dir = self.app_dir(id);
-        if !app_dir.is_dir() {
-            bail!("app {id} is not stored locally");
-        }
-        let _metadata_lock = self.lock_app_file(id, METADATA_LOCK_FILE)?;
-        let path = app_dir.join(CHROMIUM_TOKEN_FILE);
-        if path.exists() {
-            let token = fs::read_to_string(&path)
-                .with_context(|| format!("failed to read {}", path.display()))?;
-            validate_chromium_token(&token)?;
-            return Ok(token);
-        }
-
-        let mut bytes = [0_u8; 32];
-        rand::thread_rng().fill_bytes(&mut bytes);
-        let token = bytes
-            .iter()
-            .map(|byte| format!("{byte:02x}"))
-            .collect::<String>();
-        let temporary = stage_bytes(&path, token.as_bytes())?;
-        persist_staged(temporary, &path)?;
-        sync_parent(&path)?;
-        Ok(token)
-    }
-
-    pub fn chromium_token_if_exists(&self, id: &AppId) -> Result<Option<String>> {
-        let app_dir = self.app_dir(id);
-        if !app_dir.is_dir() {
-            return Ok(None);
-        }
-        let _metadata_lock = self.lock_app_file(id, METADATA_LOCK_FILE)?;
-        let path = app_dir.join(CHROMIUM_TOKEN_FILE);
-        if !path.exists() {
-            return Ok(None);
-        }
-        let token = fs::read_to_string(&path)
-            .with_context(|| format!("failed to read {}", path.display()))?;
-        validate_chromium_token(&token)?;
-        Ok(Some(token))
-    }
-
-    pub fn pending_chromium_deletions(&self) -> Result<Vec<PendingChromiumDeletion>> {
-        fs::create_dir_all(&self.data_root)
-            .with_context(|| format!("failed to create {}", self.data_root.display()))?;
-        let _lock = self.lock_chromium_queue()?;
-        Ok(self.load_chromium_queue()?.entries)
-    }
-
-    pub fn has_pending_chromium_deletion(&self, id: &AppId) -> Result<bool> {
-        Ok(self
-            .pending_chromium_deletions()?
-            .iter()
-            .any(|pending| pending.id == *id))
-    }
-
-    pub fn enqueue_chromium_deletion(&self, id_lock: &AppIdLock, token: &str) -> Result<()> {
-        validate_chromium_token(token)?;
-        fs::create_dir_all(&self.data_root)
-            .with_context(|| format!("failed to create {}", self.data_root.display()))?;
-        let _lock = self.lock_chromium_queue()?;
-        let mut queue = self.load_chromium_queue()?;
-        if let Some(entry) = queue
-            .entries
-            .iter_mut()
-            .find(|entry| entry.id == id_lock.id)
-        {
-            entry.token = token.to_owned();
-        } else {
-            queue.entries.push(PendingChromiumDeletion {
-                id: id_lock.id.clone(),
-                token: token.to_owned(),
-            });
-        }
-        replace_json(&self.data_root.join(CHROMIUM_QUEUE_FILE), &queue)
-    }
-
-    pub fn complete_chromium_deletion(&self, id_lock: &AppIdLock, token: &str) -> Result<()> {
-        validate_chromium_token(token)?;
-        fs::create_dir_all(&self.data_root)
-            .with_context(|| format!("failed to create {}", self.data_root.display()))?;
-        let _lock = self.lock_chromium_queue()?;
-        let mut queue = self.load_chromium_queue()?;
-        queue
-            .entries
-            .retain(|entry| entry.id != id_lock.id || entry.token != token);
-        replace_json(&self.data_root.join(CHROMIUM_QUEUE_FILE), &queue)
-    }
-
-    fn load_chromium_queue(&self) -> Result<PendingChromiumDeletionQueue> {
-        let path = self.data_root.join(CHROMIUM_QUEUE_FILE);
-        if !path.exists() {
-            return Ok(PendingChromiumDeletionQueue::default());
-        }
-        let bytes =
-            fs::read(&path).with_context(|| format!("failed to read {}", path.display()))?;
-        let queue: PendingChromiumDeletionQueue = serde_json::from_slice(&bytes)
-            .with_context(|| format!("invalid JSON in {}", path.display()))?;
-        if queue.schema_version != CHROMIUM_QUEUE_SCHEMA_VERSION {
-            bail!(
-                "unsupported pending Chromium deletion version {}",
-                queue.schema_version
-            );
-        }
-        for entry in &queue.entries {
-            validate_chromium_token(&entry.token)?;
-        }
-        Ok(queue)
-    }
-
-    fn lock_chromium_queue(&self) -> Result<fs::File> {
-        let path = self.data_root.join(CHROMIUM_QUEUE_LOCK_FILE);
-        let file = OpenOptions::new()
-            .create(true)
-            .read(true)
-            .write(true)
-            .truncate(false)
-            .open(&path)
-            .with_context(|| format!("failed to open {}", path.display()))?;
-        rustix::fs::flock(&file, rustix::fs::FlockOperation::LockExclusive)
-            .with_context(|| format!("failed to lock {}", path.display()))?;
-        Ok(file)
-    }
-
     pub fn load_policy(&self, id: &AppId) -> Result<AppPolicyV2> {
         let path = self.app_dir(id).join(POLICY_FILE);
         if !path.exists() {
@@ -810,18 +651,6 @@ fn ensure_profile_source(source: &Path) -> Result<()> {
     }
     Ok(())
 }
-
-fn validate_chromium_token(token: &str) -> Result<()> {
-    if token.len() != 64
-        || !token
-            .bytes()
-            .all(|byte| byte.is_ascii_digit() || (b'a'..=b'f').contains(&byte))
-    {
-        bail!("invalid Chromium engine capability token");
-    }
-    Ok(())
-}
-
 fn copy_regular_tree(source: &Path, destination: &Path) -> Result<()> {
     let mut entries = fs::read_dir(source)
         .with_context(|| format!("failed to read {}", source.display()))?
@@ -956,37 +785,6 @@ mod tests {
         assert!(repository.lock_app_id(&id).is_err());
         drop(first_lock);
         assert!(repository.lock_app_id(&id).is_ok());
-    }
-
-    #[test]
-    fn chromium_deletion_completion_is_token_matched() {
-        let (_temp, repository) = repository();
-        let id = AppId::from_str("abcdefghijkl").unwrap();
-        let id_lock = repository.lock_app_id(&id).unwrap();
-        let old_token = "a".repeat(64);
-        let new_token = "b".repeat(64);
-
-        repository
-            .enqueue_chromium_deletion(&id_lock, &old_token)
-            .unwrap();
-        repository
-            .enqueue_chromium_deletion(&id_lock, &new_token)
-            .unwrap();
-        repository
-            .complete_chromium_deletion(&id_lock, &old_token)
-            .unwrap();
-        assert_eq!(
-            repository.pending_chromium_deletions().unwrap(),
-            vec![PendingChromiumDeletion {
-                id: id.clone(),
-                token: new_token.clone(),
-            }]
-        );
-
-        repository
-            .complete_chromium_deletion(&id_lock, &new_token)
-            .unwrap();
-        assert!(repository.pending_chromium_deletions().unwrap().is_empty());
     }
 
     #[test]
@@ -1144,24 +942,6 @@ mod tests {
         let migrated = fs::read_to_string(app_dir.join(CONFIG_FILE)).unwrap();
         assert!(migrated.contains("\"schema_version\": 3"));
         assert!(migrated.contains("\"engine\": \"webkit\""));
-    }
-
-    #[test]
-    fn chromium_token_is_stable_and_invalid_tokens_are_rejected() {
-        let (_temp, repository) = repository();
-        let app = AppConfigV3::new("Chromium", "example.org", 0).unwrap();
-        repository.create(&app, b"icon").unwrap();
-
-        let token = repository.chromium_token(&app.id).unwrap();
-        assert_eq!(token.len(), 64);
-        assert_eq!(repository.chromium_token(&app.id).unwrap(), token);
-
-        fs::write(
-            repository.app_dir(&app.id).join(CHROMIUM_TOKEN_FILE),
-            "../invalid",
-        )
-        .unwrap();
-        assert!(repository.chromium_token(&app.id).is_err());
     }
 
     #[test]

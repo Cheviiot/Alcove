@@ -2,16 +2,10 @@
 
 use std::collections::BTreeSet;
 
-use anyhow::{bail, Context, Result};
+use anyhow::{bail, Result};
 
-use crate::{
-    domain::model::{AppConfigV3, AppId},
-    domain::policy::AppPolicyV2,
-    domain::repository::AppRepository,
-};
+use crate::{domain::model::AppConfigV3, domain::policy::AppPolicyV2};
 
-/// Where the native engine keeps its per-application storage.
-pub const CEF_PROFILE_DIR: &str = "chromium-cef";
 pub const RUNTIME_SHELL_FEATURE: &str = "runtime-shell-v1";
 pub const ADDON_REF_URL: &str =
     "https://cheviiot.github.io/Alcove/alcove-chromium-native.flatpakref";
@@ -53,10 +47,8 @@ pub trait ChromiumBackend: Clone {
         &self,
         app: &AppConfigV3,
         policy: &AppPolicyV2,
-        token: &str,
         start_in_background: bool,
     ) -> Result<()>;
-    fn delete_profile(&self, id: &AppId, token: &str) -> Result<()>;
 }
 
 impl ChromiumBackend for ChromiumClient {
@@ -75,25 +67,11 @@ impl ChromiumBackend for ChromiumClient {
         &self,
         app: &AppConfigV3,
         _policy: &AppPolicyV2,
-        _token: &str,
         start_in_background: bool,
     ) -> Result<()> {
         // The engine runs inside the application's own process, so switching to
         // it means starting that process; it then opens the window natively.
         crate::app::application::spawn_app_process(&app.id, start_in_background)
-    }
-
-    fn delete_profile(&self, id: &AppId, _token: &str) -> Result<()> {
-        let profile = AppRepository::for_current_user()
-            .profile_dir(id)
-            .join(CEF_PROFILE_DIR);
-        match std::fs::remove_dir_all(&profile) {
-            Ok(()) => Ok(()),
-            Err(error) if error.kind() == std::io::ErrorKind::NotFound => Ok(()),
-            Err(error) => {
-                Err(error).with_context(|| format!("failed to remove {}", profile.display()))
-            }
-        }
     }
 }
 
