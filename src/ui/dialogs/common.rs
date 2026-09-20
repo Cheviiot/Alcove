@@ -25,6 +25,24 @@ pub fn show_inline_error(label: &gtk::Label, message: &str) {
 
 /// Keep a non-cancellable archive operation visible until its atomic write or
 /// portal transaction finishes. Call force_close after awaiting the operation.
+/// Opens `uri` through the desktop portal, which is the only route out of the
+/// sandbox, and reports a failure beside `parent` instead of losing it.
+pub fn open_uri(parent: &impl IsA<gtk::Window>, uri: &str, failure_title: &str) {
+    let parent = parent.clone().upcast::<gtk::Window>();
+    let uri = uri.to_owned();
+    let failure_title = failure_title.to_owned();
+    glib::spawn_future_local(async move {
+        if let Err(error) = gtk::UriLauncher::new(&uri)
+            .launch_future(Some(&parent))
+            .await
+        {
+            let alert = adw::AlertDialog::new(Some(&failure_title), Some(&error.to_string()));
+            alert.add_response("close", &gettext("Close"));
+            alert.present(Some(&parent));
+        }
+    });
+}
+
 pub fn show_progress(parent: &impl IsA<gtk::Widget>, title: &str) -> adw::Dialog {
     let spinner = adw::Spinner::builder()
         .width_request(48)

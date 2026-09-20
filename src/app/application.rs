@@ -12,7 +12,9 @@ use gtk::{gio, glib};
 use crate::{
     domain::config,
     domain::model::{AppConfigV3, AppId, Engine},
+    engines::chromium,
     system::service::AppService,
+    ui::dialogs::common,
     ui::library::window::AlcoveWindow,
     ui::shell::app_window::AppWindow,
 };
@@ -714,18 +716,18 @@ impl AlcoveApplication {
                     AppWindow::new(&app, &config).present();
                 }
                 "report" => {
-                    let _ = gio::AppInfo::launch_default_for_uri(
+                    common::open_uri(
+                        &manager,
                         "https://github.com/Cheviiot/Alcove/issues/new",
-                        None::<&gio::AppLaunchContext>,
+                        &gettext("Could Not Open the Issue Tracker"),
                     );
                 }
                 "install" => {
-                    if let Err(error) = gio::AppInfo::launch_default_for_uri(
-                        "https://cheviiot.github.io/Alcove/alcove-chromium.flatpakref",
-                        None::<&gio::AppLaunchContext>,
-                    ) {
-                        manager.toast(&error.to_string());
-                    }
+                    common::open_uri(
+                        &manager,
+                        chromium::ADDON_REF_URL,
+                        &gettext("Could Not Open the Add-on Installer"),
+                    );
                 }
                 _ => {}
             }

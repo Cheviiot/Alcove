@@ -2,11 +2,9 @@
 
 use adw::prelude::*;
 use gettextrs::gettext;
-use gtk::gio;
 
-use crate::engines::chromium::EngineAvailability;
-
-const CHROMIUM_REF: &str = "https://cheviiot.github.io/Alcove/alcove-chromium.flatpakref";
+use crate::engines::chromium::{self, EngineAvailability};
+use crate::ui::dialogs::common;
 
 pub fn present(parent: &gtk::Window, availability: &EngineAvailability) {
     let dialog = adw::PreferencesDialog::builder()
@@ -59,16 +57,11 @@ pub fn present(parent: &gtk::Window, availability: &EngineAvailability) {
 
     let alert_parent = parent.clone();
     button.connect_activated(move |_| {
-        if let Err(error) =
-            gio::AppInfo::launch_default_for_uri(CHROMIUM_REF, None::<&gio::AppLaunchContext>)
-        {
-            let alert = adw::AlertDialog::new(
-                Some(&gettext("Could Not Open the Add-on Installer")),
-                Some(&error.to_string()),
-            );
-            alert.add_response("close", &gettext("Close"));
-            alert.present(Some(&alert_parent));
-        }
+        common::open_uri(
+            &alert_parent,
+            chromium::ADDON_REF_URL,
+            &gettext("Could Not Open the Add-on Installer"),
+        );
     });
 
     dialog.present(Some(parent));

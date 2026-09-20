@@ -23,10 +23,12 @@ use crate::{
     domain::policy::{AppPolicyV2, Origin, PermissionDecision, PermissionKind, ProxyMode},
     domain::repository::ProfileLock,
     domain::util,
+    engines::chromium::{self, EngineAvailability},
     engines::compatibility::{reason_description, CompatibilityCatalogV1},
     engines::content_filters,
     system::background,
     system::service::AppService,
+    ui::dialogs::common,
     ui::dialogs::download_manager::DownloadManager,
     ui::shell::web_app_shell::{adjusted_zoom_level, WebAppShell, DEFAULT_ZOOM_LEVEL, ZOOM_STEP},
 };
@@ -1142,19 +1144,49 @@ impl AppWindow {
                 gettext("WebKitGTK error"),
                 failure
             );
+            // Offering the engine is pointless while its add-on is missing: the
+            // launch would fail and leave the person without a way forward.
+            let addon_missing = matches!(
+                AppService::portal().chromium_availability(),
+                EngineAvailability::Missing
+            );
+            let body = if addon_missing {
+                format!(
+                    "{body}\n\n{}",
+                    gettext("The Chromium add-on is not installed yet.")
+                )
+            } else {
+                body
+            };
             let dialog = adw::AlertDialog::new(
                 Some(&gettext("Try This Application with Chromium?")),
                 Some(&body),
             );
+            let offer = if addon_missing { "install" } else { "chromium" };
+            let offer_label = if addon_missing {
+                gettext("Get Chromium Add-on")
+            } else {
+                gettext("Use Chromium")
+            };
             dialog.add_responses(&[
                 ("cancel", &gettext("Keep WebKitGTK")),
-                ("chromium", &gettext("Use Chromium")),
+                (offer, &offer_label),
             ]);
-            dialog.set_response_appearance("chromium", adw::ResponseAppearance::Suggested);
+            dialog.set_response_appearance(offer, adw::ResponseAppearance::Suggested);
             dialog.set_default_response(Some("cancel"));
             dialog.set_close_response("cancel");
             let response = dialog.choose_future(Some(&window)).await;
             window.set_toolbar_dialog_open(false);
+            if response == "install" {
+                // The prompt may return once the add-on is in place.
+                window.imp().compatibility_prompt_shown.set(false);
+                common::open_uri(
+                    &window,
+                    chromium::ADDON_REF_URL,
+                    &gettext("Could Not Open the Add-on Installer"),
+                );
+                return;
+            }
             if response != "chromium" {
                 return;
             }

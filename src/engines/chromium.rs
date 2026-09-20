@@ -16,6 +16,7 @@ pub const INTERFACE_NAME: &str = "io.github.cheviiot.alcove.Chromium.Engine1";
 pub const PROTOCOL_VERSION: u32 = 1;
 pub const RUNTIME_SHELL_FEATURE: &str = "runtime-shell-v1";
 pub const EXTENSION_ROOT: &str = "/app/extensions/chromium";
+pub const ADDON_REF_URL: &str = "https://cheviiot.github.io/Alcove/alcove-chromium.flatpakref";
 const CALL_TIMEOUT_MSEC: i32 = 10_000;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
