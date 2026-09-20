@@ -1,0 +1,11 @@
+[Flatpak Ref]
+Title=Alcove
+Name=io.github.cheviiot.alcove
+Branch=master
+Url=https://cheviiot.github.io/Alcove/repo/
+SuggestRemoteName=alcove
+Homepage=https://github.com/Cheviiot/Alcove
+Icon=https://cheviiot.github.io/Alcove/io.github.cheviiot.alcove.svg
+RuntimeRepo=https://dl.flathub.org/repo/flathub.flatpakrepo
+IsRuntime=false
+GPGKey=@GPG_KEY@

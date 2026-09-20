@@ -1,0 +1,11 @@
+[Flatpak Repo]
+Version=1
+Title=Alcove
+Url=https://cheviiot.github.io/Alcove/repo/
+Homepage=https://github.com/Cheviiot/Alcove
+Comment=Official repository for the Alcove web application manager
+Description=Small GPG-signed Flatpak repository published directly by the Alcove project
+Icon=https://cheviiot.github.io/Alcove/io.github.cheviiot.alcove.svg
+SuggestRemoteName=alcove
+RuntimeRepo=https://dl.flathub.org/repo/flathub.flatpakrepo
+GPGKey=@GPG_KEY@
