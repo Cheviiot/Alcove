@@ -3,21 +3,19 @@
 use std::collections::BTreeSet;
 
 use anyhow::{bail, Context, Result};
-use gtk::{gio, glib, prelude::*};
 
 use crate::{
     domain::model::{AppConfigV3, AppId},
     domain::policy::AppPolicyV2,
+    domain::repository::AppRepository,
 };
 
-pub const BUS_NAME: &str = "io.github.cheviiot.alcove.Chromium";
-pub const OBJECT_PATH: &str = "/io/github/cheviiot/alcove/Chromium/Engine1";
-pub const INTERFACE_NAME: &str = "io.github.cheviiot.alcove.Chromium.Engine1";
 pub const PROTOCOL_VERSION: u32 = 1;
+/// Where the native engine keeps its per-application storage.
+pub const CEF_PROFILE_DIR: &str = "chromium-cef";
 pub const RUNTIME_SHELL_FEATURE: &str = "runtime-shell-v1";
-pub const EXTENSION_ROOT: &str = "/app/extensions/chromium";
-pub const ADDON_REF_URL: &str = "https://cheviiot.github.io/Alcove/alcove-chromium.flatpakref";
-const CALL_TIMEOUT_MSEC: i32 = 10_000;
+pub const ADDON_REF_URL: &str =
+    "https://cheviiot.github.io/Alcove/alcove-chromium-native.flatpakref";
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ChromiumCapabilities {
@@ -64,28 +62,11 @@ pub trait ChromiumBackend: Clone {
 
 impl ChromiumBackend for ChromiumClient {
     fn installed(&self) -> bool {
-        #[cfg(feature = "native-chromium")]
-        if crate::engines::native_chromium_launch::enabled() {
-            return crate::engines::native_chromium_launch::installed();
-        }
-        ["electron", "main.js", "bin/zypak-wrapper"]
-            .iter()
-            .all(|entry| std::path::Path::new(EXTENSION_ROOT).join(entry).is_file())
+        crate::engines::native_chromium_launch::installed()
     }
 
     fn capabilities(&self) -> Result<ChromiumCapabilities> {
-        #[cfg(feature = "native-chromium")]
-        if crate::engines::native_chromium_launch::enabled() {
-            return crate::engines::native_chromium_launch::capabilities();
-        }
-        let response = self.call("GetCapabilities", None)?;
-        let (protocol_version, features) = response
-            .get::<(u32, Vec<String>)>()
-            .context("the Chromium add-on returned malformed capabilities")?;
-        let capabilities = ChromiumCapabilities {
-            protocol_version,
-            features: features.into_iter().collect(),
-        };
+        let capabilities = crate::engines::native_chromium_launch::capabilities()?;
         validate_capabilities(&capabilities)?;
         Ok(capabilities)
     }
@@ -93,35 +74,26 @@ impl ChromiumBackend for ChromiumClient {
     fn open_app(
         &self,
         app: &AppConfigV3,
-        policy: &AppPolicyV2,
-        token: &str,
+        _policy: &AppPolicyV2,
+        _token: &str,
         start_in_background: bool,
     ) -> Result<()> {
-        let mut chromium_policy = policy.clone();
-        chromium_policy.content_filters.clear();
-        let policy_json = serde_json::to_string(&chromium_policy)
-            .context("failed to serialize the Chromium runtime policy")?;
-        let parameters = (
-            app.id.as_str(),
-            app.start_url.as_str(),
-            app.title.as_str(),
-            app.user_agent.as_deref().unwrap_or_default(),
-            app.window.width,
-            app.window.height,
-            app.window.maximized,
-            start_in_background,
-            token,
-            policy_json.as_str(),
-        )
-            .to_variant();
-        self.call("OpenApp", Some(&parameters))?;
-        Ok(())
+        // The engine runs inside the application's own process, so switching to
+        // it means starting that process; it then opens the window natively.
+        crate::app::application::spawn_app_process(&app.id, start_in_background)
     }
 
-    fn delete_profile(&self, id: &AppId, token: &str) -> Result<()> {
-        let parameters = (id.as_str(), token).to_variant();
-        self.call("DeleteProfile", Some(&parameters))?;
-        Ok(())
+    fn delete_profile(&self, id: &AppId, _token: &str) -> Result<()> {
+        let profile = AppRepository::for_current_user()
+            .profile_dir(id)
+            .join(CEF_PROFILE_DIR);
+        match std::fs::remove_dir_all(&profile) {
+            Ok(()) => Ok(()),
+            Err(error) if error.kind() == std::io::ErrorKind::NotFound => Ok(()),
+            Err(error) => {
+                Err(error).with_context(|| format!("failed to remove {}", profile.display()))
+            }
+        }
     }
 }
 
@@ -131,30 +103,6 @@ impl ChromiumCapabilities {
             bail!("the Chromium add-on does not support required feature {feature}");
         }
         Ok(())
-    }
-}
-
-impl ChromiumClient {
-    fn call(&self, method: &str, parameters: Option<&glib::Variant>) -> Result<glib::Variant> {
-        let proxy = gio::DBusProxy::for_bus_sync(
-            gio::BusType::Session,
-            gio::DBusProxyFlags::NONE,
-            None,
-            BUS_NAME,
-            OBJECT_PATH,
-            INTERFACE_NAME,
-            gio::Cancellable::NONE,
-        )
-        .context("the Chromium add-on service could not be activated")?;
-        proxy
-            .call_sync(
-                method,
-                parameters,
-                gio::DBusCallFlags::NONE,
-                CALL_TIMEOUT_MSEC,
-                gio::Cancellable::NONE,
-            )
-            .with_context(|| format!("Chromium add-on {method} call failed"))
     }
 }
 

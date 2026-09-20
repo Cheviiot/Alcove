@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
-//! Explicit opt-in while the native add-on is being integrated. The default
-//! Chromium route continues to use the installed Electron service.
+//! The Chromium engine. The worker runs CEF in a separate process and presents
+//! its output inside the application's own GTK window; the add-on carrying it
+//! is installed separately and is never required.
 
 use adw::prelude::*;
 use anyhow::{ensure, Context, Result};

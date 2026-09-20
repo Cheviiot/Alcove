@@ -59,7 +59,7 @@ compatible.
 | Proxy credential disclosure | Credentials, query strings, fragments, and paths are rejected in custom proxy URIs; Alcove stores only a normalized endpoint. |
 | Over-broad content blocking | Imported WebKit content-extension rules are opt-in and scoped to one app; no implicit third-party-resource blocking is added. |
 | Hidden background activity | Per-app opt-in state, portal authorization, a system status message, and an explicit Stop action. The portal grant belongs to the Alcove Flatpak as a whole, while Alcove keeps the enabled-app list in each app's policy. |
-| Chromium engine compromise | One Flatpak sandbox with no host filesystem or Flatpak-control permission, a narrow internal D-Bus protocol, pinned/offline build inputs, validated inputs, separate per-app Electron processes and profiles, and safe Electron defaults. |
+| Chromium engine compromise | One Flatpak sandbox with no host filesystem or Flatpak-control permission, a private versioned transport to the worker process, pinned and checksummed build inputs, validated inputs, separate per-app profiles, and the Chromium sandbox retained through zypak. |
 
 ## Availability and compatibility limits
 

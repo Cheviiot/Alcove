@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- SPDX-License-Identifier: GPL-3.0-only -->
 <component type="addon">
-  <id>io.github.cheviiot.alcove.Chromium</id>
+  <id>io.github.cheviiot.alcove.ChromiumNative</id>
   <extends>io.github.cheviiot.alcove</extends>
   <name>Chromium Engine for Alcove</name>
   <name xml:lang="ru">Движок Chromium для Alcove</name>

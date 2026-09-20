@@ -3,13 +3,15 @@
   "runtime": "org.gnome.Platform",
   "runtime-version": "50",
   "sdk": "org.gnome.Sdk",
-  "sdk-extensions": ["org.freedesktop.Sdk.Extension.rust-stable"],
+  "sdk-extensions": [
+    "org.freedesktop.Sdk.Extension.rust-stable"
+  ],
   "command": "alcove",
   "separate-locales": false,
   "add-extensions": {
-    "io.github.cheviiot.alcove.Chromium": {
+    "io.github.cheviiot.alcove.ChromiumNative": {
       "version": "master",
-      "directory": "extensions/chromium",
+      "directory": "extensions/chromium-native",
       "bundle": true,
       "no-autodownload": true,
       "autodelete": true
@@ -22,8 +24,8 @@
     "--device=dri",
     "--socket=wayland",
     "--socket=pulseaudio",
-    "--own-name=io.github.cheviiot.alcove.Chromium",
-    "--env=GTK_USE_PORTAL=1"
+    "--env=GTK_USE_PORTAL=1",
+    "--env=ALCOVE_NATIVE_CHROMIUM_ADDON=/app/extensions/chromium-native/addon.json"
   ],
   "build-options": {
     "append-path": "/usr/lib/sdk/rust-stable/bin",
@@ -36,7 +38,9 @@
     {
       "name": "blueprint-compiler",
       "buildsystem": "meson",
-      "cleanup": ["*"],
+      "cleanup": [
+        "*"
+      ],
       "sources": [
         {
           "type": "git",
@@ -47,63 +51,128 @@
       ]
     },
     {
-      "name": "alcove-chromium-broker",
-      "buildsystem": "simple",
-      "build-commands": [
-        "cc -std=c17 -O2 -Wall -Wextra -Werror src/broker.c -o alcove-chromium-service $(pkg-config --cflags --libs gio-2.0 json-glib-1.0)",
-        "./alcove-chromium-service --self-test",
-        "install -Dm755 alcove-chromium-service /app/bin/alcove-chromium-service",
-        "install -d /app/extensions/chromium /app/share/dbus-1/services",
-        "install -Dm644 data/io.github.cheviiot.alcove.Chromium.service /app/share/dbus-1/services/io.github.cheviiot.alcove.Chromium.service"
-      ],
-      "sources": [{ "type": "dir", "path": "../chromium" }]
-    },
-    {
       "name": "zypak",
       "buildsystem": "simple",
       "build-commands": [
         "./configure",
         "make -j${FLATPAK_BUILDER_N_JOBS}",
-        "make FLATPAK_DEST=/app/extensions/chromium install"
+        "make FLATPAK_DEST=/app/extensions/chromium-native install"
       ],
       "sources": [
         {
           "type": "git",
           "url": "https://github.com/refi64/zypak",
           "tag": "v2025.09",
-          "commit": "693a71c5ffa80ec9c9ce2ae03b1ccc493c698e53"
+          "commit": "693a71c5ffa80ec9c9ce2ae03b1ccc493c698e53",
+          "disable-submodules": true
+        },
+        {
+          "type": "git",
+          "url": "https://github.com/refi64/nickle",
+          "commit": "0ac7f5dbf659caa8d1d45cb57e942f2bc565da1e",
+          "disable-submodules": true,
+          "dest": "nickle"
         }
+      ],
+      "only-arches": [
+        "x86_64"
       ]
     },
     {
-      "name": "alcove-chromium-addon",
-      "buildsystem": "simple",
-      "build-commands": [
-        "cp -a electron/. /app/extensions/chromium/",
-        "install -Dm644 src/main.js src/validate.js src/navigation-policy.js src/permission-policy.js src/proxy.js src/user-agent.js src/window-state.js src/shell-security.js src/shell-preload.js src/shell.html src/shell.css src/shell.js /app/extensions/chromium/",
-        "install -Dm644 data/io.github.cheviiot.alcove.Chromium.metainfo.xml -t /app/extensions/chromium/share/metainfo",
-        "install -d /app/extensions/chromium/share/licenses",
-        "mv /app/share/licenses/io.github.cheviiot.alcove/zypak /app/extensions/chromium/share/licenses/",
-        "rmdir --ignore-fail-on-non-empty /app/share/licenses/io.github.cheviiot.alcove /app/share/licenses"
+      "name": "nlohmann-json",
+      "buildsystem": "cmake-ninja",
+      "config-opts": [
+        "-DJSON_BuildTests=OFF",
+        "-DJSON_Install=ON"
+      ],
+      "cleanup": [
+        "*"
       ],
       "sources": [
-        { "type": "dir", "path": "../chromium" },
         {
           "type": "archive",
-          "url": "https://github.com/electron/electron/releases/download/v40.1.0/electron-v40.1.0-linux-x64.zip",
-          "sha256": "26f7675cc103f6ca0a1122d82f30bed7544c1a5d5507a6980992ae07ec876a12",
-          "dest": "electron",
-          "strip-components": 0,
-          "only-arches": ["x86_64"]
+          "url": "https://github.com/nlohmann/json/releases/download/v3.12.0/json.tar.xz",
+          "sha256": "42f6e95cad6ec532fd372391373363b62a14af6d771056dbfc86160e6dfff7aa"
+        }
+      ],
+      "only-arches": [
+        "x86_64"
+      ]
+    },
+    {
+      "name": "alcove-native-chromium",
+      "buildsystem": "simple",
+      "build-commands": [
+        "cmake -S . -B _build -G Ninja -DCEF_ROOT=\"$PWD/cef\" -DCMAKE_BUILD_TYPE=Release",
+        "cmake --build _build --parallel ${FLATPAK_BUILDER_N_JOBS}",
+        "install -Dm755 _build/alcove-cef-worker /app/extensions/chromium-native/worker/alcove-cef-worker",
+        "install -d /app/extensions/chromium-native/cef",
+        "cp -a cef/Release cef/Resources /app/extensions/chromium-native/cef/",
+        "for library in /app/extensions/chromium-native/cef/Release/*.so*; do ln -s ../cef/Release/\"$(basename \"$library\")\" /app/extensions/chromium-native/worker/; done",
+        "ln -s ../cef/Release/v8_context_snapshot.bin /app/extensions/chromium-native/worker/",
+        "ln -s ../cef/Release/chrome-sandbox /app/extensions/chromium-native/worker/",
+        "ln -s ../cef/Resources/icudtl.dat ../cef/Resources/locales /app/extensions/chromium-native/worker/",
+        "for resource in /app/extensions/chromium-native/cef/Resources/*.pak; do ln -s ../cef/Resources/\"$(basename \"$resource\")\" /app/extensions/chromium-native/worker/; done",
+        "install -Dm755 flatpak-worker.sh /app/extensions/chromium-native/bin/alcove-cef-launch",
+        "install -Dm644 addon.json /app/extensions/chromium-native/addon.json",
+        "install -Dm644 cef/LICENSE.txt /app/extensions/chromium-native/share/licenses/cef/LICENSE.txt",
+        "install -Dm644 io.github.cheviiot.alcove.ChromiumNative.metainfo.xml /app/extensions/chromium-native/share/metainfo/io.github.cheviiot.alcove.ChromiumNative.metainfo.xml"
+      ],
+      "sources": [
+        {
+          "type": "file",
+          "path": "../experiments/native-chromium/CMakeLists.txt"
+        },
+        {
+          "type": "file",
+          "path": "../experiments/native-chromium/worker.cc"
+        },
+        {
+          "type": "file",
+          "path": "../experiments/native-chromium/atspi_export.h"
+        },
+        {
+          "type": "file",
+          "path": "../experiments/native-chromium/gpu_bridge.h"
+        },
+        {
+          "type": "file",
+          "path": "../experiments/native-chromium/native_accessibility.h"
+        },
+        {
+          "type": "file",
+          "path": "../experiments/native-chromium/navigation_gate.h"
+        },
+        {
+          "type": "file",
+          "path": "../experiments/native-chromium/permission_settings.h"
+        },
+        {
+          "type": "file",
+          "path": "../experiments/native-chromium/site_requests.h"
+        },
+        {
+          "type": "file",
+          "path": "../experiments/native-chromium/flatpak-worker.sh"
+        },
+        {
+          "type": "file",
+          "path": "../data/io.github.cheviiot.alcove.ChromiumNative.metainfo.xml"
         },
         {
           "type": "archive",
-          "url": "https://github.com/electron/electron/releases/download/v40.1.0/electron-v40.1.0-linux-arm64.zip",
-          "sha256": "4f07ff00445a707289d46f52dffd6faa504a4b60355ddb20df36ff8daa5cfc70",
-          "dest": "electron",
-          "strip-components": 0,
-          "only-arches": ["aarch64"]
+          "url": "https://cef-builds.spotifycdn.com/cef_binary_152.0.7+g83ffcba+chromium-152.0.7977.83_linux64_minimal.tar.bz2",
+          "sha256": "a75d8956901e1f91bad4f7151af1dc31aaa2d46888cd6af51adb0ecaa77f860f",
+          "dest": "cef"
+        },
+        {
+          "type": "inline",
+          "dest-filename": "addon.json",
+          "contents": "{\"schema_version\": 1, \"worker_protocol\": 4, \"cef_version\": \"152.0.7+g83ffcba+chromium-152.0.7977.83\", \"worker\": \"bin/alcove-cef-launch\", \"cef_root\": \"cef\"}"
         }
+      ],
+      "only-arches": [
+        "x86_64"
       ]
     },
     {
@@ -115,7 +184,9 @@
           "CARGO_HOME": "/run/build/alcove/cargo"
         }
       },
-      "config-opts": ["-Dflatpak=true"],
+      "config-opts": [
+        "-Dflatpak=true"
+      ],
       "sources": [
         {
           "type": "git",

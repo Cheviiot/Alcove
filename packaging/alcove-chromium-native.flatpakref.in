@@ -1,6 +1,6 @@
 [Flatpak Ref]
-Title=Chromium Engine for Alcove
-Name=io.github.cheviiot.alcove.Chromium
+Title=Native Chromium Engine for Alcove
+Name=io.github.cheviiot.alcove.ChromiumNative
 Branch=master
 Url=https://cheviiot.github.io/Alcove/repo/
 SuggestRemoteName=alcove

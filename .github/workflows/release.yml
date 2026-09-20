@@ -105,25 +105,23 @@ jobs:
             '^app/io.github.cheviiot.alcove/x86_64/master$'
           ostree refs --repo=public/repo | grep -q \
             '^app/io.github.cheviiot.alcove/aarch64/master$'
+          # The native engine is built for x86_64 only; aarch64 ships WebKitGTK alone.
           ostree refs --repo=public/repo | grep -q \
-            '^runtime/io.github.cheviiot.alcove.Chromium/x86_64/master$'
-          ostree refs --repo=public/repo | grep -q \
-            '^runtime/io.github.cheviiot.alcove.Chromium/aarch64/master$'
+            '^runtime/io.github.cheviiot.alcove.ChromiumNative/x86_64/master$'
+          ! ostree refs --repo=public/repo | grep -q \
+            '^runtime/io.github.cheviiot.alcove.ChromiumNative/aarch64/master$'
           ! ostree refs --repo=public/repo | grep -q \
             '^runtime/io.github.cheviiot.alcove.Debug/'
-          for arch in x86_64 aarch64; do
-            app_commit="$(ostree rev-parse --repo=public/repo "app/io.github.cheviiot.alcove/$arch/master")"
-            addon_commit="$(ostree rev-parse --repo=public/repo "runtime/io.github.cheviiot.alcove.Chromium/$arch/master")"
-            ! ostree ls --repo=public/repo "$app_commit" /files/extensions/chromium/electron
-            ostree ls --repo=public/repo "$addon_commit" /files/electron
-            ostree ls --repo=public/repo "$addon_commit" /files/bin/zypak-wrapper
-          done
+          addon_commit="$(ostree rev-parse --repo=public/repo 'runtime/io.github.cheviiot.alcove.ChromiumNative/x86_64/master')"
+          ostree ls --repo=public/repo "$addon_commit" /files/worker/alcove-cef-worker
+          ostree ls --repo=public/repo "$addon_commit" /files/bin/zypak-wrapper
+          ostree ls --repo=public/repo "$addon_commit" /files/addon.json
       - name: Create install descriptors and bundles
         run: |
           gpg_key="$(base64 --wrap=0 packaging/alcove-repository.gpg)"
           sed "s|@GPG_KEY@|$gpg_key|" packaging/alcove.flatpakrepo.in > public/alcove.flatpakrepo
           sed "s|@GPG_KEY@|$gpg_key|" packaging/alcove.flatpakref.in > public/alcove.flatpakref
-          sed "s|@GPG_KEY@|$gpg_key|" packaging/alcove-chromium.flatpakref.in > public/alcove-chromium.flatpakref
+          sed "s|@GPG_KEY@|$gpg_key|" packaging/alcove-chromium-native.flatpakref.in > public/alcove-chromium-native.flatpakref
           install -Dm644 packaging/index.html public/index.html
           install -Dm644 packaging/alcove-repository.gpg public/alcove-repository.gpg
           install -Dm644 data/icons/hicolor/scalable/apps/io.github.cheviiot.alcove.svg public/io.github.cheviiot.alcove.svg

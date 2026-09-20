@@ -26,15 +26,6 @@ jobs:
       - run: cargo check --locked
       - run: cargo clippy --locked --all-targets -- -D warnings
       - run: cargo test --locked
-      - name: Chromium engine tests
-        run: |
-          node chromium/tests/validate.test.js
-          node chromium/tests/navigation-policy.test.js
-          node chromium/tests/permission-policy.test.js
-          node chromium/tests/proxy.test.js
-          node chromium/tests/user-agent.test.js
-          node chromium/tests/window-state.test.js
-          node chromium/tests/shell-security.test.js
 
   metadata:
     name: Metadata

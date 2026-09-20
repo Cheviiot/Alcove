@@ -30,7 +30,7 @@ fn command_app_id(arguments: &[std::ffi::OsString]) -> Option<AppId> {
         .find_map(|value| AppId::from_str(&value.to_string_lossy()).ok())
 }
 
-fn spawn_app_process(id: &AppId, start_in_background: bool) -> Result<()> {
+pub(crate) fn spawn_app_process(id: &AppId, start_in_background: bool) -> Result<()> {
     let executable = std::env::current_exe().unwrap_or_else(|_| "alcove".into());
     let mut command = Command::new(executable);
     command.arg(id.as_str());
@@ -408,7 +408,6 @@ mod imp {
                 return glib::ExitCode::FAILURE;
             }
             if let Some(id) = app_id {
-                #[cfg(feature = "native-chromium")]
                 if let Some(window) =
                     crate::engines::native_chromium_launch::existing_window(&self.obj(), &id)
                 {
@@ -454,18 +453,11 @@ mod imp {
                         }
                     }
                     Engine::Chromium => {
-                        #[cfg(feature = "native-chromium")]
-                        let result = if crate::engines::native_chromium_launch::enabled() {
-                            crate::engines::native_chromium_launch::open(
-                                &self.obj(),
-                                &config,
-                                start_in_background,
-                            )
-                        } else {
-                            service.open_chromium(&config, start_in_background)
-                        };
-                        #[cfg(not(feature = "native-chromium"))]
-                        let result = service.open_chromium(&config, start_in_background);
+                        let result = crate::engines::native_chromium_launch::open(
+                            &self.obj(),
+                            &config,
+                            start_in_background,
+                        );
                         if let Err(error) = result {
                             if start_in_background {
                                 eprintln!("Error: {error:#}");
@@ -549,7 +541,6 @@ impl AlcoveApplication {
                     if let Some(window) = app.background_window(parameter) {
                         window.show_from_background();
                     }
-                    #[cfg(feature = "native-chromium")]
                     crate::engines::native_chromium_launch::background_action(
                         app,
                         parameter,
@@ -563,7 +554,6 @@ impl AlcoveApplication {
                     if let Some(window) = app.background_window(parameter) {
                         window.stop_background();
                     }
-                    #[cfg(feature = "native-chromium")]
                     crate::engines::native_chromium_launch::background_action(
                         app,
                         parameter,

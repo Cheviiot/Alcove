@@ -30,8 +30,8 @@ test('Validate appstream file', appstreamcli,
 # mistake there is invisible in the application's own metadata.
 test('Validate add-on appstream file', appstreamcli,
      args: ['validate', '--no-net', '--explain',
-            meson.project_source_root() / 'chromium' / 'data'
-              / 'io.github.cheviiot.alcove.Chromium.metainfo.xml'])
+            meson.current_source_dir()
+              / 'io.github.cheviiot.alcove.ChromiumNative.metainfo.xml'])
 
 install_data('io.github.cheviiot.alcove.gschema.xml',
   install_dir: get_option('datadir') / 'glib-2.0' / 'schemas'

@@ -32,9 +32,6 @@ cargo_features = []
 if get_option('ui_tests')
   cargo_features += ['ui-tests']
 endif
-if get_option('native_chromium')
-  cargo_features += ['native-chromium']
-endif
 cargo_features = ','.join(cargo_features)
 
 if get_option('flatpak')
