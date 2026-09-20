@@ -26,6 +26,13 @@ appstreamcli = find_program('appstreamcli', required: false, disabler: true)
 test('Validate appstream file', appstreamcli,
      args: ['validate', '--no-net', '--explain', appstream_file])
 
+# The add-on is listed by software centres through its own AppStream data, so a
+# mistake there is invisible in the application's own metadata.
+test('Validate add-on appstream file', appstreamcli,
+     args: ['validate', '--no-net', '--explain',
+            meson.project_source_root() / 'chromium' / 'data'
+              / 'io.github.cheviiot.alcove.Chromium.metainfo.xml'])
+
 install_data('io.github.cheviiot.alcove.gschema.xml',
   install_dir: get_option('datadir') / 'glib-2.0' / 'schemas'
 )

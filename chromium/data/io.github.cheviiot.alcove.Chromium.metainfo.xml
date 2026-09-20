@@ -7,8 +7,14 @@
   <name xml:lang="ru">Движок Chromium для Alcove</name>
   <summary>Optional Chromium compatibility engine</summary>
   <summary xml:lang="ru">Дополнительный движок Chromium для совместимости</summary>
+  <developer id="io.github.cheviiot">
+    <name>Cheviiot and Alcove contributors</name>
+    <url>https://github.com/Cheviiot</url>
+  </developer>
+  <icon type="stock">io.github.cheviiot.alcove</icon>
   <metadata_license>FSFAP</metadata_license>
   <project_license>GPL-3.0-only</project_license>
+  <content_rating type="oars-1.1" />
   <description>
     <p>
       Adds the Chromium engine to Alcove for websites that do not work well
