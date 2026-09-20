@@ -1,18 +1,176 @@
 <!doctype html>
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
 <html lang="ru">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Репозиторий Alcove</title>
+    <title>Alcove</title>
+    <meta name="description" content="Alcove превращает сайт в отдельное приложение GNOME со своим профилем, cookie и разрешениями.">
+    <link rel="icon" href="io.github.cheviiot.alcove.svg" type="image/svg+xml">
+    <style>
+      :root {
+        --bg: #faf9f8; --surface: #fff; --line: #e2ded9; --ink: #1d1b19;
+        --muted: #6f6961; --accent: #8f7358; --accent-ink: #fff; --code-bg: #f2efec;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #17181c; --surface: #1f2126; --line: #32353c; --ink: #ecebe9;
+          --muted: #a49d94; --accent: #c4a581; --accent-ink: #201a14; --code-bg: #26282e;
+        }
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; background: var(--bg); color: var(--ink);
+        font: 400 17px/1.6 Cantarell, "Adwaita Sans", system-ui, -apple-system, sans-serif;
+        -webkit-text-size-adjust: 100%;
+      }
+      .wrap { max-width: 46rem; margin: 0 auto; padding: 0 1.25rem; }
+      a { color: var(--accent); }
+      code { font-family: "Adwaita Mono", ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+      .lang { display: flex; justify-content: flex-end; gap: .5rem; padding-top: 1.25rem; }
+      .lang button {
+        font: inherit; font-size: .85rem; cursor: pointer; padding: .3rem .7rem;
+        border-radius: 999px; border: 1px solid var(--line);
+        background: var(--surface); color: var(--muted);
+      }
+      .lang button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+
+      header { text-align: center; padding: 2.5rem 0 3rem; }
+      header img { width: 120px; height: 120px; }
+      h1 { font-size: 2.7rem; font-weight: 600; letter-spacing: -.02em; margin: 1rem 0 .4rem; }
+      .tagline { font-size: 1.25rem; color: var(--muted); margin: 0 0 2rem; }
+
+      .cta { display: flex; flex-wrap: wrap; gap: .7rem; justify-content: center; }
+      .btn {
+        text-decoration: none; font-weight: 500; padding: .7rem 1.4rem; border-radius: 999px;
+        border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+      }
+      .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+      .note { font-size: .88rem; color: var(--muted); margin-top: 1rem; }
+
+      .grid {
+        display: grid; gap: .9rem; padding: 0 0 3rem;
+        grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+      }
+      .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 1rem 1.15rem; }
+      .card b { display: block; font-weight: 600; font-size: 1rem; margin-bottom: .2rem; }
+      .card span { color: var(--muted); font-size: .93rem; }
+
+      .install { border-top: 1px solid var(--line); padding: 2.5rem 0; }
+      .install h2 { font-size: 1.3rem; font-weight: 600; margin: 0 0 1rem; }
+      pre {
+        background: var(--code-bg); border: 1px solid var(--line); border-radius: 14px;
+        padding: .9rem 1.1rem; margin: 0 0 .9rem; font-size: .88rem;
+        white-space: pre-wrap; overflow-wrap: anywhere;
+      }
+      .install p { margin: 0; color: var(--muted); font-size: .93rem; }
+
+      footer { border-top: 1px solid var(--line); padding: 1.75rem 0 3rem; color: var(--muted); font-size: .88rem; }
+      footer a { color: inherit; }
+      footer p { margin: .3rem 0; }
+      footer code { font-size: .82rem; overflow-wrap: anywhere; }
+
+      [lang]:not([lang="ru"]):not(html) { display: none; }
+      html[data-lang="en"] [lang="ru"] { display: none; }
+      html[data-lang="en"] [lang="en"] { display: revert; }
+
+      @media (max-width: 30rem) { body { font-size: 16px; } h1 { font-size: 2.2rem; } }
+    </style>
   </head>
   <body>
-    <main>
-      <h1>Alcove</h1>
-      <p>Небольшой подписанный Flatpak-репозиторий проекта.</p>
-      <p><a href="alcove.flatpakref">Установить Alcove</a></p>
-      <p><a href="alcove-chromium.flatpakref">Установить дополнение Chromium</a></p>
-      <p><a href="alcove.flatpakrepo">Добавить репозиторий Alcove</a></p>
-      <p><a href="https://github.com/Cheviiot/Alcove/releases">Файлы выпусков</a></p>
-    </main>
+    <div class="wrap">
+      <nav class="lang">
+        <button type="button" data-set="ru" aria-pressed="true">Русский</button>
+        <button type="button" data-set="en" aria-pressed="false">English</button>
+      </nav>
+
+      <header>
+        <img src="io.github.cheviiot.alcove.svg" alt="Alcove" width="120" height="120">
+        <h1>Alcove</h1>
+        <p class="tagline">
+          <span lang="ru">Любой сайт — отдельное приложение.</span>
+          <span lang="en">Every website, its own application.</span>
+        </p>
+        <div class="cta">
+          <a class="btn primary" href="alcove.flatpakref"><span lang="ru">Установить</span><span lang="en">Install</span></a>
+          <a class="btn" href="https://github.com/Cheviiot/Alcove"><span lang="ru">Исходный код</span><span lang="en">Source</span></a>
+        </div>
+        <p class="note">
+          <span lang="ru">Flatpak · x86_64 и aarch64</span>
+          <span lang="en">Flatpak · x86_64 and aarch64</span>
+        </p>
+      </header>
+
+      <div class="grid">
+        <div class="card">
+          <b><span lang="ru">Два аккаунта сразу</span><span lang="en">Two accounts at once</span></b>
+          <span lang="ru">Без инкогнито и второго браузера.</span>
+          <span lang="en">No private mode, no second browser.</span>
+        </div>
+        <div class="card">
+          <b><span lang="ru">Работа и личное врозь</span><span lang="en">Work and personal apart</span></b>
+          <span lang="ru">Сессии не пересекаются.</span>
+          <span lang="en">Sessions never cross.</span>
+        </div>
+        <div class="card">
+          <b><span lang="ru">Сайт как программа</span><span lang="en">A site as a program</span></b>
+          <span lang="ru">Своя иконка, своё окно.</span>
+          <span lang="en">Its own icon, its own window.</span>
+        </div>
+        <div class="card">
+          <b><span lang="ru">Разрешения сайту</span><span lang="en">Per-site permissions</span></b>
+          <span lang="ru">Камера и уведомления — ему, а не браузеру.</span>
+          <span lang="en">Camera and notifications to it, not a browser.</span>
+        </div>
+        <div class="card">
+          <b><span lang="ru">Копии под шифром</span><span lang="en">Encrypted backups</span></b>
+          <span lang="ru">Профиль переносится архивом.</span>
+          <span lang="en">A profile moves as an archive.</span>
+        </div>
+        <div class="card">
+          <b><span lang="ru">Два движка</span><span lang="en">Two engines</span></b>
+          <span lang="ru">WebKitGTK, Chromium по желанию.</span>
+          <span lang="en">WebKitGTK, Chromium if you want it.</span>
+        </div>
+      </div>
+
+      <section class="install">
+        <h2><span lang="ru">Установка</span><span lang="en">Install</span></h2>
+        <pre><code>flatpak install --user https://cheviiot.github.io/Alcove/alcove.flatpakref</code></pre>
+        <p lang="ru">Дополнение Chromium — <a href="alcove-chromium.flatpakref">отдельно</a>, только по вашему решению.</p>
+        <p lang="en">The Chromium add-on installs <a href="alcove-chromium.flatpakref">separately</a>, only if you choose it.</p>
+      </section>
+
+      <footer>
+        <p>
+          <a href="https://github.com/Cheviiot/Alcove">GitHub</a> ·
+          <a href="https://github.com/Cheviiot/Alcove/releases"><span lang="ru">Выпуски</span><span lang="en">Releases</span></a> ·
+          <a href="https://github.com/Cheviiot/Alcove/issues"><span lang="ru">Обратная связь</span><span lang="en">Issues</span></a> ·
+          <a href="https://github.com/Cheviiot/Alcove/blob/main/COPYING">GPL-3.0-only</a>
+        </p>
+        <p>
+          <span lang="ru">Подпись выпусков</span><span lang="en">Release signing</span>
+          <a href="alcove-repository.gpg"><code>FA64 0607 BEBF D82E 61EF 72EF 33AD DA41 5AF7 FE09</code></a>
+        </p>
+      </footer>
+    </div>
+
+    <script>
+      (function () {
+        var html = document.documentElement;
+        var buttons = document.querySelectorAll('.lang button');
+        function apply(lang) {
+          html.setAttribute('data-lang', lang);
+          html.setAttribute('lang', lang);
+          buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.set === lang)); });
+          try { localStorage.setItem('alcove-lang', lang); } catch (e) {}
+        }
+        buttons.forEach(function (b) { b.addEventListener('click', function () { apply(b.dataset.set); }); });
+        var saved = null;
+        try { saved = localStorage.getItem('alcove-lang'); } catch (e) {}
+        apply(saved === 'en' || (!saved && !/^ru\b/i.test(navigator.language || '')) ? 'en' : 'ru');
+      })();
+    </script>
   </body>
 </html>
