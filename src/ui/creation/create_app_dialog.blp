@@ -184,6 +184,16 @@ template $AlcoveCreateAppDialog: Adw.Dialog {
                   visible: false;
                   title: _("Chromium Recommended");
                   subtitle-lines: 0;
+
+                  [suffix]
+                  Button addon_button {
+                    valign: center;
+                    visible: false;
+                    label: _("Get Add-on");
+                    tooltip-text: _("Install the Chromium add-on");
+
+                    styles ["flat"]
+                  }
                 }
                 Adw.ExpanderRow advanced_row {
                   title: _("Advanced");

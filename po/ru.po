@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: alcove 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-21 00:08+1000\n"
+"POT-Creation-Date: 2026-09-21 00:15+1000\n"
 "PO-Revision-Date: 2026-09-19 00:00+1000\n"
 "Last-Translator: Alcove contributors\n"
 "Language-Team: Russian\n"
@@ -83,12 +83,10 @@ msgid "Turn any valid HTTP(S) address into an isolated desktop application"
 msgstr "Превращает корректный адрес HTTP(S) в изолированное приложение"
 
 #: data/io.github.cheviiot.alcove.metainfo.xml.in:59
-
 msgid "Keep each site's profile, cookies, cache and storage separate"
 msgstr "Профиль, cookie, кэш и хранилище каждого сайта остаются раздельными"
 
 #: data/io.github.cheviiot.alcove.metainfo.xml.in:60
-
 msgid "Use WebKitGTK by default and offer Chromium as an optional add-on"
 msgstr "По умолчанию WebKitGTK, Chromium доступен отдельным дополнением"
 
@@ -145,12 +143,12 @@ msgstr "Движок Chromium недоступен"
 #. Leave room for the primary action with enlarged text. The icon has
 #. the same accessible name and dismissal behavior as the wide button.
 #: src/app/application.rs:705 src/ui/dialogs/backup_dialog.rs:271
-#: src/ui/dialogs/common.rs:114 src/ui/dialogs/common.rs:115
+#: src/ui/dialogs/common.rs:119 src/ui/dialogs/common.rs:120
 #: src/ui/library/window.rs:567
 msgid "Cancel"
 msgstr "Отмена"
 
-#: src/app/application.rs:706 src/ui/shell/app_window.rs:1167
+#: src/app/application.rs:706 src/ui/shell/app_window.rs:1184
 msgid "Get Chromium Add-on"
 msgstr "Установить дополнение Chromium"
 
@@ -163,12 +161,11 @@ msgid "Run Once with WebKit"
 msgstr "Запустить один раз через WebKit"
 
 #: src/app/application.rs:722
-
 msgid "Could Not Open the Issue Tracker"
 msgstr "Не удалось открыть трекер задач"
 
 #: src/app/application.rs:729 src/ui/dialogs/addons_dialog.rs:63
-#: src/ui/shell/app_window.rs:1186
+#: src/ui/shell/app_window.rs:1203
 msgid "Could Not Open the Add-on Installer"
 msgstr "Не удалось открыть установщик дополнения"
 
@@ -217,7 +214,7 @@ msgstr "Закройте и снова откройте приложение, ч
 msgid "Downloads"
 msgstr "Загрузки"
 
-#: src/engines/native_chromium/mod.rs:635 src/ui/shell/app_window.rs:1280
+#: src/engines/native_chromium/mod.rs:635 src/ui/shell/app_window.rs:1297
 msgid "Stop Background Activity"
 msgstr "Остановить фоновую работу"
 
@@ -225,87 +222,87 @@ msgstr "Остановить фоновую работу"
 msgid "Website content"
 msgstr "Содержимое сайта"
 
-#: src/engines/native_chromium/mod.rs:724 src/ui/dialogs/common.rs:183
+#: src/engines/native_chromium/mod.rs:724 src/ui/dialogs/common.rs:188
 msgid "Reload"
 msgstr "Перезагрузить"
 
 #: src/engines/native_chromium/site_requests.rs:124
-#: src/ui/shell/app_window.rs:896
+#: src/ui/shell/app_window.rs:913
 msgid "Unsupported website permission request"
 msgstr "Неподдерживаемый запрос разрешения сайта"
 
 #: src/engines/native_chromium/site_requests.rs:179
-#: src/ui/shell/app_window.rs:851
+#: src/ui/shell/app_window.rs:868
 msgid "Open Another Origin?"
 msgstr "Открыть другой origin?"
 
 #: src/engines/native_chromium/site_requests.rs:182
-#: src/ui/shell/app_window.rs:847
+#: src/ui/shell/app_window.rs:864
 msgid "This origin is outside the application's navigation allowlist."
 msgstr "Этот origin отсутствует в списке разрешённой навигации приложения."
 
 #: src/engines/native_chromium/site_requests.rs:183
-#: src/ui/shell/app_window.rs:848
+#: src/ui/shell/app_window.rs:865
 msgid "Destination"
 msgstr "Назначение"
 
 #: src/engines/native_chromium/site_requests.rs:187
-#: src/ui/dialogs/permissions_dialog.rs:70 src/ui/shell/app_window.rs:853
+#: src/ui/dialogs/permissions_dialog.rs:70 src/ui/shell/app_window.rs:870
 msgid "Block"
 msgstr "Блокировать"
 
 #: src/engines/native_chromium/site_requests.rs:188
-#: src/ui/shell/app_window.rs:854
+#: src/ui/shell/app_window.rs:871
 msgid "Open Externally"
 msgstr "Открыть во внешнем браузере"
 
 #: src/engines/native_chromium/site_requests.rs:189
-#: src/ui/shell/app_window.rs:855
+#: src/ui/shell/app_window.rs:872
 msgid "Open Once"
 msgstr "Открыть один раз"
 
 #: src/engines/native_chromium/site_requests.rs:190
-#: src/ui/shell/app_window.rs:856
+#: src/ui/shell/app_window.rs:873
 msgid "Always Allow Origin"
 msgstr "Всегда разрешать origin"
 
 #: src/engines/native_chromium/site_requests.rs:236
-#: src/ui/shell/app_window.rs:937
+#: src/ui/shell/app_window.rs:954
 msgid "Website Permission"
 msgstr "Разрешение сайта"
 
 #: src/engines/native_chromium/site_requests.rs:239
-#: src/ui/shell/app_window.rs:939
+#: src/ui/shell/app_window.rs:956
 msgid "Not Now"
 msgstr "Не сейчас"
 
 #: src/engines/native_chromium/site_requests.rs:240
-#: src/ui/shell/app_window.rs:940
+#: src/ui/shell/app_window.rs:957
 msgid "Always Block"
 msgstr "Всегда блокировать"
 
 #: src/engines/native_chromium/site_requests.rs:241
-#: src/ui/shell/app_window.rs:941
+#: src/ui/shell/app_window.rs:958
 msgid "Allow for This Session"
 msgstr "Разрешить на эту сессию"
 
 #: src/engines/native_chromium/site_requests.rs:242
-#: src/ui/shell/app_window.rs:942
+#: src/ui/shell/app_window.rs:959
 msgid "Always Allow"
 msgstr "Всегда разрешать"
 
 #: src/engines/native_chromium/site_requests.rs:279
-#: src/ui/shell/app_window.rs:872
+#: src/ui/shell/app_window.rs:889
 msgid "The origin could not be saved"
 msgstr "Не удалось сохранить origin"
 
 #: src/engines/native_chromium/site_requests.rs:320
-#: src/ui/shell/app_window.rs:971
+#: src/ui/shell/app_window.rs:988
 msgid "Permission was allowed only for this session"
 msgstr "Разрешение действует только в этом сеансе"
 
 #: src/engines/native_chromium/site_requests.rs:329
-#: src/ui/shell/app_window.rs:984
+#: src/ui/shell/app_window.rs:1001
 msgid "Permission block could not be saved"
 msgstr "Не удалось сохранить блокировку разрешения"
 
@@ -429,8 +426,8 @@ msgstr "Выбор файлов"
 msgid "Documents"
 msgstr "Документы"
 
-#: src/ui/app_page/app_page.blp:15 src/ui/dialogs/common.rs:181
-#: src/ui/dialogs/common.rs:196 src/ui/shell/web_app_shell.rs:93
+#: src/ui/app_page/app_page.blp:15 src/ui/dialogs/common.rs:186
+#: src/ui/dialogs/common.rs:201 src/ui/shell/web_app_shell.rs:93
 msgid "Back"
 msgstr "Назад"
 
@@ -447,7 +444,7 @@ msgstr "Дополнения"
 msgid "Changes take effect the next time you open this application."
 msgstr "Изменения вступят в силу при следующем запуске приложения."
 
-#: src/ui/app_page/app_page.blp:72 src/ui/shell/app_window.rs:936
+#: src/ui/app_page/app_page.blp:72 src/ui/shell/app_window.rs:953
 msgid "Website"
 msgstr "Сайт"
 
@@ -504,7 +501,7 @@ msgstr "Приватность и питание"
 msgid "Navigation, network and background activity"
 msgstr "Навигация, сеть и работа в фоне"
 
-#: src/ui/app_page/app_page.blp:139 src/ui/creation/create_app_dialog.blp:189
+#: src/ui/app_page/app_page.blp:139 src/ui/creation/create_app_dialog.blp:199
 msgid "Advanced"
 msgstr "Дополнительно"
 
@@ -540,11 +537,11 @@ msgstr "Восстановление приложения в системном 
 msgid "Delete…"
 msgstr "Удалить…"
 
-#: src/ui/app_page/mod.rs:273 src/ui/creation/mod.rs:244
+#: src/ui/app_page/mod.rs:273 src/ui/creation/mod.rs:258
 msgid "The site icon provider is unavailable."
 msgstr "Провайдер иконок сайта недоступен."
 
-#: src/ui/app_page/mod.rs:365 src/ui/creation/mod.rs:353
+#: src/ui/app_page/mod.rs:365 src/ui/creation/mod.rs:367
 msgid "Chromium (add-on)"
 msgstr "Chromium (дополнение)"
 
@@ -552,7 +549,7 @@ msgstr "Chromium (дополнение)"
 msgid "Chromium · Ready"
 msgstr "Рекомендуется Chromium"
 
-#: src/ui/app_page/mod.rs:384 src/ui/creation/mod.rs:360
+#: src/ui/app_page/mod.rs:384 src/ui/creation/mod.rs:374
 #: src/ui/library/app_row.rs:80
 msgid "Chromium · Add-on Required"
 msgstr "Установить дополнение Chromium"
@@ -595,7 +592,7 @@ msgstr "Отменить изменения"
 msgid "New Application"
 msgstr "Новое приложение"
 
-#: src/ui/creation/create_app_dialog.blp:34 src/ui/dialogs/common.rs:88
+#: src/ui/creation/create_app_dialog.blp:34 src/ui/dialogs/common.rs:93
 msgid "_Cancel"
 msgstr "_Отмена"
 
@@ -619,39 +616,49 @@ msgstr "Ввести вручную"
 msgid "Review Application"
 msgstr "Проверка приложения"
 
-#: src/ui/creation/create_app_dialog.blp:111 src/ui/creation/mod.rs:102
+#: src/ui/creation/create_app_dialog.blp:111 src/ui/creation/mod.rs:105
 msgid "Create"
 msgstr "Создать"
 
-#: src/ui/creation/create_app_dialog.blp:190
+#: src/ui/creation/create_app_dialog.blp:192
+
+msgid "Get Add-on"
+msgstr "Получить дополнение"
+
+#: src/ui/creation/create_app_dialog.blp:193
+
+msgid "Install the Chromium add-on"
+msgstr "Установить дополнение Chromium"
+
+#: src/ui/creation/create_app_dialog.blp:200
 msgid "Browser Engine"
 msgstr "Браузерный движок"
 
-#: src/ui/creation/mod.rs:159
+#: src/ui/creation/mod.rs:173
 msgid "Website details were not checked. You can edit them below."
 msgstr "Данные сайта не проверены. Вы можете заполнить их ниже."
 
-#: src/ui/creation/mod.rs:214
+#: src/ui/creation/mod.rs:228
 msgid "Enter a valid website URL first."
 msgstr "Сначала укажите корректный адрес сайта."
 
-#: src/ui/creation/mod.rs:219
+#: src/ui/creation/mod.rs:233
 msgid "The website URL has no hostname."
 msgstr "В адресе сайта отсутствует имя хоста."
 
-#: src/ui/creation/mod.rs:224
+#: src/ui/creation/mod.rs:238
 msgid "Getting the website icon…"
 msgstr "Получение иконки сайта…"
 
-#: src/ui/creation/mod.rs:238
+#: src/ui/creation/mod.rs:252
 msgid "Icon from Icon Horse"
 msgstr "Иконка из Icon Horse"
 
-#: src/ui/creation/mod.rs:332
+#: src/ui/creation/mod.rs:346
 msgid "The application could not be created."
 msgstr "Не удалось создать приложение."
 
-#: src/ui/creation/mod.rs:439 src/ui/creation/mod.rs:569
+#: src/ui/creation/mod.rs:453 src/ui/creation/mod.rs:592
 msgid ""
 "The website could not be reached. You can still create this application."
 msgstr "Сайт недоступен. Приложение всё равно можно создать."
@@ -847,7 +854,7 @@ msgstr "Восстановление приложений"
 msgid "Restore"
 msgstr "Восстановить"
 
-#: src/ui/dialogs/backup_dialog.rs:329 src/ui/dialogs/common.rs:177
+#: src/ui/dialogs/backup_dialog.rs:329 src/ui/dialogs/common.rs:182
 #: src/ui/library/window.blp:16
 msgid "Applications"
 msgstr "Приложения"
@@ -913,67 +920,67 @@ msgstr "Ошибка"
 msgid "Restore Finished with Errors"
 msgstr "Восстановление завершено с ошибками"
 
-#: src/ui/dialogs/backup_dialog.rs:451 src/ui/dialogs/common.rs:40
+#: src/ui/dialogs/backup_dialog.rs:451 src/ui/dialogs/common.rs:45
 msgid "Close"
 msgstr "Закрыть"
 
-#: src/ui/dialogs/common.rs:163
+#: src/ui/dialogs/common.rs:168
 msgid "General"
 msgstr "Общие"
 
-#: src/ui/dialogs/common.rs:164 src/ui/library/window.blp:37
+#: src/ui/dialogs/common.rs:169 src/ui/library/window.blp:37
 msgid "Main Menu"
 msgstr "Меню"
 
-#: src/ui/dialogs/common.rs:166
+#: src/ui/dialogs/common.rs:171
 msgid "Keyboard Shortcuts"
 msgstr "Комбинации клавиш"
 
-#: src/ui/dialogs/common.rs:170
+#: src/ui/dialogs/common.rs:175
 msgid "Quit"
 msgstr "Выйти"
 
-#: src/ui/dialogs/common.rs:175 src/ui/dialogs/privacy_dialog.rs:98
+#: src/ui/dialogs/common.rs:180 src/ui/dialogs/privacy_dialog.rs:98
 msgid "Navigation"
 msgstr "Навигация"
 
-#: src/ui/dialogs/common.rs:182 src/ui/shell/web_app_shell.rs:99
+#: src/ui/dialogs/common.rs:187 src/ui/shell/web_app_shell.rs:99
 msgid "Forward"
 msgstr "Вперёд"
 
-#: src/ui/dialogs/common.rs:184 src/ui/shell/web_app_shell.rs:110
+#: src/ui/dialogs/common.rs:189 src/ui/shell/web_app_shell.rs:110
 msgid "Reload Without Cache"
 msgstr "Перезагрузить без кэша"
 
-#: src/ui/dialogs/common.rs:185
+#: src/ui/dialogs/common.rs:190
 msgid "Home"
 msgstr "На главную"
 
-#: src/ui/dialogs/common.rs:186
+#: src/ui/dialogs/common.rs:191
 msgid "Zoom In"
 msgstr "Увеличить масштаб"
 
-#: src/ui/dialogs/common.rs:187
+#: src/ui/dialogs/common.rs:192
 msgid "Zoom Out"
 msgstr "Уменьшить масштаб"
 
-#: src/ui/dialogs/common.rs:188
+#: src/ui/dialogs/common.rs:193
 msgid "Reset Zoom"
 msgstr "Сбросить масштаб"
 
-#: src/ui/dialogs/common.rs:189
+#: src/ui/dialogs/common.rs:194
 msgid "Toggle Fullscreen"
 msgstr "Полноэкранный режим"
 
-#: src/ui/dialogs/common.rs:193 src/ui/library/window.blp:26
+#: src/ui/dialogs/common.rs:198 src/ui/library/window.blp:26
 msgid "Add Application"
 msgstr "Добавить новое приложение"
 
-#: src/ui/dialogs/common.rs:194
+#: src/ui/dialogs/common.rs:199
 msgid "Search Applications"
 msgstr "Поиск приложений"
 
-#: src/ui/dialogs/common.rs:195
+#: src/ui/dialogs/common.rs:200
 msgid "Close Search or Go Back"
 msgstr "Закрыть поиск или вернуться назад"
 
@@ -1284,7 +1291,7 @@ msgstr "_Восстановить…"
 msgid "System _Capabilities"
 msgstr "Системные _возможности"
 
-#: src/ui/library/window.blp:155 src/ui/shell/app_window.rs:1281
+#: src/ui/library/window.blp:155 src/ui/shell/app_window.rs:1298
 msgid "_Keyboard Shortcuts"
 msgstr "_Комбинации клавиш"
 
@@ -1380,109 +1387,113 @@ msgstr "Не поддерживается"
 msgid "Unknown (interface unavailable)"
 msgstr "Неизвестно (интерфейс недоступен)"
 
-#: src/ui/shell/app_window.rs:114 src/ui/shell/app_window.rs:134
+#: src/ui/shell/app_window.rs:85
+
+msgid "The link could not be opened"
+msgstr "Не удалось открыть ссылку"
+
+#: src/ui/shell/app_window.rs:131 src/ui/shell/app_window.rs:151
 msgid "Web App Window"
 msgstr "Окно веб-приложения"
 
-#: src/ui/shell/app_window.rs:235
+#: src/ui/shell/app_window.rs:252
 msgid "Screen sharing is not available"
 msgstr "Демонстрация экрана недоступна"
 
-#: src/ui/shell/app_window.rs:245
+#: src/ui/shell/app_window.rs:262
 msgid "Allow this website to use the camera?"
 msgstr "Разрешить этому сайту использовать камеру?"
 
-#: src/ui/shell/app_window.rs:246
+#: src/ui/shell/app_window.rs:263
 msgid "Allow this website to use the microphone?"
 msgstr "Разрешить этому сайту использовать микрофон?"
 
-#: src/ui/shell/app_window.rs:248
+#: src/ui/shell/app_window.rs:265
 msgid "Allow this website to use the camera and microphone?"
 msgstr "Разрешить этому сайту использовать камеру и микрофон?"
 
-#: src/ui/shell/app_window.rs:250
+#: src/ui/shell/app_window.rs:267
 msgid "Unknown media device request"
 msgstr "Неизвестный запрос к мультимедийному устройству"
 
-#: src/ui/shell/app_window.rs:257
+#: src/ui/shell/app_window.rs:274
 msgid "Allow this website to access your location?"
 msgstr "Разрешить этому сайту доступ к вашему местоположению?"
 
-#: src/ui/shell/app_window.rs:263
+#: src/ui/shell/app_window.rs:280
 msgid "Allow this website to send notifications?"
 msgstr "Разрешить этому сайту отправлять уведомления?"
 
-#: src/ui/shell/app_window.rs:269
+#: src/ui/shell/app_window.rs:286
 msgid "Allow this website to read the clipboard?"
 msgstr "Разрешить этому сайту читать буфер обмена?"
 
-#: src/ui/shell/app_window.rs:275
+#: src/ui/shell/app_window.rs:292
 msgid "Allow this website to lock the pointer?"
 msgstr "Разрешить этому сайту захватывать указатель?"
 
-#: src/ui/shell/app_window.rs:281
+#: src/ui/shell/app_window.rs:298
 msgid "Allow this website to access third-party storage?"
 msgstr "Разрешить этому сайту доступ к стороннему хранилищу?"
 
-#: src/ui/shell/app_window.rs:286
+#: src/ui/shell/app_window.rs:303
 msgid "This WebKit permission type is not supported"
 msgstr "Этот тип разрешения WebKit не поддерживается"
 
-#: src/ui/shell/app_window.rs:632
+#: src/ui/shell/app_window.rs:649
 msgid "Privacy policy could not be loaded; web content was not started"
 msgstr ""
 "Не удалось загрузить политику конфиденциальности; веб-содержимое не запущено"
 
-#: src/ui/shell/app_window.rs:656
+#: src/ui/shell/app_window.rs:673
 msgid "Content filters could not be initialized"
 msgstr "Не удалось инициализировать фильтры содержимого"
 
-#: src/ui/shell/app_window.rs:660
+#: src/ui/shell/app_window.rs:677
 msgid "Some content filters could not be enabled"
 msgstr "Не удалось включить некоторые фильтры содержимого"
 
-#: src/ui/shell/app_window.rs:882
+#: src/ui/shell/app_window.rs:899
 msgid "Navigation blocked"
 msgstr "Навигация заблокирована"
 
-#: src/ui/shell/app_window.rs:907
+#: src/ui/shell/app_window.rs:924
 msgid "Website permission origin is unavailable"
 msgstr "Не удалось определить источник запроса разрешения"
 
-#: src/ui/shell/app_window.rs:1008
+#: src/ui/shell/app_window.rs:1025
 msgid "System notifications are unavailable"
 msgstr "Системные уведомления недоступны"
 
-#: src/ui/shell/app_window.rs:1142
+#: src/ui/shell/app_window.rs:1159
 msgid "Address"
 msgstr "Адрес"
 
-#: src/ui/shell/app_window.rs:1144
+#: src/ui/shell/app_window.rs:1161
 msgid "WebKitGTK error"
 msgstr "Ошибка WebKitGTK"
 
-#: src/ui/shell/app_window.rs:1156
-
+#: src/ui/shell/app_window.rs:1173
 msgid "The Chromium add-on is not installed yet."
 msgstr "Дополнение Chromium ещё не установлено."
 
-#: src/ui/shell/app_window.rs:1162
+#: src/ui/shell/app_window.rs:1179
 msgid "Try This Application with Chromium?"
 msgstr "Попробовать это приложение с Chromium?"
 
-#: src/ui/shell/app_window.rs:1169
+#: src/ui/shell/app_window.rs:1186
 msgid "Use Chromium"
 msgstr "Использовать Chromium"
 
-#: src/ui/shell/app_window.rs:1172
+#: src/ui/shell/app_window.rs:1189
 msgid "Keep WebKitGTK"
 msgstr "Оставить WebKitGTK"
 
-#: src/ui/shell/app_window.rs:1212
+#: src/ui/shell/app_window.rs:1229
 msgid "Chromium could not be started"
 msgstr "Не удалось запустить Chromium"
 
-#: src/ui/shell/app_window.rs:1279
+#: src/ui/shell/app_window.rs:1296
 msgid "_Downloads"
 msgstr "_Загрузки"
 

@@ -27,15 +27,20 @@ pub fn show_inline_error(label: &gtk::Label, message: &str) {
 /// portal transaction finishes. Call force_close after awaiting the operation.
 /// Opens `uri` through the desktop portal, which is the only route out of the
 /// sandbox, and reports a failure beside `parent` instead of losing it.
-pub fn open_uri(parent: &impl IsA<gtk::Window>, uri: &str, failure_title: &str) {
-    let parent = parent.clone().upcast::<gtk::Window>();
+pub fn open_uri(parent: &impl IsA<gtk::Widget>, uri: &str, failure_title: &str) {
+    let parent = parent.clone().upcast::<gtk::Widget>();
     let uri = uri.to_owned();
     let failure_title = failure_title.to_owned();
     glib::spawn_future_local(async move {
+        let window = parent.root().and_downcast::<gtk::Window>();
         if let Err(error) = gtk::UriLauncher::new(&uri)
-            .launch_future(Some(&parent))
+            .launch_future(window.as_ref())
             .await
         {
+            // Dismissing the chooser is a choice, not a failure.
+            if error.matches(gtk::DialogError::Cancelled) {
+                return;
+            }
             let alert = adw::AlertDialog::new(Some(&failure_title), Some(&error.to_string()));
             alert.add_response("close", &gettext("Close"));
             alert.present(Some(&parent));

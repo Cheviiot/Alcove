@@ -68,17 +68,34 @@ fn navigation_uri(decision: &PolicyDecision) -> Option<glib::GString> {
         .and_then(|request| request.uri())
 }
 
-fn launch_external_uri(uri: &str) {
-    let _ = gio::AppInfo::launch_default_for_uri(uri, None::<&gio::AppLaunchContext>);
+/// Hands `uri` to the desktop portal, the only route out of the sandbox, and
+/// reports a refusal instead of dropping it. A person dismissing the chooser
+/// is not a failure, so that case stays silent.
+fn launch_external_uri(window: &AppWindow, uri: &str) {
+    let window = window.clone();
+    let uri = uri.to_owned();
+    glib::spawn_future_local(async move {
+        if let Err(error) = gtk::UriLauncher::new(&uri)
+            .launch_future(Some(&window))
+            .await
+        {
+            if !error.matches(gtk::DialogError::Cancelled) {
+                window.toast(&format!(
+                    "{}: {error}",
+                    gettext("The link could not be opened")
+                ));
+            }
+        }
+    });
 }
 
-fn handle_new_window_policy(decision: &PolicyDecision) -> Option<bool> {
+fn handle_new_window_policy(window: &AppWindow, decision: &PolicyDecision) -> Option<bool> {
     let uri = navigation_uri(decision);
     match classify_popup_target(uri.as_deref()) {
         PopupTarget::InApp => None,
         PopupTarget::External => {
             if let Some(uri) = uri {
-                launch_external_uri(uri.as_str());
+                launch_external_uri(window, uri.as_str());
             }
             decision.ignore();
             Some(true)
@@ -101,7 +118,7 @@ fn create_popup(
         PopupTarget::InApp => {}
         PopupTarget::External => {
             if let Some(uri) = uri {
-                launch_external_uri(uri.as_str());
+                launch_external_uri(owner, uri.as_str());
             }
             return None;
         }
@@ -797,7 +814,7 @@ impl AppWindow {
         kind: PolicyDecisionType,
     ) -> bool {
         if kind == PolicyDecisionType::NewWindowAction {
-            return handle_new_window_policy(decision).unwrap_or(false);
+            return handle_new_window_policy(self, decision).unwrap_or(false);
         }
         if kind == PolicyDecisionType::Response {
             if self.handle_top_level_navigation(view, decision) {
@@ -875,7 +892,7 @@ impl AppWindow {
                 },
                 "external" => {
                     decision.ignore();
-                    launch_external_uri(url.as_str());
+                    launch_external_uri(&window, url.as_str());
                 }
                 _ => {
                     decision.ignore();

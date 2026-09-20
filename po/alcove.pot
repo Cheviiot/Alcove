@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: alcove\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-21 00:08+1000\n"
+"POT-Creation-Date: 2026-09-21 00:15+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -132,12 +132,12 @@ msgstr ""
 #. Leave room for the primary action with enlarged text. The icon has
 #. the same accessible name and dismissal behavior as the wide button.
 #: src/app/application.rs:705 src/ui/dialogs/backup_dialog.rs:271
-#: src/ui/dialogs/common.rs:114 src/ui/dialogs/common.rs:115
+#: src/ui/dialogs/common.rs:119 src/ui/dialogs/common.rs:120
 #: src/ui/library/window.rs:567
 msgid "Cancel"
 msgstr ""
 
-#: src/app/application.rs:706 src/ui/shell/app_window.rs:1167
+#: src/app/application.rs:706 src/ui/shell/app_window.rs:1184
 msgid "Get Chromium Add-on"
 msgstr ""
 
@@ -154,7 +154,7 @@ msgid "Could Not Open the Issue Tracker"
 msgstr ""
 
 #: src/app/application.rs:729 src/ui/dialogs/addons_dialog.rs:63
-#: src/ui/shell/app_window.rs:1186
+#: src/ui/shell/app_window.rs:1203
 msgid "Could Not Open the Add-on Installer"
 msgstr ""
 
@@ -203,7 +203,7 @@ msgstr ""
 msgid "Downloads"
 msgstr ""
 
-#: src/engines/native_chromium/mod.rs:635 src/ui/shell/app_window.rs:1280
+#: src/engines/native_chromium/mod.rs:635 src/ui/shell/app_window.rs:1297
 msgid "Stop Background Activity"
 msgstr ""
 
@@ -211,87 +211,87 @@ msgstr ""
 msgid "Website content"
 msgstr ""
 
-#: src/engines/native_chromium/mod.rs:724 src/ui/dialogs/common.rs:183
+#: src/engines/native_chromium/mod.rs:724 src/ui/dialogs/common.rs:188
 msgid "Reload"
 msgstr ""
 
 #: src/engines/native_chromium/site_requests.rs:124
-#: src/ui/shell/app_window.rs:896
+#: src/ui/shell/app_window.rs:913
 msgid "Unsupported website permission request"
 msgstr ""
 
 #: src/engines/native_chromium/site_requests.rs:179
-#: src/ui/shell/app_window.rs:851
+#: src/ui/shell/app_window.rs:868
 msgid "Open Another Origin?"
 msgstr ""
 
 #: src/engines/native_chromium/site_requests.rs:182
-#: src/ui/shell/app_window.rs:847
+#: src/ui/shell/app_window.rs:864
 msgid "This origin is outside the application's navigation allowlist."
 msgstr ""
 
 #: src/engines/native_chromium/site_requests.rs:183
-#: src/ui/shell/app_window.rs:848
+#: src/ui/shell/app_window.rs:865
 msgid "Destination"
 msgstr ""
 
 #: src/engines/native_chromium/site_requests.rs:187
-#: src/ui/dialogs/permissions_dialog.rs:70 src/ui/shell/app_window.rs:853
+#: src/ui/dialogs/permissions_dialog.rs:70 src/ui/shell/app_window.rs:870
 msgid "Block"
 msgstr ""
 
 #: src/engines/native_chromium/site_requests.rs:188
-#: src/ui/shell/app_window.rs:854
+#: src/ui/shell/app_window.rs:871
 msgid "Open Externally"
 msgstr ""
 
 #: src/engines/native_chromium/site_requests.rs:189
-#: src/ui/shell/app_window.rs:855
+#: src/ui/shell/app_window.rs:872
 msgid "Open Once"
 msgstr ""
 
 #: src/engines/native_chromium/site_requests.rs:190
-#: src/ui/shell/app_window.rs:856
+#: src/ui/shell/app_window.rs:873
 msgid "Always Allow Origin"
 msgstr ""
 
 #: src/engines/native_chromium/site_requests.rs:236
-#: src/ui/shell/app_window.rs:937
+#: src/ui/shell/app_window.rs:954
 msgid "Website Permission"
 msgstr ""
 
 #: src/engines/native_chromium/site_requests.rs:239
-#: src/ui/shell/app_window.rs:939
+#: src/ui/shell/app_window.rs:956
 msgid "Not Now"
 msgstr ""
 
 #: src/engines/native_chromium/site_requests.rs:240
-#: src/ui/shell/app_window.rs:940
+#: src/ui/shell/app_window.rs:957
 msgid "Always Block"
 msgstr ""
 
 #: src/engines/native_chromium/site_requests.rs:241
-#: src/ui/shell/app_window.rs:941
+#: src/ui/shell/app_window.rs:958
 msgid "Allow for This Session"
 msgstr ""
 
 #: src/engines/native_chromium/site_requests.rs:242
-#: src/ui/shell/app_window.rs:942
+#: src/ui/shell/app_window.rs:959
 msgid "Always Allow"
 msgstr ""
 
 #: src/engines/native_chromium/site_requests.rs:279
-#: src/ui/shell/app_window.rs:872
+#: src/ui/shell/app_window.rs:889
 msgid "The origin could not be saved"
 msgstr ""
 
 #: src/engines/native_chromium/site_requests.rs:320
-#: src/ui/shell/app_window.rs:971
+#: src/ui/shell/app_window.rs:988
 msgid "Permission was allowed only for this session"
 msgstr ""
 
 #: src/engines/native_chromium/site_requests.rs:329
-#: src/ui/shell/app_window.rs:984
+#: src/ui/shell/app_window.rs:1001
 msgid "Permission block could not be saved"
 msgstr ""
 
@@ -415,8 +415,8 @@ msgstr ""
 msgid "Documents"
 msgstr ""
 
-#: src/ui/app_page/app_page.blp:15 src/ui/dialogs/common.rs:181
-#: src/ui/dialogs/common.rs:196 src/ui/shell/web_app_shell.rs:93
+#: src/ui/app_page/app_page.blp:15 src/ui/dialogs/common.rs:186
+#: src/ui/dialogs/common.rs:201 src/ui/shell/web_app_shell.rs:93
 msgid "Back"
 msgstr ""
 
@@ -433,7 +433,7 @@ msgstr ""
 msgid "Changes take effect the next time you open this application."
 msgstr ""
 
-#: src/ui/app_page/app_page.blp:72 src/ui/shell/app_window.rs:936
+#: src/ui/app_page/app_page.blp:72 src/ui/shell/app_window.rs:953
 msgid "Website"
 msgstr ""
 
@@ -490,7 +490,7 @@ msgstr ""
 msgid "Navigation, network and background activity"
 msgstr ""
 
-#: src/ui/app_page/app_page.blp:139 src/ui/creation/create_app_dialog.blp:189
+#: src/ui/app_page/app_page.blp:139 src/ui/creation/create_app_dialog.blp:199
 msgid "Advanced"
 msgstr ""
 
@@ -526,11 +526,11 @@ msgstr ""
 msgid "Delete…"
 msgstr ""
 
-#: src/ui/app_page/mod.rs:273 src/ui/creation/mod.rs:244
+#: src/ui/app_page/mod.rs:273 src/ui/creation/mod.rs:258
 msgid "The site icon provider is unavailable."
 msgstr ""
 
-#: src/ui/app_page/mod.rs:365 src/ui/creation/mod.rs:353
+#: src/ui/app_page/mod.rs:365 src/ui/creation/mod.rs:367
 msgid "Chromium (add-on)"
 msgstr ""
 
@@ -538,7 +538,7 @@ msgstr ""
 msgid "Chromium · Ready"
 msgstr ""
 
-#: src/ui/app_page/mod.rs:384 src/ui/creation/mod.rs:360
+#: src/ui/app_page/mod.rs:384 src/ui/creation/mod.rs:374
 #: src/ui/library/app_row.rs:80
 msgid "Chromium · Add-on Required"
 msgstr ""
@@ -580,7 +580,7 @@ msgstr ""
 msgid "New Application"
 msgstr ""
 
-#: src/ui/creation/create_app_dialog.blp:34 src/ui/dialogs/common.rs:88
+#: src/ui/creation/create_app_dialog.blp:34 src/ui/dialogs/common.rs:93
 msgid "_Cancel"
 msgstr ""
 
@@ -604,39 +604,47 @@ msgstr ""
 msgid "Review Application"
 msgstr ""
 
-#: src/ui/creation/create_app_dialog.blp:111 src/ui/creation/mod.rs:102
+#: src/ui/creation/create_app_dialog.blp:111 src/ui/creation/mod.rs:105
 msgid "Create"
 msgstr ""
 
-#: src/ui/creation/create_app_dialog.blp:190
+#: src/ui/creation/create_app_dialog.blp:192
+msgid "Get Add-on"
+msgstr ""
+
+#: src/ui/creation/create_app_dialog.blp:193
+msgid "Install the Chromium add-on"
+msgstr ""
+
+#: src/ui/creation/create_app_dialog.blp:200
 msgid "Browser Engine"
 msgstr ""
 
-#: src/ui/creation/mod.rs:159
+#: src/ui/creation/mod.rs:173
 msgid "Website details were not checked. You can edit them below."
 msgstr ""
 
-#: src/ui/creation/mod.rs:214
+#: src/ui/creation/mod.rs:228
 msgid "Enter a valid website URL first."
 msgstr ""
 
-#: src/ui/creation/mod.rs:219
+#: src/ui/creation/mod.rs:233
 msgid "The website URL has no hostname."
 msgstr ""
 
-#: src/ui/creation/mod.rs:224
+#: src/ui/creation/mod.rs:238
 msgid "Getting the website icon…"
 msgstr ""
 
-#: src/ui/creation/mod.rs:238
+#: src/ui/creation/mod.rs:252
 msgid "Icon from Icon Horse"
 msgstr ""
 
-#: src/ui/creation/mod.rs:332
+#: src/ui/creation/mod.rs:346
 msgid "The application could not be created."
 msgstr ""
 
-#: src/ui/creation/mod.rs:439 src/ui/creation/mod.rs:569
+#: src/ui/creation/mod.rs:453 src/ui/creation/mod.rs:592
 msgid ""
 "The website could not be reached. You can still create this application."
 msgstr ""
@@ -828,7 +836,7 @@ msgstr ""
 msgid "Restore"
 msgstr ""
 
-#: src/ui/dialogs/backup_dialog.rs:329 src/ui/dialogs/common.rs:177
+#: src/ui/dialogs/backup_dialog.rs:329 src/ui/dialogs/common.rs:182
 #: src/ui/library/window.blp:16
 msgid "Applications"
 msgstr ""
@@ -889,67 +897,67 @@ msgstr ""
 msgid "Restore Finished with Errors"
 msgstr ""
 
-#: src/ui/dialogs/backup_dialog.rs:451 src/ui/dialogs/common.rs:40
+#: src/ui/dialogs/backup_dialog.rs:451 src/ui/dialogs/common.rs:45
 msgid "Close"
 msgstr ""
 
-#: src/ui/dialogs/common.rs:163
+#: src/ui/dialogs/common.rs:168
 msgid "General"
 msgstr ""
 
-#: src/ui/dialogs/common.rs:164 src/ui/library/window.blp:37
+#: src/ui/dialogs/common.rs:169 src/ui/library/window.blp:37
 msgid "Main Menu"
 msgstr ""
 
-#: src/ui/dialogs/common.rs:166
+#: src/ui/dialogs/common.rs:171
 msgid "Keyboard Shortcuts"
 msgstr ""
 
-#: src/ui/dialogs/common.rs:170
+#: src/ui/dialogs/common.rs:175
 msgid "Quit"
 msgstr ""
 
-#: src/ui/dialogs/common.rs:175 src/ui/dialogs/privacy_dialog.rs:98
+#: src/ui/dialogs/common.rs:180 src/ui/dialogs/privacy_dialog.rs:98
 msgid "Navigation"
 msgstr ""
 
-#: src/ui/dialogs/common.rs:182 src/ui/shell/web_app_shell.rs:99
+#: src/ui/dialogs/common.rs:187 src/ui/shell/web_app_shell.rs:99
 msgid "Forward"
 msgstr ""
 
-#: src/ui/dialogs/common.rs:184 src/ui/shell/web_app_shell.rs:110
+#: src/ui/dialogs/common.rs:189 src/ui/shell/web_app_shell.rs:110
 msgid "Reload Without Cache"
 msgstr ""
 
-#: src/ui/dialogs/common.rs:185
+#: src/ui/dialogs/common.rs:190
 msgid "Home"
 msgstr ""
 
-#: src/ui/dialogs/common.rs:186
+#: src/ui/dialogs/common.rs:191
 msgid "Zoom In"
 msgstr ""
 
-#: src/ui/dialogs/common.rs:187
+#: src/ui/dialogs/common.rs:192
 msgid "Zoom Out"
 msgstr ""
 
-#: src/ui/dialogs/common.rs:188
+#: src/ui/dialogs/common.rs:193
 msgid "Reset Zoom"
 msgstr ""
 
-#: src/ui/dialogs/common.rs:189
+#: src/ui/dialogs/common.rs:194
 msgid "Toggle Fullscreen"
 msgstr ""
 
-#: src/ui/dialogs/common.rs:193 src/ui/library/window.blp:26
+#: src/ui/dialogs/common.rs:198 src/ui/library/window.blp:26
 msgid "Add Application"
 msgstr ""
 
-#: src/ui/dialogs/common.rs:194
+#: src/ui/dialogs/common.rs:199
 msgid "Search Applications"
 msgstr ""
 
-#: src/ui/dialogs/common.rs:195
+#: src/ui/dialogs/common.rs:200
 msgid "Close Search or Go Back"
 msgstr ""
 
@@ -1254,7 +1262,7 @@ msgstr ""
 msgid "System _Capabilities"
 msgstr ""
 
-#: src/ui/library/window.blp:155 src/ui/shell/app_window.rs:1281
+#: src/ui/library/window.blp:155 src/ui/shell/app_window.rs:1298
 msgid "_Keyboard Shortcuts"
 msgstr ""
 
@@ -1346,107 +1354,111 @@ msgstr ""
 msgid "Unknown (interface unavailable)"
 msgstr ""
 
-#: src/ui/shell/app_window.rs:114 src/ui/shell/app_window.rs:134
+#: src/ui/shell/app_window.rs:85
+msgid "The link could not be opened"
+msgstr ""
+
+#: src/ui/shell/app_window.rs:131 src/ui/shell/app_window.rs:151
 msgid "Web App Window"
 msgstr ""
 
-#: src/ui/shell/app_window.rs:235
+#: src/ui/shell/app_window.rs:252
 msgid "Screen sharing is not available"
 msgstr ""
 
-#: src/ui/shell/app_window.rs:245
+#: src/ui/shell/app_window.rs:262
 msgid "Allow this website to use the camera?"
 msgstr ""
 
-#: src/ui/shell/app_window.rs:246
+#: src/ui/shell/app_window.rs:263
 msgid "Allow this website to use the microphone?"
 msgstr ""
 
-#: src/ui/shell/app_window.rs:248
+#: src/ui/shell/app_window.rs:265
 msgid "Allow this website to use the camera and microphone?"
 msgstr ""
 
-#: src/ui/shell/app_window.rs:250
+#: src/ui/shell/app_window.rs:267
 msgid "Unknown media device request"
 msgstr ""
 
-#: src/ui/shell/app_window.rs:257
+#: src/ui/shell/app_window.rs:274
 msgid "Allow this website to access your location?"
 msgstr ""
 
-#: src/ui/shell/app_window.rs:263
+#: src/ui/shell/app_window.rs:280
 msgid "Allow this website to send notifications?"
 msgstr ""
 
-#: src/ui/shell/app_window.rs:269
+#: src/ui/shell/app_window.rs:286
 msgid "Allow this website to read the clipboard?"
 msgstr ""
 
-#: src/ui/shell/app_window.rs:275
+#: src/ui/shell/app_window.rs:292
 msgid "Allow this website to lock the pointer?"
 msgstr ""
 
-#: src/ui/shell/app_window.rs:281
+#: src/ui/shell/app_window.rs:298
 msgid "Allow this website to access third-party storage?"
 msgstr ""
 
-#: src/ui/shell/app_window.rs:286
+#: src/ui/shell/app_window.rs:303
 msgid "This WebKit permission type is not supported"
 msgstr ""
 
-#: src/ui/shell/app_window.rs:632
+#: src/ui/shell/app_window.rs:649
 msgid "Privacy policy could not be loaded; web content was not started"
 msgstr ""
 
-#: src/ui/shell/app_window.rs:656
+#: src/ui/shell/app_window.rs:673
 msgid "Content filters could not be initialized"
 msgstr ""
 
-#: src/ui/shell/app_window.rs:660
+#: src/ui/shell/app_window.rs:677
 msgid "Some content filters could not be enabled"
 msgstr ""
 
-#: src/ui/shell/app_window.rs:882
+#: src/ui/shell/app_window.rs:899
 msgid "Navigation blocked"
 msgstr ""
 
-#: src/ui/shell/app_window.rs:907
+#: src/ui/shell/app_window.rs:924
 msgid "Website permission origin is unavailable"
 msgstr ""
 
-#: src/ui/shell/app_window.rs:1008
+#: src/ui/shell/app_window.rs:1025
 msgid "System notifications are unavailable"
 msgstr ""
 
-#: src/ui/shell/app_window.rs:1142
+#: src/ui/shell/app_window.rs:1159
 msgid "Address"
 msgstr ""
 
-#: src/ui/shell/app_window.rs:1144
+#: src/ui/shell/app_window.rs:1161
 msgid "WebKitGTK error"
 msgstr ""
 
-#: src/ui/shell/app_window.rs:1156
+#: src/ui/shell/app_window.rs:1173
 msgid "The Chromium add-on is not installed yet."
 msgstr ""
 
-#: src/ui/shell/app_window.rs:1162
+#: src/ui/shell/app_window.rs:1179
 msgid "Try This Application with Chromium?"
 msgstr ""
 
-#: src/ui/shell/app_window.rs:1169
+#: src/ui/shell/app_window.rs:1186
 msgid "Use Chromium"
 msgstr ""
 
-#: src/ui/shell/app_window.rs:1172
+#: src/ui/shell/app_window.rs:1189
 msgid "Keep WebKitGTK"
 msgstr ""
 
-#: src/ui/shell/app_window.rs:1212
+#: src/ui/shell/app_window.rs:1229
 msgid "Chromium could not be started"
 msgstr ""
 
-#: src/ui/shell/app_window.rs:1279
+#: src/ui/shell/app_window.rs:1296
 msgid "_Downloads"
 msgstr ""
 

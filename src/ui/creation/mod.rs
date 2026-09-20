@@ -12,10 +12,11 @@ use crate::{
     domain::config,
     domain::model::{parse_web_url, AppConfigV3, Engine},
     domain::util,
-    engines::chromium::EngineAvailability,
+    engines::chromium::{self, EngineAvailability},
     engines::compatibility::{reason_description, CompatibilityCatalogV1},
     engines::site_icon_provider::{IconHorseProvider, SiteIconProvider},
     system::service::AppService,
+    ui::dialogs::common,
 };
 
 mod imp {
@@ -70,6 +71,8 @@ mod imp {
         pub engine_row: TemplateChild<adw::ComboRow>,
         #[template_child]
         pub recommendation_row: TemplateChild<adw::ActionRow>,
+        #[template_child]
+        pub addon_button: TemplateChild<gtk::Button>,
         #[property(get, set)]
         pub lookup_loading: Cell<bool>,
         #[property(get, set)]
@@ -100,6 +103,17 @@ mod imp {
             self.parent_constructed();
             self.button
                 .update_property(&[gtk::accessible::Property::Label(&gettext("Create"))]);
+            self.addon_button.connect_clicked(glib::clone!(
+                #[weak(rename_to = dialog)]
+                self.obj(),
+                move |_| {
+                    common::open_uri(
+                        &dialog,
+                        chromium::ADDON_REF_URL,
+                        &gettext("Could Not Open the Add-on Installer"),
+                    );
+                }
+            ));
             self.obj()
                 .connect_loading_notify(|dialog| dialog.update_busy());
             self.obj()
@@ -509,6 +523,15 @@ impl CreateAppDialog {
         self.imp()
             .recommendation_row
             .set_visible(recommendation.is_some());
+        // Recommending an engine whose add-on is missing is only useful when it
+        // also says how to get it.
+        let addon_missing = matches!(
+            self.imp().engine_availability.borrow().as_ref(),
+            Some(EngineAvailability::Missing)
+        );
+        self.imp()
+            .addon_button
+            .set_visible(recommendation.is_some() && addon_missing);
         if let Some(reason_code) = recommendation {
             self.imp()
                 .recommendation_row
