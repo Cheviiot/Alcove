@@ -1,0 +1,6 @@
+<!doctype html><meta charset="utf-8"><title>Alcove close confirmation</title>
+<style>body{font:20px sans-serif;padding:48px;background:#f8d7da}button{font:inherit;padding:16px}</style>
+<h1>Закрытие окна</h1><button autofocus id="arm">Включить подтверждение</button>
+<script>
+arm.onclick=()=>{window.onbeforeunload=e=>{e.preventDefault();e.returnValue=''};console.log('ALCOVE_POPUP:'+JSON.stringify({kind:'beforeunload-armed',value:true}));};
+</script>

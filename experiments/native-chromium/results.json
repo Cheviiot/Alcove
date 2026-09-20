@@ -1,0 +1,3320 @@
+{
+  "date": "2026-09-20",
+  "production_ready": false,
+  "binding": "official C++ CEF API; Rust GTK host (not cef-rs)",
+  "runs": {
+    "wayland_cpu": {
+      "directory": "20260920-004814-wayland-429048",
+      "report": {
+        "acceptance_gaps": [
+          "AT-SPI document bridge",
+          "popup and portal integration",
+          "Flatpak sandbox verification",
+          "real keyboard/IME and performance acceptance"
+        ],
+        "accessibility_updates": 4,
+        "autohide_observed": true,
+        "backend": "GdkWaylandDisplay",
+        "cpu_frames": 344,
+        "elapsed_seconds": 12.020688272,
+        "errors": [],
+        "frame_size": [
+          800,
+          640
+        ],
+        "gpu_callbacks": 0,
+        "gpu_presented": 0,
+        "header_visible_at_capture": true,
+        "layout_checks": [],
+        "overlay_preserved_viewport": true,
+        "production_ready": false,
+        "protocol": 1,
+        "resource_samples": [
+          {
+            "host_fds": 24,
+            "second": 2,
+            "worker_fds": 147
+          },
+          {
+            "host_fds": 24,
+            "second": 4,
+            "worker_fds": 161
+          },
+          {
+            "host_fds": 24,
+            "second": 6,
+            "worker_fds": 161
+          },
+          {
+            "host_fds": 24,
+            "second": 8,
+            "worker_fds": 163
+          },
+          {
+            "host_fds": 27,
+            "second": 10,
+            "worker_fds": 163
+          },
+          {
+            "host_fds": 27,
+            "second": 12,
+            "worker_fds": 164
+          }
+        ],
+        "scale_factor": 1,
+        "size": [
+          800,
+          640
+        ],
+        "transport": "cpu-diagnostic",
+        "unicode_commit_confirmed": true,
+        "webgl": true
+      },
+      "at_spi": {
+        "web_document_exposed": false,
+        "web_input_exposed": false,
+        "web_button_exposed": false
+      }
+    },
+    "wayland_gpu_layout": {
+      "directory": "20260920-004814-wayland-429054",
+      "report": {
+        "acceptance_gaps": [
+          "AT-SPI document bridge",
+          "popup and portal integration",
+          "Flatpak sandbox verification",
+          "real keyboard/IME and performance acceptance"
+        ],
+        "accessibility_updates": 6,
+        "autohide_observed": true,
+        "backend": "GdkWaylandDisplay",
+        "cpu_frames": 0,
+        "elapsed_seconds": 32.022593995,
+        "errors": [],
+        "frame_size": [
+          800,
+          640
+        ],
+        "gpu_callbacks": 945,
+        "gpu_presented": 945,
+        "header_visible_at_capture": true,
+        "layout_checks": [
+          {
+            "fullscreen": false,
+            "maximized": false,
+            "size": [
+              800,
+              640
+            ],
+            "stage": 0
+          },
+          {
+            "fullscreen": false,
+            "maximized": false,
+            "size": [
+              360,
+              640
+            ],
+            "stage": 1
+          },
+          {
+            "fullscreen": false,
+            "maximized": false,
+            "size": [
+              800,
+              640
+            ],
+            "stage": 2
+          },
+          {
+            "fullscreen": false,
+            "maximized": true,
+            "size": [
+              1280,
+              868
+            ],
+            "stage": 3
+          },
+          {
+            "fullscreen": false,
+            "maximized": false,
+            "size": [
+              800,
+              640
+            ],
+            "stage": 4
+          },
+          {
+            "fullscreen": true,
+            "maximized": false,
+            "size": [
+              1280,
+              900
+            ],
+            "stage": 5
+          },
+          {
+            "fullscreen": false,
+            "maximized": false,
+            "size": [
+              800,
+              640
+            ],
+            "stage": 6
+          }
+        ],
+        "overlay_preserved_viewport": true,
+        "production_ready": false,
+        "protocol": 1,
+        "resource_samples": [
+          {
+            "host_fds": 29,
+            "second": 2,
+            "worker_fds": 151
+          },
+          {
+            "host_fds": 28,
+            "second": 4,
+            "worker_fds": 165
+          },
+          {
+            "host_fds": 28,
+            "second": 6,
+            "worker_fds": 165
+          },
+          {
+            "host_fds": 29,
+            "second": 8,
+            "worker_fds": 167
+          },
+          {
+            "host_fds": 28,
+            "second": 10,
+            "worker_fds": 167
+          },
+          {
+            "host_fds": 29,
+            "second": 12,
+            "worker_fds": 168
+          },
+          {
+            "host_fds": 28,
+            "second": 14,
+            "worker_fds": 168
+          },
+          {
+            "host_fds": 29,
+            "second": 16,
+            "worker_fds": 168
+          },
+          {
+            "host_fds": 28,
+            "second": 18,
+            "worker_fds": 168
+          },
+          {
+            "host_fds": 29,
+            "second": 20,
+            "worker_fds": 168
+          },
+          {
+            "host_fds": 29,
+            "second": 22,
+            "worker_fds": 168
+          },
+          {
+            "host_fds": 28,
+            "second": 24,
+            "worker_fds": 168
+          },
+          {
+            "host_fds": 29,
+            "second": 26,
+            "worker_fds": 168
+          },
+          {
+            "host_fds": 28,
+            "second": 28,
+            "worker_fds": 168
+          },
+          {
+            "host_fds": 29,
+            "second": 30,
+            "worker_fds": 168
+          },
+          {
+            "host_fds": 29,
+            "second": 32,
+            "worker_fds": 168
+          }
+        ],
+        "scale_factor": 1,
+        "size": [
+          800,
+          640
+        ],
+        "transport": "gpu-dmabuf",
+        "unicode_commit_confirmed": true,
+        "webgl": true
+      },
+      "at_spi": {
+        "web_document_exposed": false,
+        "web_input_exposed": false,
+        "web_button_exposed": false
+      }
+    },
+    "wayland_gpu_scale2": {
+      "directory": "20260920-004814-wayland-429051",
+      "report": {
+        "acceptance_gaps": [
+          "AT-SPI document bridge",
+          "popup and portal integration",
+          "Flatpak sandbox verification",
+          "real keyboard/IME and performance acceptance"
+        ],
+        "accessibility_updates": 5,
+        "autohide_observed": true,
+        "backend": "GdkWaylandDisplay",
+        "cpu_frames": 0,
+        "elapsed_seconds": 12.039210131,
+        "errors": [],
+        "frame_size": [
+          1600,
+          1280
+        ],
+        "gpu_callbacks": 346,
+        "gpu_presented": 346,
+        "header_visible_at_capture": true,
+        "layout_checks": [],
+        "overlay_preserved_viewport": true,
+        "production_ready": false,
+        "protocol": 1,
+        "resource_samples": [
+          {
+            "host_fds": 29,
+            "second": 2,
+            "worker_fds": 151
+          },
+          {
+            "host_fds": 30,
+            "second": 4,
+            "worker_fds": 165
+          },
+          {
+            "host_fds": 30,
+            "second": 6,
+            "worker_fds": 167
+          },
+          {
+            "host_fds": 29,
+            "second": 8,
+            "worker_fds": 167
+          },
+          {
+            "host_fds": 28,
+            "second": 10,
+            "worker_fds": 168
+          },
+          {
+            "host_fds": 28,
+            "second": 12,
+            "worker_fds": 168
+          }
+        ],
+        "scale_factor": 2,
+        "size": [
+          800,
+          640
+        ],
+        "transport": "gpu-dmabuf",
+        "unicode_commit_confirmed": true,
+        "webgl": true
+      },
+      "at_spi": {
+        "web_document_exposed": false,
+        "web_input_exposed": false,
+        "web_button_exposed": false
+      }
+    },
+    "xvfb_cpu": {
+      "directory": "20260920-004628-x11-425457",
+      "report": {
+        "acceptance_gaps": [
+          "AT-SPI document bridge",
+          "popup and portal integration",
+          "Flatpak sandbox verification",
+          "real keyboard/IME and performance acceptance"
+        ],
+        "accessibility_updates": 4,
+        "autohide_observed": true,
+        "backend": "GdkX11Display",
+        "cpu_frames": 702,
+        "elapsed_seconds": 12.098624176,
+        "errors": [],
+        "gpu_callbacks": 0,
+        "gpu_presented": 0,
+        "header_visible_at_capture": true,
+        "layout_checks": [],
+        "overlay_preserved_viewport": true,
+        "production_ready": false,
+        "protocol": 1,
+        "scale_factor": 1,
+        "size": [
+          790,
+          630
+        ],
+        "transport": "cpu-diagnostic",
+        "unicode_commit_confirmed": true,
+        "webgl": false
+      },
+      "at_spi": {
+        "web_document_exposed": false,
+        "web_input_exposed": false,
+        "web_button_exposed": false
+      }
+    },
+    "wayland_gpu_final_dark": {
+      "directory": "20260920-005316-wayland-436830",
+      "report": {
+        "acceptance_gaps": [
+          "AT-SPI document bridge",
+          "popup and portal integration",
+          "Flatpak sandbox verification",
+          "real keyboard/IME and performance acceptance"
+        ],
+        "accessibility_updates": 5,
+        "autohide_observed": true,
+        "backend": "GdkWaylandDisplay",
+        "cpu_frames": 0,
+        "elapsed_seconds": 12.029144233,
+        "errors": [],
+        "frame_size": [
+          1600,
+          1280
+        ],
+        "gpu_callbacks": 351,
+        "gpu_presented": 351,
+        "header_visible_at_capture": true,
+        "layout_checks": [],
+        "overlay_preserved_viewport": true,
+        "production_ready": false,
+        "protocol": 1,
+        "resource_samples": [
+          {
+            "host_fds": 28,
+            "second": 2,
+            "worker_fds": 151
+          },
+          {
+            "host_fds": 28,
+            "second": 4,
+            "worker_fds": 168
+          },
+          {
+            "host_fds": 28,
+            "second": 6,
+            "worker_fds": 168
+          },
+          {
+            "host_fds": 28,
+            "second": 8,
+            "worker_fds": 168
+          },
+          {
+            "host_fds": 28,
+            "second": 10,
+            "worker_fds": 168
+          },
+          {
+            "host_fds": 28,
+            "second": 12,
+            "worker_fds": 168
+          }
+        ],
+        "scale_factor": 2,
+        "size": [
+          800,
+          640
+        ],
+        "transport": "gpu-dmabuf",
+        "unicode_commit_confirmed": true,
+        "webgl": true,
+        "diagnostic_checks": {
+          "rendering": true,
+          "scale": true
+        },
+        "diagnostic_passed": true
+      },
+      "at_spi": {
+        "web_document_exposed": false,
+        "web_input_exposed": false,
+        "web_button_exposed": false
+      }
+    },
+    "mutter_native_atspi_navigation": {
+      "directory": "20260920-063256-wayland-709913",
+      "report": {
+        "acceptance_gaps": [
+          "complete screenreader interaction and accessibility interfaces",
+          "popup and portal integration",
+          "Flatpak sandbox verification",
+          "real keyboard/IME and performance acceptance"
+        ],
+        "accessibility_updates": 9,
+        "autohide_observed": true,
+        "backend": "GdkWaylandDisplay",
+        "cpu_frames": 0,
+        "elapsed_seconds": 32.017476346,
+        "errors": [],
+        "frame_size": [
+          800,
+          640
+        ],
+        "gpu_callbacks": 885,
+        "gpu_presented": 885,
+        "header_visible_at_capture": true,
+        "layout_checks": [],
+        "native_accessibility": true,
+        "overlay_preserved_viewport": true,
+        "production_ready": false,
+        "protocol": 1,
+        "scale_factor": 1,
+        "size": [
+          800,
+          640
+        ],
+        "transport": "gpu-dmabuf",
+        "unicode_commit_confirmed": true,
+        "webgl": true,
+        "orca_exit_code_before_shutdown": null,
+        "compositor": "mutter",
+        "diagnostic_checks": {
+          "rendering": true,
+          "scale": true,
+          "native_accessibility": true,
+          "accessibility_navigation": true,
+          "orca_document_and_input": true
+        },
+        "diagnostic_passed": true,
+        "resource_last_three_samples": [
+          {
+            "host_fds": 36,
+            "second": 28,
+            "worker_fds": 177
+          },
+          {
+            "host_fds": 36,
+            "second": 30,
+            "worker_fds": 177
+          },
+          {
+            "host_fds": 37,
+            "second": 32,
+            "worker_fds": 177
+          }
+        ],
+        "orca_speech_text": [
+          "'Screen reader on.'",
+          "'left shift'",
+          "'Alcove — Chromium Prototype'",
+          "'grouping'",
+          "'Содержимое сайта'",
+          "'Chromium внутри GTK'",
+          "'document web'",
+          "'Browse mode'",
+          "'main content'",
+          "'Проверка ввода'",
+          "'entry'",
+          "'Привет.'",
+          "'Focus mode'",
+          "'Переход выполнен'",
+          "'document web'",
+          "'Browse mode'",
+          "'Chromium внутри GTK'",
+          "'document web'"
+        ]
+      },
+      "at_spi": {
+        "document_embedded_in_gtk": true,
+        "web_document_exposed": true,
+        "web_input_exposed": true,
+        "web_button_exposed": true,
+        "interactions": {
+          "text": "Привет",
+          "focus_accepted": true,
+          "focused": true,
+          "caret_accepted": true,
+          "caret_offset": 2,
+          "selection_accepted": true,
+          "selection": [
+            1,
+            4
+          ],
+          "action_names": [
+            "press",
+            "showContextMenu"
+          ],
+          "button_action_accepted": true,
+          "link_uri": "http://127.0.0.1:38515/next.html",
+          "link_target_matches": true,
+          "navigation_action_accepted": true,
+          "navigation_document_replaced": true,
+          "previous_document_defunct": true,
+          "previous_button_action_rejected": true,
+          "return_action_accepted": true,
+          "return_document_restored": true
+        },
+        "event_counts": {
+          "object:text-caret-moved": 2,
+          "object:text-selection-changed": 1,
+          "object:children-changed:add": 3,
+          "object:state-changed:defunct": 106,
+          "object:state-changed:focused": 8,
+          "object:text-changed:insert": 1,
+          "object:children-changed:remove": 2,
+          "document:load-complete": 2
+        }
+      }
+    },
+    "mutter_orca_keyboard": {
+      "directory": "20260920-063329-wayland-710781",
+      "report": {
+        "acceptance_gaps": [
+          "complete screenreader interaction and accessibility interfaces",
+          "popup and portal integration",
+          "Flatpak sandbox verification",
+          "real keyboard/IME and performance acceptance"
+        ],
+        "accessibility_updates": 10,
+        "autohide_observed": true,
+        "backend": "GdkWaylandDisplay",
+        "cpu_frames": 0,
+        "elapsed_seconds": 32.030046126,
+        "errors": [],
+        "frame_size": [
+          800,
+          640
+        ],
+        "gpu_callbacks": 950,
+        "gpu_presented": 950,
+        "header_visible_at_capture": true,
+        "layout_checks": [],
+        "native_accessibility": true,
+        "overlay_preserved_viewport": true,
+        "production_ready": false,
+        "protocol": 1,
+        "scale_factor": 1,
+        "size": [
+          800,
+          640
+        ],
+        "transport": "gpu-dmabuf",
+        "unicode_commit_confirmed": true,
+        "webgl": true,
+        "orca_exit_code_before_shutdown": null,
+        "compositor": "mutter",
+        "diagnostic_checks": {
+          "rendering": true,
+          "scale": true,
+          "native_accessibility": true,
+          "orca_document_and_input": true,
+          "orca_keyboard_button": true
+        },
+        "diagnostic_passed": true,
+        "resource_last_three_samples": [
+          {
+            "host_fds": 37,
+            "second": 28,
+            "worker_fds": 176
+          },
+          {
+            "host_fds": 36,
+            "second": 30,
+            "worker_fds": 177
+          },
+          {
+            "host_fds": 37,
+            "second": 32,
+            "worker_fds": 176
+          }
+        ],
+        "orca_speech_text": [
+          "'Screen reader on.'",
+          "'left shift'",
+          "'Alcove — Chromium Prototype'",
+          "'grouping'",
+          "'Содержимое сайта'",
+          "'Chromium внутри GTK'",
+          "'document web'",
+          "'Browse mode'",
+          "'main content'",
+          "'Проверка ввода'",
+          "'entry'",
+          "'Привет.'",
+          "'Focus mode'",
+          "'Проверить нажатие'",
+          "'button.'",
+          "'Browse mode'",
+          "'Привет'",
+          "'selected'",
+          "'left shift'",
+          "'tab'",
+          "'Проверить нажатие'",
+          "'button.'",
+          "'return'",
+          "'leaving main content.'",
+          "'Меню'",
+          "'toggle button not pressed.'",
+          "'opens popup'"
+        ]
+      },
+      "at_spi": {
+        "document_embedded_in_gtk": true,
+        "web_document_exposed": true,
+        "web_input_exposed": true,
+        "web_button_exposed": true,
+        "interactions": {
+          "text": "Привет",
+          "focus_accepted": true,
+          "focused": true,
+          "caret_accepted": true,
+          "caret_offset": 2,
+          "selection_accepted": true,
+          "selection": [
+            1,
+            4
+          ],
+          "action_names": [
+            "press",
+            "showContextMenu"
+          ],
+          "button_action_accepted": true,
+          "link_uri": "http://127.0.0.1:34907/next.html",
+          "link_target_matches": true
+        },
+        "event_counts": {
+          "object:text-caret-moved": 2,
+          "object:text-selection-changed": 1,
+          "object:children-changed:add": 1,
+          "object:state-changed:defunct": 1,
+          "object:state-changed:focused": 2,
+          "object:text-changed:insert": 1
+        }
+      }
+    },
+    "weston_full_fixture_inactive_input": {
+      "directory": "20260920-063402-wayland-711832",
+      "report": {
+        "acceptance_gaps": [
+          "complete screenreader interaction and accessibility interfaces",
+          "popup and portal integration",
+          "Flatpak sandbox verification",
+          "real keyboard/IME and performance acceptance"
+        ],
+        "accessibility_updates": 2,
+        "autohide_observed": true,
+        "backend": "GdkWaylandDisplay",
+        "cpu_frames": 0,
+        "elapsed_seconds": 12.020441527,
+        "errors": [],
+        "frame_size": [
+          1600,
+          1280
+        ],
+        "gpu_callbacks": 350,
+        "gpu_presented": 350,
+        "header_visible_at_capture": true,
+        "layout_checks": [],
+        "native_accessibility": false,
+        "overlay_preserved_viewport": true,
+        "production_ready": false,
+        "protocol": 1,
+        "scale_factor": 2,
+        "size": [
+          800,
+          640
+        ],
+        "transport": "gpu-dmabuf",
+        "unicode_commit_confirmed": false,
+        "webgl": true,
+        "compositor": "weston",
+        "diagnostic_checks": {
+          "rendering": true,
+          "scale": true
+        },
+        "diagnostic_passed": false,
+        "resource_last_three_samples": [
+          {
+            "host_fds": 28,
+            "second": 8,
+            "worker_fds": 167
+          },
+          {
+            "host_fds": 29,
+            "second": 10,
+            "worker_fds": 167
+          },
+          {
+            "host_fds": 29,
+            "second": 12,
+            "worker_fds": 167
+          }
+        ]
+      },
+      "at_spi": {
+        "document_embedded_in_gtk": false,
+        "web_document_exposed": false,
+        "web_input_exposed": false,
+        "web_button_exposed": false,
+        "interactions": {},
+        "event_counts": {}
+      }
+    },
+    "xvfb_full_fixture_limitations": {
+      "directory": "20260920-063402-x11-711816",
+      "report": {
+        "acceptance_gaps": [
+          "complete screenreader interaction and accessibility interfaces",
+          "popup and portal integration",
+          "Flatpak sandbox verification",
+          "real keyboard/IME and performance acceptance"
+        ],
+        "accessibility_updates": 4,
+        "autohide_observed": true,
+        "backend": "GdkX11Display",
+        "cpu_frames": 704,
+        "elapsed_seconds": 12.089272169,
+        "errors": [],
+        "frame_size": [
+          790,
+          630
+        ],
+        "gpu_callbacks": 0,
+        "gpu_presented": 0,
+        "header_visible_at_capture": true,
+        "layout_checks": [],
+        "native_accessibility": false,
+        "overlay_preserved_viewport": true,
+        "production_ready": false,
+        "protocol": 1,
+        "scale_factor": 1,
+        "size": [
+          790,
+          630
+        ],
+        "transport": "cpu-diagnostic",
+        "unicode_commit_confirmed": true,
+        "webgl": false,
+        "compositor": "xvfb",
+        "diagnostic_checks": {
+          "rendering": true,
+          "scale": true
+        },
+        "diagnostic_passed": false,
+        "resource_last_three_samples": [
+          {
+            "host_fds": 25,
+            "second": 8,
+            "worker_fds": 172
+          },
+          {
+            "host_fds": 26,
+            "second": 10,
+            "worker_fds": 172
+          },
+          {
+            "host_fds": 26,
+            "second": 12,
+            "worker_fds": 173
+          }
+        ]
+      },
+      "at_spi": {
+        "document_embedded_in_gtk": false,
+        "web_document_exposed": false,
+        "web_input_exposed": false,
+        "web_button_exposed": false,
+        "interactions": {},
+        "event_counts": {}
+      }
+    },
+    "weston_surface_scale2_dark": {
+      "directory": "20260920-063655-wayland-715004",
+      "report": {
+        "acceptance_gaps": [
+          "complete screenreader interaction and accessibility interfaces",
+          "popup and portal integration",
+          "Flatpak sandbox verification",
+          "real keyboard/IME and performance acceptance"
+        ],
+        "accessibility_updates": 3,
+        "autohide_observed": true,
+        "backend": "GdkWaylandDisplay",
+        "cpu_frames": 0,
+        "elapsed_seconds": 12.024360148,
+        "errors": [],
+        "frame_size": [
+          1600,
+          1280
+        ],
+        "gpu_callbacks": 351,
+        "gpu_presented": 351,
+        "header_visible_at_capture": true,
+        "layout_checks": [],
+        "native_accessibility": false,
+        "overlay_preserved_viewport": true,
+        "production_ready": false,
+        "protocol": 1,
+        "scale_factor": 2,
+        "size": [
+          800,
+          640
+        ],
+        "transport": "gpu-dmabuf",
+        "unicode_commit_confirmed": false,
+        "webgl": true,
+        "diagnostic_scope": "surface-only",
+        "compositor": "weston",
+        "diagnostic_checks": {
+          "rendering": true,
+          "scale": true,
+          "header_overlay": true
+        },
+        "diagnostic_passed": true,
+        "resource_last_three_samples": [
+          {
+            "host_fds": 29,
+            "second": 8,
+            "worker_fds": 168
+          },
+          {
+            "host_fds": 28,
+            "second": 10,
+            "worker_fds": 169
+          },
+          {
+            "host_fds": 29,
+            "second": 12,
+            "worker_fds": 168
+          }
+        ]
+      },
+      "at_spi": {
+        "document_embedded_in_gtk": false,
+        "web_document_exposed": false,
+        "web_input_exposed": false,
+        "web_button_exposed": false,
+        "interactions": {},
+        "event_counts": {}
+      }
+    },
+    "xvfb_surface": {
+      "directory": "20260920-063656-x11-715007",
+      "report": {
+        "acceptance_gaps": [
+          "complete screenreader interaction and accessibility interfaces",
+          "popup and portal integration",
+          "Flatpak sandbox verification",
+          "real keyboard/IME and performance acceptance"
+        ],
+        "accessibility_updates": 4,
+        "autohide_observed": true,
+        "backend": "GdkX11Display",
+        "cpu_frames": 704,
+        "elapsed_seconds": 12.095454852,
+        "errors": [],
+        "frame_size": [
+          790,
+          630
+        ],
+        "gpu_callbacks": 0,
+        "gpu_presented": 0,
+        "header_visible_at_capture": true,
+        "layout_checks": [],
+        "native_accessibility": false,
+        "overlay_preserved_viewport": true,
+        "production_ready": false,
+        "protocol": 1,
+        "scale_factor": 1,
+        "size": [
+          790,
+          630
+        ],
+        "transport": "cpu-diagnostic",
+        "unicode_commit_confirmed": true,
+        "webgl": false,
+        "diagnostic_scope": "surface-only",
+        "compositor": "xvfb",
+        "diagnostic_checks": {
+          "rendering": true,
+          "scale": true,
+          "header_overlay": true
+        },
+        "diagnostic_passed": true,
+        "resource_last_three_samples": [
+          {
+            "host_fds": 25,
+            "second": 8,
+            "worker_fds": 173
+          },
+          {
+            "host_fds": 26,
+            "second": 10,
+            "worker_fds": 172
+          },
+          {
+            "host_fds": 26,
+            "second": 12,
+            "worker_fds": 172
+          }
+        ]
+      },
+      "at_spi": {
+        "document_embedded_in_gtk": false,
+        "web_document_exposed": false,
+        "web_input_exposed": false,
+        "web_button_exposed": false,
+        "interactions": {},
+        "event_counts": {}
+      }
+    },
+    "site_requests": {
+      "directory": "20260920-114229-wayland-1039121",
+      "report": {
+        "acceptance_gaps": [
+          "complete screenreader interaction and accessibility interfaces",
+          "popup and portal integration",
+          "Flatpak sandbox verification",
+          "real keyboard/IME and performance acceptance"
+        ],
+        "accessibility_updates": 29,
+        "autohide_observed": true,
+        "backend": "GdkWaylandDisplay",
+        "cpu_frames": 0,
+        "dialog_hold_failed": false,
+        "dialog_hold_observed": true,
+        "elapsed_seconds": 75.016519709,
+        "errors": [],
+        "frame_size": [
+          800,
+          640
+        ],
+        "gpu_callbacks": 55,
+        "gpu_presented": 55,
+        "header_visible_at_capture": true,
+        "layout_checks": [],
+        "native_accessibility": true,
+        "overlay_preserved_viewport": true,
+        "production_ready": false,
+        "protocol": 1,
+        "resource_samples": [
+          {
+            "host_fds": 51,
+            "second": 70,
+            "worker_fds": 184
+          },
+          {
+            "host_fds": 51,
+            "second": 72,
+            "worker_fds": 184
+          },
+          {
+            "host_fds": 51,
+            "second": 74,
+            "worker_fds": 184
+          }
+        ],
+        "scale_factor": 1,
+        "size": [
+          800,
+          640
+        ],
+        "transport": "gpu-dmabuf",
+        "unicode_commit_confirmed": false,
+        "webgl": false,
+        "diagnostic_scope": "site-requests",
+        "compositor": "mutter",
+        "diagnostic_checks": {
+          "rendering": true,
+          "scale": true,
+          "site_requests": true,
+          "header_held_for_dialog": true,
+          "header_overlay": true
+        },
+        "diagnostic_passed": true
+      },
+      "site_requests": {
+        "checks": {
+          "menu_keyboard": true,
+          "menu_blocks_web_action": true,
+          "dialog_blocks_web_action": true,
+          "alert": true,
+          "confirm_deny": true,
+          "confirm_allow": true,
+          "prompt": true,
+          "notification_deny": true,
+          "geolocation_allow": true,
+          "microphone_allow": true,
+          "camera_deny": true,
+          "file_portal_open": true,
+          "file_portal_cancel": true,
+          "download_portal_save": true,
+          "download_complete": true,
+          "multiple_downloads_permission": true,
+          "download_portal_cancel": true,
+          "download_ui_cancel": true,
+          "before_unload_cancel": true,
+          "before_unload_accept": true,
+          "navigation_cancels_prompt": true,
+          "navigation_closes_portal": true
+        },
+        "menu_before_space": [
+          {
+            "name": "Меню",
+            "role": "button",
+            "focused": false
+          },
+          {
+            "name": "Меню",
+            "role": "toggle button",
+            "focused": true
+          }
+        ],
+        "passed": true
+      }
+    },
+    "orca_native_focus_v2": {
+      "directory": "20260920-114229-wayland-1039118",
+      "report": {
+        "acceptance_gaps": [
+          "complete screenreader interaction and accessibility interfaces",
+          "popup and portal integration",
+          "Flatpak sandbox verification",
+          "real keyboard/IME and performance acceptance"
+        ],
+        "accessibility_updates": 10,
+        "autohide_observed": true,
+        "backend": "GdkWaylandDisplay",
+        "cpu_frames": 0,
+        "dialog_hold_failed": false,
+        "dialog_hold_observed": false,
+        "elapsed_seconds": 32.070404784,
+        "errors": [],
+        "frame_size": [
+          800,
+          640
+        ],
+        "gpu_callbacks": 942,
+        "gpu_presented": 942,
+        "header_visible_at_capture": true,
+        "layout_checks": [],
+        "native_accessibility": true,
+        "overlay_preserved_viewport": true,
+        "production_ready": false,
+        "protocol": 1,
+        "resource_samples": [
+          {
+            "host_fds": 37,
+            "second": 28,
+            "worker_fds": 176
+          },
+          {
+            "host_fds": 37,
+            "second": 30,
+            "worker_fds": 176
+          },
+          {
+            "host_fds": 37,
+            "second": 32,
+            "worker_fds": 176
+          }
+        ],
+        "scale_factor": 1,
+        "size": [
+          800,
+          640
+        ],
+        "transport": "gpu-dmabuf",
+        "unicode_commit_confirmed": true,
+        "webgl": true,
+        "orca_speech": [
+          "11:42:30.493590 - SPEECH OUTPUT: 'Screen reader on.' {'established': False}",
+          "11:42:30.900992 - SPEECH OUTPUT: 'left shift' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "11:42:31.067837 - SPEECH OUTPUT: 'Alcove — Chromium Prototype' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "11:42:31.165648 - SPEECH OUTPUT: 'grouping' {'established': False}",
+          "11:42:32.697448 - SPEECH OUTPUT: 'Содержимое сайта' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "11:42:32.697707 - SPEECH OUTPUT: 'Chromium внутри GTK' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'ru', 'dialect': '', 'variant': None}}",
+          "11:42:32.697756 - SPEECH OUTPUT: 'document web' {'established': False}",
+          "11:42:32.826082 - SPEECH OUTPUT: 'Browse mode' {'established': False}",
+          "11:42:36.507343 - SPEECH OUTPUT: 'main content' {'established': False}",
+          "11:42:36.507613 - SPEECH OUTPUT: 'Проверка ввода' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'ru', 'dialect': '', 'variant': None}}",
+          "11:42:36.507823 - SPEECH OUTPUT: 'entry' {'established': False}",
+          "11:42:36.507872 - SPEECH OUTPUT: 'Привет.' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'ru', 'dialect': '', 'variant': None}}",
+          "11:42:36.867464 - SPEECH OUTPUT: 'Focus mode' {'established': False}",
+          "11:42:42.508561 - SPEECH OUTPUT: 'Проверить нажатие' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'ru', 'dialect': '', 'variant': None}}",
+          "11:42:42.508644 - SPEECH OUTPUT: 'button.' {'established': False}",
+          "11:42:43.056111 - SPEECH OUTPUT: 'Browse mode' {'established': False}",
+          "11:42:43.201767 - SPEECH OUTPUT: 'left shift' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "11:42:45.701652 - SPEECH OUTPUT: 'Проверка ввода' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'ru', 'dialect': '', 'variant': None}}",
+          "11:42:45.701868 - SPEECH OUTPUT: 'entry' {'established': False}",
+          "11:42:45.701956 - SPEECH OUTPUT: 'Привет.' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'ru', 'dialect': '', 'variant': None}}",
+          "11:42:45.932561 - SPEECH OUTPUT: 'Focus mode' {'established': False}",
+          "11:42:46.086066 - SPEECH OUTPUT: 'tab' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "11:42:48.283527 - SPEECH OUTPUT: 'Проверить нажатие' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'ru', 'dialect': '', 'variant': None}}",
+          "11:42:48.283587 - SPEECH OUTPUT: 'button.' {'established': False}",
+          "11:42:48.861100 - SPEECH OUTPUT: 'Browse mode' {'established': False}",
+          "11:42:48.956790 - SPEECH OUTPUT: 'return' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}"
+        ],
+        "orca_exit_code_before_shutdown": null,
+        "diagnostic_scope": "full-fixture",
+        "compositor": "mutter",
+        "diagnostic_checks": {
+          "rendering": true,
+          "scale": true,
+          "native_accessibility": true,
+          "orca_document_and_input": true,
+          "orca_keyboard_button": true,
+          "unicode_commit": true,
+          "webgl": true,
+          "header_overlay": true
+        },
+        "diagnostic_passed": true
+      }
+    },
+    "xvfb_after_requests": {
+      "directory": "20260920-114229-x11-1039124",
+      "report": {
+        "acceptance_gaps": [
+          "complete screenreader interaction and accessibility interfaces",
+          "popup and portal integration",
+          "Flatpak sandbox verification",
+          "real keyboard/IME and performance acceptance"
+        ],
+        "accessibility_updates": 5,
+        "autohide_observed": true,
+        "backend": "GdkX11Display",
+        "cpu_frames": 684,
+        "dialog_hold_failed": false,
+        "dialog_hold_observed": false,
+        "elapsed_seconds": 12.195924863,
+        "errors": [],
+        "frame_size": [
+          790,
+          630
+        ],
+        "gpu_callbacks": 0,
+        "gpu_presented": 0,
+        "header_visible_at_capture": true,
+        "layout_checks": [],
+        "native_accessibility": false,
+        "overlay_preserved_viewport": true,
+        "production_ready": false,
+        "protocol": 1,
+        "resource_samples": [
+          {
+            "host_fds": 25,
+            "second": 8,
+            "worker_fds": 172
+          },
+          {
+            "host_fds": 26,
+            "second": 10,
+            "worker_fds": 173
+          },
+          {
+            "host_fds": 26,
+            "second": 12,
+            "worker_fds": 173
+          }
+        ],
+        "scale_factor": 1,
+        "size": [
+          790,
+          630
+        ],
+        "transport": "cpu-diagnostic",
+        "unicode_commit_confirmed": true,
+        "webgl": false,
+        "diagnostic_scope": "surface-only",
+        "compositor": "xvfb",
+        "diagnostic_checks": {
+          "rendering": true,
+          "scale": true,
+          "header_overlay": true
+        },
+        "diagnostic_passed": true
+      }
+    }
+  },
+  "code_checks": {
+    "application_tests_passed": 104,
+    "probe_tests_passed": 4,
+    "meson_tests_passed": 4,
+    "clippy_all_targets": "passed",
+    "cargo_fmt": "passed",
+    "meson_build": "passed",
+    "scope": "original application baseline, before native AT-SPI bridge"
+  },
+  "native_accessibility_code_checks": {
+    "cef_worker_build": "passed",
+    "probe_tests_passed": 4,
+    "probe_clippy_warnings_denied": "passed",
+    "rustfmt": "passed",
+    "python_syntax": "passed"
+  },
+  "site_request_code_checks": {
+    "worker_build": "passed",
+    "probe_unit_tests": "5 passed",
+    "probe_clippy_deny_warnings": "passed",
+    "rustfmt": "passed",
+    "python_syntax": "passed",
+    "note": "Normal Alcove checks were not repeated during this isolated prototype iteration."
+  },
+  "native_popup_iteration": {
+    "date": "2026-09-20",
+    "protocol": 2,
+    "production_ready": false,
+    "scope": "Native multi-view transport and local two-origin OAuth mechanics; native multi-window website accessibility remains blocked",
+    "runs": {
+      "gpu": {
+        "run": "20260920-121017-wayland-1089930",
+        "checks": {
+          "rendering": true,
+          "scale": true,
+          "popups": true,
+          "header_overlay": true
+        },
+        "errors": [],
+        "transport": "gpu-dmabuf",
+        "popup_checks": {
+          "trusted_open": true,
+          "window_returned": true,
+          "shared_session_and_opener": true,
+          "cross_origin_security": true,
+          "oauth_callback": true,
+          "script_close": true,
+          "close_cancel": true,
+          "close_confirm": true,
+          "separate_frames": true,
+          "single_worker": true,
+          "all_native_windows_closed": true
+        },
+        "children": [
+          {
+            "closed_by_engine": true,
+            "cpu_frames": 0,
+            "errors": [],
+            "frame_size": [
+              480,
+              520
+            ],
+            "gpu_presented": 7,
+            "size": [
+              480,
+              520
+            ],
+            "view": 2
+          },
+          {
+            "closed_by_engine": true,
+            "cpu_frames": 0,
+            "errors": [],
+            "frame_size": [
+              480,
+              520
+            ],
+            "gpu_presented": 4,
+            "size": [
+              480,
+              520
+            ],
+            "view": 3
+          }
+        ]
+      },
+      "cpu": {
+        "run": "20260920-120752-wayland-1084205",
+        "checks": {
+          "rendering": true,
+          "scale": true,
+          "popups": true,
+          "header_overlay": true
+        },
+        "errors": [],
+        "transport": "cpu-diagnostic",
+        "popup_checks": {
+          "trusted_open": true,
+          "window_returned": true,
+          "shared_session_and_opener": true,
+          "cross_origin_security": true,
+          "oauth_callback": true,
+          "script_close": true,
+          "close_cancel": true,
+          "close_confirm": true,
+          "separate_frames": true,
+          "single_worker": true,
+          "all_native_windows_closed": true
+        },
+        "children": [
+          {
+            "closed_by_engine": true,
+            "cpu_frames": 6,
+            "errors": [],
+            "frame_size": [
+              480,
+              520
+            ],
+            "gpu_presented": 0,
+            "size": [
+              480,
+              520
+            ],
+            "view": 2
+          },
+          {
+            "closed_by_engine": true,
+            "cpu_frames": 6,
+            "errors": [],
+            "frame_size": [
+              480,
+              520
+            ],
+            "gpu_presented": 0,
+            "size": [
+              480,
+              520
+            ],
+            "view": 3
+          }
+        ]
+      },
+      "orca_regression": {
+        "run": "20260920-120241-wayland-1067896",
+        "checks": {
+          "rendering": true,
+          "scale": true,
+          "native_accessibility": true,
+          "orca_document_and_input": true,
+          "orca_keyboard_button": true,
+          "unicode_commit": true,
+          "webgl": true,
+          "header_overlay": true
+        },
+        "errors": [],
+        "transport": "gpu-dmabuf"
+      },
+      "requests_regression": {
+        "run": "20260920-120537-wayland-1074473",
+        "checks": {
+          "rendering": true,
+          "scale": true,
+          "site_requests": true,
+          "header_held_for_dialog": true,
+          "header_overlay": true
+        },
+        "errors": [],
+        "transport": "gpu-dmabuf"
+      },
+      "xvfb_regression": {
+        "run": "20260920-120539-x11-1075059",
+        "checks": {
+          "rendering": true,
+          "scale": true,
+          "header_overlay": true
+        },
+        "errors": [],
+        "transport": "cpu-diagnostic"
+      }
+    },
+    "code_checks": {
+      "worker_build": "passed",
+      "probe_unit_tests": 5,
+      "probe_clippy_deny_warnings": "passed",
+      "rustfmt": "passed",
+      "python_syntax": "passed"
+    },
+    "limitations": [
+      "Native AT-SPI mode explicitly blocks popups until native root-to-view association is reliable.",
+      "No external OAuth provider compatibility claim.",
+      "Popup dropdown surfaces, close-during-creation stress, notification delivery, complete input/IME, performance/video, crash recovery and Flatpak remain separate gates."
+    ],
+    "superseded_accessibility_scope": "Native capability v3 now supports tested multi-window AT-SPI; see native_multi_window_iteration. Earlier runs above retain their original transport-only scope."
+  },
+  "native_multi_window_iteration": {
+    "date": "2026-09-20",
+    "protocol": 2,
+    "native_atspi": 3,
+    "production_ready": false,
+    "runtime_pin": "152.0.7+g83ffcba+chromium-152.0.7977.83",
+    "association": "Ordered per-browser CEF root load events correlated to native ATK busy signals; immutable view/tree qdata, per-view plug/proxy generations. No URL/title heuristic or private Chromium object ABI.",
+    "runs": {
+      "identical_windows_orca": {
+        "run": "20260920-125926-wayland-1203857",
+        "scope": "multi-window-native-accessibility",
+        "passed": true,
+        "checks": {
+          "rendering": true,
+          "scale": true,
+          "native_accessibility_lifetime": true,
+          "orca_multiple_windows": true,
+          "independent_native_accessibility_windows": true,
+          "header_overlay": true
+        },
+        "errors": [],
+        "transport": "gpu-dmabuf",
+        "native_lifetime_warnings": [],
+        "audit": {
+          "checks": {
+            "identical_titles_distinct_objects": true,
+            "same_document_uri": true,
+            "separate_gtk_windows": true,
+            "native_window_titles": true,
+            "child_action_routing": true,
+            "inactive_parent_action_blocked": true,
+            "child_text_selection": true,
+            "parent_text_untouched": true,
+            "iframe_action_routing": true,
+            "only_child_document_retired": true,
+            "retired_child_action_rejected": true,
+            "restored_action_routing": true,
+            "closed_child_defunct": true,
+            "parent_survives_child_close": true,
+            "no_binding_errors": true
+          },
+          "bindings": [
+            {
+              "view": 1,
+              "tree": "1F1BBC0D3F87E36B8E9D67F64AC1996F"
+            },
+            {
+              "view": 2,
+              "tree": "57FBB5B6325B3AE3C519849491074A51"
+            },
+            {
+              "view": 2,
+              "tree": "CCA2DCDF06BCCEE2894457B477B94D34"
+            },
+            {
+              "view": 2,
+              "tree": "A66A465B6A511524661E5F9EFB46BAE8"
+            }
+          ],
+          "passed": true
+        },
+        "orca_speech": [
+          "12:59:27.792280 - SPEECH OUTPUT: 'Screen reader on.' {'established': False}",
+          "12:59:28.526447 - SPEECH OUTPUT: 'left shift' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:59:28.603348 - SPEECH OUTPUT: 'Одинаковая страница' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:59:28.674212 - SPEECH OUTPUT: 'grouping' {'established': False}",
+          "12:59:29.960211 - SPEECH OUTPUT: 'Содержимое сайта' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:59:29.960359 - SPEECH OUTPUT: 'Одинаковая страница' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'ru', 'dialect': '', 'variant': None}}",
+          "12:59:29.960396 - SPEECH OUTPUT: 'document web' {'established': False}",
+          "12:59:30.035335 - SPEECH OUTPUT: 'Browse mode' {'established': False}",
+          "12:59:34.548264 - SPEECH OUTPUT: 'Одинаковая страница' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:59:34.604348 - SPEECH OUTPUT: 'grouping' {'established': False}",
+          "12:59:35.986739 - SPEECH OUTPUT: 'Содержимое сайта' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:59:35.987060 - SPEECH OUTPUT: 'Одинаковая страница' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'ru', 'dialect': '', 'variant': None}}",
+          "12:59:35.987120 - SPEECH OUTPUT: 'document web' {'established': False}",
+          "12:59:36.098127 - SPEECH OUTPUT: 'Browse mode' {'established': False}",
+          "12:59:37.269135 - SPEECH OUTPUT: 'Finished loading Одинаковая страница.' {'established': False}",
+          "12:59:37.289717 - SPEECH OUTPUT: 'Page has 1 heading, 1 unvisited link.' {'established': False}",
+          "12:59:42.210149 - SPEECH OUTPUT: 'Действие страницы' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'ru', 'dialect': '', 'variant': None}}",
+          "12:59:42.210246 - SPEECH OUTPUT: 'button.' {'established': False}",
+          "12:59:44.788465 - SPEECH OUTPUT: 'Другая страница окна' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:59:44.788529 - SPEECH OUTPUT: 'Содержимое сайта' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:59:44.788659 - SPEECH OUTPUT: 'Другая страница окна' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'ru', 'dialect': '', 'variant': None}}",
+          "12:59:44.788689 - SPEECH OUTPUT: 'document web' {'established': False}",
+          "12:59:44.914216 - SPEECH OUTPUT: 'Browse mode' {'established': False}",
+          "12:59:45.252002 - SPEECH OUTPUT: 'Другая страница окна' {'established': False}",
+          "12:59:47.322534 - SPEECH OUTPUT: 'Одинаковая страница' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'ru', 'dialect': '', 'variant': None}}",
+          "12:59:47.322608 - SPEECH OUTPUT: 'document web' {'established': False}",
+          "12:59:48.261968 - SPEECH OUTPUT: 'Finished loading Одинаковая страница.' {'established': False}",
+          "12:59:48.282702 - SPEECH OUTPUT: 'Page has 1 heading, 1 visited link.' {'established': False}",
+          "12:59:50.194118 - SPEECH OUTPUT: 'Одинаковая страница' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:59:50.308592 - SPEECH OUTPUT: 'grouping' {'established': False}",
+          "12:59:51.483146 - SPEECH OUTPUT: 'Открыть второе окно' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'ru', 'dialect': '', 'variant': None}}",
+          "12:59:51.483237 - SPEECH OUTPUT: 'button.' {'established': False}",
+          "12:59:51.629425 - SPEECH OUTPUT: 'Browse mode' {'established': False}",
+          "12:59:53.011342 - SPEECH OUTPUT: 'Действие страницы' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'ru', 'dialect': '', 'variant': None}}",
+          "12:59:53.011446 - SPEECH OUTPUT: 'button.' {'established': False}",
+          "13:00:03.402905 - SPEECH OUTPUT: 'Меню' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "13:00:03.402957 - SPEECH OUTPUT: 'toggle button not pressed.' {'established': False}",
+          "13:00:03.402999 - SPEECH OUTPUT: 'opens popup' {'established': False}",
+          "13:00:05.329503 - SPEECH OUTPUT: 'Screen reader off.' {'established': False}"
+        ]
+      },
+      "native_oauth_orca": {
+        "run": "20260920-125840-wayland-1201229",
+        "scope": "popups-native-accessibility",
+        "passed": true,
+        "checks": {
+          "rendering": true,
+          "scale": true,
+          "native_accessibility_lifetime": true,
+          "orca_popup_window_titles": true,
+          "orca_popup_controls": true,
+          "popups": true,
+          "header_overlay": true
+        },
+        "errors": [],
+        "transport": "gpu-dmabuf",
+        "native_lifetime_warnings": [],
+        "audit": {
+          "scope": "popup transport and local OAuth with native website AT-SPI",
+          "checks": {
+            "native_window_titles": true,
+            "trusted_open": true,
+            "window_returned": true,
+            "shared_session_and_opener": true,
+            "native_child_document": true,
+            "native_provider_document": true,
+            "cross_origin_security": true,
+            "oauth_callback": true,
+            "script_close": true,
+            "close_cancel": true,
+            "close_confirm": true,
+            "separate_frames": true,
+            "single_worker": true,
+            "all_native_windows_closed": true
+          },
+          "children": [
+            {
+              "closed_by_engine": true,
+              "cpu_frames": 0,
+              "errors": [],
+              "frame_size": [
+                480,
+                520
+              ],
+              "gpu_presented": 6,
+              "size": [
+                480,
+                520
+              ],
+              "view": 2
+            },
+            {
+              "closed_by_engine": true,
+              "cpu_frames": 0,
+              "errors": [],
+              "frame_size": [
+                480,
+                520
+              ],
+              "gpu_presented": 4,
+              "size": [
+                480,
+                520
+              ],
+              "view": 3
+            }
+          ],
+          "passed": true
+        },
+        "orca_speech": [
+          "12:58:41.708714 - SPEECH OUTPUT: 'Screen reader on.' {'established': False}",
+          "12:58:42.135562 - SPEECH OUTPUT: 'left shift' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:58:42.255725 - SPEECH OUTPUT: 'Alcove popup fixture' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:58:42.357899 - SPEECH OUTPUT: 'grouping' {'established': False}",
+          "12:58:43.591895 - SPEECH OUTPUT: 'Начать проверку входа' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'en', 'dialect': 'US', 'variant': None}}",
+          "12:58:43.592008 - SPEECH OUTPUT: 'button.' {'established': False}",
+          "12:58:43.734407 - SPEECH OUTPUT: 'Browse mode' {'established': False}",
+          "12:58:49.336276 - SPEECH OUTPUT: 'return' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:58:49.720327 - SPEECH OUTPUT: 'Alcove OAuth step' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:58:50.009232 - SPEECH OUTPUT: 'grouping' {'established': False}",
+          "12:58:51.252752 - SPEECH OUTPUT: 'Перейти к провайдеру входа' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'en', 'dialect': 'US', 'variant': None}}",
+          "12:58:51.252811 - SPEECH OUTPUT: 'button.' {'established': False}",
+          "12:58:51.433066 - SPEECH OUTPUT: 'Browse mode' {'established': False}",
+          "12:58:51.591927 - SPEECH OUTPUT: 'Alcove OAuth step' {'established': False}",
+          "12:58:55.029509 - SPEECH OUTPUT: 'return' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:58:56.518696 - SPEECH OUTPUT: 'Подтвердить вход' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'en', 'dialect': 'US', 'variant': None}}",
+          "12:58:56.518782 - SPEECH OUTPUT: 'button.' {'established': False}",
+          "12:59:00.610922 - SPEECH OUTPUT: 'return' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:59:01.738769 - SPEECH OUTPUT: 'Alcove OAuth callback' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'en', 'dialect': 'US', 'variant': None}}",
+          "12:59:01.738817 - SPEECH OUTPUT: 'document web' {'established': False}",
+          "12:59:02.066375 - SPEECH OUTPUT: 'Alcove popup fixture' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:59:02.116076 - SPEECH OUTPUT: 'grouping' {'established': False}",
+          "12:59:03.139751 - SPEECH OUTPUT: 'Проверить закрытие окна' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'en', 'dialect': 'US', 'variant': None}}",
+          "12:59:03.139807 - SPEECH OUTPUT: 'button.' {'established': False}",
+          "12:59:03.288138 - SPEECH OUTPUT: 'Browse mode' {'established': False}",
+          "12:59:03.351778 - SPEECH OUTPUT: 'return' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:59:03.542121 - SPEECH OUTPUT: 'Alcove close confirmation' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:59:04.969182 - SPEECH OUTPUT: 'Включить подтверждение' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'en', 'dialect': 'US', 'variant': None}}",
+          "12:59:04.969291 - SPEECH OUTPUT: 'button.' {'established': False}",
+          "12:59:05.153925 - SPEECH OUTPUT: 'Browse mode' {'established': False}",
+          "12:59:05.203514 - SPEECH OUTPUT: 'return' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:59:05.212261 - SPEECH OUTPUT: 'left alt' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:59:05.678217 - SPEECH OUTPUT: 'alert' {'established': False}",
+          "12:59:05.678290 - SPEECH OUTPUT: 'Покинуть страницу?' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:59:05.678328 - SPEECH OUTPUT: 'http://127.0.0.1:34157",
+          "12:59:05.678490 - SPEECH OUTPUT: 'Остаться' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:59:05.678519 - SPEECH OUTPUT: 'button.' {'established': False}",
+          "12:59:05.846621 - SPEECH OUTPUT: 'grouping' {'established': False}",
+          "12:59:07.165930 - SPEECH OUTPUT: 'Включить подтверждение' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'en', 'dialect': 'US', 'variant': None}}",
+          "12:59:07.166025 - SPEECH OUTPUT: 'button.' {'established': False}",
+          "12:59:07.350248 - SPEECH OUTPUT: 'Browse mode' {'established': False}",
+          "12:59:07.396408 - SPEECH OUTPUT: 'left alt' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:59:07.730302 - SPEECH OUTPUT: 'alert' {'established': False}",
+          "12:59:07.730374 - SPEECH OUTPUT: 'Покинуть страницу?' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:59:07.730450 - SPEECH OUTPUT: 'http://127.0.0.1:34157",
+          "12:59:07.730687 - SPEECH OUTPUT: 'Остаться' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:59:07.730731 - SPEECH OUTPUT: 'button.' {'established': False}",
+          "12:59:07.974210 - SPEECH OUTPUT: 'Alcove popup fixture' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:59:08.092543 - SPEECH OUTPUT: 'grouping' {'established': False}",
+          "12:59:09.260044 - SPEECH OUTPUT: 'Проверить закрытие окна' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'en', 'dialect': 'US', 'variant': None}}",
+          "12:59:09.260099 - SPEECH OUTPUT: 'button.' {'established': False}",
+          "12:59:09.407447 - SPEECH OUTPUT: 'Browse mode' {'established': False}",
+          "12:59:24.270152 - SPEECH OUTPUT: 'Меню' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:59:24.270204 - SPEECH OUTPUT: 'toggle button not pressed.' {'established': False}",
+          "12:59:24.270244 - SPEECH OUTPUT: 'opens popup' {'established': False}",
+          "12:59:26.061933 - SPEECH OUTPUT: 'Screen reader off.' {'established': False}"
+        ]
+      },
+      "navigation": {
+        "run": "20260920-124935-wayland-1173695",
+        "scope": "full-fixture",
+        "passed": true,
+        "checks": {
+          "rendering": true,
+          "scale": true,
+          "native_accessibility_lifetime": true,
+          "native_accessibility": true,
+          "accessibility_navigation": true,
+          "unicode_commit": true,
+          "webgl": true,
+          "header_overlay": true
+        },
+        "errors": [],
+        "transport": "gpu-dmabuf",
+        "native_lifetime_warnings": [],
+        "audit": {
+          "checks": {},
+          "interactions": {
+            "text": "Привет",
+            "focus_accepted": true,
+            "focused": true,
+            "caret_accepted": true,
+            "caret_offset": 2,
+            "selection_accepted": true,
+            "selection": [
+              1,
+              4
+            ],
+            "action_names": [
+              "press",
+              "showContextMenu"
+            ],
+            "button_action_accepted": true,
+            "link_uri": "http://127.0.0.1:33311/next.html",
+            "link_target_matches": true,
+            "navigation_action_accepted": true,
+            "navigation_document_replaced": true,
+            "previous_document_defunct": true,
+            "previous_button_action_rejected": true,
+            "return_action_accepted": true,
+            "return_document_restored": true
+          },
+          "passed": true
+        }
+      },
+      "site_requests": {
+        "run": "20260920-124934-wayland-1173686",
+        "scope": "site-requests",
+        "passed": true,
+        "checks": {
+          "rendering": true,
+          "scale": true,
+          "native_accessibility_lifetime": true,
+          "site_requests": true,
+          "header_held_for_dialog": true,
+          "header_overlay": true
+        },
+        "errors": [],
+        "transport": "gpu-dmabuf",
+        "native_lifetime_warnings": [],
+        "audit": {
+          "checks": {
+            "menu_keyboard": true,
+            "menu_blocks_web_action": true,
+            "dialog_blocks_web_action": true,
+            "alert": true,
+            "confirm_deny": true,
+            "confirm_allow": true,
+            "prompt": true,
+            "notification_deny": true,
+            "geolocation_allow": true,
+            "microphone_allow": true,
+            "camera_deny": true,
+            "file_portal_open": true,
+            "file_portal_cancel": true,
+            "download_portal_save": true,
+            "download_complete": true,
+            "multiple_downloads_permission": true,
+            "download_portal_cancel": true,
+            "download_ui_cancel": true,
+            "before_unload_cancel": true,
+            "before_unload_accept": true,
+            "navigation_cancels_prompt": true,
+            "navigation_closes_portal": true
+          },
+          "interactions": {},
+          "passed": true
+        }
+      },
+      "orca_keyboard": {
+        "run": "20260920-125453-wayland-1191150",
+        "scope": "full-fixture",
+        "passed": true,
+        "checks": {
+          "rendering": true,
+          "scale": true,
+          "native_accessibility_lifetime": true,
+          "native_accessibility": true,
+          "orca_document_and_input": true,
+          "orca_keyboard_button": true,
+          "unicode_commit": true,
+          "webgl": true,
+          "header_overlay": true
+        },
+        "errors": [],
+        "transport": "gpu-dmabuf",
+        "native_lifetime_warnings": [],
+        "audit": {
+          "checks": {},
+          "interactions": {
+            "text": "Привет",
+            "focus_accepted": true,
+            "focused": true,
+            "caret_accepted": true,
+            "caret_offset": 2,
+            "selection_accepted": true,
+            "selection": [
+              1,
+              4
+            ],
+            "action_names": [
+              "press",
+              "showContextMenu"
+            ],
+            "button_action_accepted": true,
+            "link_uri": "http://127.0.0.1:41039/next.html",
+            "link_target_matches": true
+          },
+          "passed": true
+        },
+        "orca_speech": [
+          "12:54:55.211359 - SPEECH OUTPUT: 'Screen reader on.' {'established': False}",
+          "12:54:55.697657 - SPEECH OUTPUT: 'left shift' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:54:55.796577 - SPEECH OUTPUT: 'Chromium внутри GTK' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:54:55.904244 - SPEECH OUTPUT: 'grouping' {'established': False}",
+          "12:54:57.086592 - SPEECH OUTPUT: 'Содержимое сайта' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:54:57.086881 - SPEECH OUTPUT: 'Chromium внутри GTK' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'ru', 'dialect': '', 'variant': None}}",
+          "12:54:57.086941 - SPEECH OUTPUT: 'document web' {'established': False}",
+          "12:54:57.171483 - SPEECH OUTPUT: 'Browse mode' {'established': False}",
+          "12:55:00.293061 - SPEECH OUTPUT: 'main content' {'established': False}",
+          "12:55:00.293402 - SPEECH OUTPUT: 'Проверка ввода' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'ru', 'dialect': '', 'variant': None}}",
+          "12:55:00.293671 - SPEECH OUTPUT: 'entry' {'established': False}",
+          "12:55:00.293751 - SPEECH OUTPUT: 'Привет.' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'ru', 'dialect': '', 'variant': None}}",
+          "12:55:00.475216 - SPEECH OUTPUT: 'Focus mode' {'established': False}",
+          "12:55:05.353836 - SPEECH OUTPUT: 'Проверить нажатие' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'ru', 'dialect': '', 'variant': None}}",
+          "12:55:05.353939 - SPEECH OUTPUT: 'button.' {'established': False}",
+          "12:55:05.712114 - SPEECH OUTPUT: 'Browse mode' {'established': False}",
+          "12:55:06.679873 - SPEECH OUTPUT: 'left shift' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:55:09.197731 - SPEECH OUTPUT: 'tab' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:55:10.910035 - SPEECH OUTPUT: 'Проверить нажатие' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'ru', 'dialect': '', 'variant': None}}",
+          "12:55:10.910120 - SPEECH OUTPUT: 'button.' {'established': False}",
+          "12:55:12.199230 - SPEECH OUTPUT: 'return' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:55:20.968108 - SPEECH OUTPUT: 'leaving main content.' {'established': False}",
+          "12:55:20.968250 - SPEECH OUTPUT: 'Меню' {'established': False, 'family': {'name': '', 'gender': None, 'lang': 'C', 'dialect': '', 'variant': None}}",
+          "12:55:20.968282 - SPEECH OUTPUT: 'toggle button not pressed.' {'established': False}",
+          "12:55:20.968314 - SPEECH OUTPUT: 'opens popup' {'established': False}"
+        ]
+      },
+      "xvfb_surface": {
+        "run": "20260920-124617-x11-1165391",
+        "scope": "surface-only",
+        "passed": true,
+        "checks": {
+          "rendering": true,
+          "scale": true,
+          "header_overlay": true
+        },
+        "errors": [],
+        "transport": "cpu-diagnostic",
+        "native_lifetime_warnings": []
+      }
+    },
+    "code_checks": {
+      "worker_build": "passed",
+      "probe_tests": 5,
+      "probe_clippy_deny_warnings": "passed",
+      "rustfmt_edition_2021": "passed",
+      "python_syntax": "passed"
+    },
+    "remaining": [
+      "in-page PET_POPUP surfaces",
+      "extended AX interfaces and workflows",
+      "Russian layout, IME and clipboard",
+      "notifications and desktop capture portal",
+      "Electron media/performance comparison and GPU stress",
+      "crash recovery",
+      "Flatpak sandbox",
+      "common production adapters/add-on contract and manager redesign"
+    ]
+  },
+  "popup_surfaces_and_real_sites_iteration": {
+    "protocol": 3,
+    "surfaces_capability": 1,
+    "native_atspi_capability": 3,
+    "production_ready": false,
+    "runs": {
+      "dropdown_gpu_100": {
+        "directory": "20260920-132742-wayland-1256939",
+        "report": {
+          "protocol": 3,
+          "transport": "gpu-dmabuf",
+          "backend": "GdkWaylandDisplay",
+          "scale_factor": 1,
+          "size": [
+            800,
+            640
+          ],
+          "frame_size": [
+            800,
+            640
+          ],
+          "cpu_frames": 0,
+          "gpu_presented": 18,
+          "errors": [],
+          "diagnostic_scope": "dropdowns",
+          "diagnostic_checks": {
+            "rendering": true,
+            "scale": true,
+            "native_accessibility_lifetime": true,
+            "dropdowns": true,
+            "popup_surfaces": true,
+            "header_overlay": true
+          },
+          "diagnostic_passed": true,
+          "native_accessibility_lifetime_warnings": [],
+          "popup_surface": {
+            "generation": 12,
+            "observations": [
+              {
+                "generation": 1,
+                "rect": [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "visible": true
+              },
+              {
+                "generation": 2,
+                "rect": [
+                  280,
+                  344,
+                  240,
+                  110
+                ],
+                "visible": true
+              },
+              {
+                "painted": 2,
+                "pixels": [
+                  240,
+                  110
+                ],
+                "rect": [
+                  280,
+                  344,
+                  240,
+                  110
+                ],
+                "scale": 1
+              },
+              {
+                "generation": 3,
+                "rect": [
+                  280,
+                  344,
+                  240,
+                  110
+                ],
+                "visible": false
+              },
+              {
+                "generation": 4,
+                "rect": [
+                  280,
+                  344,
+                  240,
+                  110
+                ],
+                "visible": true
+              },
+              {
+                "generation": 5,
+                "rect": [
+                  280,
+                  344,
+                  240,
+                  110
+                ],
+                "visible": true
+              },
+              {
+                "painted": 5,
+                "pixels": [
+                  240,
+                  110
+                ],
+                "rect": [
+                  280,
+                  344,
+                  240,
+                  110
+                ],
+                "scale": 1
+              },
+              {
+                "generation": 6,
+                "rect": [
+                  280,
+                  344,
+                  240,
+                  110
+                ],
+                "visible": false
+              },
+              {
+                "generation": 7,
+                "rect": [
+                  280,
+                  344,
+                  240,
+                  110
+                ],
+                "visible": true
+              },
+              {
+                "generation": 8,
+                "rect": [
+                  544,
+                  466,
+                  240,
+                  110
+                ],
+                "visible": true
+              },
+              {
+                "painted": 8,
+                "pixels": [
+                  240,
+                  110
+                ],
+                "rect": [
+                  544,
+                  466,
+                  240,
+                  110
+                ],
+                "scale": 1
+              },
+              {
+                "generation": 9,
+                "rect": [
+                  544,
+                  466,
+                  240,
+                  110
+                ],
+                "visible": false
+              },
+              {
+                "generation": 10,
+                "rect": [
+                  544,
+                  466,
+                  240,
+                  110
+                ],
+                "visible": true
+              },
+              {
+                "generation": 11,
+                "rect": [
+                  544,
+                  466,
+                  240,
+                  110
+                ],
+                "visible": true
+              },
+              {
+                "painted": 11,
+                "pixels": [
+                  240,
+                  110
+                ],
+                "rect": [
+                  544,
+                  466,
+                  240,
+                  110
+                ],
+                "scale": 1
+              },
+              {
+                "generation": 12,
+                "rect": [
+                  544,
+                  466,
+                  240,
+                  110
+                ],
+                "visible": false
+              }
+            ],
+            "presented": 7,
+            "visible": false
+          }
+        },
+        "audit": {
+          "checks": {
+            "select_accessible": true,
+            "pointer_opens_rendered_popup": true,
+            "keyboard_selection": true,
+            "reopen_new_generation": true,
+            "pointer_selection": true,
+            "edge_popup_inside_viewport": true,
+            "escape_preserves_selection": true,
+            "native_option_action": true,
+            "native_action_escape_preserves_selection": true,
+            "page_size_unchanged": true,
+            "native_option_names": true
+          },
+          "passed": true,
+          "native_action_kept_menu_open": true
+        }
+      },
+      "dropdown_gpu_200": {
+        "directory": "20260920-133218-wayland-1269869",
+        "report": {
+          "protocol": 3,
+          "transport": "gpu-dmabuf",
+          "backend": "GdkWaylandDisplay",
+          "scale_factor": 2,
+          "size": [
+            800,
+            640
+          ],
+          "frame_size": [
+            1600,
+            1280
+          ],
+          "cpu_frames": 0,
+          "gpu_presented": 16,
+          "errors": [],
+          "diagnostic_scope": "dropdowns",
+          "diagnostic_checks": {
+            "rendering": true,
+            "scale": true,
+            "native_accessibility_lifetime": true,
+            "dropdowns": true,
+            "popup_surfaces": true,
+            "header_overlay": true
+          },
+          "diagnostic_passed": true,
+          "native_accessibility_lifetime_warnings": [],
+          "popup_surface": {
+            "generation": 12,
+            "observations": [
+              {
+                "generation": 1,
+                "rect": [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "visible": true
+              },
+              {
+                "generation": 2,
+                "rect": [
+                  280,
+                  344,
+                  240,
+                  108
+                ],
+                "visible": true
+              },
+              {
+                "painted": 2,
+                "pixels": [
+                  480,
+                  216
+                ],
+                "rect": [
+                  280,
+                  344,
+                  240,
+                  108
+                ],
+                "scale": 2
+              },
+              {
+                "generation": 3,
+                "rect": [
+                  280,
+                  344,
+                  240,
+                  108
+                ],
+                "visible": false
+              },
+              {
+                "generation": 4,
+                "rect": [
+                  280,
+                  344,
+                  240,
+                  108
+                ],
+                "visible": true
+              },
+              {
+                "generation": 5,
+                "rect": [
+                  280,
+                  344,
+                  240,
+                  108
+                ],
+                "visible": true
+              },
+              {
+                "painted": 5,
+                "pixels": [
+                  480,
+                  216
+                ],
+                "rect": [
+                  280,
+                  344,
+                  240,
+                  108
+                ],
+                "scale": 2
+              },
+              {
+                "generation": 6,
+                "rect": [
+                  280,
+                  344,
+                  240,
+                  108
+                ],
+                "visible": false
+              },
+              {
+                "generation": 7,
+                "rect": [
+                  280,
+                  344,
+                  240,
+                  108
+                ],
+                "visible": true
+              },
+              {
+                "generation": 8,
+                "rect": [
+                  544,
+                  468,
+                  240,
+                  108
+                ],
+                "visible": true
+              },
+              {
+                "painted": 8,
+                "pixels": [
+                  480,
+                  216
+                ],
+                "rect": [
+                  544,
+                  468,
+                  240,
+                  108
+                ],
+                "scale": 2
+              },
+              {
+                "generation": 9,
+                "rect": [
+                  544,
+                  468,
+                  240,
+                  108
+                ],
+                "visible": false
+              },
+              {
+                "generation": 10,
+                "rect": [
+                  544,
+                  468,
+                  240,
+                  108
+                ],
+                "visible": true
+              },
+              {
+                "generation": 11,
+                "rect": [
+                  544,
+                  468,
+                  240,
+                  108
+                ],
+                "visible": true
+              },
+              {
+                "painted": 11,
+                "pixels": [
+                  480,
+                  216
+                ],
+                "rect": [
+                  544,
+                  468,
+                  240,
+                  108
+                ],
+                "scale": 2
+              },
+              {
+                "generation": 12,
+                "rect": [
+                  544,
+                  468,
+                  240,
+                  108
+                ],
+                "visible": false
+              }
+            ],
+            "presented": 6,
+            "visible": false
+          }
+        },
+        "audit": {
+          "checks": {
+            "select_accessible": true,
+            "pointer_opens_rendered_popup": true,
+            "keyboard_selection": true,
+            "reopen_new_generation": true,
+            "pointer_selection": true,
+            "edge_popup_inside_viewport": true,
+            "escape_preserves_selection": true,
+            "native_option_action": true,
+            "native_action_escape_preserves_selection": true,
+            "page_size_unchanged": true,
+            "native_option_names": true
+          },
+          "passed": true,
+          "native_action_kept_menu_open": true
+        }
+      },
+      "dropdown_cpu_200": {
+        "directory": "20260920-133219-wayland-1269874",
+        "report": {
+          "protocol": 3,
+          "transport": "cpu-diagnostic",
+          "backend": "GdkWaylandDisplay",
+          "scale_factor": 2,
+          "size": [
+            800,
+            640
+          ],
+          "frame_size": [
+            1600,
+            1280
+          ],
+          "cpu_frames": 16,
+          "gpu_presented": 0,
+          "errors": [],
+          "diagnostic_scope": "dropdowns",
+          "diagnostic_checks": {
+            "rendering": true,
+            "scale": true,
+            "native_accessibility_lifetime": true,
+            "dropdowns": true,
+            "popup_surfaces": true,
+            "header_overlay": true
+          },
+          "diagnostic_passed": true,
+          "native_accessibility_lifetime_warnings": [],
+          "popup_surface": {
+            "generation": 12,
+            "observations": [
+              {
+                "generation": 1,
+                "rect": [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "visible": true
+              },
+              {
+                "generation": 2,
+                "rect": [
+                  280,
+                  344,
+                  240,
+                  108
+                ],
+                "visible": true
+              },
+              {
+                "painted": 2,
+                "pixels": [
+                  480,
+                  216
+                ],
+                "rect": [
+                  280,
+                  344,
+                  240,
+                  108
+                ],
+                "scale": 2
+              },
+              {
+                "generation": 3,
+                "rect": [
+                  280,
+                  344,
+                  240,
+                  108
+                ],
+                "visible": false
+              },
+              {
+                "generation": 4,
+                "rect": [
+                  280,
+                  344,
+                  240,
+                  108
+                ],
+                "visible": true
+              },
+              {
+                "generation": 5,
+                "rect": [
+                  280,
+                  344,
+                  240,
+                  108
+                ],
+                "visible": true
+              },
+              {
+                "painted": 5,
+                "pixels": [
+                  480,
+                  216
+                ],
+                "rect": [
+                  280,
+                  344,
+                  240,
+                  108
+                ],
+                "scale": 2
+              },
+              {
+                "generation": 6,
+                "rect": [
+                  280,
+                  344,
+                  240,
+                  108
+                ],
+                "visible": false
+              },
+              {
+                "generation": 7,
+                "rect": [
+                  280,
+                  344,
+                  240,
+                  108
+                ],
+                "visible": true
+              },
+              {
+                "generation": 8,
+                "rect": [
+                  544,
+                  468,
+                  240,
+                  108
+                ],
+                "visible": true
+              },
+              {
+                "painted": 8,
+                "pixels": [
+                  480,
+                  216
+                ],
+                "rect": [
+                  544,
+                  468,
+                  240,
+                  108
+                ],
+                "scale": 2
+              },
+              {
+                "generation": 9,
+                "rect": [
+                  544,
+                  468,
+                  240,
+                  108
+                ],
+                "visible": false
+              },
+              {
+                "generation": 10,
+                "rect": [
+                  544,
+                  468,
+                  240,
+                  108
+                ],
+                "visible": true
+              },
+              {
+                "generation": 11,
+                "rect": [
+                  544,
+                  468,
+                  240,
+                  108
+                ],
+                "visible": true
+              },
+              {
+                "painted": 11,
+                "pixels": [
+                  480,
+                  216
+                ],
+                "rect": [
+                  544,
+                  468,
+                  240,
+                  108
+                ],
+                "scale": 2
+              },
+              {
+                "generation": 12,
+                "rect": [
+                  544,
+                  468,
+                  240,
+                  108
+                ],
+                "visible": false
+              }
+            ],
+            "presented": 7,
+            "visible": false
+          }
+        },
+        "audit": {
+          "checks": {
+            "select_accessible": true,
+            "pointer_opens_rendered_popup": true,
+            "keyboard_selection": true,
+            "reopen_new_generation": true,
+            "pointer_selection": true,
+            "edge_popup_inside_viewport": true,
+            "escape_preserves_selection": true,
+            "native_option_action": true,
+            "native_action_escape_preserves_selection": true,
+            "page_size_unchanged": true,
+            "native_option_names": true
+          },
+          "passed": true,
+          "native_action_kept_menu_open": true
+        }
+      },
+      "native_windows_orca": {
+        "directory": "20260920-133219-wayland-1269877",
+        "report": {
+          "protocol": 3,
+          "transport": "gpu-dmabuf",
+          "backend": "GdkWaylandDisplay",
+          "scale_factor": 1,
+          "size": [
+            800,
+            640
+          ],
+          "frame_size": [
+            800,
+            640
+          ],
+          "cpu_frames": 0,
+          "gpu_presented": 9,
+          "errors": [],
+          "diagnostic_scope": "multi-window-native-accessibility",
+          "diagnostic_checks": {
+            "rendering": true,
+            "scale": true,
+            "native_accessibility_lifetime": true,
+            "orca_multiple_windows": true,
+            "independent_native_accessibility_windows": true,
+            "header_overlay": true
+          },
+          "diagnostic_passed": true,
+          "native_accessibility_lifetime_warnings": [],
+          "popup_surface": {
+            "generation": 0,
+            "observations": [],
+            "presented": 0,
+            "visible": false
+          }
+        },
+        "audit": {
+          "checks": {
+            "identical_titles_distinct_objects": true,
+            "same_document_uri": true,
+            "separate_gtk_windows": true,
+            "native_window_titles": true,
+            "child_action_routing": true,
+            "inactive_parent_action_blocked": true,
+            "child_text_selection": true,
+            "parent_text_untouched": true,
+            "iframe_action_routing": true,
+            "only_child_document_retired": true,
+            "retired_child_action_rejected": true,
+            "restored_action_routing": true,
+            "closed_child_defunct": true,
+            "parent_survives_child_close": true,
+            "no_binding_errors": true
+          },
+          "passed": true
+        }
+      },
+      "xvfb": {
+        "directory": "20260920-133345-x11-1274785",
+        "report": {
+          "protocol": 3,
+          "transport": "cpu-diagnostic",
+          "backend": "GdkX11Display",
+          "scale_factor": 1,
+          "size": [
+            790,
+            630
+          ],
+          "frame_size": [
+            790,
+            630
+          ],
+          "cpu_frames": 689,
+          "gpu_presented": 0,
+          "errors": [],
+          "diagnostic_scope": "surface-only",
+          "diagnostic_checks": {
+            "rendering": true,
+            "scale": true,
+            "header_overlay": true
+          },
+          "diagnostic_passed": true,
+          "popup_surface": {
+            "generation": 0,
+            "observations": [],
+            "presented": 0,
+            "visible": false
+          }
+        }
+      },
+      "wikipedia": {
+        "directory": "20260920-133343-wayland-1274167",
+        "report": {
+          "protocol": 3,
+          "transport": "gpu-dmabuf",
+          "backend": "GdkWaylandDisplay",
+          "scale_factor": 1,
+          "size": [
+            800,
+            640
+          ],
+          "frame_size": [
+            800,
+            640
+          ],
+          "cpu_frames": 0,
+          "gpu_presented": 91,
+          "errors": [],
+          "diagnostic_scope": "real-site",
+          "diagnostic_checks": {
+            "rendering": true,
+            "scale": true,
+            "native_accessibility_lifetime": true,
+            "real_site": true,
+            "header_overlay": true
+          },
+          "diagnostic_passed": true,
+          "native_accessibility_lifetime_warnings": [],
+          "popup_surface": {
+            "generation": 0,
+            "observations": [],
+            "presented": 0,
+            "visible": false
+          }
+        },
+        "audit": {
+          "url": "https://www.wikipedia.org/",
+          "scenario": "wikipedia",
+          "checks": {
+            "https_site_loaded": true,
+            "site_document_in_gtk": true,
+            "semantic_site_content": true,
+            "keyboard_search_text": true,
+            "search_navigated": true,
+            "keyboard_scroll": true,
+            "native_back": true,
+            "no_main_load_error": true
+          },
+          "passed": true
+        }
+      },
+      "gnome_hig": {
+        "directory": "20260920-132408-wayland-1246371",
+        "report": {
+          "protocol": 3,
+          "transport": "gpu-dmabuf",
+          "backend": "GdkWaylandDisplay",
+          "scale_factor": 1,
+          "size": [
+            800,
+            640
+          ],
+          "frame_size": [
+            800,
+            640
+          ],
+          "cpu_frames": 0,
+          "gpu_presented": 16,
+          "errors": [],
+          "diagnostic_scope": "real-site",
+          "diagnostic_checks": {
+            "rendering": true,
+            "scale": true,
+            "native_accessibility_lifetime": true,
+            "real_site": true,
+            "header_overlay": true
+          },
+          "diagnostic_passed": true,
+          "native_accessibility_lifetime_warnings": [],
+          "popup_surface": {
+            "generation": 0,
+            "observations": [],
+            "presented": 0,
+            "visible": false
+          }
+        },
+        "audit": {
+          "url": "https://developer.gnome.org/hig/",
+          "scenario": "gnome",
+          "checks": {
+            "https_site_loaded": true,
+            "site_document_in_gtk": true,
+            "semantic_site_content": true,
+            "link_navigation": true,
+            "keyboard_scroll": true,
+            "native_back": true,
+            "no_main_load_error": true
+          },
+          "passed": true
+        }
+      },
+      "mdn_video": {
+        "directory": "20260920-132408-wayland-1246384",
+        "report": {
+          "protocol": 3,
+          "transport": "gpu-dmabuf",
+          "backend": "GdkWaylandDisplay",
+          "scale_factor": 1,
+          "size": [
+            800,
+            640
+          ],
+          "frame_size": [
+            800,
+            640
+          ],
+          "cpu_frames": 0,
+          "gpu_presented": 193,
+          "errors": [],
+          "diagnostic_scope": "real-site",
+          "diagnostic_checks": {
+            "rendering": true,
+            "scale": true,
+            "native_accessibility_lifetime": true,
+            "real_site": true,
+            "header_overlay": true
+          },
+          "diagnostic_passed": true,
+          "native_accessibility_lifetime_warnings": [],
+          "popup_surface": {
+            "generation": 0,
+            "observations": [],
+            "presented": 0,
+            "visible": false
+          }
+        },
+        "audit": {
+          "url": "https://interactive-examples.mdn.mozilla.net/pages/tabbed/video.html",
+          "scenario": "video",
+          "checks": {
+            "https_site_loaded": true,
+            "site_document_in_gtk": true,
+            "semantic_site_content": true,
+            "video_frames_advance": true,
+            "no_main_load_error": true
+          },
+          "passed": true
+        }
+      },
+      "khronos_webgl": {
+        "directory": "20260920-132829-wayland-1259429",
+        "report": {
+          "protocol": 3,
+          "transport": "gpu-dmabuf",
+          "backend": "GdkWaylandDisplay",
+          "scale_factor": 1,
+          "size": [
+            800,
+            640
+          ],
+          "frame_size": [
+            800,
+            640
+          ],
+          "cpu_frames": 0,
+          "gpu_presented": 1026,
+          "errors": [],
+          "diagnostic_scope": "real-site",
+          "diagnostic_checks": {
+            "rendering": true,
+            "scale": true,
+            "native_accessibility_lifetime": true,
+            "real_site": true,
+            "header_overlay": true
+          },
+          "diagnostic_passed": true,
+          "native_accessibility_lifetime_warnings": [],
+          "popup_surface": {
+            "generation": 0,
+            "observations": [],
+            "presented": 0,
+            "visible": false
+          }
+        },
+        "audit": {
+          "url": "https://get.webgl.org/",
+          "scenario": "webgl",
+          "checks": {
+            "https_site_loaded": true,
+            "site_document_in_gtk": true,
+            "semantic_site_content": true,
+            "webgl_site_reports_support": true,
+            "visible_canvas": true,
+            "no_main_load_error": true
+          },
+          "passed": true
+        }
+      },
+      "site_requests": {
+        "directory": "20260920-133529-wayland-1282748",
+        "report": {
+          "protocol": 3,
+          "transport": "gpu-dmabuf",
+          "backend": "GdkWaylandDisplay",
+          "scale_factor": 1,
+          "size": [
+            800,
+            640
+          ],
+          "frame_size": [
+            800,
+            640
+          ],
+          "errors": [],
+          "diagnostic_scope": "site-requests",
+          "diagnostic_checks": {
+            "rendering": true,
+            "scale": true,
+            "native_accessibility_lifetime": true,
+            "site_requests": true,
+            "header_held_for_dialog": true,
+            "header_overlay": true
+          },
+          "diagnostic_passed": true,
+          "native_accessibility_lifetime_warnings": []
+        },
+        "audit": {
+          "checks": {
+            "menu_keyboard": true,
+            "menu_blocks_web_action": true,
+            "dialog_blocks_web_action": true,
+            "alert": true,
+            "confirm_deny": true,
+            "confirm_allow": true,
+            "prompt": true,
+            "notification_deny": true,
+            "geolocation_allow": true,
+            "microphone_allow": true,
+            "camera_deny": true,
+            "file_portal_open": true,
+            "file_portal_cancel": true,
+            "download_portal_save": true,
+            "download_complete": true,
+            "multiple_downloads_permission": true,
+            "download_portal_cancel": true,
+            "download_ui_cancel": true,
+            "before_unload_cancel": true,
+            "before_unload_accept": true,
+            "navigation_cancels_prompt": true,
+            "navigation_closes_portal": true
+          },
+          "passed": true
+        }
+      }
+    },
+    "wikipedia_max_serialized_tree_bytes": 6593023,
+    "wikipedia_max_control_record_bytes": 2036,
+    "webgl_animation_comparison": {
+      "changed_pixels": 3503,
+      "bounds": [
+        343,
+        222,
+        464,
+        357
+      ],
+      "images": [
+        "site-12.png",
+        "site-18.png"
+      ]
+    },
+    "scale_workaround": "Wayland CEF worker disables WaylandFractionalScaleV1; GTK owns actual surface and supplies scale. Fractional-monitor acceptance remains open.",
+    "code_checks": {
+      "probe_unit_tests": 6,
+      "clippy_warnings_denied": true,
+      "rustfmt_edition2021": true,
+      "python_syntax": true
+    }
+  },
+  "shared_webview_shell_iteration": {
+    "component": "src/ui/shell/web_app_shell.rs",
+    "worker_capability": "shell_actions: 1",
+    "production_ready": false,
+    "runs": {
+      "wikipedia": {
+        "directory": "20260920-135429-wayland-1319442",
+        "report": {
+          "diagnostic_passed": true,
+          "diagnostic_checks": {
+            "rendering": true,
+            "scale": true,
+            "native_accessibility_lifetime": true,
+            "real_site": true,
+            "header_overlay": true
+          },
+          "backend": "GdkWaylandDisplay",
+          "transport": "gpu-dmabuf",
+          "errors": [],
+          "size": [
+            800,
+            640
+          ],
+          "frame_size": [
+            800,
+            640
+          ],
+          "autohide_observed": true,
+          "overlay_preserved_viewport": true,
+          "native_accessibility_lifetime_warnings": []
+        },
+        "audit": {
+          "passed": true,
+          "checks": {
+            "https_site_loaded": true,
+            "site_document_in_gtk": true,
+            "semantic_site_content": true,
+            "keyboard_search_text": true,
+            "search_navigated": true,
+            "keyboard_scroll": true,
+            "native_back": true,
+            "no_main_load_error": true
+          }
+        }
+      },
+      "shared_menu": {
+        "directory": "20260920-141230-wayland-1384044",
+        "report": {
+          "diagnostic_passed": true,
+          "diagnostic_checks": {
+            "rendering": true,
+            "scale": true,
+            "native_accessibility_lifetime": true,
+            "real_site": true,
+            "header_overlay": true
+          },
+          "backend": "GdkWaylandDisplay",
+          "transport": "gpu-dmabuf",
+          "errors": [],
+          "size": [
+            800,
+            640
+          ],
+          "frame_size": [
+            800,
+            640
+          ],
+          "autohide_observed": true,
+          "overlay_preserved_viewport": true,
+          "native_accessibility_lifetime_warnings": []
+        },
+        "audit": {
+          "passed": true,
+          "checks": {
+            "https_site_loaded": true,
+            "site_document_in_gtk": true,
+            "semantic_site_content": true,
+            "native_zoom": true,
+            "native_zoom_reset": true,
+            "link_navigation": true,
+            "keyboard_scroll": true,
+            "native_back": true,
+            "native_forward": true,
+            "native_zoom_after_history": true,
+            "native_home": true,
+            "native_reload_without_cache": true,
+            "no_main_load_error": true
+          }
+        }
+      },
+      "native_requests": {
+        "directory": "20260920-135730-wayland-1325402",
+        "report": {
+          "diagnostic_passed": true,
+          "diagnostic_checks": {
+            "rendering": true,
+            "scale": true,
+            "native_accessibility_lifetime": true,
+            "site_requests": true,
+            "header_held_for_dialog": true,
+            "header_overlay": true
+          },
+          "backend": "GdkWaylandDisplay",
+          "transport": "gpu-dmabuf",
+          "errors": [],
+          "size": [
+            800,
+            640
+          ],
+          "frame_size": [
+            800,
+            640
+          ],
+          "autohide_observed": true,
+          "overlay_preserved_viewport": true,
+          "native_accessibility_lifetime_warnings": []
+        },
+        "audit": {
+          "passed": true,
+          "checks": {
+            "menu_keyboard": true,
+            "menu_blocks_web_action": true,
+            "dialog_blocks_web_action": true,
+            "alert": true,
+            "confirm_deny": true,
+            "confirm_allow": true,
+            "prompt": true,
+            "notification_deny": true,
+            "geolocation_allow": true,
+            "microphone_allow": true,
+            "camera_deny": true,
+            "file_portal_open": true,
+            "file_portal_cancel": true,
+            "download_portal_save": true,
+            "download_complete": true,
+            "multiple_downloads_permission": true,
+            "download_portal_cancel": true,
+            "download_ui_cancel": true,
+            "before_unload_cancel": true,
+            "before_unload_accept": true,
+            "navigation_cancels_prompt": true,
+            "navigation_closes_portal": true
+          }
+        }
+      },
+      "xvfb": {
+        "directory": "20260920-141403-x11-1386977",
+        "report": {
+          "diagnostic_passed": true,
+          "diagnostic_checks": {
+            "rendering": true,
+            "scale": true,
+            "header_overlay": true
+          },
+          "backend": "GdkX11Display",
+          "transport": "cpu-diagnostic",
+          "errors": [],
+          "size": [
+            790,
+            630
+          ],
+          "frame_size": [
+            790,
+            630
+          ],
+          "autohide_observed": true,
+          "overlay_preserved_viewport": true
+        }
+      }
+    }
+  },
+  "ordinary_app_launch_iteration": {
+    "date": "2026-09-20",
+    "status": "experimental opt-in; default Electron preserved",
+    "launch_run": "20260920-144447-launch",
+    "launch_checks": {
+      "configured_user_agent": true,
+      "site_interaction": true,
+      "keyboard_reload_from_site": true,
+      "relaunch_presents_existing_window": true,
+      "no_probe_recording": true,
+      "graceful_close_and_ipc_cleanup": true,
+      "separate_cef_profile": true,
+      "storage_survives_restart": true,
+      "apps_have_independent_storage": true,
+      "network_failure_native_retry": true,
+      "renderer_crash_native_retry": true,
+      "worker_crash_native_error": true,
+      "reopen_after_worker_crash": true,
+      "real_site_in_ordinary_app": true,
+      "native_wayland": true
+    },
+    "gnome_regression": {
+      "run": "20260920-144045-wayland-1424094",
+      "passed": true,
+      "checks": {
+        "https_site_loaded": true,
+        "site_document_in_gtk": true,
+        "semantic_site_content": true,
+        "native_zoom": true,
+        "native_zoom_reset": true,
+        "link_navigation": true,
+        "keyboard_scroll": true,
+        "native_back": true,
+        "native_forward": true,
+        "native_zoom_after_history": true,
+        "native_home": true,
+        "native_reload_without_cache": true,
+        "no_main_load_error": true
+      }
+    },
+    "xvfb_regression": {
+      "run": "20260920-144045-x11-1424119",
+      "passed": true,
+      "scope": "CPU surface only"
+    },
+    "code_checks": {
+      "library_tests": 7,
+      "application_tests": 104,
+      "meson_checks": 4,
+      "clippy": "all targets, warnings denied"
+    },
+    "remaining": [
+      "non-default policy mapping",
+      "theme-color preference",
+      "notification delivery",
+      "in-place worker restart",
+      "add-on installation and backup integration",
+      "Flatpak deployment"
+    ],
+    "production_ready": false
+  },
+  "native_policy_iteration": {
+    "date": "2026-09-20",
+    "worker_protocol": 4,
+    "worker_capability": "policy_ui: 1",
+    "policy_run": "20260920-151849-policy",
+    "policy_checks": {
+      "always_allow_saved_in_alcove": true,
+      "saved_permissions_visible_to_site_on_startup": true,
+      "saved_block_overrides_previous_allow": true,
+      "session_permission_expires_on_restart": true,
+      "not_now_can_prompt_again_and_block_is_saved": true,
+      "configured_proxy_routes_requests": true,
+      "navigation_blocked_before_network": true,
+      "redirect_requires_decision": true,
+      "navigation_preserves_post": true,
+      "popup_obeys_same_navigation_policy": true,
+      "navigation_allowlist_saved": true,
+      "saved_navigation_allowlist_applies_on_restart": true
+    },
+    "ordinary_launch_regression": {
+      "run": "20260920-151450-launch",
+      "checks": {
+        "configured_user_agent": true,
+        "site_interaction": true,
+        "keyboard_reload_from_site": true,
+        "relaunch_presents_existing_window": true,
+        "no_probe_recording": true,
+        "graceful_close_and_ipc_cleanup": true,
+        "separate_cef_profile": true,
+        "storage_survives_restart": true,
+        "apps_have_independent_storage": true,
+        "network_failure_native_retry": true,
+        "renderer_crash_native_retry": true,
+        "worker_crash_native_error": true,
+        "reopen_after_worker_crash": true,
+        "real_site_in_ordinary_app": true,
+        "native_wayland": true
+      }
+    },
+    "site_requests_regression": {
+      "run": "20260920-151748-wayland-1543842",
+      "checks": {
+        "menu_keyboard": true,
+        "menu_blocks_web_action": true,
+        "dialog_blocks_web_action": true,
+        "alert": true,
+        "confirm_deny": true,
+        "confirm_allow": true,
+        "prompt": true,
+        "notification_deny": true,
+        "geolocation_allow": true,
+        "microphone_allow": true,
+        "camera_deny": true,
+        "file_portal_open": true,
+        "file_portal_cancel": true,
+        "download_portal_save": true,
+        "download_complete": true,
+        "download_portal_cancel": true,
+        "download_ui_cancel": true,
+        "before_unload_cancel": true,
+        "before_unload_accept": true,
+        "navigation_cancels_prompt": true,
+        "navigation_dismissal_does_not_save_denial": true,
+        "navigation_closes_portal": true
+      },
+      "passed": true,
+      "diagnostic_passed": true,
+      "errors": []
+    },
+    "xvfb_regression": {
+      "run": "20260920-151451-x11-1533268",
+      "scope": "CPU surface only",
+      "passed": true
+    },
+    "code_checks": {
+      "library_tests": 27,
+      "application_tests": 86,
+      "meson_checks": 4,
+      "clippy": "all targets, warnings denied"
+    },
+    "fixes": [
+      "Chrome permission exceptions synchronized from Alcove before first navigation",
+      "temporary permission grants expire on restart",
+      "navigation cancels previous document dialogs before its paused resource callback",
+      "navigation cancellation dismisses permission without saving a Chrome denial"
+    ],
+    "remaining": [
+      "background lifecycle",
+      "theme-color preference",
+      "notification delivery",
+      "in-place worker restart",
+      "add-on installation and backup integration",
+      "Flatpak deployment"
+    ],
+    "production_ready": false
+  },
+  "background_lifecycle_iteration": {
+    "date": "2026-09-20",
+    "worker_capability": "window_lifecycle: 1",
+    "shared_component": "src/system/background.rs::BackgroundSession",
+    "background_run": "20260920-152924-background",
+    "background_checks": {
+      "autostart_requires_saved_authorization": true,
+      "background_launch_without_visible_window": true,
+      "native_background_notification_actions": true,
+      "relaunch_reveals_same_page": true,
+      "close_retains_site_in_background": true,
+      "notification_show_restores_same_page": true,
+      "notification_stop_exits_and_releases_profile": true,
+      "website_dialog_reveals_background_window": true,
+      "stop_confirmation_can_cancel_without_losing_site": true,
+      "menu_stop_exits_and_storage_survives_restart": true,
+      "worker_failure_reveals_error_and_releases_background_hold": true
+    },
+    "notification_scope": "Actual GNotification payload and real app actions on private bus; no GNOME Shell visual claim",
+    "ordinary_launch_regression": {
+      "run": "20260920-152846-launch",
+      "checks": {
+        "configured_user_agent": true,
+        "site_interaction": true,
+        "keyboard_reload_from_site": true,
+        "relaunch_presents_existing_window": true,
+        "no_probe_recording": true,
+        "graceful_close_and_ipc_cleanup": true,
+        "separate_cef_profile": true,
+        "storage_survives_restart": true,
+        "apps_have_independent_storage": true,
+        "network_failure_native_retry": true,
+        "renderer_crash_native_retry": true,
+        "worker_crash_native_error": true,
+        "reopen_after_worker_crash": true,
+        "real_site_in_ordinary_app": true,
+        "native_wayland": true
+      }
+    },
+    "xvfb_regression": {
+      "run": "20260920-153144-x11-1586023",
+      "passed": true,
+      "scope": "CPU surface and successful cleanup"
+    },
+    "code_checks": {
+      "library_tests": 27,
+      "application_tests": 86,
+      "meson_checks": 4,
+      "clippy": "all targets, warnings denied"
+    },
+    "remaining": [
+      "theme-color preference",
+      "website notification delivery",
+      "in-place worker restart",
+      "add-on installation and backup integration",
+      "Flatpak deployment",
+      "approved manager UI"
+    ],
+    "production_ready": false
+  }
+}

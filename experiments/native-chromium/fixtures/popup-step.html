@@ -1,0 +1,7 @@
+<!doctype html><meta charset="utf-8"><title>Alcove OAuth step</title>
+<style>body{font:20px sans-serif;padding:48px;background:#e0edff}button{font:inherit;padding:16px}</style>
+<h1>Дочернее окно</h1><button autofocus id="continue">Перейти к провайдеру входа</button>
+<script>
+console.log('ALCOVE_POPUP:'+JSON.stringify({kind:'child-session',value:{opener:!!opener,cookie:document.cookie.includes('alcove_popup_session=shared')}}));
+document.getElementById('continue').onclick=()=>{location.href='http://localhost:'+location.port+'/popup-provider.html'+location.search};
+</script>

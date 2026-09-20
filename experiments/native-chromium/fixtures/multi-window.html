@@ -1,0 +1,13 @@
+<!doctype html><html lang="ru"><meta charset="utf-8"><title>Одинаковая страница</title>
+<style>body{font:18px sans-serif;padding:60px 24px;background:#f6f5f4}button,input,a{font:inherit;margin:8px;padding:10px}label{display:block}</style>
+<h1>Одинаковая страница</h1>
+<button id="open">Открыть второе окно</button><button id="act">Действие страницы</button>
+<label>Поле страницы <input id="entry" value="Исходный текст"></label>
+<a href="multi-window-next.html">Перейти дальше</a><button id="close">Закрыть это окно</button>
+<iframe title="Вложенная страница"></iframe>
+<script>
+document.querySelector('iframe').src='http://localhost:'+location.port+'/multi-window-frame.html';
+document.getElementById("open").onclick=()=>window.open('/multi-window.html','_blank','popup,width=520,height=640');
+act.onclick=e=>console.log('ALCOVE_MULTI_ACTION:'+JSON.stringify({trusted:e.isTrusted}));
+document.getElementById("close").onclick=()=>window.close();
+</script></html>

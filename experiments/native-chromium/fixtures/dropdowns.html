@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ru"><meta charset="utf-8"><title>Списки Chromium внутри GTK</title>
+<style>
+body { margin:0; font:20px sans-serif; background:#f6f5f4; color:#241f31 }
+h1 { margin:80px 36px 24px; font-size:28px }
+button { margin:12px 36px; padding:12px; font:inherit }
+select { position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); font:24px sans-serif; width:240px; height:48px }
+output { position:fixed; left:36px; bottom:36px }
+</style>
+<h1>Отдельная поверхность выпадающего списка</h1>
+<button id="edge">Переместить список к краю</button>
+<select id="choice" aria-label="Цвет интерфейса">
+  <option value="red">Красный</option><option value="green">Зелёный</option><option value="blue">Синий</option>
+</select>
+<output id="selected">Красный</output>
+<script>
+const log=(kind,value)=>console.log('ALCOVE_SELECT:'+JSON.stringify({kind,value}));
+const geometry=()=>log('geometry',{rect:(()=>{const r=choice.getBoundingClientRect();return [r.x,r.y,r.width,r.height]})(),viewport:[innerWidth,innerHeight],scale:devicePixelRatio});
+choice.addEventListener('change',e=>{selected.textContent=choice.selectedOptions[0].textContent;log('change',{value:choice.value,trusted:e.isTrusted})});
+edge.onclick=()=>{choice.style.left='calc(100% - 16px)';choice.style.top='calc(100% - 16px)';choice.style.transform='translate(-100%,-100%)';geometry()};
+addEventListener('resize',geometry);geometry();
+</script></html>

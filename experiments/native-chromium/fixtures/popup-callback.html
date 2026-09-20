@@ -1,0 +1,7 @@
+<!doctype html><meta charset="utf-8"><title>Alcove OAuth callback</title>
+<style>body{font:20px sans-serif;padding:48px;background:#d8f3dc}</style><h1>Вход подтверждён</h1>
+<script>
+const result={state:new URLSearchParams(location.search).get('state'),code:'local-test-code',cookie:document.cookie.includes('alcove_popup_session=shared'),opener:!!opener};
+opener.postMessage(result,location.origin);
+setTimeout(()=>window.close(),1200);
+</script>

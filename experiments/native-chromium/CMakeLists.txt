@@ -1,0 +1,45 @@
+# SPDX-License-Identifier: GPL-3.0-only
+cmake_minimum_required(VERSION 3.21)
+project(alcove_cef_probe LANGUAGES C CXX)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type")
+set(CEF_ROOT "" CACHE PATH "Verified CEF binary distribution")
+list(APPEND CMAKE_MODULE_PATH "${CEF_ROOT}/cmake")
+find_package(CEF REQUIRED)
+# The Flatpak SDK supplies _FORTIFY_SOURCE=3 via -Wp. GCC processes those
+# preprocessor flags after ordinary -D/-U options, so CEF's =2 produces a
+# redefinition error. Keep the toolchain's supplied protection when present.
+if(CMAKE_CXX_FLAGS MATCHES "_FORTIFY_SOURCE")
+  list(REMOVE_ITEM CEF_COMPILER_FLAGS_RELEASE -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2)
+endif()
+find_package(nlohmann_json 3.11 REQUIRED)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GPU REQUIRED IMPORTED_TARGET egl glesv2 gbm libdrm atk atk-bridge-2.0)
+add_compile_definitions(CEF_API_VERSION=15200)
+add_subdirectory("${CEF_LIBCEF_DLL_WRAPPER_PATH}" libcef_dll_wrapper)
+ADD_LOGICAL_TARGET(libcef_lib "${CEF_LIB_DEBUG}" "${CEF_LIB_RELEASE}")
+add_executable(alcove-cef-worker worker.cc)
+target_include_directories(alcove-cef-worker PRIVATE "${CEF_ROOT}")
+target_link_libraries(alcove-cef-worker PRIVATE libcef_lib libcef_dll_wrapper nlohmann_json::nlohmann_json PkgConfig::GPU ${CEF_STANDARD_LIBS})
+set_target_properties(alcove-cef-worker PROPERTIES
+  BUILD_WITH_INSTALL_RPATH TRUE INSTALL_RPATH "$ORIGIN")
+# Keep the runtime libraries beside the executable, as required during early
+# subprocess startup. Hard links avoid another large SDK copy in build/.
+file(GLOB CEF_PROBE_LIBRARIES "${CEF_ROOT}/Release/*.so*")
+foreach(library IN LISTS CEF_PROBE_LIBRARIES)
+  get_filename_component(name "${library}" NAME)
+  if(NOT EXISTS "${CMAKE_BINARY_DIR}/${name}")
+    file(CREATE_LINK "${library}" "${CMAKE_BINARY_DIR}/${name}" COPY_ON_ERROR)
+  endif()
+endforeach()
+# Chromium initializes ICU before CefSettings resource paths are available.
+configure_file("${CEF_ROOT}/Resources/icudtl.dat" "${CMAKE_BINARY_DIR}/icudtl.dat" COPYONLY)
+configure_file("${CEF_ROOT}/Release/v8_context_snapshot.bin" "${CMAKE_BINARY_DIR}/v8_context_snapshot.bin" COPYONLY)
+file(GLOB CEF_PROBE_PACKS "${CEF_ROOT}/Resources/*.pak")
+foreach(resource IN LISTS CEF_PROBE_PACKS)
+  get_filename_component(name "${resource}" NAME)
+  configure_file("${resource}" "${CMAKE_BINARY_DIR}/${name}" COPYONLY)
+endforeach()
+if(NOT EXISTS "${CMAKE_BINARY_DIR}/locales")
+  file(CREATE_LINK "${CEF_ROOT}/Resources/locales" "${CMAKE_BINARY_DIR}/locales" SYMBOLIC)
+endif()

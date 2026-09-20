@@ -1,0 +1,28 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Alcove popup fixture</title>
+<style>body{font:20px sans-serif;padding:64px;background:#f6f5f4}button{font:inherit;padding:16px}pre{white-space:pre-wrap}</style>
+<h1>Вход через дочернее окно</h1>
+<p>Локальная проверка: два origin, cookie, opener и postMessage.</p>
+<button id="start" autofocus>Начать проверку входа</button><pre id="result"></pre>
+<script>
+let child, step=0;
+const state='alcove-local-state';
+const log=(kind,value)=>{console.log('ALCOVE_POPUP:'+JSON.stringify({kind,value}));result.textContent+=kind+': '+JSON.stringify(value)+'\n'};
+start.onclick=e=>{
+ log('trusted-open',e.isTrusted);
+ if(step++===0){
+  document.cookie='alcove_popup_session=shared; SameSite=Lax; path=/';
+  child=window.open('/popup-step.html?state='+state,'alcove-oauth','popup,width=480,height=520');
+  log('window-returned',!!child);
+ }else{
+  child=window.open('/popup-close.html','alcove-close','popup,width=480,height=520');
+  log('close-window-returned',!!child);
+ }
+};
+window.addEventListener('message',e=>{
+ if(e.origin!==location.origin||e.source!==child||e.data.state!==state)return;
+ log('oauth',e.data);
+ start.textContent='Проверить закрытие окна';
+});
+</script>
