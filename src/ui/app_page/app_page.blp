@@ -1,0 +1,187 @@
+// SPDX-License-Identifier: GPL-3.0-only
+
+using Gtk 4.0;
+using Adw 1;
+
+template $AlcoveAppPage: Adw.NavigationPage {
+  tag: "details";
+  Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      show-back-button: false;
+      [start]
+      Button {
+        icon-name: "go-previous-symbolic";
+        tooltip-text: _("Back");
+        action-name: "win.back";
+      }
+    }
+    content: ScrolledWindow settings_scroll {
+      hscrollbar-policy: never;
+      Adw.Clamp {
+        maximum-size: 600;
+        tightening-threshold: 480;
+        margin-top: 18;
+        margin-bottom: 36;
+        margin-start: 18;
+        margin-end: 18;
+        Box settings_content {
+          orientation: vertical;
+          spacing: 24;
+          Box {
+            spacing: 12;
+            Image details_icon {
+              icon-name: "io.github.cheviiot.alcove";
+              pixel-size: 48;
+            }
+            Box {
+              orientation: vertical;
+              valign: center;
+              hexpand: true;
+              Label details_domain {
+                xalign: 0;
+                ellipsize: middle;
+                selectable: true;
+                styles ["heading"]
+              }
+              Label engine_status {
+                xalign: 0;
+                wrap: true;
+                styles ["caption", "dim-label"]
+              }
+            }
+            Spinner save_spinner { visible: false; }
+          }
+          Adw.Banner engine_banner {
+            revealed: false;
+            title: _("This application needs the optional Chromium add-on.");
+            button-label: _("Add-ons");
+            button-clicked => $on_addons_clicked() swapped;
+          }
+          Label restart_notice {
+            visible: false;
+            label: _("Changes take effect the next time you open this application.");
+            wrap: true;
+            xalign: 0;
+            styles ["dim-label", "caption"]
+          }
+          Box {
+            orientation: vertical;
+            spacing: 6;
+            Adw.PreferencesGroup {
+              title: _("Website");
+              Adw.EntryRow title_entry {
+                title: _("Name");
+                max-length: 512;
+              }
+            }
+            Label title_error { visible: false; wrap: true; xalign: 0; styles ["error", "caption"] }
+            Adw.PreferencesGroup {
+              Adw.EntryRow url_entry {
+                title: _("Website Address");
+                input-purpose: url;
+              }
+            }
+            Label url_error { visible: false; wrap: true; xalign: 0; styles ["error", "caption"] }
+          }
+          Adw.PreferencesGroup {
+            title: _("Appearance");
+            Adw.ExpanderRow icon_expander {
+              title: _("Icon");
+              [prefix]
+              Image icon_image { icon-name: "io.github.cheviiot.alcove"; pixel-size: 32; }
+              Adw.ActionRow {
+                title: _("Choose Icon File");
+                activatable: true;
+                activated => $on_icon_clicked() swapped;
+                [suffix]
+                Image { icon-name: "document-open-symbolic"; }
+              }
+              Adw.ActionRow site_icon_button {
+                title: _("Get Site Icon");
+                subtitle: _("Getting a site icon sends the website domain to Icon Horse.");
+                activatable: true;
+                activated => $on_site_icon_clicked() swapped;
+                [suffix]
+                Image { icon-name: "folder-download-symbolic"; }
+              }
+            }
+            Adw.SwitchRow titlebar_color {
+              title: _("Website Titlebar Color");
+              subtitle: _("Use a valid theme color supplied by the website");
+            }
+          }
+          Label appearance_error { visible: false; wrap: true; xalign: 0; styles ["error", "caption"] }
+          Adw.PreferencesGroup {
+            Adw.ActionRow permissions_button {
+              use-markup: false;
+              title: _("Permissions");
+              subtitle: _("Camera, microphone, location and more");
+              activatable: true;
+              [prefix]
+              Image { icon-name: "system-lock-screen-symbolic"; }
+              [suffix]
+              Image { icon-name: "go-next-symbolic"; }
+            }
+            Adw.ActionRow privacy_button {
+              use-markup: false;
+              title: _("Privacy and Power");
+              subtitle: _("Navigation, network and background activity");
+              activatable: true;
+              [prefix]
+              Image { icon-name: "preferences-system-symbolic"; }
+              [suffix]
+              Image { icon-name: "go-next-symbolic"; }
+            }
+          }
+          Adw.PreferencesGroup {
+            Adw.ExpanderRow advanced_expander {
+              title: _("Advanced");
+              Adw.ComboRow engine_row {
+                title: _("Engine");
+                use-subtitle: true;
+              }
+              Label engine_note {
+                label: _("Profiles and cookies are never transferred between engines");
+                wrap: true;
+                xalign: 0;
+                margin-start: 12;
+                margin-end: 12;
+                margin-top: 6;
+                margin-bottom: 6;
+                styles ["dim-label", "caption"]
+              }
+              Adw.ActionRow recommendation_row {
+                use-markup: false;
+                visible: false;
+                title: _("Chromium Recommended");
+              }
+              Adw.SwitchRow user_agent_enabled { title: _("Custom User Agent"); }
+              Adw.EntryRow user_agent_entry {
+                title: _("User Agent");
+                visible: bind user_agent_enabled.active;
+              }
+              Adw.ActionRow repair_button {
+                use-markup: false;
+                title: _("Repair Launcher");
+                subtitle: _("Restore the app in your desktop application menu");
+                activatable: true;
+                [suffix]
+                Image { icon-name: "view-refresh-symbolic"; }
+              }
+            }
+          }
+          Label advanced_error { visible: false; wrap: true; xalign: 0; styles ["error", "caption"] }
+          Adw.PreferencesGroup {
+            Adw.ButtonRow delete_button {
+              use-markup: false;
+              title: _("Delete…");
+              start-icon-name: "user-trash-symbolic";
+              styles ["destructive-action"]
+            }
+          }
+        }
+      }
+    };
+  }
+}

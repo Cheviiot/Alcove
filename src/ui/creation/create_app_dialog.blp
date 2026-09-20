@@ -1,0 +1,205 @@
+// SPDX-License-Identifier: GPL-3.0-only
+
+using Gtk 4.0;
+using Adw 1;
+
+template $AlcoveCreateAppDialog: Adw.Dialog {
+  content-width: 480;
+  content-height: 580;
+  width-request: 320;
+  height-request: 220;
+  title: _("New Application");
+  default-widget: next_button;
+  focus-widget: url_entry;
+
+  Adw.Breakpoint {
+    condition ("max-width: 420sp")
+    setters {
+      address_header.show-title: false;
+      review_header.show-title: false;
+    }
+  }
+
+  Adw.NavigationView navigation_view {
+    Adw.NavigationPage {
+      tag: "address";
+      title: _("New Application");
+      Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar address_header {
+          show-start-title-buttons: false;
+          show-end-title-buttons: false;
+          [start]
+          Button {
+            label: _("_Cancel");
+            use-underline: true;
+            clicked => $on_cancel_clicked() swapped;
+          }
+          [end]
+          Button next_button {
+            label: _("Next");
+            sensitive: false;
+            clicked => $on_next_clicked() swapped;
+            styles ["suggested-action"]
+          }
+        }
+        content: ScrolledWindow {
+          hscrollbar-policy: never;
+          Adw.Clamp {
+            maximum-size: 440;
+            margin-top: 24;
+            margin-bottom: 24;
+            margin-start: 18;
+            margin-end: 18;
+            Box {
+              orientation: vertical;
+              spacing: 18;
+              Label {
+                label: _("Open a website in its own window, with its own cookies and storage.");
+                wrap: true;
+                xalign: 0;
+                styles ["dim-label"]
+              }
+              Adw.PreferencesGroup {
+                Adw.EntryRow url_entry {
+                  title: _("Website Address");
+                  input-purpose: url;
+                  activates-default: true;
+                  editable: bind template.lookup-loading inverted;
+                  changed => $validate_input_cb() swapped;
+                }
+              }
+              Label address_error {
+                visible: false;
+                label: _("Enter a valid HTTP or HTTPS address.");
+                wrap: true;
+                xalign: 0;
+                styles ["error", "caption"]
+              }
+              Box {
+                visible: bind template.lookup-loading;
+                orientation: vertical;
+                spacing: 18;
+                Adw.Spinner { width-request: 32; height-request: 32; halign: center; }
+                Label { label: _("Looking up the website name and icon…"); wrap: true; justify: center; }
+                Button {
+                  label: _("Enter Manually");
+                  halign: center;
+                  clicked => $on_skip_lookup_clicked() swapped;
+                }
+              }
+            }
+          }
+        };
+      }
+    }
+
+    Adw.NavigationPage review_page {
+      tag: "review";
+      title: _("Review Application");
+      Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar review_header {
+          show-start-title-buttons: false;
+          show-end-title-buttons: false;
+          [end]
+          Button button {
+            sensitive: false;
+            clicked => $on_create_clicked() swapped;
+            styles ["suggested-action"]
+            Stack button_stack {
+              Label button_label { label: _("Create"); }
+              Adw.Spinner button_spinner {}
+            }
+          }
+        }
+        content: ScrolledWindow {
+          hscrollbar-policy: never;
+          Adw.Clamp {
+            maximum-size: 440;
+            margin-top: 24;
+            margin-bottom: 24;
+            margin-start: 18;
+            margin-end: 18;
+            Box review_content {
+              orientation: vertical;
+              spacing: 18;
+              Label lookup_notice {
+                visible: false;
+                wrap: true;
+                xalign: 0;
+                styles ["dim-label"]
+              }
+              Adw.PreferencesGroup {
+                Adw.EntryRow title_entry {
+                  title: _("Name");
+                  max-length: 512;
+                  activates-default: true;
+                  changed => $validate_input_cb() swapped;
+                }
+                Adw.ActionRow address_row {
+                  title: _("Website Address");
+                  use-markup: false;
+                  subtitle-lines: 2;
+                }
+              }
+              Label name_error {
+                visible: false;
+                label: _("Enter a name for the application.");
+                wrap: true;
+                xalign: 0;
+                styles ["error", "caption"]
+              }
+              Adw.PreferencesGroup {
+                title: _("Icon");
+                description: _("Getting a site icon sends the website domain to Icon Horse.");
+                Adw.ActionRow {
+                  use-markup: false;
+                  title: _("Choose Icon File");
+                  activatable: true;
+                  activated => $on_icon_clicked() swapped;
+                  [prefix]
+                  Image icon_image { pixel-size: 40; }
+                  [suffix]
+                  Image { icon-name: "document-open-symbolic"; }
+                }
+                Adw.ActionRow site_icon_button {
+                  use-markup: false;
+                  title: _("Get Site Icon");
+                  activatable: true;
+                  activated => $on_site_icon_clicked() swapped;
+                  [suffix]
+                  Image { icon-name: "folder-download-symbolic"; }
+                }
+              }
+              Label icon_provider_status {
+                visible: false;
+                wrap: true;
+                xalign: 0;
+                styles ["dim-label", "caption"]
+              }
+              Adw.PreferencesGroup {
+                Adw.ActionRow recommendation_row {
+                  use-markup: false;
+                  visible: false;
+                  title: _("Chromium Recommended");
+                  subtitle-lines: 0;
+                }
+                Adw.ExpanderRow advanced_row {
+                  title: _("Advanced");
+                  Adw.ComboRow engine_row { title: _("Browser Engine"); }
+                }
+              }
+              Label creation_error {
+                visible: false;
+                wrap: true;
+                xalign: 0;
+                styles ["error"]
+              }
+            }
+          }
+        };
+      }
+    }
+  }
+}
