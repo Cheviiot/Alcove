@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: GPL-3.0-only
+
+# The repository guards application lifecycle, profile and background state
+# with advisory file locks, which are scoped to a process. Running those tests
+# as parallel threads of a single test binary therefore models a situation that
+# cannot occur in production, where every application is its own process, and
+# makes lock acquisition race against unrelated tests.
+[env]
+RUST_TEST_THREADS = "1"

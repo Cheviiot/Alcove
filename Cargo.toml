@@ -1,0 +1,67 @@
+# SPDX-License-Identifier: GPL-3.0-only
+
+[package]
+name = "alcove"
+version = "0.1.0"
+edition = "2021"
+license = "GPL-3.0-only"
+repository = "https://github.com/Cheviiot/Alcove"
+description = "Install isolated web apps that integrate with GNOME"
+default-run = "alcove"
+
+[features]
+ui-tests = []
+native-chromium = ["rustix/net"]
+native-chromium-probe = ["native-chromium"]
+
+[[bin]]
+name = "alcove-native-chromium"
+path = "experiments/native-chromium/host.rs"
+required-features = ["native-chromium-probe"]
+
+[dependencies]
+age = "0.12.1"
+anyhow = "1.0.103"
+async-trait = "0.1.89"
+futures = "0.3.30"
+gettext-rs = { version = "0.8", features = ["gettext-system"] }
+glycin = { version = "3.1", features = ["gdk4"] }
+image = { version = "0.25", default-features = false, features = ["png"] }
+isahc = "1.8.2"
+rand = "0.8.5"
+rustix = { version = "1.1.4", features = ["fs"] }
+scraper = { version = "0.27.0", features = ["atomic"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tar = "0.4.46"
+tempfile = "3.23"
+url = { version = "2.5.8", features = ["serde"] }
+zstd = "0.13.3"
+
+[dependencies.ashpd]
+package = "ashpd"
+version = "0.13.13"
+features = [
+  "async-io",
+  "gtk4",
+  "background",
+  "documents",
+  "dynamic_launcher",
+  "file_chooser",
+]
+default-features = false
+
+[dependencies.gtk]
+package = "gtk4"
+version = "0.11"
+features = ["v4_22"]
+
+[dependencies.adw]
+package = "libadwaita"
+version = "0.9"
+features = ["v1_9"]
+
+[dependencies.webkit]
+package = "webkit6"
+version = "0.6"
+features = ["v2_52"]
