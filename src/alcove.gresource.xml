@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<gresources>
+  <gresource prefix="/io/github/cheviiot/alcove">
+    <file alias="window.ui" preprocess="xml-stripblanks">ui/library/window.ui</file>
+    <file alias="create_app_dialog.ui" preprocess="xml-stripblanks">ui/creation/create_app_dialog.ui</file>
+    <file alias="app_row.ui" preprocess="xml-stripblanks">ui/library/app_row.ui</file>
+    <file alias="app_window.ui" preprocess="xml-stripblanks">ui/shell/app_window.ui</file>
+    <file alias="app_page.ui" preprocess="xml-stripblanks">ui/app_page/app_page.ui</file>
+  </gresource>
+  <gresource prefix="/io/github/cheviiot/alcove/icons/scalable/apps">
+    <file alias="io.github.cheviiot.alcove.svg">../data/icons/hicolor/scalable/apps/io.github.cheviiot.alcove.svg</file>
+  </gresource>
+  <gresource prefix="/io/github/cheviiot/alcove/icons/symbolic/apps">
+    <file alias="io.github.cheviiot.alcove-symbolic.svg">../data/icons/hicolor/symbolic/apps/io.github.cheviiot.alcove-symbolic.svg</file>
+  </gresource>
+</gresources>
