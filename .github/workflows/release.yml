@@ -1,0 +1,196 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: alcove-pages-release
+  cancel-in-progress: false
+
+jobs:
+  flatpak-release:
+    name: Release Flatpak (${{ matrix.variant.arch }})
+    strategy:
+      fail-fast: false
+      matrix:
+        variant:
+          - arch: x86_64
+            runner: ubuntu-24.04
+          - arch: aarch64
+            runner: ubuntu-24.04-arm
+    runs-on: ${{ matrix.variant.runner }}
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50
+      options: --privileged
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Import repository signing key
+        env:
+          ALCOVE_GPG_PRIVATE_KEY: ${{ secrets.ALCOVE_FLATPAK_GPG_PRIVATE_KEY }}
+        run: printf '%s' "$ALCOVE_GPG_PRIVATE_KEY" | gpg --batch --import
+      - name: Resolve signing-key fingerprint
+        id: signing-key
+        run: |
+          fingerprint="$(gpg --batch --with-colons --list-secret-keys 'Alcove Flatpak Repository' | awk -F: '$1 == "fpr" { print $10; exit }')"
+          test "$fingerprint" = FA640607BEBFD82E61EF72EF33ADDA415AF7FE09
+          echo "fingerprint=$fingerprint" >> "$GITHUB_OUTPUT"
+      - uses: flatpak/flatpak-github-actions/flatpak-builder@aa777012a985fe1b1fd3e66ea2173609cf0c9a70
+        with:
+          build-bundle: false
+          manifest-path: build-aux/io.github.cheviiot.alcove.json
+          arch: ${{ matrix.variant.arch }}
+          gpg-sign: ${{ steps.signing-key.outputs.fingerprint }}
+          repo-dir: repo-${{ matrix.variant.arch }}
+      - name: Pack signed architecture repository
+        run: tar -C "repo-${{ matrix.variant.arch }}" -cf "Alcove-repo-${{ matrix.variant.arch }}.tar" .
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: Alcove-repo-${{ matrix.variant.arch }}
+          path: Alcove-repo-${{ matrix.variant.arch }}.tar
+          if-no-files-found: error
+
+  prepare-repository:
+    name: Prepare project repository
+    needs: flatpak-release
+    permissions:
+      contents: read
+      pages: write
+    runs-on: ubuntu-24.04
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50
+      options: --privileged
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          pattern: Alcove-repo-*
+          path: repository-artifacts
+          merge-multiple: true
+      - name: Import repository signing key
+        env:
+          ALCOVE_GPG_PRIVATE_KEY: ${{ secrets.ALCOVE_FLATPAK_GPG_PRIVATE_KEY }}
+        run: printf '%s' "$ALCOVE_GPG_PRIVATE_KEY" | gpg --batch --import
+      - name: Resolve signing-key fingerprint
+        id: signing-key
+        run: |
+          fingerprint="$(gpg --batch --with-colons --list-secret-keys 'Alcove Flatpak Repository' | awk -F: '$1 == "fpr" { print $10; exit }')"
+          test "$fingerprint" = FA640607BEBFD82E61EF72EF33ADDA415AF7FE09
+          echo "fingerprint=$fingerprint" >> "$GITHUB_OUTPUT"
+      - name: Assemble signed Flatpak repository
+        env:
+          GPG_FINGERPRINT: ${{ steps.signing-key.outputs.fingerprint }}
+        run: |
+          mkdir -p public/repo
+          for archive in repository-artifacts/Alcove-repo-*.tar; do
+            tar -xf "$archive" -C public/repo
+          done
+          ostree refs --repo=public/repo --delete \
+            runtime/io.github.cheviiot.alcove.Debug
+          flatpak build-update-repo \
+            --title=Alcove \
+            --comment='Official Alcove project repository' \
+            --description='GPG-signed Alcove releases published directly from GitHub' \
+            --homepage='https://github.com/Cheviiot/Alcove' \
+            --icon='https://cheviiot.github.io/Alcove/io.github.cheviiot.alcove.svg' \
+            --default-branch=master \
+            --gpg-sign="$GPG_FINGERPRINT" \
+            --prune \
+            public/repo
+          ostree fsck --repo=public/repo
+          ostree refs --repo=public/repo | grep -q \
+            '^app/io.github.cheviiot.alcove/x86_64/master$'
+          ostree refs --repo=public/repo | grep -q \
+            '^app/io.github.cheviiot.alcove/aarch64/master$'
+          ostree refs --repo=public/repo | grep -q \
+            '^runtime/io.github.cheviiot.alcove.Chromium/x86_64/master$'
+          ostree refs --repo=public/repo | grep -q \
+            '^runtime/io.github.cheviiot.alcove.Chromium/aarch64/master$'
+          ! ostree refs --repo=public/repo | grep -q \
+            '^runtime/io.github.cheviiot.alcove.Debug/'
+          for arch in x86_64 aarch64; do
+            app_commit="$(ostree rev-parse --repo=public/repo "app/io.github.cheviiot.alcove/$arch/master")"
+            addon_commit="$(ostree rev-parse --repo=public/repo "runtime/io.github.cheviiot.alcove.Chromium/$arch/master")"
+            ! ostree ls --repo=public/repo "$app_commit" /files/extensions/chromium/electron
+            ostree ls --repo=public/repo "$addon_commit" /files/electron
+            ostree ls --repo=public/repo "$addon_commit" /files/bin/zypak-wrapper
+          done
+      - name: Create install descriptors and bundles
+        run: |
+          gpg_key="$(base64 --wrap=0 packaging/alcove-repository.gpg)"
+          sed "s|@GPG_KEY@|$gpg_key|" packaging/alcove.flatpakrepo.in > public/alcove.flatpakrepo
+          sed "s|@GPG_KEY@|$gpg_key|" packaging/alcove.flatpakref.in > public/alcove.flatpakref
+          sed "s|@GPG_KEY@|$gpg_key|" packaging/alcove-chromium.flatpakref.in > public/alcove-chromium.flatpakref
+          install -Dm644 packaging/index.html public/index.html
+          install -Dm644 packaging/alcove-repository.gpg public/alcove-repository.gpg
+          install -Dm644 data/icons/hicolor/scalable/apps/io.github.cheviiot.alcove.svg public/io.github.cheviiot.alcove.svg
+          flatpak build-bundle \
+            --arch=x86_64 \
+            --repo-url='https://cheviiot.github.io/Alcove/repo/' \
+            --runtime-repo='https://dl.flathub.org/repo/flathub.flatpakrepo' \
+            --gpg-keys=packaging/alcove-repository.gpg \
+            public/repo Alcove-x86_64.flatpak io.github.cheviiot.alcove master
+          flatpak build-bundle \
+            --arch=aarch64 \
+            --repo-url='https://cheviiot.github.io/Alcove/repo/' \
+            --runtime-repo='https://dl.flathub.org/repo/flathub.flatpakrepo' \
+            --gpg-keys=packaging/alcove-repository.gpg \
+            public/repo Alcove-aarch64.flatpak io.github.cheviiot.alcove master
+          flatpak build-bundle \
+            --runtime \
+            --arch=x86_64 \
+            --repo-url='https://cheviiot.github.io/Alcove/repo/' \
+            --gpg-keys=packaging/alcove-repository.gpg \
+            public/repo Alcove-Chromium-x86_64.flatpak io.github.cheviiot.alcove.Chromium master
+          flatpak build-bundle \
+            --runtime \
+            --arch=aarch64 \
+            --repo-url='https://cheviiot.github.io/Alcove/repo/' \
+            --gpg-keys=packaging/alcove-repository.gpg \
+            public/repo Alcove-Chromium-aarch64.flatpak io.github.cheviiot.alcove.Chromium master
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: Alcove-release-bundles
+          path: Alcove-*.flatpak
+          if-no-files-found: error
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b
+      - uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b
+        with:
+          path: public
+
+  deploy-repository:
+    name: Publish project repository
+    needs: prepare-repository
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e
+
+  publish-release:
+    name: Publish GitHub release
+    needs: [prepare-repository, deploy-repository]
+    permissions:
+      contents: write
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: Alcove-release-bundles
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh release create "$GITHUB_REF_NAME"
+          Alcove-x86_64.flatpak Alcove-aarch64.flatpak
+          Alcove-Chromium-x86_64.flatpak Alcove-Chromium-aarch64.flatpak
+          --repo "$GITHUB_REPOSITORY" --verify-tag --generate-notes

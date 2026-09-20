@@ -1,0 +1,98 @@
+name: CI
+
+on:
+  push:
+    branches: [main, "release/**"]
+  pull_request:
+    branches: [main, "release/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rust:
+    name: Rust checks
+    runs-on: ubuntu-24.04
+    container: fedora:44
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Install Fedora build dependencies
+        run: >-
+          dnf install -y rust cargo rustfmt clippy gcc pkgconf-pkg-config
+          gtk4-devel libadwaita-devel webkitgtk6.0-devel openssl-devel gettext
+          nodejs
+      - run: cargo fmt --check
+      - run: cargo check --locked
+      - run: cargo clippy --locked --all-targets -- -D warnings
+      - run: cargo test --locked
+      - name: Chromium engine tests
+        run: |
+          node chromium/tests/validate.test.js
+          node chromium/tests/navigation-policy.test.js
+          node chromium/tests/permission-policy.test.js
+          node chromium/tests/proxy.test.js
+          node chromium/tests/user-agent.test.js
+          node chromium/tests/window-state.test.js
+          node chromium/tests/shell-security.test.js
+
+  metadata:
+    name: Metadata
+    runs-on: ubuntu-24.04
+    container: fedora:44
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Install validation dependencies
+        run: >-
+          dnf install -y rust cargo gcc pkgconf-pkg-config meson ninja-build
+          blueprint-compiler gtk4-devel libadwaita-devel webkitgtk6.0-devel
+          gettext openssl-devel appstream desktop-file-utils glib2-devel
+          xorg-x11-server-Xvfb dbus-daemon
+      - run: meson setup build --fatal-meson-warnings -Dui_tests=true
+      - run: meson compile -C build
+      - run: meson test -C build --print-errorlogs
+
+  security:
+    name: Security and licenses
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Verify project license and attribution
+        run: |
+          grep -qx 'license = "GPL-3.0-only"' Cargo.toml
+          grep -q '<project_license>GPL-3.0-only</project_license>' \
+            data/io.github.cheviiot.alcove.metainfo.xml.in
+          forbidden_spdx='SPDX-License-Identifier: GPL-3.0-''or-later'
+          ! git grep -n "$forbidden_spdx"
+          test -s COPYING
+          test -s NOTICE
+          test -s AUTHORS.md
+          grep -q '<project_license>GPL-3.0-only</project_license>' \
+            chromium/data/io.github.cheviiot.alcove.Chromium.metainfo.xml
+      - uses: EmbarkStudios/cargo-deny-action@c3bbe7e4e3f7baeee1a3dd9aec0a3b2aded580fb
+        with:
+          command: check
+
+  flatpak:
+    name: Flatpak (${{ matrix.variant.arch }})
+    strategy:
+      fail-fast: false
+      matrix:
+        variant:
+          - arch: x86_64
+            runner: ubuntu-24.04
+          - arch: aarch64
+            runner: ubuntu-24.04-arm
+    runs-on: ${{ matrix.variant.runner }}
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50
+      options: --privileged
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: flatpak/flatpak-github-actions/flatpak-builder@aa777012a985fe1b1fd3e66ea2173609cf0c9a70
+        with:
+          bundle: Alcove-${{ matrix.variant.arch }}.flatpak
+          manifest-path: build-aux/io.github.cheviiot.alcove.Devel.json
+          arch: ${{ matrix.variant.arch }}
+          run-tests: true
+          artifact-name: Alcove-${{ matrix.variant.arch }}
