@@ -13,106 +13,59 @@
   <p><a href="README.md">Русский</a> · <strong>English</strong></p>
 </div>
 
-## Why it exists
+Alcove turns a website into a GNOME application: its own window, profile,
+cookies, cache and permissions. Two accounts on one service run side by side
+and know nothing about each other. It launches from the menu and needs no
+browser.
 
-A browser shares everything. Your work mail knows about your personal one
-because the cookies sit in the same jar. Signing in to one service drags a
-profile into the next. A notification permission granted to one site looks
-exactly like the other forty tabs. And the tab you actually need gets lost
-among the rest, then closes with the browser.
+## Features
 
-Alcove splits that apart. Each site gets its own window, profile, cookies,
-cache and permissions. Two accounts on the same service live side by side and
-know nothing about each other. The application launches from the GNOME menu
-like any other, whether or not a browser is running.
+- Two accounts on one service at once — no private mode, no second browser.
+- Its own icon in the menu and its own slot in the window switcher.
+- Camera, microphone and notifications are granted to a site, not a browser.
+- Navigation, proxy, background, content filters and user agent, per site.
+- A profile exports to an encrypted archive and moves to another machine.
+- System access through XDG portals only, with no broad Flatpak permissions.
 
-## What you get
+## Two engines
 
-- **Two accounts on one service at once** — no private mode, no second
-  browser.
-- **Work apart from personal** — the sessions cannot cross, rather than
-  relying on your discipline.
-- **A site as a program** — its own icon in the menu and its own slot in the
-  window switcher.
-- **Permissions where they belong** — camera, microphone, notifications and
-  location are granted to one site, not to a whole browser.
-- **Data you control** — a profile can be exported to an archive, carried to
-  another machine, or deleted together with its application.
+**WebKitGTK** is the default. **Chromium** is a Flatpak add-on for sites
+WebKitGTK cannot serve: installed separately, never switched to without
+confirmation, and never sharing profiles or sessions with the other engine.
 
-## How it works
-
-Alcove is a GNOME application built with GTK 4 and libadwaita. An embedded
-engine renders the site, while the window, menus and navigation stay native to
-the desktop.
-
-| Engine | Role |
-| --- | --- |
-| **WebKitGTK** | Native to GNOME, used by default. |
-| **Chromium** | An add-on for sites that WebKitGTK cannot serve. |
-
-Chromium installs as a separate Flatpak add-on and **never appears on its
-own**. The engine choice exists only once the add-on is installed, the engine
-is never switched without confirmation, and the two engines never share
-profiles or authenticated sessions.
-
-Every application is configured separately: navigation rules, proxy,
-background behavior, content filters and the user agent string. System access
-goes through XDG portals only — Alcove asks for no broad Flatpak permissions
-and reads no other application's directories.
+DRM and Widevine, browser extensions and anti-bot circumvention are not
+supported.
 
 ## Installation
 
-The project is at version 0.1.0 and has no published releases yet. The first
-release will bring a signed Flatpak repository and a one-command install;
-until then the application is built from source, as described in
-[CONTRIBUTING.md](CONTRIBUTING.md).
+```sh
+flatpak install --user https://cheviiot.github.io/Alcove/alcove.flatpakref
+```
+
+There are no releases yet — until the first one, build from source as described
+in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Privacy
 
-Alcove collects no analytics, contacts no third-party service at startup, and
-never sends out the addresses you open.
-
-The one optional outbound request is an icon lookup through
-[Icon Horse](https://icon.horse/) when a site serves no usable favicon. It
-happens **only on an explicit click**, nothing but the hostname leaves the
-machine, and the result is stored locally. With no network the provider is
-neither needed nor contacted.
-
-Archives that carry website data are encrypted: a profile with its cookies and
-storage cannot be exported without a passphrase.
-
-## What Alcove does not do
-
-Not supported and not part of the project's promises: DRM and Widevine,
-browser extensions, anti-bot circumvention, and proprietary browser APIs.
-Alcove gives a site its own place on the desktop; it does not replace a
-browser.
+No analytics, no third-party calls, no reporting of the addresses you open. The
+one optional outbound request is a site icon through
+[Icon Horse](https://icon.horse/) on an explicit click, and only the hostname
+leaves the machine.
 
 ## Contributing
 
-Bug reports and proposals go to
-[Issues](https://github.com/Cheviiot/Alcove/issues). The development
-environment, build, checks and coding rules are described in
-[CONTRIBUTING.md](CONTRIBUTING.md).
-
-## Provenance and license
-
-Alcove is an independent continuation of
-[Spider](https://github.com/Zaedus/spider) as it existed at commit
-`dcf9d1080ce2bbd89c342b4766a94e18aaecf660`. Spider was created primarily by
-Zaedus, with a contribution by Cameron Radmore. Alcove's Git history starts
-fresh and does not carry the original Spider commits — those remain in the
-Spider repository, and authorship of the inherited code is recorded in
-[AUTHORS.md](AUTHORS.md). The previous authors do not participate in Alcove
-and have not endorsed it.
-
-Licensed under GPL-3.0-only. See [NOTICE](NOTICE), [AUTHORS.md](AUTHORS.md)
-and [COPYING](COPYING).
-
-## More
-
+[Issues](https://github.com/Cheviiot/Alcove/issues) ·
+[CONTRIBUTING.md](CONTRIBUTING.md) ·
 [Interface](docs/gnome-hig.md) ·
 [Threat model](docs/threat-model.md) ·
-[Portal compatibility](docs/portal-compatibility.md) ·
-[Flatpak repository](packaging/README.md) ·
 [Changelog](CHANGELOG.md)
+
+## Provenance
+
+An independent continuation of [Spider](https://github.com/Zaedus/spider) as of
+commit `dcf9d1080ce2bbd89c342b4766a94e18aaecf660`, created by Zaedus with a
+contribution by Cameron Radmore. The Git history starts fresh; authorship of
+the inherited code is recorded in [AUTHORS.md](AUTHORS.md). The previous
+authors do not participate in Alcove.
+
+Licensed under GPL-3.0-only — [NOTICE](NOTICE), [COPYING](COPYING).
