@@ -66,7 +66,7 @@ The interface structure and UI checks are documented in [GNOME interface](docs/g
 
 Run production GUI checks on a virtual X11 display. The isolated native
 Chromium experiment also provides its own headless Wayland compositor; see
-[the experiment instructions](experiments/native-chromium/README.md).
+[the experiment instructions](tests/engine/README.md).
 Never allow a GUI check to fall back to the active desktop session:
 
 ```sh

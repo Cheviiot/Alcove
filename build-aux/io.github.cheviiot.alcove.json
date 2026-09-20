@@ -121,39 +121,39 @@
       "sources": [
         {
           "type": "file",
-          "path": "../experiments/native-chromium/CMakeLists.txt"
+          "path": "../engine/CMakeLists.txt"
         },
         {
           "type": "file",
-          "path": "../experiments/native-chromium/worker.cc"
+          "path": "../engine/worker.cc"
         },
         {
           "type": "file",
-          "path": "../experiments/native-chromium/atspi_export.h"
+          "path": "../engine/atspi_export.h"
         },
         {
           "type": "file",
-          "path": "../experiments/native-chromium/gpu_bridge.h"
+          "path": "../engine/gpu_bridge.h"
         },
         {
           "type": "file",
-          "path": "../experiments/native-chromium/native_accessibility.h"
+          "path": "../engine/native_accessibility.h"
         },
         {
           "type": "file",
-          "path": "../experiments/native-chromium/navigation_gate.h"
+          "path": "../engine/navigation_gate.h"
         },
         {
           "type": "file",
-          "path": "../experiments/native-chromium/permission_settings.h"
+          "path": "../engine/permission_settings.h"
         },
         {
           "type": "file",
-          "path": "../experiments/native-chromium/site_requests.h"
+          "path": "../engine/site_requests.h"
         },
         {
           "type": "file",
-          "path": "../experiments/native-chromium/flatpak-worker.sh"
+          "path": "../engine/flatpak-worker.sh"
         },
         {
           "type": "file",

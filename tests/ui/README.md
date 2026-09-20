@@ -15,9 +15,9 @@ The normal Meson checks cover supporting dialogs as well as the library.
 ## Library rendering
 
 ```sh
-distrobox enter alcove-dev -- python3 experiments/ui/render.py
-distrobox enter alcove-dev -- python3 experiments/ui/render.py --high-contrast
-distrobox enter alcove-dev -- python3 experiments/ui/render.py --large-text
+distrobox enter alcove-dev -- python3 tests/ui/render.py
+distrobox enter alcove-dev -- python3 tests/ui/render.py --high-contrast
+distrobox enter alcove-dev -- python3 tests/ui/render.py --large-text
 ```
 
 Each invocation creates a private Xvfb/session bus and disposable XDG data.
@@ -35,7 +35,7 @@ with `ui-tests`. Icon resources are embedded for uninstalled builds. Test
 ## Real keyboard and screen reader
 
 ```sh
-distrobox enter alcove-dev -- python3 experiments/ui/library-audit.py --orca
+distrobox enter alcove-dev -- python3 tests/ui/library-audit.py --orca
 ```
 
 This launches the real manager with three disposable application records under
@@ -60,10 +60,10 @@ are not shipped with the application.
 ## Permissions and behavior
 
 ```sh
-distrobox enter alcove-dev -- python3 experiments/ui/library-audit.py --policy --orca
-distrobox enter alcove-dev -- python3 experiments/ui/render.py --screen policy
-distrobox enter alcove-dev -- python3 experiments/ui/render.py --screen policy --high-contrast
-distrobox enter alcove-dev -- python3 experiments/ui/render.py --screen policy --large-text
+distrobox enter alcove-dev -- python3 tests/ui/library-audit.py --policy --orca
+distrobox enter alcove-dev -- python3 tests/ui/render.py --screen policy
+distrobox enter alcove-dev -- python3 tests/ui/render.py --screen policy --high-contrast
+distrobox enter alcove-dev -- python3 tests/ui/render.py --screen policy --large-text
 ```
 
 The policy audit seeds only disposable settings. It checks immediate permission
@@ -92,10 +92,10 @@ Xvfb, D-Bus and the GTK development environment are documented in
 ## Creation
 
 ```sh
-distrobox enter alcove-dev -- python3 experiments/ui/render.py --screen creation
-distrobox enter alcove-dev -- python3 experiments/ui/render.py --screen creation --high-contrast
-distrobox enter alcove-dev -- python3 experiments/ui/render.py --screen creation --large-text
-distrobox enter alcove-dev -- python3 experiments/ui/library-audit.py --creation --orca
+distrobox enter alcove-dev -- python3 tests/ui/render.py --screen creation
+distrobox enter alcove-dev -- python3 tests/ui/render.py --screen creation --high-contrast
+distrobox enter alcove-dev -- python3 tests/ui/render.py --screen creation --large-text
+distrobox enter alcove-dev -- python3 tests/ui/library-audit.py --creation --orca
 ```
 
 Rendering uses the feature-gated `--ui-test-creation` entry point. The independent
@@ -112,10 +112,10 @@ labels even when the application's language is Russian.
 ## Application settings
 
 ```sh
-distrobox enter alcove-dev -- python3 experiments/ui/render.py --screen settings
-distrobox enter alcove-dev -- python3 experiments/ui/render.py --screen settings --high-contrast
-distrobox enter alcove-dev -- python3 experiments/ui/render.py --screen settings --large-text
-distrobox enter alcove-dev -- python3 experiments/ui/library-audit.py --settings --orca
+distrobox enter alcove-dev -- python3 tests/ui/render.py --screen settings
+distrobox enter alcove-dev -- python3 tests/ui/render.py --screen settings --high-contrast
+distrobox enter alcove-dev -- python3 tests/ui/render.py --screen settings --large-text
+distrobox enter alcove-dev -- python3 tests/ui/library-audit.py --settings --orca
 ```
 
 The settings renderer uses the feature-gated `--ui-test-settings` entry point.
@@ -138,10 +138,10 @@ Permissions and Privacy and Power.
 ## Supporting dialogs
 
 ```sh
-distrobox enter alcove-dev -- python3 experiments/ui/render.py --screen utilities
-distrobox enter alcove-dev -- python3 experiments/ui/render.py --screen utilities --high-contrast
-distrobox enter alcove-dev -- python3 experiments/ui/render.py --screen utilities --large-text
-distrobox enter alcove-dev -- python3 experiments/ui/library-audit.py --utilities --orca
+distrobox enter alcove-dev -- python3 tests/ui/render.py --screen utilities
+distrobox enter alcove-dev -- python3 tests/ui/render.py --screen utilities --high-contrast
+distrobox enter alcove-dev -- python3 tests/ui/render.py --screen utilities --large-text
+distrobox enter alcove-dev -- python3 tests/ui/library-audit.py --utilities --orca
 ```
 
 The renderer produces 42 images per variant: backup, restore, encrypted password

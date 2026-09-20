@@ -162,7 +162,7 @@ def main():
                                     *sys.argv[1:], "--session"], env=env)
     root = pathlib.Path(__file__).resolve().parents[2]
     cef = "/app/extensions/chromium-native/cef" if args.flatpak else subprocess.check_output(
-        [sys.executable, str(root / "experiments/native-chromium/fetch-cef.py")], text=True).strip()
+        [sys.executable, str(root / "engine/fetch-cef.py")], text=True).strip()
     identifier = datetime.datetime.now().strftime("%Y%m%d-%H%M%S") + f"-{'flatpak-' if args.flatpak else ''}{args.backend}-{os.getpid()}"
     output = root / "build/native-chromium/runs" / identifier
     output.mkdir(parents=True, mode=0o700)
@@ -174,7 +174,7 @@ def main():
         deployed["permissions"] = subprocess.check_output(["flatpak", "info", "--user",
             "--show-permissions", "io.github.cheviiot.alcove"], text=True)
         (output / "flatpak.json").write_text(json.dumps(deployed, indent=2))
-    handler = functools.partial(FixtureHandler, directory=str(root / "experiments/native-chromium/fixtures"))
+    handler = functools.partial(FixtureHandler, directory=str(root / "tests/engine/fixtures"))
     server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
     threading.Thread(target=server.serve_forever, daemon=True).start()
     compositor = None
@@ -257,7 +257,7 @@ def main():
             if args.compositor == "mutter" and args.backend == "wayland":
                 with (output / "input.log").open("w") as input_log:
                     virtual_input = subprocess.Popen([sys.executable,
-                        str(root / "experiments/native-chromium/mutter-input.py"),
+                        str(root / "engine/mutter-input.py"),
                         *(["--keyboard-check"] if args.orca_keyboard else [])],
                         env=env, stdout=input_log, stderr=subprocess.STDOUT)
             if args.orca:
@@ -270,26 +270,26 @@ def main():
                         env=orca_env, stdout=orca_log, stderr=subprocess.STDOUT)
             with (output / "accessibility.log").open("w") as audit_log:
                 audit_command = [sys.executable,
-                    str(root / "experiments/native-chromium/accessibility-audit.py"),
+                    str(root / "engine/accessibility-audit.py"),
                     "--output", str(output / "accessibility.json"),
                     "--delay", str(min(6, max(1, args.seconds - 3))),
                     *(["--navigate"] if args.accessibility_navigation else [])]
                 if args.site_requests:
-                    audit_command = [sys.executable, str(root / "experiments/native-chromium/site-requests-audit.py"),
+                    audit_command = [sys.executable, str(root / "engine/site-requests-audit.py"),
                                      "--output", str(output / "site-requests.json")]
                 if args.popups:
-                    audit_command = [sys.executable, str(root / "experiments/native-chromium/popup-audit.py"),
+                    audit_command = [sys.executable, str(root / "engine/popup-audit.py"),
                                      "--output", str(output / "popups.json"),
                                      *(["--native"] if args.native_accessibility else []),
                                      *(["--orca"] if args.orca else [])]
                 if args.accessibility_windows:
-                    audit_command = [sys.executable, str(root / "experiments/native-chromium/multi-window-audit.py"),
+                    audit_command = [sys.executable, str(root / "engine/multi-window-audit.py"),
                                      "--output", str(output / "multi-window.json")]
                 if args.dropdowns:
-                    audit_command = [sys.executable, str(root / "experiments/native-chromium/dropdown-audit.py"),
+                    audit_command = [sys.executable, str(root / "engine/dropdown-audit.py"),
                                      "--output", str(output / "dropdowns.json")]
                 if args.url:
-                    audit_command = [sys.executable, str(root / "experiments/native-chromium/real-site-audit.py"),
+                    audit_command = [sys.executable, str(root / "engine/real-site-audit.py"),
                         "--output", str(output / "real-site.json"), "--url", args.url,
                         "--scenario", args.site_scenario]
                 accessibility = subprocess.Popen(audit_command,

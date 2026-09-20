@@ -3,8 +3,8 @@
 # Run inside alcove-dev; see README.md for the project-local prerequisites.
 set -euo pipefail
 cd "$(dirname "$0")/../.."
-cef_probe_root=$(python3 experiments/native-chromium/fetch-cef.py)
-cmake -S experiments/native-chromium -B build/native-chromium/worker -G Ninja \
+cef_probe_root=$(python3 engine/fetch-cef.py)
+cmake -S engine -B build/native-chromium/worker -G Ninja \
   -DCEF_ROOT="$cef_probe_root" -DCMAKE_BUILD_TYPE=Release
 cmake --build build/native-chromium/worker --parallel 6
 mkdir -p build/native-chromium/locale/ru/LC_MESSAGES

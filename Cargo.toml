@@ -15,7 +15,7 @@ native-chromium-probe = []
 
 [[bin]]
 name = "alcove-native-chromium"
-path = "experiments/native-chromium/host.rs"
+path = "src/bin/alcove-native-chromium.rs"
 required-features = ["native-chromium-probe"]
 
 [dependencies]

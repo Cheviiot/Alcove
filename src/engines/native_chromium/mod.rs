@@ -1290,7 +1290,7 @@ fn build_view(
                     // AT-SPI client and the private compositor's actual input.
                     worker.send(
                         "evaluate",
-                        json!({"script":include_str!("../../../experiments/native-chromium/real-site-observe.js")}),
+                        json!({"script":include_str!("../../../tests/engine/real-site-observe.js")}),
                     );
                     if last_site_sample.is_multiple_of(3) && last_site_sample <= 36 {
                         captures.borrow_mut().push(

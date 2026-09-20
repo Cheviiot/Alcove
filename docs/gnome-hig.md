@@ -106,7 +106,7 @@ availability.
 
 Each manager screen has reproducible Russian rendering, high-contrast, doubled
 text and independent keyboard/AT-SPI/Orca checks. See
-[the UI audit instructions](../experiments/ui/README.md) and its results for
+[the UI audit instructions](../tests/ui/README.md) and its results for
 the exact coverage and limits. These checks do not establish CEF packaging acceptance.
 
 ## References

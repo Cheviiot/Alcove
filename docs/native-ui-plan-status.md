@@ -41,8 +41,8 @@ checks; this clarification does not authorize replacing Electron prematurely.
 | Flatpak | CEF integration with sandbox retained still required |
 
 Detailed reproducible evidence and known limitations live in
-[the experiment](../experiments/native-chromium/README.md) and
-[results](../experiments/native-chromium/RESULTS.md).
+[the experiment](../tests/engine/README.md) and
+[results](../tests/engine/RESULTS.md).
 
 ## Product integration
 
@@ -54,7 +54,7 @@ activation and no launch controls. Its 10,000-app check creates 205–206 row
 widgets. Private native Wayland keyboard/AT-SPI/Orca audit
 `20260920-160431-library` passes all nine checks. Russian normal, high-contrast
 and doubled-text runs `20260920-155934-*` pass light/dark and 360-pixel layouts,
-including empty states and long titles. See [UI evidence](../experiments/ui/RESULTS.md).
+including empty states and long titles. See [UI evidence](../tests/ui/RESULTS.md).
 
 **Creation is implemented and verified**: URL → metadata review → real portal
 installation → library with the new row focused. Cancellation, offline/skip,
