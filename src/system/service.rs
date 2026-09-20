@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
-use std::path::PathBuf;
+use std::{path::PathBuf, time::Duration};
 
 use anyhow::{anyhow, Context, Result};
 use ashpd::WindowIdentifier;
@@ -168,13 +168,29 @@ impl<L: LauncherBackend, B: BackgroundBackend, C: ChromiumBackend> AppService<L,
             .map_err(|_| anyhow!("the profile restore worker stopped unexpectedly"))?
     }
 
+    /// Waits for the background lock off the main loop and with a bound. A
+    /// blocking acquisition froze the interface for as long as another holder
+    /// kept the lock, and any caller already holding a fail-fast lock kept that
+    /// one too, so unrelated operations failed while the wait lasted.
     async fn lock_background(&self) -> Result<BackgroundLock> {
+        const ATTEMPTS: u32 = 100;
+        const INTERVAL: Duration = Duration::from_millis(50);
         let repository = self.repository.clone();
         let (sender, receiver) = oneshot::channel();
         std::thread::Builder::new()
             .name("alcove-background-lock".to_owned())
             .spawn(move || {
-                let _ = sender.send(repository.lock_background());
+                for attempt in 0..ATTEMPTS {
+                    match repository.try_lock_background() {
+                        Ok(Some(lock)) => return drop(sender.send(Ok(lock))),
+                        Err(error) => return drop(sender.send(Err(error))),
+                        Ok(None) if attempt + 1 == ATTEMPTS => break,
+                        Ok(None) => std::thread::sleep(INTERVAL),
+                    }
+                }
+                let _ = sender.send(Err(anyhow!(
+                    "another application is still reconciling background permission"
+                )));
             })
             .context("failed to start the background lock worker")?;
         receiver

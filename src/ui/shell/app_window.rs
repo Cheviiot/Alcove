@@ -387,6 +387,12 @@ mod imp {
                 return glib::Propagation::Stop;
             }
             self.obj().leave_background();
+            // Release the profile lock here rather than at finalisation. The
+            // whole interface is one process, so a delete started right after
+            // this window closes would otherwise find the profile still held.
+            self.obj().shell().set_content(None::<&gtk::Widget>);
+            self.webview.take();
+            self.runtime_lock.take();
             glib::Propagation::Proceed
         }
     }

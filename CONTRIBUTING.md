@@ -20,11 +20,6 @@ a report and keep each pull request focused on one change.
    meson test -C build
    ```
 
-   The suite runs on a single thread, which `.cargo/config.toml` enforces.
-   This is a temporary workaround. An advisory lock belongs to the open file
-   description rather than the process, so repeated acquisitions inside one
-   process contend; running the suite in parallel surfaces real defects rather
-   than test-harness artefacts. See that file for what remains to be fixed.
 
 5. Open a pull request. Changes are squash-merged after required checks pass.
 

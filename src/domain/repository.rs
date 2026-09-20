@@ -130,7 +130,10 @@ impl AppRepository {
         self.data_root.join("apps")
     }
 
-    pub fn lock_background(&self) -> Result<BackgroundLock> {
+    /// Takes the background lock if it is free. Returns `Ok(None)` when another
+    /// holder has it, so callers on the main loop can retry instead of parking
+    /// the whole interface on an unbounded wait.
+    pub fn try_lock_background(&self) -> Result<Option<BackgroundLock>> {
         fs::create_dir_all(&self.data_root)
             .with_context(|| format!("failed to create {}", self.data_root.display()))?;
         let path = self.data_root.join(BACKGROUND_LOCK_FILE);
@@ -141,9 +144,11 @@ impl AppRepository {
             .truncate(false)
             .open(&path)
             .with_context(|| format!("failed to open {}", path.display()))?;
-        rustix::fs::flock(&file, rustix::fs::FlockOperation::LockExclusive)
-            .with_context(|| format!("failed to lock {}", path.display()))?;
-        Ok(BackgroundLock { _file: file })
+        match rustix::fs::flock(&file, rustix::fs::FlockOperation::NonBlockingLockExclusive) {
+            Ok(()) => Ok(Some(BackgroundLock { _file: file })),
+            Err(rustix::io::Errno::WOULDBLOCK) => Ok(None),
+            Err(error) => Err(error).with_context(|| format!("failed to lock {}", path.display())),
+        }
     }
 
     pub fn profile_dir(&self, id: &AppId) -> PathBuf {
@@ -1037,24 +1042,14 @@ mod tests {
     }
 
     #[test]
-    fn background_reconciliation_lock_serializes_processes() {
+    fn background_reconciliation_lock_reports_a_busy_holder() {
         let (_temp, repository) = repository();
-        let first_lock = repository.lock_background().unwrap();
-        let repository_for_thread = repository.clone();
-        let (sender, receiver) = std::sync::mpsc::channel();
-        let thread = std::thread::spawn(move || {
-            let _ = sender.send(repository_for_thread.lock_background());
-        });
-        assert!(matches!(
-            receiver.recv_timeout(std::time::Duration::from_millis(100)),
-            Err(std::sync::mpsc::RecvTimeoutError::Timeout)
-        ));
-        drop(first_lock);
-        receiver
-            .recv_timeout(std::time::Duration::from_secs(2))
-            .unwrap()
-            .unwrap();
-        thread.join().unwrap();
+        let held = repository.try_lock_background().unwrap().unwrap();
+        // Another holder must be reported, not waited on: callers run on the
+        // main loop and cannot afford to block the interface.
+        assert!(repository.try_lock_background().unwrap().is_none());
+        drop(held);
+        assert!(repository.try_lock_background().unwrap().is_some());
     }
 
     #[test]
