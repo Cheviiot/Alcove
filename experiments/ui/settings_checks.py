@@ -8,7 +8,7 @@ import time
 def run(nodes,find,wait,press,key,result,runtime):
     import pyatspi
     created=result['created_app']
-    path=runtime/'data/bastle/apps'/created['id']/'app.json'
+    path=runtime/'data/alcove/apps'/created['id']/'app.json'
     def config(): return json.loads(path.read_text())
     def field(name):
         return wait(lambda: next((n for n in nodes() if n.name==name and
@@ -100,9 +100,9 @@ def run(nodes,find,wait,press,key,result,runtime):
     activate(advanced)
     toggle('Собственный User-Agent')
     agent=field('User-Agent')
-    write(agent,'Bastle Settings Audit')
+    write(agent,'Alcove Settings Audit')
     press_enter(agent)
-    wait(lambda: config()['user_agent']=='Bastle Settings Audit','custom user agent saved')
+    wait(lambda: config()['user_agent']=='Alcove Settings Audit','custom user agent saved')
     toggle('Собственный User-Agent')
     wait(lambda: config()['user_agent'] is None,'custom agent disabled immediately')
     checks['settings_advanced_user_agent_saves']=True

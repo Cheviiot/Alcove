@@ -8,7 +8,7 @@ use crate::{
         MAX_CONTENT_FILTER_SOURCE_SIZE,
     },
     service::AppService,
-    BastleWindow,
+    AlcoveWindow,
 };
 use adw::prelude::*;
 use anyhow::{anyhow, ensure, Context, Result};
@@ -62,7 +62,7 @@ struct Editor {
     notice: gtk::Label,
 }
 
-pub fn start(parent: &BastleWindow, id: AppId) {
+pub fn start(parent: &AlcoveWindow, id: AppId) {
     let service = AppService::portal();
     match service
         .load(&id)
@@ -75,7 +75,7 @@ pub fn start(parent: &BastleWindow, id: AppId) {
     }
 }
 
-fn present_editor(parent: &BastleWindow, policy: AppPolicyV2, config: AppConfigV3) -> adw::Dialog {
+fn present_editor(parent: &AlcoveWindow, policy: AppPolicyV2, config: AppConfigV3) -> adw::Dialog {
     let dialog = adw::PreferencesDialog::builder()
         .title(gettext("Privacy and Power"))
         .content_width(540)
@@ -151,7 +151,7 @@ fn present_editor(parent: &BastleWindow, policy: AppPolicyV2, config: AppConfigV
     let autostart = adw::SwitchRow::builder()
         .title(gettext("Start at Login"))
         .subtitle(gettext(
-            "Start all opted-in Bastle applications without opening windows",
+            "Start all opted-in Alcove applications without opening windows",
         ))
         .active(policy.background.autostart)
         .build();
@@ -508,7 +508,7 @@ impl Editor {
                     &original,
                     &desired,
                     identifier.as_ref(),
-                    &gettext("Keep this Bastle application running in the background"),
+                    &gettext("Keep this Alcove application running in the background"),
                 )
                 .await;
             self.background_group.set_sensitive(true);
@@ -833,7 +833,7 @@ fn is_cancelled(error: &anyhow::Error) -> bool {
 
 #[cfg(feature = "ui-tests")]
 pub(crate) fn run_ui_smoke_test<P: IsA<gtk::Application>>(application: &P) -> Result<()> {
-    let parent = BastleWindow::new(application);
+    let parent = AlcoveWindow::new(application);
     let config = AppConfigV3::new("Privacy UI smoke test", "https://example.org/", 0)?;
     let mut policy = AppPolicyV2::default();
     apply_edit(&mut policy, &Edit::Navigation(true), &config.start_url)?;

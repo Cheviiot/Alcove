@@ -26,7 +26,7 @@ def run(nodes, find, wait, press, key, result, runtime):
             if self.path=='/icon.png': status,kind,body=200,'image/png',icon
             elif self.path in ('/site','/slow'):
                 status,kind,body=200,'text/html; charset=utf-8',(
-                    '<title>Проверочный сайт Bastle</title><link rel="icon" href="/icon.png">').encode()
+                    '<title>Проверочный сайт Alcove</title><link rel="icon" href="/icon.png">').encode()
             else: status,kind,body=503,'text/plain',b'Offline fixture'
             try:
                 self.send_response(status)
@@ -47,7 +47,7 @@ def run(nodes, find, wait, press, key, result, runtime):
     def app_records():
         # Transaction staging directories also contain app.json. Only the
         # final directory named after its ID proves the create committed.
-        return [p for p in (runtime/'data/bastle/apps').glob('*/app.json')
+        return [p for p in (runtime/'data/alcove/apps').glob('*/app.json')
             if p.parent.name==json.loads(p.read_text())['id']]
     def write(node,value): assert node.queryEditableText().setTextContents(value)
     def click(name):
@@ -81,7 +81,7 @@ def run(nodes, find, wait, press, key, result, runtime):
         write(address,base+'/site')
         press(0xff0d)  # Enter on the first step must advance, not create.
         title=review()
-        wait(lambda: read(title)=='Проверочный сайт Bastle','site title appears')
+        wait(lambda: read(title)=='Проверочный сайт Alcove','site title appears')
         assert '/icon.png' in requests
         assert len(app_records())==3
         checks['creation_fetches_title_and_icon_before_create']=True
@@ -162,7 +162,7 @@ def run(nodes, find, wait, press, key, result, runtime):
             time.sleep(.3)
             press(0xff0d)
             # The development binary is not installed in the container. GLib
-            # rejects Exec=bastle until it is on the portal session's PATH.
+            # rejects Exec=alcove until it is on the portal session's PATH.
             # Exercise this real failure, then provide the ordinary command
             # only inside the disposable environment and retry the same draft.
             wait(lambda: any(n.name.startswith('Не удалось создать приложение.') for n in nodes()),
@@ -170,7 +170,7 @@ def run(nodes, find, wait, press, key, result, runtime):
             assert len(app_records())==3 and read(field('Название'))=='Создано в проверке'
             checks['creation_install_failure_preserves_draft']=True
             from pathlib import Path
-            (runtime/'bin/bastle').symlink_to(Path(__file__).resolve().parents[2]/'build/src/bastle')
+            (runtime/'bin/alcove').symlink_to(Path(__file__).resolve().parents[2]/'build/src/alcove')
             click('Создать')
             portal_button('Create')
             time.sleep(.3)
@@ -193,8 +193,8 @@ def run(nodes, find, wait, press, key, result, runtime):
             installed=[p for p in launchers if created['id'] in p.name]
             assert installed, launchers
             desktop=installed[0].read_text()
-            assert 'bastle '+created['id'] in desktop and 'Создано в проверке' in desktop
-            icon_path=runtime/'data/bastle/apps'/created['id']/'icon.png'
+            assert 'alcove '+created['id'] in desktop and 'Создано в проверке' in desktop
+            icon_path=runtime/'data/alcove/apps'/created['id']/'icon.png'
             assert icon_path.exists() and icon_path.read_bytes().startswith(b'\x89PNG')
             checks['creation_real_portal_installs_launcher']=True
             checks['creation_returns_to_library_with_new_app']=True

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: GPL-3.0-only
-"""Exercise the ordinary Bastle launch command in a disposable Wayland session.
+"""Exercise the ordinary Alcove launch command in a disposable Wayland session.
 
 The host runs without probe instrumentation. Interact through real AT-SPI
 actions and the private compositor keyboard, including graceful window close.
@@ -24,7 +24,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 
 def main():
     if '--session' not in sys.argv:
-        with tempfile.TemporaryDirectory(prefix='bastle-launch-') as runtime:
+        with tempfile.TemporaryDirectory(prefix='alcove-launch-') as runtime:
             env = os.environ.copy()
             for key in ('DISPLAY', 'WAYLAND_DISPLAY', 'XAUTHORITY', 'AT_SPI_BUS_ADDRESS',
                         'DBUS_SESSION_BUS_ADDRESS', 'DBUS_STARTER_ADDRESS', 'DBUS_STARTER_BUS_TYPE'):
@@ -32,17 +32,17 @@ def main():
             env.update(XDG_RUNTIME_DIR=runtime, XDG_DATA_HOME=runtime + '/data',
                        XDG_CONFIG_HOME=runtime + '/config', XDG_CACHE_HOME=runtime + '/cache',
                        GSETTINGS_BACKEND='memory', NO_AT_BRIDGE='0', GDK_BACKEND='wayland',
-                       WAYLAND_DISPLAY='bastle-launch', LANGUAGE='ru', LC_ALL='ru_RU.UTF-8',
-                       BASTLE_TEST_RESOURCE=str(ROOT / 'build/src/bastle.gresource'),
+                       WAYLAND_DISPLAY='alcove-launch', LANGUAGE='ru', LC_ALL='ru_RU.UTF-8',
+                       ALCOVE_TEST_RESOURCE=str(ROOT / 'build/src/alcove.gresource'),
                        GSETTINGS_SCHEMA_DIR=str(ROOT / 'build/data'),
-                       BASTLE_NATIVE_CHROMIUM_ADDON=str(ROOT / 'build/native-chromium/addon.json'))
+                       ALCOVE_NATIVE_CHROMIUM_ADDON=str(ROOT / 'build/native-chromium/addon.json'))
             settings = pathlib.Path(runtime, 'config/gtk-4.0/settings.ini')
             settings.parent.mkdir(parents=True)
             settings.write_text('[Settings]\ngtk-xft-dpi=98304\n')
             return subprocess.call(['dbus-run-session', '--', sys.executable, __file__, *sys.argv[1:], '--session'], env=env)
 
     runtime = pathlib.Path(os.environ['XDG_RUNTIME_DIR'])
-    assert runtime.name.startswith('bastle-launch-') and os.environ['WAYLAND_DISPLAY'] == 'bastle-launch'
+    assert runtime.name.startswith('alcove-launch-') and os.environ['WAYLAND_DISPLAY'] == 'alcove-launch'
     policy_mode = '--policy' in sys.argv
     background_mode = '--background' in sys.argv
     output = ROOT / 'build/native-chromium/runs' / (datetime.datetime.now().strftime('%Y%m%d-%H%M%S') + ('-background' if background_mode else '-policy' if policy_mode else '-launch'))
@@ -76,7 +76,7 @@ def main():
                 return
             if self.path == '/target':
                 Fixture.target_requests += 1
-            if self.path.startswith('http://bastle-proxy.invalid/'):
+            if self.path.startswith('http://alcove-proxy.invalid/'):
                 Fixture.proxy_requests.append(self.path)
             if self.path == '/recover' and not Fixture.recover:
                 self.close_connection = True
@@ -99,7 +99,7 @@ def main():
             home = f'http://127.0.0.1:{server.server_port}/'
             body += f'<a href="{other}">Другой сайт</a><a href="/redirect">Перенаправление</a><a href="{home}">На начальный сайт</a>'
             body += f'<form action="{other}" method="post"><input type="hidden" name="fixture" value="retained"><button>Отправить форму</button></form>'
-            body += f'<button onclick="window.open(\'{other}\',\'bastle-policy-popup\')">Открыть дочернее окно</button>'
+            body += f'<button onclick="window.open(\'{other}\',\'alcove-policy-popup\')">Открыть дочернее окно</button>'
             body += '<button onclick="setTimeout(()=>alert(\'Сообщение из фона\'),2000)">Сообщение позже</button>'
             body += '<button onclick="window.onbeforeunload=e=>{e.preventDefault();e.returnValue=\'\'}">Подтверждать закрытие</button>'
             if self.path == '/target':
@@ -118,14 +118,14 @@ def main():
 
     server = http.server.ThreadingHTTPServer(('127.0.0.1', 0), Fixture)
     threading.Thread(target=server.serve_forever, daemon=True).start()
-    data = runtime / 'data/bastle'
+    data = runtime / 'data/alcove'
 
     def config(identifier, url, title):
         path = data / 'apps' / identifier / 'app.json'
         path.parent.mkdir(parents=True)
         path.write_text(json.dumps(dict(schema_version=3, id=identifier, title=title,
             start_url=url, engine='chromium', use_theme_color=False,
-            user_agent='Bastle-Native-Launch-Audit/1.0' if url.startswith('http:') else None,
+            user_agent='Alcove-Native-Launch-Audit/1.0' if url.startswith('http:') else None,
             window=dict(width=800, height=640, maximized=False))))
 
     def progress(stage):
@@ -136,9 +136,9 @@ def main():
     try:
         with (output / 'compositor.log').open('w') as log:
             compositor = subprocess.Popen(['mutter', '--headless', '--wayland', '--no-x11',
-                '--virtual-monitor=1280x900', '--wayland-display=bastle-launch'], stdout=log, stderr=subprocess.STDOUT)
+                '--virtual-monitor=1280x900', '--wayland-display=alcove-launch'], stdout=log, stderr=subprocess.STDOUT)
         for _ in range(100):
-            if (runtime / 'bastle-launch').exists():
+            if (runtime / 'alcove-launch').exists():
                 break
             if compositor.poll() is not None:
                 raise RuntimeError('private compositor exited')
@@ -208,7 +208,7 @@ def main():
 
         def launch(identifier, background=False):
             with (output / f'{identifier}-{len(processes)}.log').open('w') as log:
-                proc = subprocess.Popen([str(ROOT / 'target/debug/bastle'), *(['--start-background'] if background else []), identifier],
+                proc = subprocess.Popen([str(ROOT / 'target/debug/alcove'), *(['--start-background'] if background else []), identifier],
                     stdout=log, stderr=subprocess.STDOUT)
             processes.append(proc)
             return proc
@@ -238,7 +238,7 @@ def main():
                 time.sleep(.08)
             wait(lambda: proc.poll() is not None, 'ordinary application exited after window close', 10)
             assert proc.returncode == 0, proc.returncode
-            wait(lambda: not list(runtime.glob('bastle-cef-*')), 'temporary IPC resources removed')
+            wait(lambda: not list(runtime.glob('alcove-cef-*')), 'temporary IPC resources removed')
 
         def click(name):
             button = wait(lambda: next((n for n in nodes() if n.name == name and
@@ -277,14 +277,14 @@ def main():
             bus.call_sync('org.freedesktop.DBus', '/org/freedesktop/DBus', 'org.freedesktop.DBus',
                 'RequestName', GLib.Variant('(su)', ('org.gtk.Notifications', 0)), None, Gio.DBusCallFlags.NONE, 3000, None)
             identifier = 'cefbackgrond'
-            app_id = 'io.github.cheviiot.bastle.' + identifier
+            app_id = 'io.github.cheviiot.alcove.' + identifier
             notification_key = (app_id, 'background-' + identifier)
             def app_action(action):
                 bus.call_sync(app_id, '/' + app_id.replace('.', '/'), 'org.gtk.Actions', 'Activate',
                     GLib.Variant('(sava{sv})', (action, [GLib.Variant('s', identifier)], {})),
                     None, Gio.DBusCallFlags.NONE, 3000, None)
             def visible_window():
-                return any(n.getRoleName() == 'frame' and n.getApplication().name == 'bastle'
+                return any(n.getRoleName() == 'frame' and n.getApplication().name == 'alcove'
                            and n.getState().contains(pyatspi.STATE_SHOWING) for n in nodes())
             def hidden():
                 return Fixture.visibility and Fixture.visibility[-1] == 'hidden' and not visible_window()
@@ -295,20 +295,20 @@ def main():
             def stopped(proc):
                 wait(lambda: proc.poll() is not None, 'background app exited', 10)
                 assert proc.returncode == 0, proc.returncode
-                wait(lambda: not list(runtime.glob('bastle-cef-*')), 'background IPC removed')
+                wait(lambda: not list(runtime.glob('alcove-cef-*')), 'background IPC removed')
                 wait(lambda: notification_key not in notifications, 'background notification removed')
             url = f'http://127.0.0.1:{server.server_port}/'
             config(identifier, url, 'Background App')
             disabled = launch(identifier, background=True)
             wait(lambda: disabled.poll() is not None, 'unapproved autostart exits')
-            assert disabled.returncode == 0 and not list(runtime.glob('bastle-cef-*'))
+            assert disabled.returncode == 0 and not list(runtime.glob('alcove-cef-*'))
             assert Fixture.page_requests == 0
             result['checks']['autostart_requires_saved_authorization'] = True
             policy_path = data / 'apps' / identifier / 'policy.json'
             policy_path.write_text(json.dumps(dict(schema_version=2, background=dict(enabled=True, autostart=True))))
             proc = launch(identifier, background=True)
             wait(hidden, 'CEF starts hidden and reports hidden visibility')
-            assert proc.poll() is None and len(list(runtime.glob('bastle-cef-*'))) == 1
+            assert proc.poll() is None and len(list(runtime.glob('alcove-cef-*'))) == 1
             result['checks']['background_launch_without_visible_window'] = True
             payload = wait(lambda: notifications.get(notification_key), 'background notification delivered')
             assert payload['default-action'] == 'app.show-background'
@@ -376,7 +376,7 @@ def main():
             proc = launch(identifier, background=True)
             wait(hidden, 'background before worker failure')
             workers = [pid for pid, argv in descendants(proc) if argv and
-                pathlib.Path(os.fsdecode(argv[0]).split(' ')[0]).name == 'bastle-cef-worker'
+                pathlib.Path(os.fsdecode(argv[0]).split(' ')[0]).name == 'alcove-cef-worker'
                 and not any(b'--type=' in arg for arg in argv)]
             assert len(workers) == 1
             os.kill(workers[0], signal.SIGKILL)
@@ -402,7 +402,7 @@ def main():
             policy_path = data / 'apps/cefpolicyask/policy.json'
             saved = json.loads(policy_path.read_text())
             assert saved['permissions'][origin]['notifications'] == 'allow'
-            result['checks']['always_allow_saved_in_bastle'] = True
+            result['checks']['always_allow_saved_in_alcove'] = True
             close(proc)
             saved['permissions'][origin]['geolocation'] = 'allow'
             policy_path.write_text(json.dumps(saved))
@@ -441,12 +441,12 @@ def main():
             assert json.loads((data / 'apps/cefpolicytmp/policy.json').read_text())['permissions'][origin]['notifications'] == 'block'
             result['checks']['not_now_can_prompt_again_and_block_is_saved'] = True
             close(proc)
-            config('cefpolicyprx', 'http://bastle-proxy.invalid/proxy-test', 'Proxy')
+            config('cefpolicyprx', 'http://alcove-proxy.invalid/proxy-test', 'Proxy')
             policy_path = data / 'apps/cefpolicyprx/policy.json'
             policy_path.write_text(json.dumps(dict(schema_version=2, proxy=dict(mode='custom',uri=origin))))
             proc = launch('cefpolicyprx')
             find('Проверка приложения')
-            assert 'http://bastle-proxy.invalid/proxy-test' in Fixture.proxy_requests
+            assert 'http://alcove-proxy.invalid/proxy-test' in Fixture.proxy_requests
             result['checks']['configured_proxy_routes_requests'] = True
             close(proc)
             config('cefpolicynav', url, 'Navigation')
@@ -490,7 +490,7 @@ def main():
             for sym, pressed in ((0xffe9, True), (0xffc1, True), (0xffc1, False), (0xffe9, False)):
                 call('NotifyKeyboardKeysym', '(ub)', (sym, pressed))
                 time.sleep(.08)
-            wait(lambda: sum(n.getRoleName() == 'frame' and n.getApplication().name == 'bastle' for n in nodes()) == 1,
+            wait(lambda: sum(n.getRoleName() == 'frame' and n.getApplication().name == 'alcove' for n in nodes()) == 1,
                  'blocked child window closed while parent remains')
             assert proc.poll() is None and Fixture.target_requests == before_popup
             result['checks']['popup_obeys_same_navigation_policy'] = True
@@ -519,7 +519,7 @@ def main():
         marker.write_text('unchanged')
         proc = launch('ceflaunchone')
         find('Пусто')
-        find('Bastle-Native-Launch-Audit/1.0')
+        find('Alcove-Native-Launch-Audit/1.0')
         result['checks']['configured_user_agent'] = True
         snapshot('fixture-loaded')
         button = wait(lambda: next((n for n in nodes() if n.name == 'Сохранить' and
@@ -533,13 +533,13 @@ def main():
         wait(lambda: Fixture.page_requests > requests_before, 'F5 reloads website')
         result['checks']['keyboard_reload_from_site'] = True
         snapshot('saved')
-        repeat = subprocess.run([str(ROOT / 'target/debug/bastle'), 'ceflaunchone'],
+        repeat = subprocess.run([str(ROOT / 'target/debug/alcove'), 'ceflaunchone'],
             capture_output=True, timeout=10)
         assert repeat.returncode == 0 and proc.poll() is None
-        assert len(list(runtime.glob('bastle-cef-*'))) == 1
+        assert len(list(runtime.glob('alcove-cef-*'))) == 1
         result['checks']['relaunch_presents_existing_window'] = True
-        assert not list(runtime.glob('bastle-cef-*/events.jsonl'))
-        assert not list(runtime.glob('bastle-cef-*/*.png'))
+        assert not list(runtime.glob('alcove-cef-*/events.jsonl'))
+        assert not list(runtime.glob('alcove-cef-*/*.png'))
         result['checks']['no_probe_recording'] = True
         close(proc)
         result['checks']['graceful_close_and_ipc_cleanup'] = True
@@ -582,7 +582,7 @@ def main():
         find('Пусто')
         result['checks']['renderer_crash_native_retry'] = True
         workers = [pid for pid, argv in descendants(proc) if argv and
-            pathlib.Path(os.fsdecode(argv[0]).split(' ')[0]).name == 'bastle-cef-worker'
+            pathlib.Path(os.fsdecode(argv[0]).split(' ')[0]).name == 'alcove-cef-worker'
             and not any(b'--type=' in arg for arg in argv)]
         assert len(workers) == 1
         os.kill(workers[0], signal.SIGKILL)
@@ -595,7 +595,7 @@ def main():
         close(proc)
         proc = launch('ceflaunchweb')
         wait(lambda: next((n for n in nodes() if n.getRoleName() == 'document web'
-            and 'Wikipedia' in n.name and n.getApplication().name == 'bastle'), None), 'real site in Bastle')
+            and 'Wikipedia' in n.name and n.getApplication().name == 'alcove'), None), 'real site in Alcove')
         wait(lambda: next((n for n in nodes() if n.getRoleName() == 'link'
             and n.name.startswith('English')), None), 'Wikipedia language link')
         snapshot('wikipedia')

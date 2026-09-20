@@ -1,13 +1,13 @@
 # SPDX-License-Identifier: GPL-3.0-only
 
 [package]
-name = "bastle"
+name = "alcove"
 version = "0.1.0"
 edition = "2021"
 license = "GPL-3.0-only"
-repository = "https://github.com/Cheviiot/bastle"
+repository = "https://github.com/Cheviiot/alcove"
 description = "Install isolated web apps that integrate with GNOME"
-default-run = "bastle"
+default-run = "alcove"
 
 [features]
 ui-tests = []
@@ -15,7 +15,7 @@ native-chromium = ["rustix/net"]
 native-chromium-probe = ["native-chromium"]
 
 [[bin]]
-name = "bastle-native-chromium"
+name = "alcove-native-chromium"
 path = "experiments/native-chromium/host.rs"
 required-features = ["native-chromium-probe"]
 

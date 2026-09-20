@@ -5,7 +5,7 @@ mod app_page;
 mod app_row;
 mod app_window;
 mod application;
-use bastle::background;
+use alcove::background;
 mod backup;
 mod backup_dialog;
 mod chromium;
@@ -16,11 +16,11 @@ mod create_app_dialog;
 mod dialogs;
 mod download_manager;
 mod launcher;
-use bastle::model;
+use alcove::model;
 #[cfg(feature = "native-chromium")]
 mod native_chromium_launch;
 mod permissions_dialog;
-use bastle::policy;
+use alcove::policy;
 mod portal;
 mod privacy_dialog;
 mod repository;
@@ -30,14 +30,14 @@ mod ui_model;
 #[cfg(feature = "ui-tests")]
 mod ui_test_support;
 mod util;
-use bastle::web_app_shell;
+use alcove::web_app_shell;
 mod window;
 
-use application::BastleApplication;
+use application::AlcoveApplication;
 use config::{GETTEXT_PACKAGE, LOCALEDIR, PKGDATADIR};
 use gettextrs::{bind_textdomain_codeset, bindtextdomain, textdomain};
 use gtk::{gio, glib, prelude::*};
-use window::BastleWindow;
+use window::AlcoveWindow;
 
 fn main() -> glib::ExitCode {
     // SAFETY: process startup, before GTK or any worker threads are initialized.
@@ -45,7 +45,7 @@ fn main() -> glib::ExitCode {
         gettextrs::setlocale(gettextrs::LocaleCategory::LcAll, "");
     }
     #[cfg(feature = "ui-tests")]
-    let test_locale = std::env::var("BASTLE_TEST_LOCALEDIR").ok();
+    let test_locale = std::env::var("ALCOVE_TEST_LOCALEDIR").ok();
     #[cfg(feature = "ui-tests")]
     let locale_dir = test_locale.as_deref().unwrap_or(LOCALEDIR);
     #[cfg(not(feature = "ui-tests"))]
@@ -59,10 +59,10 @@ fn main() -> glib::ExitCode {
     }
 
     #[cfg(feature = "ui-tests")]
-    let resource_path = std::env::var("BASTLE_TEST_RESOURCE")
-        .unwrap_or_else(|_| format!("{PKGDATADIR}/bastle.gresource"));
+    let resource_path = std::env::var("ALCOVE_TEST_RESOURCE")
+        .unwrap_or_else(|_| format!("{PKGDATADIR}/alcove.gresource"));
     #[cfg(not(feature = "ui-tests"))]
-    let resource_path = format!("{PKGDATADIR}/bastle.gresource");
+    let resource_path = format!("{PKGDATADIR}/alcove.gresource");
     let resources = match gio::Resource::load(&resource_path) {
         Ok(resources) => resources,
         Err(error) => {
@@ -72,5 +72,5 @@ fn main() -> glib::ExitCode {
     };
     gio::resources_register(&resources);
 
-    BastleApplication::new(gio::ApplicationFlags::HANDLES_COMMAND_LINE).run()
+    AlcoveApplication::new(gio::ApplicationFlags::HANDLES_COMMAND_LINE).run()
 }

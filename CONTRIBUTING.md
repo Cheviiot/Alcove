@@ -1,12 +1,12 @@
-# Contributing to Bastle
+# Contributing to Alcove
 
-Thank you for helping build Bastle. Please search existing issues before filing
+Thank you for helping build Alcove. Please search existing issues before filing
 a report and keep each pull request focused on one change.
 
 ## Workflow
 
 1. Create a branch from `main`.
-2. Work inside the documented `bastle-dev` Fedora 44 Distrobox.
+2. Work inside the documented `alcove-dev` Fedora 44 Distrobox.
 3. Add tests for behavior changes.
 4. Run the local gate:
 
@@ -25,17 +25,17 @@ a report and keep each pull request focused on one change.
 ## Development environment
 
 Project-specific packages belong in the Fedora 44 Distrobox named
-`bastle-dev`, not on the ALT Workstation host:
+`alcove-dev`, not on the ALT Workstation host:
 
 ```sh
-distrobox create --name bastle-dev --image registry.fedoraproject.org/fedora:44 --yes
-distrobox enter bastle-dev -- sudo dnf install -y rust cargo rustfmt clippy cargo-deny gcc pkgconf-pkg-config meson ninja-build blueprint-compiler gtk4-devel libadwaita-devel webkitgtk6.0-devel openssl-devel appstream desktop-file-utils flatpak-builder gettext glib2-devel librsvg2-tools xorg-x11-server-Xvfb dbus-daemon git nodejs python3-aiohttp python3-pyyaml python3-tomlkit
+distrobox create --name alcove-dev --image registry.fedoraproject.org/fedora:44 --yes
+distrobox enter alcove-dev -- sudo dnf install -y rust cargo rustfmt clippy cargo-deny gcc pkgconf-pkg-config meson ninja-build blueprint-compiler gtk4-devel libadwaita-devel webkitgtk6.0-devel openssl-devel appstream desktop-file-utils flatpak-builder gettext glib2-devel librsvg2-tools xorg-x11-server-Xvfb dbus-daemon git nodejs python3-aiohttp python3-pyyaml python3-tomlkit
 ```
 
 Build the development Flatpak without FUSE-backed rofiles:
 
 ```sh
-distrobox enter bastle-dev -- flatpak-builder --disable-rofiles-fuse --user --install --force-clean --install-deps-from=flathub .flatpak-build build-aux/io.github.cheviiot.bastle.Devel.json
+distrobox enter alcove-dev -- flatpak-builder --disable-rofiles-fuse --user --install --force-clean --install-deps-from=flathub .flatpak-build build-aux/io.github.cheviiot.alcove.Devel.json
 ```
 
 The interface structure and UI checks are documented in [GNOME interface](docs/gnome-hig.md).
@@ -46,7 +46,7 @@ Chromium experiment also provides its own headless Wayland compositor; see
 Never allow a GUI check to fall back to the active desktop session:
 
 ```sh
-distrobox enter bastle-dev -- dbus-run-session -- env -u WAYLAND_DISPLAY xvfb-run -a timeout 10s flatpak run --nosocket=wayland --socket=x11 --env=GDK_BACKEND=x11 io.github.cheviiot.bastle
+distrobox enter alcove-dev -- dbus-run-session -- env -u WAYLAND_DISPLAY xvfb-run -a timeout 10s flatpak run --nosocket=wayland --socket=x11 --env=GDK_BACKEND=x11 io.github.cheviiot.alcove
 ```
 
 Use English for code, identifiers, and technical documentation. User-facing

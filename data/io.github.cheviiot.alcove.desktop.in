@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: GPL-3.0-only
 [Desktop Entry]
-Name=Bastle
+Name=Alcove
 Comment=Create isolated web applications
-Exec=bastle
-Icon=io.github.cheviiot.bastle
+Exec=alcove
+Icon=io.github.cheviiot.alcove
 Terminal=false
 Type=Application
 StartupNotify=true

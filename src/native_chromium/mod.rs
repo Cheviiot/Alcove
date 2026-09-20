@@ -73,7 +73,7 @@ impl Options {
         let result = Self {
             diagnostics: true,
             profile: None,
-            title: "Bastle — Chromium Prototype".into(),
+            title: "Alcove — Chromium Prototype".into(),
             width: 800,
             height: 640,
             maximized: false,
@@ -107,7 +107,7 @@ impl Options {
     }
 }
 
-/// Inputs supplied by Bastle after validating the app configuration and policy.
+/// Inputs supplied by Alcove after validating the app configuration and policy.
 /// `lifetime` retains the repository profile lock until all CEF windows close.
 pub struct Launch {
     pub app_id: crate::model::AppId,
@@ -130,7 +130,7 @@ pub fn open(app: &adw::Application, launch: Launch) -> Result<adw::ApplicationWi
     protocol::validate_url(&launch.url)?;
     launch.policy.validate()?;
     let directory = tempfile::Builder::new()
-        .prefix("bastle-cef-")
+        .prefix("alcove-cef-")
         .tempdir_in(glib::user_runtime_dir())
         .context("create private CEF runtime directory")?;
     fs::create_dir_all(&launch.profile)?;
@@ -218,10 +218,10 @@ impl Worker {
                 Stdio::null()
             });
         if options.diagnostics {
-            command.arg("--bastle-diagnostics");
+            command.arg("--alcove-diagnostics");
         }
         if let Some(profile) = &options.profile {
-            command.arg(format!("--bastle-profile-root={}", profile.display()));
+            command.arg(format!("--alcove-profile-root={}", profile.display()));
         }
         if let Some(agent) = &options.user_agent {
             command.arg(format!("--user-agent={agent}"));
@@ -231,7 +231,7 @@ impl Worker {
             &policy_path,
             serde_json::to_vec(&*options.policy.current.borrow())?,
         )?;
-        command.arg(format!("--bastle-policy={}", policy_path.display()));
+        command.arg(format!("--alcove-policy={}", policy_path.display()));
         command.args(policy::proxy_arguments(
             &options.policy.current.borrow().proxy,
         )?);
@@ -765,7 +765,7 @@ fn build_view(
         move |_, _| {
             let dialog = adw::AlertDialog::new(
                 Some("Экспериментальная сборка"),
-                Some("Прототип проверяет работу Chromium внутри нативного окна Bastle."),
+                Some("Прототип проверяет работу Chromium внутри нативного окна Alcove."),
             );
             dialog.add_response("close", "Закрыть");
             dialog.set_close_response("close");
@@ -1164,11 +1164,11 @@ fn build_view(
                         "console"
                             if event["message"]
                                 .as_str()
-                                .is_some_and(|s| s.contains("BASTLE_INPUT:Привет")) =>
+                                .is_some_and(|s| s.contains("ALCOVE_INPUT:Привет")) =>
                         {
                             text_confirmed = true;
                         }
-                        "console" if event["message"].as_str() == Some("BASTLE_WEBGL:true") => {
+                        "console" if event["message"].as_str() == Some("ALCOVE_WEBGL:true") => {
                             webgl = true;
                         }
                         _ => {}
@@ -1318,7 +1318,7 @@ fn build_view(
                 {
                     ime.emit_by_name::<()>("commit", &[&"Привет"]);
                     worker.send("native-accessibility-inspect", json!({}));
-                    worker.send("evaluate",json!({"script":"console.log('BASTLE_INPUT:'+document.querySelector('#input')?.value);"}));
+                    worker.send("evaluate",json!({"script":"console.log('ALCOVE_INPUT:'+document.querySelector('#input')?.value);"}));
                     inspected = true;
                 }
                 if primary && !ready && !closed && start.elapsed() > Duration::from_secs(20) {
@@ -1463,10 +1463,10 @@ pub fn run_probe() -> glib::ExitCode {
         gettextrs::setlocale(gettextrs::LocaleCategory::LcAll, "");
     }
     let locale =
-        std::env::var("BASTLE_PROBE_LOCALEDIR").unwrap_or_else(|_| "/usr/share/locale".into());
-    if let Err(error) = gettextrs::bindtextdomain("bastle", locale)
-        .and_then(|_| gettextrs::bind_textdomain_codeset("bastle", "UTF-8"))
-        .and_then(|_| gettextrs::textdomain("bastle"))
+        std::env::var("ALCOVE_PROBE_LOCALEDIR").unwrap_or_else(|_| "/usr/share/locale".into());
+    if let Err(error) = gettextrs::bindtextdomain("alcove", locale)
+        .and_then(|_| gettextrs::bind_textdomain_codeset("alcove", "UTF-8"))
+        .and_then(|_| gettextrs::textdomain("alcove"))
     {
         eprintln!("Failed to initialize translations: {error}");
         return glib::ExitCode::FAILURE;
@@ -1479,7 +1479,7 @@ pub fn run_probe() -> glib::ExitCode {
         }
     };
     let app = adw::Application::builder()
-        .application_id("io.github.cheviiot.bastle.NativeProbe")
+        .application_id("io.github.cheviiot.alcove.NativeProbe")
         .flags(gio::ApplicationFlags::NON_UNIQUE)
         .build();
     let startup_failed = Rc::new(Cell::new(false));

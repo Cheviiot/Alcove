@@ -30,7 +30,7 @@ try:
             events.append(record)
             return
         try:
-            if event.source.getApplication().name in ("Bastle Chromium content", "bastle-native-chromium"):
+            if event.source.getApplication().name in ("Alcove Chromium content", "alcove-native-chromium"):
                 events.append(record | {"name": event.source.name})
         except GLib.Error:
             events.append(record | {"source_removed": True})
@@ -68,7 +68,7 @@ try:
                 visit(child, depth + 1)
     visit(pyatspi.Registry.getDesktop(0))
     result = {"nodes": list(nodes),
-              "document_embedded_in_gtk": any(n["role"] == "document web" and n["application"] == "bastle-native-chromium" for n in nodes),
+              "document_embedded_in_gtk": any(n["role"] == "document web" and n["application"] == "alcove-native-chromium" for n in nodes),
               "web_document_exposed": any(n["role"] == "document web" for n in nodes),
               "web_input_exposed": any(n["name"] == "Проверка ввода" and n["role"] in ("entry", "text") for n in nodes),
               "web_button_exposed": any(n["name"] == "Проверить нажатие" and "button" in n["role"] for n in nodes)}

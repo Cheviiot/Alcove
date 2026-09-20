@@ -203,7 +203,7 @@ impl<L: LauncherBackend + Clone> BackupService<L> {
 
     fn prepare_backup(&self, ids: &[AppId], include_site_data: bool) -> Result<PreparedBackup> {
         let directory = TempBuilder::new()
-            .prefix("bastle-backup-snapshot-")
+            .prefix("alcove-backup-snapshot-")
             .tempdir()
             .context("failed to create a backup snapshot directory")?;
         let mut manifest_apps = Vec::new();
@@ -213,7 +213,7 @@ impl<L: LauncherBackend + Clone> BackupService<L> {
             if include_site_data {
                 ensure!(
                     snapshot.config.engine == Engine::WebKit,
-                    "Chromium site data export is not supported by Bastle backup yet"
+                    "Chromium site data export is not supported by Alcove backup yet"
                 );
                 profile_locks.push(self.service.try_acquire_profile_snapshot_lock(id)?);
             }
@@ -589,7 +589,7 @@ fn extract_backup(
         File::open(source).with_context(|| format!("failed to open {}", source.display()))?;
     let mut input = BufReader::new(file);
     let encrypted = input.fill_buf()?.starts_with(AGE_HEADER);
-    let extracted = TempBuilder::new().prefix("bastle-restore-").tempdir()?;
+    let extracted = TempBuilder::new().prefix("alcove-restore-").tempdir()?;
     let paths = if encrypted {
         let passphrase =
             passphrase.context("this backup is encrypted and requires a passphrase")?;
@@ -616,7 +616,7 @@ fn extract_backup(
         let archived = read_archived_app(extracted.path(), &app.id)?;
         ensure!(
             !manifest.includes_site_data || archived.config.engine == Engine::WebKit,
-            "site data in a Bastle backup must belong to a WebKit application"
+            "site data in a Alcove backup must belong to a WebKit application"
         );
     }
     Ok((extracted, manifest, encrypted))
@@ -816,7 +816,7 @@ mod tests {
             b"cache",
         )
         .unwrap();
-        let backup = source.path().join("example.bastle-backup");
+        let backup = source.path().join("example.alcove-backup");
         source_service
             .create_backup(
                 &backup,
@@ -850,7 +850,7 @@ mod tests {
             b"cookies",
         )
         .unwrap();
-        let backup = source.path().join("site-data.bastle-backup");
+        let backup = source.path().join("site-data.alcove-backup");
         let missing_passphrase = BackupOptions {
             include_site_data: true,
             passphrase: None,
@@ -932,7 +932,7 @@ mod tests {
         };
         let error = service
             .create_backup(
-                &source.path().join("chromium.bastle-backup"),
+                &source.path().join("chromium.alcove-backup"),
                 &[app.id],
                 &options,
             )
@@ -943,7 +943,7 @@ mod tests {
     #[test]
     fn restore_rejects_chromium_archives_that_claim_webkit_site_data() {
         let temp = tempfile::tempdir().unwrap();
-        let backup = temp.path().join("forged-chromium.bastle-backup");
+        let backup = temp.path().join("forged-chromium.alcove-backup");
         let id: AppId = "abcdefghijkl".parse().unwrap();
         let mut app = AppConfigV3::new("Chromium", "https://example.org", 0).unwrap();
         app.id = id.clone();
@@ -1026,7 +1026,7 @@ mod tests {
             r#"{
   "schema_version": 2,
   "id": "abcdefghijkl",
-  "title": "Bastle v0.4 backup",
+  "title": "Alcove v0.4 backup",
   "start_url": "https://example.org/",
   "user_agent": null,
   "use_theme_color": true,
@@ -1053,7 +1053,7 @@ mod tests {
         let source_service = backup_service(source.path());
         let app = AppConfigV3::new("Source", "example.org", 0).unwrap();
         block_on(source_service.service.create(app.clone(), b"icon", None)).unwrap();
-        let backup = source.path().join("conflict.bastle-backup");
+        let backup = source.path().join("conflict.alcove-backup");
         source_service
             .create_backup(
                 &backup,
@@ -1088,7 +1088,7 @@ mod tests {
         let source_service = backup_service(source.path());
         let app = AppConfigV3::new("Source", "example.org", 0).unwrap();
         block_on(source_service.service.create(app.clone(), b"icon", None)).unwrap();
-        let backup = source.path().join("reserved-id.bastle-backup");
+        let backup = source.path().join("reserved-id.alcove-backup");
         source_service
             .create_backup(
                 &backup,
@@ -1139,7 +1139,7 @@ mod tests {
         let source_service = backup_service(source.path());
         let app = AppConfigV3::new("Source", "example.org", 0).unwrap();
         block_on(source_service.service.create(app.clone(), b"icon", None)).unwrap();
-        let backup = source.path().join("late-reservation.bastle-backup");
+        let backup = source.path().join("late-reservation.alcove-backup");
         source_service
             .create_backup(
                 &backup,
@@ -1188,7 +1188,7 @@ mod tests {
             .merge_policy(&app.id, &AppPolicyV2::default(), &policy)
             .unwrap();
 
-        let backup = source.path().join("background.bastle-backup");
+        let backup = source.path().join("background.alcove-backup");
         service
             .create_backup(
                 &backup,
@@ -1244,7 +1244,7 @@ mod tests {
     #[test]
     fn archive_links_are_rejected_before_restore() {
         let temp = tempfile::tempdir().unwrap();
-        let backup = temp.path().join("link.bastle-backup");
+        let backup = temp.path().join("link.alcove-backup");
         let file = File::create(&backup).unwrap();
         let encoder = zstd::stream::Encoder::new(file, 1).unwrap();
         let mut archive = tar::Builder::new(encoder);
@@ -1314,7 +1314,7 @@ mod tests {
                 .create(second.clone(), b"second", None),
         )
         .unwrap();
-        let backup = source.path().join("partial.bastle-backup");
+        let backup = source.path().join("partial.alcove-backup");
         source_service
             .create_backup(
                 &backup,

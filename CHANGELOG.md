@@ -1,6 +1,6 @@
 # Changelog
 
-All notable Bastle changes are recorded here. The format follows Keep a
+All notable Alcove changes are recorded here. The format follows Keep a
 Changelog and versions follow Semantic Versioning.
 
 ## [Unreleased]
@@ -30,5 +30,5 @@ Changelog and versions follow Semantic Versioning.
   `native-chromium` build feature, alongside reproducible UI and engine audit
   harnesses.
 
-[Unreleased]: https://github.com/Cheviiot/bastle/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/Cheviiot/bastle/releases/tag/v0.1.0
+[Unreleased]: https://github.com/Cheviiot/alcove/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/Cheviiot/alcove/releases/tag/v0.1.0

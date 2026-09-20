@@ -8,8 +8,8 @@ from gi.repository import Gio, GLib
 parser=argparse.ArgumentParser()
 parser.add_argument('--output',type=pathlib.Path,required=True)
 args=parser.parse_args()
-if os.environ.get('WAYLAND_DISPLAY')!='bastle-probe' or not os.path.basename(os.environ.get('XDG_RUNTIME_DIR','')).startswith('bastle-native-'):
-    raise SystemExit('Refusing UI control outside isolated Bastle session')
+if os.environ.get('WAYLAND_DISPLAY')!='alcove-probe' or not os.path.basename(os.environ.get('XDG_RUNTIME_DIR','')).startswith('alcove-native-'):
+    raise SystemExit('Refusing UI control outside isolated Alcove session')
 result={'checks':{}}
 pyatspi.Registry.registerEventListener(lambda e:None,'object','window')
 bus=Gio.bus_get_sync(Gio.BusType.SESSION,None)
@@ -37,7 +37,7 @@ def events():
 def messages(kind):
     records=[]
     for e in events():
-        if e.get('message','').startswith('BASTLE_SELECT:'):
+        if e.get('message','').startswith('ALCOVE_SELECT:'):
             value=json.loads(e['message'].split(':',1)[1])
             if value['kind']==kind:records.append(value['value'])
     return records
@@ -68,7 +68,7 @@ try:
     combo=find('Цвет интерфейса',('combo box',))
     initial=wait(lambda:messages('geometry'),'fixture geometry')[-1]
     scale=initial['scale'];cx,cy=640,450
-    result['checks']['select_accessible']=combo.getApplication().name=='bastle-native-chromium'
+    result['checks']['select_accessible']=combo.getApplication().name=='alcove-native-chromium'
     # The private Mutter opens the sole 800x640 window at the monitor center.
     # The first select is centered in the viewport: use real pointer input.
     pointer(cx,cy);click()

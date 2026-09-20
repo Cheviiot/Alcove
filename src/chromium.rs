@@ -10,9 +10,9 @@ use crate::{
     policy::AppPolicyV2,
 };
 
-pub const BUS_NAME: &str = "io.github.cheviiot.bastle.Chromium";
-pub const OBJECT_PATH: &str = "/io/github/cheviiot/bastle/Chromium/Engine1";
-pub const INTERFACE_NAME: &str = "io.github.cheviiot.bastle.Chromium.Engine1";
+pub const BUS_NAME: &str = "io.github.cheviiot.alcove.Chromium";
+pub const OBJECT_PATH: &str = "/io/github/cheviiot/alcove/Chromium/Engine1";
+pub const INTERFACE_NAME: &str = "io.github.cheviiot.alcove.Chromium.Engine1";
 pub const PROTOCOL_VERSION: u32 = 1;
 pub const RUNTIME_SHELL_FEATURE: &str = "runtime-shell-v1";
 pub const EXTENSION_ROOT: &str = "/app/extensions/chromium";
@@ -160,7 +160,7 @@ impl ChromiumClient {
 fn validate_capabilities(capabilities: &ChromiumCapabilities) -> Result<()> {
     if capabilities.protocol_version != PROTOCOL_VERSION {
         bail!(
-            "incompatible Chromium add-on protocol {}; Bastle requires {}",
+            "incompatible Chromium add-on protocol {}; Alcove requires {}",
             capabilities.protocol_version,
             PROTOCOL_VERSION
         );

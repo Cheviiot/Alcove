@@ -7,8 +7,8 @@ from gi.repository import GLib
 parser=argparse.ArgumentParser()
 parser.add_argument('--output',type=pathlib.Path,required=True)
 args=parser.parse_args()
-if os.environ.get('WAYLAND_DISPLAY')!='bastle-probe' or not os.path.basename(os.environ.get('XDG_RUNTIME_DIR','')).startswith('bastle-native-'):
-    raise SystemExit('Refusing UI control outside isolated Bastle session')
+if os.environ.get('WAYLAND_DISPLAY')!='alcove-probe' or not os.path.basename(os.environ.get('XDG_RUNTIME_DIR','')).startswith('alcove-native-'):
+    raise SystemExit('Refusing UI control outside isolated Alcove session')
 result={'checks':{}}
 pyatspi.Registry.registerEventListener(lambda e: None,'object','window','document')
 def settle(seconds=.1):
@@ -31,7 +31,7 @@ def docs(title='Одинаковая страница'):
     found=[]
     for n in walk():
         try:
-            if n.getRoleName()=='document web' and n.name==title and n.getApplication().name=='bastle-native-chromium': found.append(n)
+            if n.getRoleName()=='document web' and n.name==title and n.getApplication().name=='alcove-native-chromium': found.append(n)
         except GLib.Error:pass # A navigation can remove a node during enumeration.
     return found
 def wait(predicate,description):
@@ -47,7 +47,7 @@ def action(document,name):
 def events():
     p=args.output.parent/'app/events.jsonl'
     return [json.loads(line) for line in p.read_text().splitlines()] if p.exists() else []
-def actions(view):return sum(e.get('view')==view and e.get('message')=='BASTLE_MULTI_ACTION:{"trusted":true}' for e in events())
+def actions(view):return sum(e.get('view')==view and e.get('message')=='ALCOVE_MULTI_ACTION:{"trusted":true}' for e in events())
 def defunct(n):
     try:n.clearCache();return n.getState().contains(pyatspi.STATE_DEFUNCT)
     except GLib.Error:return True
@@ -81,7 +81,7 @@ try:
     result['checks']['child_text_selection']=list(text.getSelection(0))==[1,5]
     result['checks']['parent_text_untouched']=node(main,'Поле страницы').queryText().getNSelections()==0
     action(child,'Действие во фрейме')
-    result['checks']['iframe_action_routing']=bool(wait(lambda:any(e.get('view')==2 and e.get('message')=='BASTLE_FRAME_ACTION:true' for e in events()),'native iframe action'))
+    result['checks']['iframe_action_routing']=bool(wait(lambda:any(e.get('view')==2 and e.get('message')=='ALCOVE_FRAME_ACTION:true' for e in events()),'native iframe action'))
     old_child_action=node(child,'Действие страницы')
     action(child,'Перейти дальше')
     other=wait(lambda:next(iter(docs('Другая страница окна')),None),'child navigation')

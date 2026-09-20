@@ -13,8 +13,8 @@ from gi.repository import Gio, GLib
 parser = argparse.ArgumentParser()
 parser.add_argument('--output', type=pathlib.Path, required=True)
 args = parser.parse_args()
-if os.environ.get('WAYLAND_DISPLAY') != 'bastle-probe' or not os.path.basename(os.environ.get('XDG_RUNTIME_DIR','')).startswith('bastle-native-'):
-    raise SystemExit('Refusing UI control outside the isolated Bastle session')
+if os.environ.get('WAYLAND_DISPLAY') != 'alcove-probe' or not os.path.basename(os.environ.get('XDG_RUNTIME_DIR','')).startswith('alcove-native-'):
+    raise SystemExit('Refusing UI control outside the isolated Alcove session')
 result = {'checks': {}}
 pyatspi.Registry.registerEventListener(lambda event: None, 'object', 'window')
 bus = Gio.bus_get_sync(Gio.BusType.SESSION, None)
@@ -74,7 +74,7 @@ def wait_log(kind,value):
     while time.monotonic()<until:
         for event in events():
             message=event.get('message','')
-            if message.startswith('BASTLE_REQUEST:'):
+            if message.startswith('ALCOVE_REQUEST:'):
                 record=json.loads(message.split(':',1)[1])
                 if record == {'kind':kind,'value':value}: return True
         settle()
@@ -154,11 +154,11 @@ try:
     result['checks']['microphone_allow']=wait_log('microphone','granted')
     click('Разрешение камеры'); click('Всегда блокировать')
     result['checks']['camera_deny']=wait_log('camera','NotAllowedError')
-    upload=args.output.parent/'upload.txt'; upload.write_text('Bastle portal upload\n')
+    upload=args.output.parent/'upload.txt'; upload.write_text('Alcove portal upload\n')
     # CEF exposes the file control as a button with its localized default name.
     click_file()
     portal_path(upload)
-    result['checks']['file_portal_open']=wait_log('files',[{'name':'upload.txt','text':'Bastle portal upload\n'}])
+    result['checks']['file_portal_open']=wait_log('files',[{'name':'upload.txt','text':'Alcove portal upload\n'}])
     click_file(); click('Cancel')
     result['checks']['file_portal_cancel']=wait_log('file-cancel',True)
     click('Скачать тестовый файл')
@@ -166,7 +166,7 @@ try:
     portal_path(download,save=True)
     deadline=time.monotonic()+5
     while not download.exists() and time.monotonic()<deadline: settle()
-    result['checks']['download_portal_save']=download.read_text()=='Bastle portal download\n'
+    result['checks']['download_portal_save']=download.read_text()=='Alcove portal download\n'
     result['checks']['download_complete']=any(e.get('event')=='download' and e.get('complete') for e in events())
     click('Скачать тестовый файл')
     click('Cancel')
@@ -180,7 +180,7 @@ try:
         'focused':node.getState().contains(pyatspi.STATE_FOCUSED)} for node in nodes() if node.name in ('Меню','Загрузки')]
     press(0x20)  # Open the focused MenuButton through the compositor keyboard.
     menu_item('Загрузки').queryAction().doAction(0)
-    find('bastle-slow.bin')
+    find('alcove-slow.bin')
     click('Отменить загрузку')
     result['checks']['download_ui_cancel']=wait_download_cancelled(3) and not cancelled_download.exists()
     # The native dialog header uses the toolkit's localized Close button.

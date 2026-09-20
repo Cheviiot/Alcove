@@ -15,9 +15,9 @@
 #include <unistd.h>
 #include <ftw.h>
 
-#define BUS_NAME "io.github.cheviiot.bastle.Chromium"
-#define OBJECT_PATH "/io/github/cheviiot/bastle/Chromium/Engine1"
-#define INTERFACE_NAME "io.github.cheviiot.bastle.Chromium.Engine1"
+#define BUS_NAME "io.github.cheviiot.alcove.Chromium"
+#define OBJECT_PATH "/io/github/cheviiot/alcove/Chromium/Engine1"
+#define INTERFACE_NAME "io.github.cheviiot.alcove.Chromium.Engine1"
 #define PROTOCOL_VERSION 1U
 #define MAX_POLICY_SIZE (32U * 1024U * 1024U)
 #define MAX_USER_AGENT_BYTES 4096U
@@ -155,7 +155,7 @@ engine_available(GError **error)
         !g_file_test(CHROMIUM_ENTRYPOINT, G_FILE_TEST_IS_REGULAR) ||
         !g_file_test(ZYPAK_WRAPPER, G_FILE_TEST_IS_EXECUTABLE)) {
         g_set_error_literal(error, G_IO_ERROR, G_IO_ERROR_NOT_FOUND,
-                            "the Bastle Chromium add-on is not installed");
+                            "the Alcove Chromium add-on is not installed");
         return FALSE;
     }
     return TRUE;
@@ -182,7 +182,7 @@ valid_policy(const gchar *value, JsonNode **root_out, GError **error)
     if (!json_object_has_member(object, "schema_version") ||
         json_object_get_int_member(object, "schema_version") != 2) {
         g_set_error_literal(error, G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
-                            "unsupported Bastle policy version");
+                            "unsupported Alcove policy version");
         return FALSE;
     }
     *root_out = json_node_copy(root);
@@ -192,7 +192,7 @@ valid_policy(const gchar *value, JsonNode **root_out, GError **error)
 static gchar *
 data_root(void)
 {
-    return g_build_filename(g_get_user_data_dir(), "bastle-chromium", NULL);
+    return g_build_filename(g_get_user_data_dir(), "alcove-chromium", NULL);
 }
 
 static gchar *
@@ -205,7 +205,7 @@ profile_path(const gchar *id)
 static gchar *
 cache_path(const gchar *id)
 {
-    return g_build_filename(g_get_user_cache_dir(), "bastle-chromium", id, NULL);
+    return g_build_filename(g_get_user_cache_dir(), "alcove-chromium", id, NULL);
 }
 
 static gchar *
@@ -299,7 +299,7 @@ write_runtime_config(const gchar *id, const gchar *url, const gchar *title,
                      JsonNode *policy, GError **error)
 {
     g_autofree gchar *runtime_dir =
-        g_build_filename(g_get_user_runtime_dir(), "bastle-chromium", NULL);
+        g_build_filename(g_get_user_runtime_dir(), "alcove-chromium", NULL);
     if (g_mkdir_with_parents(runtime_dir, 0700) != 0) {
         g_set_error(error, G_IO_ERROR, g_io_error_from_errno(errno),
                     "cannot create runtime directory: %s", g_strerror(errno));
@@ -383,7 +383,7 @@ static gchar *
 runtime_socket_path(const gchar *id)
 {
     g_autofree gchar *runtime_dir =
-        g_build_filename(g_get_user_runtime_dir(), "bastle-chromium", NULL);
+        g_build_filename(g_get_user_runtime_dir(), "alcove-chromium", NULL);
     g_autofree gchar *filename = g_strdup_printf("%s.sock", id);
     return g_build_filename(runtime_dir, filename, NULL);
 }
@@ -454,7 +454,7 @@ spawn_runtime(const gchar *id, const gchar *config_path, int lock_fd,
 {
     GSubprocess *child = g_subprocess_new(
         G_SUBPROCESS_FLAGS_STDOUT_SILENCE,
-        error, "/app/bin/bastle-chromium-service", "--runtime", id,
+        error, "/app/bin/alcove-chromium-service", "--runtime", id,
         config_path, NULL);
     if (child == NULL)
         return FALSE;
@@ -543,7 +543,7 @@ static void
 return_error(GDBusMethodInvocation *invocation, GError *error)
 {
     g_dbus_method_invocation_return_dbus_error(
-        invocation, "io.github.cheviiot.bastle.Chromium.Error",
+        invocation, "io.github.cheviiot.alcove.Chromium.Error",
         error != NULL ? error->message : "unknown Chromium engine error");
 }
 
@@ -686,11 +686,11 @@ run_runtime(const gchar *id, const gchar *config_path)
         return 1;
     }
     if (!valid_app_id(id)) {
-        g_printerr("Invalid Bastle app ID\n");
+        g_printerr("Invalid Alcove app ID\n");
         return 2;
     }
     g_autofree gchar *runtime_dir =
-        g_build_filename(g_get_user_runtime_dir(), "bastle-chromium", NULL);
+        g_build_filename(g_get_user_runtime_dir(), "alcove-chromium", NULL);
     g_autofree gchar *canonical_dir = g_canonicalize_filename(runtime_dir, NULL);
     g_autofree gchar *canonical_config = g_canonicalize_filename(config_path, NULL);
     g_autofree gchar *prefix = g_strconcat(canonical_dir, G_DIR_SEPARATOR_S, NULL);
@@ -710,9 +710,9 @@ run_runtime(const gchar *id, const gchar *config_path)
         close(lock_fd);
         return 1;
     }
-    g_setenv("BASTLE_CHROMIUM_ID", id, TRUE);
+    g_setenv("ALCOVE_CHROMIUM_ID", id, TRUE);
     g_autofree gchar *argument =
-        g_strdup_printf("--bastle-config=%s", canonical_config);
+        g_strdup_printf("--alcove-config=%s", canonical_config);
     const gchar *wayland_display = g_getenv("WAYLAND_DISPLAY");
     const gchar *ozone_platform =
         wayland_display != NULL && *wayland_display != '\0'
@@ -747,14 +747,14 @@ self_test(void)
         valid_title("Bad\nTitle") || !max_title_valid || oversized_title_valid ||
         !valid_user_agent(max_user_agent) ||
         valid_user_agent(oversized_user_agent) ||
-        valid_user_agent("Bastle\r\nInjected") ||
+        valid_user_agent("Alcove\r\nInjected") ||
         !valid_policy("{\"schema_version\":2}", &policy, &error)) {
         g_printerr("Chromium engine validation self-test failed\n");
         return 1;
     }
 
     g_autofree gchar *test_root =
-        g_dir_make_tmp("bastle-chromium-test-XXXXXX", &error);
+        g_dir_make_tmp("alcove-chromium-test-XXXXXX", &error);
     if (test_root == NULL || !g_setenv("XDG_DATA_HOME", test_root, TRUE) ||
         !g_setenv("XDG_CACHE_HOME", test_root, TRUE)) {
         g_printerr("Cannot create Chromium engine lock test directory\n");

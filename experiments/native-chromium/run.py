@@ -51,7 +51,7 @@ class FixtureHandler(http.server.SimpleHTTPRequestHandler):
             return super().do_GET()
         self.send_response(200)
         self.send_header("Content-Type", "application/octet-stream")
-        self.send_header("Content-Disposition", 'attachment; filename="bastle-slow.bin"')
+        self.send_header("Content-Disposition", 'attachment; filename="alcove-slow.bin"')
         self.send_header("Content-Length", str(1024 * 1024))
         self.end_headers()
         try:
@@ -132,7 +132,7 @@ def main():
                 lock_path.parent.mkdir(parents=True, exist_ok=True)
                 lock = cleanup.enter_context(lock_path.open("a"))
                 fcntl.flock(lock, fcntl.LOCK_EX)
-            runtime = cleanup.enter_context(tempfile.TemporaryDirectory(prefix="bastle-native-"))
+            runtime = cleanup.enter_context(tempfile.TemporaryDirectory(prefix="alcove-native-"))
             cleanup.callback(finish_document_portal, runtime)
             env = os.environ.copy()
             for key in ("DISPLAY", "WAYLAND_DISPLAY", "XAUTHORITY", "AT_SPI_BUS_ADDRESS",
@@ -168,11 +168,11 @@ def main():
     output.mkdir(parents=True, mode=0o700)
     if args.flatpak:
         deployed = {"installation": os.environ["FLATPAK_USER_DIR"]}
-        for name in ("io.github.cheviiot.bastle", "io.github.cheviiot.bastle.ChromiumNative"):
+        for name in ("io.github.cheviiot.alcove", "io.github.cheviiot.alcove.ChromiumNative"):
             deployed[name] = subprocess.check_output(
                 ["flatpak", "info", "--user", "--show-commit", name], text=True).strip()
         deployed["permissions"] = subprocess.check_output(["flatpak", "info", "--user",
-            "--show-permissions", "io.github.cheviiot.bastle"], text=True)
+            "--show-permissions", "io.github.cheviiot.alcove"], text=True)
         (output / "flatpak.json").write_text(json.dumps(deployed, indent=2))
     handler = functools.partial(FixtureHandler, directory=str(root / "experiments/native-chromium/fixtures"))
     server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
@@ -190,17 +190,17 @@ def main():
                    XDG_CACHE_HOME=runtime + "/cache", NO_AT_BRIDGE="0")
         env["LANGUAGE"] = "ru"
         env["LC_ALL"] = "ru_RU.UTF-8"
-        env["BASTLE_PROBE_LOCALEDIR"] = str(root / "build/native-chromium/locale")
+        env["ALCOVE_PROBE_LOCALEDIR"] = str(root / "build/native-chromium/locale")
         env["GDK_SCALE"] = str(args.scale)
         env["ADW_DEBUG_COLOR_SCHEME"] = "prefer-dark" if args.theme == "dark" else "prefer-light"
-        launcher = [str(root / "target/debug/bastle-native-chromium")]
-        worker = str(args.worker or root / "build/native-chromium/worker/bastle-cef-worker")
+        launcher = [str(root / "target/debug/alcove-native-chromium")]
+        worker = str(args.worker or root / "build/native-chromium/worker/alcove-cef-worker")
         if args.flatpak:
-            worker = "/app/extensions/chromium-native/bin/bastle-cef-launch"
+            worker = "/app/extensions/chromium-native/bin/alcove-cef-launch"
             # Only the diagnostic report directory is exposed. The installed
             # application/extension have no filesystem grants. State is private
             # inside the sandbox, and Zypak restricts renderer subprocesses.
-            launcher = ["flatpak", "run", "--user", "--command=bastle-native-probe",
+            launcher = ["flatpak", "run", "--user", "--command=alcove-native-probe",
                 "--filesystem=" + str(output),
                 "--env=GDK_BACKEND=" + args.backend,
                 "--env=GDK_SCALE=" + str(args.scale),
@@ -209,7 +209,7 @@ def main():
                 "--env=ZYPAK_DEBUG=1",
                 *(["--nosocket=x11", "--nosocket=fallback-x11"] if args.backend == "wayland"
                   else ["--nosocket=wayland", "--socket=x11"]),
-                "io.github.cheviiot.bastle"]
+                "io.github.cheviiot.alcove"]
         command = [*launcher,
             "--worker", worker,
             "--cef-root", cef, "--output", str(output / "app"),
@@ -222,19 +222,19 @@ def main():
             command.extend(["--fake-media", "true"])
         try:
             if args.backend == "wayland":
-                env["WAYLAND_DISPLAY"] = "bastle-probe"
+                env["WAYLAND_DISPLAY"] = "alcove-probe"
                 if args.compositor == "weston":
                     compositor_command = ["weston", "--backend=headless", "--renderer=gl",
                         f"--width={1280 * args.scale}", f"--height={900 * args.scale}",
-                        f"--scale={args.scale}", "--socket=bastle-probe", "--no-config"]
+                        f"--scale={args.scale}", "--socket=alcove-probe", "--no-config"]
                 else:
                     compositor_command = ["mutter", "--headless", "--wayland", "--no-x11",
-                        f"--virtual-monitor={1280 * args.scale}x{900 * args.scale}", "--wayland-display=bastle-probe"]
+                        f"--virtual-monitor={1280 * args.scale}x{900 * args.scale}", "--wayland-display=alcove-probe"]
                 with (output / "compositor.log").open("w") as compositor_log:
                     compositor = subprocess.Popen(compositor_command, env=env,
                         stdout=compositor_log, stderr=subprocess.STDOUT)
                 for _ in range(100):
-                    if pathlib.Path(runtime, "bastle-probe").exists(): break
+                    if pathlib.Path(runtime, "alcove-probe").exists(): break
                     if compositor.poll() is not None: raise RuntimeError("isolated Wayland compositor exited")
                     time.sleep(.05)
                 else: raise RuntimeError("isolated Wayland socket was not created")
@@ -338,7 +338,7 @@ def main():
                         and interaction.get("caret_offset") == 2 and interaction.get("selection") == [1, 4]
                         and interaction.get("button_action_accepted", False)
                         and interaction.get("link_target_matches", False)
-                        and "BASTLE_CLICK_TRUSTED:true" in event_log
+                        and "ALCOVE_CLICK_TRUSTED:true" in event_log
                         and {"object:text-caret-moved", "object:text-selection-changed", "object:text-changed:insert"} <= events)
                     if args.accessibility_navigation:
                         checks["accessibility_navigation"] = all(interaction.get(key, False) for key in (
@@ -355,7 +355,7 @@ def main():
                         # autofocuses its button; Orca need not repeat its title.
                         # Check window identification plus actual web controls
                         # at every step, alongside the independent document audit.
-                        checks["orca_popup_window_titles"] = all(any(title in line for line in speech) for title in ("Bastle popup fixture", "Bastle OAuth step"))
+                        checks["orca_popup_window_titles"] = all(any(title in line for line in speech) for title in ("Alcove popup fixture", "Alcove OAuth step"))
                         checks["orca_popup_controls"] = all(any(name in line for line in speech) for name in ("Начать проверку входа", "Перейти к провайдеру входа", "Подтвердить вход"))
                     elif args.accessibility_windows:
                         checks["orca_multiple_windows"] = sum("Одинаковая страница" in line for line in speech) >= 2
@@ -363,7 +363,7 @@ def main():
                         checks["orca_document_and_input"] = any("Chromium внутри GTK" in line for line in speech) and any("Проверка ввода" in line for line in speech)
                     if args.orca_keyboard:
                         checks["orca_keyboard_button"] = (any("Проверить нажатие" in line for line in speech)
-                            and (output / "app/events.jsonl").read_text().count("BASTLE_CLICK_TRUSTED:true") == 2)
+                            and (output / "app/events.jsonl").read_text().count("ALCOVE_CLICK_TRUSTED:true") == 2)
                 if not args.surface_only and not args.site_requests and not args.popups and not args.accessibility_windows and not args.dropdowns and not args.url:
                     checks["unicode_commit"] = report["unicode_commit_confirmed"]
                     checks["webgl"] = report["webgl"]

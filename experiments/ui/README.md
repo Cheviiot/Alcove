@@ -1,12 +1,12 @@
 # Native manager UI checks
 
-Run inside the existing Fedora 44 Distrobox `bastle-dev`. Build the normal
+Run inside the existing Fedora 44 Distrobox `alcove-dev`. Build the normal
 manager with its diagnostic feature:
 
 ```sh
-distrobox enter bastle-dev -- meson setup build --reconfigure -Dui_tests=true
-distrobox enter bastle-dev -- meson compile -C build
-distrobox enter bastle-dev -- meson test -C build --print-errorlogs
+distrobox enter alcove-dev -- meson setup build --reconfigure -Dui_tests=true
+distrobox enter alcove-dev -- meson compile -C build
+distrobox enter alcove-dev -- meson test -C build --print-errorlogs
 ```
 
 Do not rebuild while a GUI audit is running: the build copies the executable.
@@ -15,9 +15,9 @@ The normal Meson checks cover supporting dialogs as well as the library.
 ## Library rendering
 
 ```sh
-distrobox enter bastle-dev -- python3 experiments/ui/render.py
-distrobox enter bastle-dev -- python3 experiments/ui/render.py --high-contrast
-distrobox enter bastle-dev -- python3 experiments/ui/render.py --large-text
+distrobox enter alcove-dev -- python3 experiments/ui/render.py
+distrobox enter alcove-dev -- python3 experiments/ui/render.py --high-contrast
+distrobox enter alcove-dev -- python3 experiments/ui/render.py --large-text
 ```
 
 Each invocation creates a private Xvfb/session bus and disposable XDG data.
@@ -28,14 +28,14 @@ text uses `Adwaita Sans 20`; high contrast asserts the actual Adwaita setting.
 The 10,000-app scenario counts instantiated row widgets and scrolls to the
 last item, checking actual virtualization rather than just the model size.
 
-`BASTLE_TEST_LOCALEDIR` and `--ui-test-library` are available only in builds
+`ALCOVE_TEST_LOCALEDIR` and `--ui-test-library` are available only in builds
 with `ui-tests`. Icon resources are embedded for uninstalled builds. Test
 `XDG_DATA_DIRS` excludes host Flatpak exports and their icon caches.
 
 ## Real keyboard and screen reader
 
 ```sh
-distrobox enter bastle-dev -- python3 experiments/ui/library-audit.py --orca
+distrobox enter alcove-dev -- python3 experiments/ui/library-audit.py --orca
 ```
 
 This launches the real manager with three disposable application records under
@@ -60,10 +60,10 @@ are not shipped with the application.
 ## Permissions and behavior
 
 ```sh
-distrobox enter bastle-dev -- python3 experiments/ui/library-audit.py --policy --orca
-distrobox enter bastle-dev -- python3 experiments/ui/render.py --screen policy
-distrobox enter bastle-dev -- python3 experiments/ui/render.py --screen policy --high-contrast
-distrobox enter bastle-dev -- python3 experiments/ui/render.py --screen policy --large-text
+distrobox enter alcove-dev -- python3 experiments/ui/library-audit.py --policy --orca
+distrobox enter alcove-dev -- python3 experiments/ui/render.py --screen policy
+distrobox enter alcove-dev -- python3 experiments/ui/render.py --screen policy --high-contrast
+distrobox enter alcove-dev -- python3 experiments/ui/render.py --screen policy --large-text
 ```
 
 The policy audit seeds only disposable settings. It checks immediate permission
@@ -83,7 +83,7 @@ Additional Fedora packages used by these audits (see also the native Chromium
 experiment's setup):
 
 ```sh
-distrobox enter bastle-dev -- sudo dnf install -y mutter python3-pyatspi orca fuse3
+distrobox enter alcove-dev -- sudo dnf install -y mutter python3-pyatspi orca fuse3
 ```
 
 Xvfb, D-Bus and the GTK development environment are documented in
@@ -92,17 +92,17 @@ Xvfb, D-Bus and the GTK development environment are documented in
 ## Creation
 
 ```sh
-distrobox enter bastle-dev -- python3 experiments/ui/render.py --screen creation
-distrobox enter bastle-dev -- python3 experiments/ui/render.py --screen creation --high-contrast
-distrobox enter bastle-dev -- python3 experiments/ui/render.py --screen creation --large-text
-distrobox enter bastle-dev -- python3 experiments/ui/library-audit.py --creation --orca
+distrobox enter alcove-dev -- python3 experiments/ui/render.py --screen creation
+distrobox enter alcove-dev -- python3 experiments/ui/render.py --screen creation --high-contrast
+distrobox enter alcove-dev -- python3 experiments/ui/render.py --screen creation --large-text
+distrobox enter alcove-dev -- python3 experiments/ui/library-audit.py --creation --orca
 ```
 
 Rendering uses the feature-gated `--ui-test-creation` entry point. The independent
 Wayland audit uses the ordinary manager and the actual Dynamic Launcher portal.
 It checks controlled metadata/delay/offline cases, GNOME/Wikipedia metadata,
 cancellation and installation failure, then successful creation and return.
-For the retry it places a `bastle` symlink to the build only in the disposable
+For the retry it places a `alcove` symlink to the build only in the disposable
 session's PATH; the executable is never installed on the host. Only committed
 app directories count toward success. With Orca it also checks spoken field
 labels and the new focused row. Portal and file chooser data stay in the private
@@ -112,10 +112,10 @@ labels even when the application's language is Russian.
 ## Application settings
 
 ```sh
-distrobox enter bastle-dev -- python3 experiments/ui/render.py --screen settings
-distrobox enter bastle-dev -- python3 experiments/ui/render.py --screen settings --high-contrast
-distrobox enter bastle-dev -- python3 experiments/ui/render.py --screen settings --large-text
-distrobox enter bastle-dev -- python3 experiments/ui/library-audit.py --settings --orca
+distrobox enter alcove-dev -- python3 experiments/ui/render.py --screen settings
+distrobox enter alcove-dev -- python3 experiments/ui/render.py --screen settings --high-contrast
+distrobox enter alcove-dev -- python3 experiments/ui/render.py --screen settings --large-text
+distrobox enter alcove-dev -- python3 experiments/ui/library-audit.py --settings --orca
 ```
 
 The settings renderer uses the feature-gated `--ui-test-settings` entry point.
@@ -138,10 +138,10 @@ Permissions and Privacy and Power.
 ## Supporting dialogs
 
 ```sh
-distrobox enter bastle-dev -- python3 experiments/ui/render.py --screen utilities
-distrobox enter bastle-dev -- python3 experiments/ui/render.py --screen utilities --high-contrast
-distrobox enter bastle-dev -- python3 experiments/ui/render.py --screen utilities --large-text
-distrobox enter bastle-dev -- python3 experiments/ui/library-audit.py --utilities --orca
+distrobox enter alcove-dev -- python3 experiments/ui/render.py --screen utilities
+distrobox enter alcove-dev -- python3 experiments/ui/render.py --screen utilities --high-contrast
+distrobox enter alcove-dev -- python3 experiments/ui/render.py --screen utilities --large-text
+distrobox enter alcove-dev -- python3 experiments/ui/library-audit.py --utilities --orca
 ```
 
 The renderer produces 42 images per variant: backup, restore, encrypted password

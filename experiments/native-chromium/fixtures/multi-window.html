@@ -8,6 +8,6 @@
 <script>
 document.querySelector('iframe').src='http://localhost:'+location.port+'/multi-window-frame.html';
 document.getElementById("open").onclick=()=>window.open('/multi-window.html','_blank','popup,width=520,height=640');
-act.onclick=e=>console.log('BASTLE_MULTI_ACTION:'+JSON.stringify({trusted:e.isTrusted}));
+act.onclick=e=>console.log('ALCOVE_MULTI_ACTION:'+JSON.stringify({trusted:e.isTrusted}));
 document.getElementById("close").onclick=()=>window.close();
 </script></html>

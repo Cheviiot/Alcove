@@ -2,9 +2,9 @@
 
 # Authors and contributors
 
-## Bastle
+## Alcove
 
-- Cheviiot — current maintainer and developer of the independent Bastle
+- Cheviiot — current maintainer and developer of the independent Alcove
   continuation.
 
 ## Original Spider project
@@ -12,6 +12,8 @@
 - Zaedus — primary author of Spider.
 - Cameron Radmore — Spider contributor.
 
-Bastle preserves the original Git commits and their author metadata. Listing
-the original contributors records provenance; it does not imply that they
-endorse, maintain, or participate in Bastle.
+Alcove's Git history starts fresh and does not carry the original Spider
+commits; those remain in the upstream Spider repository. This list records the
+authorship of the inherited code. Naming the original contributors records
+provenance; it does not imply that they endorse, maintain, or participate in
+Alcove.

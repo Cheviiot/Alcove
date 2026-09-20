@@ -22,7 +22,7 @@ mod imp {
     }
     #[glib::object_subclass]
     impl ObjectSubclass for Site {
-        const NAME: &'static str = "BastleProbeSite";
+        const NAME: &'static str = "AlcoveProbeSite";
         type Type = super::Site;
         type ParentType = gtk::Box;
         type Interfaces = (gtk::Accessible,);

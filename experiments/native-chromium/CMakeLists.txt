@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-only
 cmake_minimum_required(VERSION 3.21)
-project(bastle_cef_probe LANGUAGES C CXX)
+project(alcove_cef_probe LANGUAGES C CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type")
 set(CEF_ROOT "" CACHE PATH "Verified CEF binary distribution")
@@ -18,10 +18,10 @@ pkg_check_modules(GPU REQUIRED IMPORTED_TARGET egl glesv2 gbm libdrm atk atk-bri
 add_compile_definitions(CEF_API_VERSION=15200)
 add_subdirectory("${CEF_LIBCEF_DLL_WRAPPER_PATH}" libcef_dll_wrapper)
 ADD_LOGICAL_TARGET(libcef_lib "${CEF_LIB_DEBUG}" "${CEF_LIB_RELEASE}")
-add_executable(bastle-cef-worker worker.cc)
-target_include_directories(bastle-cef-worker PRIVATE "${CEF_ROOT}")
-target_link_libraries(bastle-cef-worker PRIVATE libcef_lib libcef_dll_wrapper nlohmann_json::nlohmann_json PkgConfig::GPU ${CEF_STANDARD_LIBS})
-set_target_properties(bastle-cef-worker PROPERTIES
+add_executable(alcove-cef-worker worker.cc)
+target_include_directories(alcove-cef-worker PRIVATE "${CEF_ROOT}")
+target_link_libraries(alcove-cef-worker PRIVATE libcef_lib libcef_dll_wrapper nlohmann_json::nlohmann_json PkgConfig::GPU ${CEF_STANDARD_LIBS})
+set_target_properties(alcove-cef-worker PROPERTIES
   BUILD_WITH_INSTALL_RPATH TRUE INSTALL_RPATH "$ORIGIN")
 # Keep the runtime libraries beside the executable, as required during early
 # subprocess startup. Hard links avoid another large SDK copy in build/.

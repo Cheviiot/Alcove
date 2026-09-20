@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: GPL-3.0-only
 
 desktop_file = i18n.merge_file(
-        input: 'io.github.cheviiot.bastle.desktop.in',
-       output: 'io.github.cheviiot.bastle.desktop',
+        input: 'io.github.cheviiot.alcove.desktop.in',
+       output: 'io.github.cheviiot.alcove.desktop',
          type: 'desktop',
        po_dir: '../po',
       install: true,
@@ -15,8 +15,8 @@ if desktop_utils.found()
 endif
 
 appstream_file = i18n.merge_file(
-        input: 'io.github.cheviiot.bastle.metainfo.xml.in',
-       output: 'io.github.cheviiot.bastle.metainfo.xml',
+        input: 'io.github.cheviiot.alcove.metainfo.xml.in',
+       output: 'io.github.cheviiot.alcove.metainfo.xml',
        po_dir: '../po',
       install: true,
   install_dir: get_option('datadir') / 'metainfo'
@@ -26,7 +26,7 @@ appstreamcli = find_program('appstreamcli', required: false, disabler: true)
 test('Validate appstream file', appstreamcli,
      args: ['validate', '--no-net', '--explain', appstream_file])
 
-install_data('io.github.cheviiot.bastle.gschema.xml',
+install_data('io.github.cheviiot.alcove.gschema.xml',
   install_dir: get_option('datadir') / 'glib-2.0' / 'schemas'
 )
 
@@ -37,7 +37,7 @@ test('Validate schema file',
 
 test_schema = custom_target(
   'compile test schema',
-  input: 'io.github.cheviiot.bastle.gschema.xml',
+  input: 'io.github.cheviiot.alcove.gschema.xml',
   output: 'gschemas.compiled',
   command: [
     compile_schemas,

@@ -210,7 +210,7 @@ fn notify(parent: &gtk::Window, message: &str) {
 
 #[cfg(feature = "ui-tests")]
 pub(crate) fn run_ui_smoke_test<P: IsA<gtk::Application>>(application: &P) -> anyhow::Result<()> {
-    let window = crate::window::BastleWindow::new(application);
+    let window = crate::window::AlcoveWindow::new(application);
     let mut policy = crate::policy::AppPolicyV2::default();
     let origin: crate::policy::Origin = "https://discourse.gnome.org".parse()?;
     policy.set_decision(

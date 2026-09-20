@@ -34,7 +34,7 @@ for (const invalid of [
   { command: 'toolbar-visibility', visible: 'yes' },
 ]) assert.throws(() => validateShellCommand(invalid));
 
-const shellSender = { getURL: () => 'bastle-ui://shell/shell.html' };
+const shellSender = { getURL: () => 'alcove-ui://shell/shell.html' };
 assert.equal(trustedShellSender(shellSender, shellSender), true);
 assert.equal(trustedShellSender({ getURL: shellSender.getURL }, shellSender), false);
 assert.equal(

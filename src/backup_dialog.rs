@@ -11,7 +11,7 @@ use gtk::{gio, glib};
 use crate::{
     backup::{is_encrypted_backup, BackupOptions, BackupService, RestoreDisposition, RestorePlan},
     portal,
-    window::BastleWindow,
+    window::AlcoveWindow,
 };
 
 fn backup_options() -> (
@@ -21,7 +21,7 @@ fn backup_options() -> (
     adw::PasswordEntryRow,
 ) {
     let options_dialog =
-        crate::dialogs::ActionDialog::new(&gettext("Back Up Bastle"), &gettext("Back Up"));
+        crate::dialogs::ActionDialog::new(&gettext("Back Up Alcove"), &gettext("Back Up"));
     let page = adw::PreferencesPage::new();
     let group = adw::PreferencesGroup::builder()
         .title(gettext("Backup Contents"))
@@ -99,7 +99,7 @@ fn backup_options() -> (
     (options_dialog, include_site_data, passphrase, confirm)
 }
 
-pub fn start_backup(parent: &BastleWindow) {
+pub fn start_backup(parent: &AlcoveWindow) {
     let window = parent.clone();
     glib::spawn_future_local(async move {
         let apps = match BackupService::portal().service().list() {
@@ -130,9 +130,9 @@ pub fn start_backup(parent: &BastleWindow) {
             None
         };
         let file_dialog = gtk::FileDialog::builder()
-            .title(gettext("Save Bastle Backup"))
+            .title(gettext("Save Alcove Backup"))
             .accept_label(gettext("Back Up"))
-            .initial_name("Bastle.bastle-backup")
+            .initial_name("Alcove.alcove-backup")
             .modal(true)
             .build();
         let file = match file_dialog.save_future(Some(&window)).await {
@@ -169,16 +169,16 @@ pub fn start_backup(parent: &BastleWindow) {
     });
 }
 
-pub fn start_restore(parent: &BastleWindow) {
+pub fn start_restore(parent: &AlcoveWindow) {
     let window = parent.clone();
     glib::spawn_future_local(async move {
         let filter = gtk::FileFilter::new();
-        filter.set_name(Some(&gettext("Bastle Backups")));
-        filter.add_pattern("*.bastle-backup");
+        filter.set_name(Some(&gettext("Alcove Backups")));
+        filter.add_pattern("*.alcove-backup");
         let filters = gio::ListStore::new::<gtk::FileFilter>();
         filters.append(&filter);
         let file_dialog = gtk::FileDialog::builder()
-            .title(gettext("Open Bastle Backup"))
+            .title(gettext("Open Alcove Backup"))
             .accept_label(gettext("Open"))
             .filters(&filters)
             .modal(true)
@@ -298,7 +298,7 @@ fn restore_passphrase_dialog(error: Option<&str>) -> (adw::AlertDialog, gtk::Pas
 }
 
 async fn ask_restore_passphrase(
-    parent: &BastleWindow,
+    parent: &AlcoveWindow,
     error: Option<&str>,
 ) -> Option<SecretString> {
     let (dialog, passphrase) = restore_passphrase_dialog(error);
@@ -376,7 +376,7 @@ fn restore_options(
     (action_dialog, selected)
 }
 
-async fn show_restore_preview(parent: &BastleWindow, plan: RestorePlan) {
+async fn show_restore_preview(parent: &AlcoveWindow, plan: RestorePlan) {
     let description = if plan.manifest.includes_site_data {
         gettext(
             "This encrypted backup includes cookies and site storage. Select the applications to restore.",
@@ -450,7 +450,7 @@ async fn show_restore_preview(parent: &BastleWindow, plan: RestorePlan) {
 pub(crate) fn run_ui_smoke_test<P: IsA<gtk::Application>>(application: &P) -> anyhow::Result<()> {
     use anyhow::ensure;
 
-    let window = BastleWindow::new(application);
+    let window = AlcoveWindow::new(application);
     let (options, include_data, passphrase, confirm) = backup_options();
     options.dialog.present(Some(&window));
     ensure!(

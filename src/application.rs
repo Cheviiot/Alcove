@@ -14,7 +14,7 @@ use crate::{
     config,
     model::{AppConfigV3, AppId, Engine},
     service::AppService,
-    BastleWindow,
+    AlcoveWindow,
 };
 
 pub fn settings() -> gio::Settings {
@@ -29,7 +29,7 @@ fn command_app_id(arguments: &[std::ffi::OsString]) -> Option<AppId> {
 }
 
 fn spawn_app_process(id: &AppId, start_in_background: bool) -> Result<()> {
-    let executable = std::env::current_exe().unwrap_or_else(|_| "bastle".into());
+    let executable = std::env::current_exe().unwrap_or_else(|_| "alcove".into());
     let mut command = Command::new(executable);
     command.arg(id.as_str());
     if start_in_background {
@@ -45,18 +45,18 @@ mod imp {
     use super::*;
 
     #[derive(Debug, Default)]
-    pub struct BastleApplication {
+    pub struct AlcoveApplication {
         pub web_notifications: RefCell<HashMap<String, (String, webkit::Notification)>>,
     }
 
     #[glib::object_subclass]
-    impl ObjectSubclass for BastleApplication {
-        const NAME: &'static str = "BastleApplication";
-        type Type = super::BastleApplication;
+    impl ObjectSubclass for AlcoveApplication {
+        const NAME: &'static str = "AlcoveApplication";
+        type Type = super::AlcoveApplication;
         type ParentType = adw::Application;
     }
 
-    impl ObjectImpl for BastleApplication {
+    impl ObjectImpl for AlcoveApplication {
         fn constructed(&self) {
             self.parent_constructed();
             let app = self.obj();
@@ -176,12 +176,12 @@ mod imp {
         }
     }
 
-    impl ApplicationImpl for BastleApplication {
+    impl ApplicationImpl for AlcoveApplication {
         fn startup(&self) {
             self.parent_startup();
             if let Some(display) = gtk::gdk::Display::default() {
                 gtk::IconTheme::for_display(&display)
-                    .add_resource_path("/io/github/cheviiot/bastle/icons");
+                    .add_resource_path("/io/github/cheviiot/alcove/icons");
             }
         }
 
@@ -462,22 +462,22 @@ mod imp {
                 return glib::ExitCode::SUCCESS;
             }
 
-            BastleWindow::new(&*self.obj()).present();
+            AlcoveWindow::new(&*self.obj()).present();
             glib::ExitCode::SUCCESS
         }
     }
 
-    impl GtkApplicationImpl for BastleApplication {}
-    impl AdwApplicationImpl for BastleApplication {}
+    impl GtkApplicationImpl for AlcoveApplication {}
+    impl AdwApplicationImpl for AlcoveApplication {}
 }
 
 glib::wrapper! {
-    pub struct BastleApplication(ObjectSubclass<imp::BastleApplication>)
+    pub struct AlcoveApplication(ObjectSubclass<imp::AlcoveApplication>)
         @extends gio::Application, gtk::Application, adw::Application,
         @implements gio::ActionGroup, gio::ActionMap;
 }
 
-impl BastleApplication {
+impl AlcoveApplication {
     pub fn new(flags: gio::ApplicationFlags) -> Self {
         glib::Object::builder()
             .property("flags", flags)
@@ -500,7 +500,7 @@ impl BastleApplication {
                     if let Some(manager) = app
                         .windows()
                         .into_iter()
-                        .find_map(|window| window.downcast::<BastleWindow>().ok())
+                        .find_map(|window| window.downcast::<AlcoveWindow>().ok())
                     {
                         manager.close();
                     } else {
@@ -637,16 +637,16 @@ impl BastleApplication {
 
     fn show_about(&self) {
         let dialog = adw::AboutDialog::builder()
-            .application_name("Bastle")
+            .application_name("Alcove")
             .application_icon(config::APP_ID)
             .developer_name("Cheviiot")
             .version(config::VERSION)
             .developers(vec!["Cheviiot"])
-            .copyright("© 2024–2026 Zaedus and Bastle contributors")
+            .copyright("© 2024–2026 Zaedus and Alcove contributors")
             .license_type(gtk::License::Custom)
             .license("GNU General Public License version 3 only (GPL-3.0-only)")
-            .website("https://github.com/Cheviiot/bastle")
-            .issue_url("https://github.com/Cheviiot/bastle/issues")
+            .website("https://github.com/Cheviiot/alcove")
+            .issue_url("https://github.com/Cheviiot/alcove/issues")
             .build();
         let original_project = gettext("Original Spider project");
         let zaedus = gettext("Zaedus — original Spider author");
@@ -673,7 +673,7 @@ impl BastleApplication {
     }
 
     fn show_chromium_diagnostic(&self, config: AppConfigV3, error: anyhow::Error) {
-        let manager = BastleWindow::new(self);
+        let manager = AlcoveWindow::new(self);
         manager.present();
         let app = self.clone();
         glib::spawn_future_local(async move {
@@ -701,13 +701,13 @@ impl BastleApplication {
                 }
                 "report" => {
                     let _ = gio::AppInfo::launch_default_for_uri(
-                        "https://github.com/Cheviiot/bastle/issues/new",
+                        "https://github.com/Cheviiot/alcove/issues/new",
                         None::<&gio::AppLaunchContext>,
                     );
                 }
                 "install" => {
                     if let Err(error) = gio::AppInfo::launch_default_for_uri(
-                        "https://cheviiot.github.io/bastle/bastle-chromium.flatpakref",
+                        "https://cheviiot.github.io/alcove/alcove-chromium.flatpakref",
                         None::<&gio::AppLaunchContext>,
                     ) {
                         manager.toast(&error.to_string());
@@ -727,12 +727,12 @@ mod tests {
     fn app_id_is_found_independently_of_internal_options() {
         let cases = [
             vec![
-                std::ffi::OsString::from("bastle"),
+                std::ffi::OsString::from("alcove"),
                 std::ffi::OsString::from("--start-background"),
                 std::ffi::OsString::from("abcdefghijkl"),
             ],
             vec![
-                std::ffi::OsString::from("bastle"),
+                std::ffi::OsString::from("alcove"),
                 std::ffi::OsString::from("--save-chromium-window-state"),
                 std::ffi::OsString::from("abcdefghijkl"),
                 std::ffi::OsString::from("--chromium-window-width"),

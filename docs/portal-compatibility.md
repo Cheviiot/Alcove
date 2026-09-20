@@ -2,7 +2,7 @@
 
 # Desktop portal compatibility
 
-Bastle uses desktop portals for every host integration boundary. It never
+Alcove uses desktop portals for every host integration boundary. It never
 writes `.desktop` launchers directly to the host when a portal is missing,
 unsupported, cancelled, or denied.
 
@@ -56,7 +56,7 @@ Never run automated GUI checks against the active display. The repository's UI
 test uses Xvfb with Wayland explicitly removed:
 
 ```sh
-distrobox enter bastle-dev -- bash -lc \
+distrobox enter alcove-dev -- bash -lc \
   'meson setup --reconfigure build -Dui_tests=true && \
    env -u WAYLAND_DISPLAY GDK_BACKEND=x11 \
    meson test -C build --print-errorlogs'

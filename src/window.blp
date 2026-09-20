@@ -3,8 +3,8 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $BastleWindow: Adw.ApplicationWindow {
-  title: _("Bastle");
+template $AlcoveWindow: Adw.ApplicationWindow {
+  title: _("Alcove");
   default-width: 800;
   default-height: 640;
   width-request: 360;
@@ -27,7 +27,7 @@ template $BastleWindow: Adw.ApplicationWindow {
             }
 
             title-widget: Adw.WindowTitle {
-              title: _("Bastle");
+              title: _("Alcove");
             };
 
             [end]
@@ -100,7 +100,7 @@ template $BastleWindow: Adw.ApplicationWindow {
               name: "empty";
 
               child: Adw.StatusPage {
-                icon-name: "io.github.cheviiot.bastle-symbolic";
+                icon-name: "io.github.cheviiot.alcove-symbolic";
                 title: _("No Applications Yet");
                 description: _("Add a website to give it an isolated space.");
 
@@ -153,6 +153,6 @@ menu primary_menu {
   section {
     item (_("System _Capabilities"), "win.capabilities")
     item (_("_Keyboard Shortcuts"), "win.shortcuts")
-    item (_("_About Bastle"), "app.about")
+    item (_("_About Alcove"), "app.about")
   }
 }

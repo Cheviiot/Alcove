@@ -170,7 +170,7 @@ inline std::unordered_map<AtkHyperlink*, AtkHyperlink*> links;
 inline AtkHyperlink* LinkSource(AtkHyperlink* object) { return reinterpret_cast<Link*>(object)->source; }
 inline GObjectClass* link_parent_class = nullptr;
 inline GType LinkType() {
-  static GType type = g_type_register_static_simple(ATK_TYPE_HYPERLINK, "BastleNativeAxLink",
+  static GType type = g_type_register_static_simple(ATK_TYPE_HYPERLINK, "AlcoveNativeAxLink",
       sizeof(AtkHyperlinkClass), [](gpointer value, gpointer) {
         auto* klass = static_cast<AtkHyperlinkClass*>(value);
         link_parent_class = G_OBJECT_CLASS(g_type_class_peek_parent(klass));
@@ -246,8 +246,8 @@ inline void ClassInit(gpointer value, gpointer) {
   };
   klass->get_name = [](AtkObject* object) -> const gchar* {
     auto* node = reinterpret_cast<Node*>(object);
-    if (node->kind == 1) return "Bastle Chromium content";
-    if (node->kind == 2) return "Chromium внутри Bastle";
+    if (node->kind == 1) return "Alcove Chromium content";
+    if (node->kind == 2) return "Chromium внутри Alcove";
     return node->source ? atk_object_get_name(node->source) : "";
   };
   klass->get_description = [](AtkObject* object) -> const gchar* {
@@ -335,7 +335,7 @@ inline void ClassInit(gpointer value, gpointer) {
   };
 }
 inline GType BaseType() {
-  static GType type = g_type_register_static_simple(ATK_TYPE_OBJECT, "BastleNativeAxProxy",
+  static GType type = g_type_register_static_simple(ATK_TYPE_OBJECT, "AlcoveNativeAxProxy",
       sizeof(NodeClass), ClassInit, sizeof(Node), nullptr, GTypeFlags(0));
   return type;
 }
@@ -351,7 +351,7 @@ inline AtkObject* Wrap(AtkObject* source) {
       | (ATK_IS_HYPERTEXT(source) ? 16 : 0) | (ATK_IS_HYPERLINK_IMPL(source) ? 32 : 0);
   auto& type = types[mask];
   if (!type) {
-    const auto name = "BastleNativeAxProxy" + std::to_string(mask);
+    const auto name = "AlcoveNativeAxProxy" + std::to_string(mask);
     type = g_type_register_static_simple(BaseType(), name.c_str(), sizeof(NodeClass), nullptr,
         sizeof(Node), nullptr, GTypeFlags(0));
     const std::array<GType, 6> interfaces{ATK_TYPE_ACTION, ATK_TYPE_COMPONENT, ATK_TYPE_TEXT, ATK_TYPE_DOCUMENT, ATK_TYPE_HYPERTEXT, ATK_TYPE_HYPERLINK_IMPL};
@@ -406,7 +406,7 @@ inline void RemoveListener(guint id) {
   g_signal_remove_emission_hook(listener->signal, listener->hook);
 }
 inline GType PlugType() {
-  static GType type = g_type_register_static_simple(ATK_TYPE_PLUG, "BastleNativeAxPlug",
+  static GType type = g_type_register_static_simple(ATK_TYPE_PLUG, "AlcoveNativeAxPlug",
       sizeof(AtkPlugClass), [](gpointer value, gpointer) {
         auto* klass = static_cast<AtkObjectClass*>(value);
         klass->get_name = [](AtkObject*) -> const gchar* { return "Содержимое сайта"; };
@@ -473,7 +473,7 @@ inline void Publish(uint64_t id, AtkObject* root) {
     util->remove_global_event_listener = RemoveListener;
     util->get_root = [] { return application; };
     util->get_toolkit_name = [] { return "Chromium"; };
-    util->get_toolkit_version = [] { return "152 Bastle OSR probe"; };
+    util->get_toolkit_version = [] { return "152 Alcove OSR probe"; };
     g_type_class_unref(util);
     g_unsetenv("NO_AT_BRIDGE");
     atk_bridge_adaptor_init(nullptr, nullptr);

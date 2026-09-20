@@ -15,7 +15,7 @@ mod imp {
     }
     #[glib::object_subclass]
     impl ObjectSubclass for Layer {
-        const NAME: &'static str = "BastleProbePopupSurface";
+        const NAME: &'static str = "AlcoveProbePopupSurface";
         type Type = super::Layer;
         type ParentType = gtk::Widget;
     }

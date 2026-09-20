@@ -44,7 +44,7 @@ identity, navigation, return and stale actions. The second checks keyboard
 focus traversal and button activation through Mutter with Orca running.
 
 The harness creates virtual pointer/keyboard devices in its own Mutter session.
-The input helper refuses to run outside the private Bastle runtime/display.
+The input helper refuses to run outside the private Alcove runtime/display.
 Orca receives genuine AT-SPI and compositor events; its speech-generation log
 is retained. Audio playback and hardware Braille are not tested.
 

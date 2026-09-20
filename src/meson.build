@@ -15,8 +15,8 @@ blueprints = custom_target('blueprints',
   command: [find_program('blueprint-compiler'), 'batch-compile', '@OUTPUT@', '@CURRENT_SOURCE_DIR@', '@INPUT@'],
 )
 
-resources = gnome.compile_resources('bastle',
-  'bastle.gresource.xml',
+resources = gnome.compile_resources('alcove',
+  'alcove.gresource.xml',
   gresource_bundle: true,
   install: true,
   install_dir: pkgdatadir,
@@ -25,8 +25,8 @@ resources = gnome.compile_resources('bastle',
 
 cargo_bin  = find_program('cargo')
 cargo_env  = [
-  'BASTLE_LOCALEDIR=' + get_option('prefix') / get_option('localedir'),
-  'BASTLE_PKGDATADIR=' + pkgdatadir,
+  'ALCOVE_LOCALEDIR=' + get_option('prefix') / get_option('localedir'),
+  'ALCOVE_PKGDATADIR=' + pkgdatadir,
 ]
 cargo_features = []
 if get_option('ui_tests')
@@ -78,7 +78,7 @@ if get_option('ui_tests')
   ui_test_env.set('GSK_RENDERER', 'cairo')
   ui_test_env.set('GSETTINGS_BACKEND', 'memory')
   ui_test_env.set('XDG_DATA_DIRS', '/usr/local/share:/usr/share')
-  ui_test_env.set('BASTLE_TEST_RESOURCE', resources.full_path())
+  ui_test_env.set('ALCOVE_TEST_RESOURCE', resources.full_path())
   ui_test_env.set('GSETTINGS_SCHEMA_DIR', meson.project_build_root() / 'data')
   ui_test_env.set('XDG_DATA_HOME', meson.project_build_root() / 'ui-test-data')
   ui_test_env.set('XDG_CACHE_HOME', meson.project_build_root() / 'ui-test-cache')

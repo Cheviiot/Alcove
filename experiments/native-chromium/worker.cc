@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-// Optional OSR worker. Bastle supplies a separate CEF profile and private IPC;
+// Optional OSR worker. Alcove supplies a separate CEF profile and private IPC;
 // Chromium's renderer sandbox remains enabled.
 #include <atomic>
 #include <chrono>
@@ -372,7 +372,7 @@ class Client final : public CefClient,
     } else if (name == "native-accessibility-inspect" && diagnostics) { NativeAccessibility::Inspect(view_);
     } else if (name == "evaluate" && diagnostics) {
       // Available only over the inherited parent pipe in this experimental tool.
-      browser_->GetMainFrame()->ExecuteJavaScript(request.at("script").get<std::string>(), "bastle-probe", 1);
+      browser_->GetMainFrame()->ExecuteJavaScript(request.at("script").get<std::string>(), "alcove-probe", 1);
     } else if (name == "close-view") { host->CloseBrowser(false);
     } else if (name == "quit") { host->CloseBrowser(true);
     } else throw std::runtime_error("unknown command");
@@ -439,21 +439,21 @@ int main(int argc, char** argv) {
     }
     NativeAccessibility::Initialize();
   }
-  Client::diagnostics = command->HasSwitch("bastle-diagnostics");
+  Client::diagnostics = command->HasSwitch("alcove-diagnostics");
   try {
-    const fs::path policy_path(command->GetSwitchValue("bastle-policy").ToString());
+    const fs::path policy_path(command->GetSwitchValue("alcove-policy").ToString());
     if (!policy_path.is_absolute() || fs::file_size(policy_path) > 32 * 1024 * 1024)
-      throw std::runtime_error("invalid Bastle policy path or size");
+      throw std::runtime_error("invalid Alcove policy path or size");
     std::ifstream policy_file(policy_path);
     policy_file >> Client::initial_policy;
     if (Client::initial_policy.value("schema_version", 0) != 2)
-      throw std::runtime_error("unsupported Bastle policy schema");
+      throw std::runtime_error("unsupported Alcove policy schema");
   } catch (const std::exception& error) {
     Emit({{"event", "protocol-error"}, {"message", error.what()}});
     return 6;
   }
-  const fs::path profile = command->HasSwitch("bastle-profile-root")
-      ? fs::path(command->GetSwitchValue("bastle-profile-root").ToString()) : directory / "profile";
+  const fs::path profile = command->HasSwitch("alcove-profile-root")
+      ? fs::path(command->GetSwitchValue("alcove-profile-root").ToString()) : directory / "profile";
   if (!profile.is_absolute()) return 2;
   CefSettings settings;
   settings.windowless_rendering_enabled = true;

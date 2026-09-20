@@ -11,9 +11,9 @@ function persistWindowState(window, id, run = spawnSync) {
     '--chromium-window-height', String(bounds.height),
   ];
   if (window.isMaximized()) args.push('--chromium-window-maximized');
-  const result = run('/app/bin/bastle', args, { stdio: 'ignore', timeout: 5000 });
+  const result = run('/app/bin/alcove', args, { stdio: 'ignore', timeout: 5000 });
   if (result.error || result.status !== 0) {
-    throw result.error || new Error(`Bastle exited with status ${result.status}`);
+    throw result.error || new Error(`Alcove exited with status ${result.status}`);
   }
 }
 

@@ -30,7 +30,7 @@ mod imp {
     use super::*;
 
     #[derive(Debug, Default, gtk::CompositeTemplate)]
-    #[template(resource = "/io/github/cheviiot/bastle/app_page.ui")]
+    #[template(resource = "/io/github/cheviiot/alcove/app_page.ui")]
     pub struct AppPage {
         pub config: RefCell<Option<AppConfigV3>>,
         pub availability: RefCell<Option<EngineAvailability>>,
@@ -99,7 +99,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for AppPage {
-        const NAME: &'static str = "BastleAppPage";
+        const NAME: &'static str = "AlcoveAppPage";
         type Type = super::AppPage;
         type ParentType = adw::NavigationPage;
         fn class_init(klass: &mut Self::Class) {

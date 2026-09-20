@@ -4,10 +4,10 @@ The library now follows the accepted design. Creation has the two-step flow
 described below, verified with the real portal and Orca. The main application
 settings, policy pages and supporting dialogs also pass their interaction audits.
 Remaining CEF integration is tracked in [the implementation tracker](native-ui-plan-status.md).
-Bastle remains a simple website-as-an-application launcher: the shared native
+Alcove remains a simple website-as-an-application launcher: the shared native
 shell hosts WebKit or the optional CEF adapter, which displays the website.
 
-Bastle uses GTK 4.22 and libadwaita 1.9 for its interface. The redesign follows
+Alcove uses GTK 4.22 and libadwaita 1.9 for its interface. The redesign follows
 [GNOME HIG](https://developer.gnome.org/hig/) and uses the platform's spacing,
 typography, colors, focus indicators, dialogs, and symbolic icons. It does not
 ship a custom GTK theme.
@@ -76,23 +76,23 @@ and support native Tab/arrow/Enter navigation.
 
 ## Validation
 
-Use the Fedora 44 Distrobox `bastle-dev` documented in `CONTRIBUTING.md`.
+Use the Fedora 44 Distrobox `alcove-dev` documented in `CONTRIBUTING.md`.
 GUI runs use private Wayland or Xvfb sessions, isolated XDG directories and an
 in-memory settings backend. Tests must not use the person's installed apps.
 
 ```sh
-distrobox enter bastle-dev -- cargo fmt --check
-distrobox enter bastle-dev -- cargo clippy --locked --all-targets --features ui-tests -- -D warnings
-distrobox enter bastle-dev -- cargo test --locked
-distrobox enter bastle-dev -- meson setup build -Dui_tests=true
-distrobox enter bastle-dev -- meson compile -C build
-distrobox enter bastle-dev -- meson test -C build --print-errorlogs
+distrobox enter alcove-dev -- cargo fmt --check
+distrobox enter alcove-dev -- cargo clippy --locked --all-targets --features ui-tests -- -D warnings
+distrobox enter alcove-dev -- cargo test --locked
+distrobox enter alcove-dev -- meson setup build -Dui_tests=true
+distrobox enter alcove-dev -- meson compile -C build
+distrobox enter alcove-dev -- meson test -C build --print-errorlogs
 ```
 
 The `ui-tests` feature exercises real widgets: empty and populated libraries,
 search and clearing it, narrow forms, inline validation/navigation, encryption
 requirements, busy creation, and supporting dialogs. The test binary includes
-an optional `BASTLE_UI_SCREENSHOTS` output directory for rendering actual GTK
+an optional `ALCOVE_UI_SCREENSHOTS` output directory for rendering actual GTK
 windows to PNG. Set this when invoking `--ui-test-app-page`. Use a virtual
 screen of at least `1600x1200x24` so normal-size windows are not inadvertently
 constrained by Xvfb's default screen. Screenshots are test artifacts, never

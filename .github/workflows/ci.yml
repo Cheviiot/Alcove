@@ -61,14 +61,14 @@ jobs:
         run: |
           grep -qx 'license = "GPL-3.0-only"' Cargo.toml
           grep -q '<project_license>GPL-3.0-only</project_license>' \
-            data/io.github.cheviiot.bastle.metainfo.xml.in
+            data/io.github.cheviiot.alcove.metainfo.xml.in
           forbidden_spdx='SPDX-License-Identifier: GPL-3.0-''or-later'
           ! git grep -n "$forbidden_spdx"
           test -s COPYING
           test -s NOTICE
           test -s AUTHORS.md
           grep -q '<project_license>GPL-3.0-only</project_license>' \
-            chromium/data/io.github.cheviiot.bastle.Chromium.metainfo.xml
+            chromium/data/io.github.cheviiot.alcove.Chromium.metainfo.xml
       - uses: EmbarkStudios/cargo-deny-action@c3bbe7e4e3f7baeee1a3dd9aec0a3b2aded580fb
         with:
           command: check
@@ -91,8 +91,8 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - uses: flatpak/flatpak-github-actions/flatpak-builder@aa777012a985fe1b1fd3e66ea2173609cf0c9a70
         with:
-          bundle: Bastle-${{ matrix.variant.arch }}.flatpak
-          manifest-path: build-aux/io.github.cheviiot.bastle.Devel.json
+          bundle: Alcove-${{ matrix.variant.arch }}.flatpak
+          manifest-path: build-aux/io.github.cheviiot.alcove.Devel.json
           arch: ${{ matrix.variant.arch }}
           run-tests: true
-          artifact-name: Bastle-${{ matrix.variant.arch }}
+          artifact-name: Alcove-${{ matrix.variant.arch }}

@@ -25,7 +25,7 @@
     }
   };
   inspect(document);
-  console.log('BASTLE_SITE_STATE:' + JSON.stringify({url: location.href,
+  console.log('ALCOVE_SITE_STATE:' + JSON.stringify({url: location.href,
     title: document.title, navigationStarted: performance.timeOrigin, ready: document.readyState, scale: devicePixelRatio,
     viewport: [innerWidth, innerHeight], scroll: [scrollX, scrollY],
     height: document.documentElement.scrollHeight,

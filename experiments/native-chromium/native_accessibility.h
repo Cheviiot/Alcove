@@ -142,7 +142,7 @@ class NativeAccessibility {
   struct Tree { uint64_t view = 0; int root = 0; bool top_level = false; };
   struct Ticket { uint64_t view; std::string tree; std::deque<bool> busy; Ticket() : view(0) {} };
   struct Binding { uint64_t view; std::string tree; };
-  static GQuark BindingKey() { return g_quark_from_static_string("bastle-native-atk-browser-binding-v3"); }
+  static GQuark BindingKey() { return g_quark_from_static_string("alcove-native-atk-browser-binding-v3"); }
   struct PendingSignal {
     GSignalInvocationHint hint;
     guint count;

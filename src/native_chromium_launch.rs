@@ -12,14 +12,14 @@ use std::{
 };
 
 use crate::{
-    application::BastleApplication,
+    application::AlcoveApplication,
     chromium::{ChromiumCapabilities, RUNTIME_SHELL_FEATURE},
     model::{AppConfigV3, AppId, WindowState},
     policy::{AppPolicyV2, Origin, PermissionDecision, PermissionKind},
     service::AppService,
 };
 
-const ADDON_ENV: &str = "BASTLE_NATIVE_CHROMIUM_ADDON";
+const ADDON_ENV: &str = "ALCOVE_NATIVE_CHROMIUM_ADDON";
 const CEF_VERSION: &str = "152.0.7+g83ffcba+chromium-152.0.7977.83";
 
 #[derive(Deserialize)]
@@ -53,7 +53,7 @@ fn read_addon(path: &Path) -> Result<(PathBuf, PathBuf)> {
     let addon: Addon = serde_json::from_slice(&std::fs::read(path)?)?;
     ensure!(
         addon.schema_version == 1
-            && addon.worker_protocol == bastle::native_chromium::WORKER_PROTOCOL
+            && addon.worker_protocol == alcove::native_chromium::WORKER_PROTOCOL
             && addon.cef_version == CEF_VERSION,
         "incompatible native Chromium add-on"
     );
@@ -84,7 +84,7 @@ pub fn capabilities() -> Result<ChromiumCapabilities> {
         std::env::var_os(ADDON_ENV).context("native Chromium add-on is not configured")?;
     read_addon(Path::new(&manifest))?;
     Ok(ChromiumCapabilities {
-        protocol_version: bastle::native_chromium::WORKER_PROTOCOL,
+        protocol_version: alcove::native_chromium::WORKER_PROTOCOL,
         features: [
             "open-app",
             "policy-v2",
@@ -98,13 +98,13 @@ pub fn capabilities() -> Result<ChromiumCapabilities> {
     })
 }
 
-pub fn existing_window(app: &BastleApplication, id: &AppId) -> Option<gtk::Window> {
+pub fn existing_window(app: &AlcoveApplication, id: &AppId) -> Option<gtk::Window> {
     app.windows()
         .into_iter()
         .find(|w| w.widget_name() == format!("cef-{}", id))
 }
 
-pub fn background_action(app: &BastleApplication, parameter: Option<&glib::Variant>, action: &str) {
+pub fn background_action(app: &AlcoveApplication, parameter: Option<&glib::Variant>, action: &str) {
     let Some(id) = parameter
         .and_then(|v| v.get::<String>())
         .and_then(|s| s.parse::<AppId>().ok())
@@ -116,7 +116,7 @@ pub fn background_action(app: &BastleApplication, parameter: Option<&glib::Varia
     }
 }
 
-pub fn open(app: &BastleApplication, config: &AppConfigV3, background: bool) -> Result<()> {
+pub fn open(app: &AlcoveApplication, config: &AppConfigV3, background: bool) -> Result<()> {
     let manifest =
         std::env::var_os(ADDON_ENV).context("native Chromium add-on is not configured")?;
     let (worker, cef) = read_addon(Path::new(&manifest))?;
@@ -125,9 +125,9 @@ pub fn open(app: &BastleApplication, config: &AppConfigV3, background: bool) -> 
     // Like the existing Chromium adapter, WebKit content filters do not apply.
     policy.content_filters.clear();
     let lock = service.acquire_runtime_lock(&config.id)?;
-    let window = bastle::native_chromium::open(
+    let window = alcove::native_chromium::open(
         app.upcast_ref::<adw::Application>(),
-        bastle::native_chromium::Launch {
+        alcove::native_chromium::Launch {
             app_id: config.id.clone(),
             start_in_background: background,
             worker,
@@ -170,12 +170,12 @@ fn save_window_state(window: &adw::ApplicationWindow, id: &AppId) {
             maximized: window.is_maximized(),
         },
     ) {
-        eprintln!("Failed to save Bastle window state: {error:#}");
+        eprintln!("Failed to save Alcove window state: {error:#}");
     }
 }
 
 struct RepositoryPolicy(AppId);
-impl bastle::native_chromium::PolicyStore for RepositoryPolicy {
+impl alcove::native_chromium::PolicyStore for RepositoryPolicy {
     fn permissions(
         &self,
         origin: &Origin,

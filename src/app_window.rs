@@ -18,7 +18,7 @@ use webkit::{
 };
 
 use crate::{
-    application::BastleApplication,
+    application::AlcoveApplication,
     background,
     compatibility::{reason_description, CompatibilityCatalogV1},
     content_filters,
@@ -307,7 +307,7 @@ mod imp {
     use super::*;
 
     #[derive(Debug, Default, gtk::CompositeTemplate)]
-    #[template(resource = "/io/github/cheviiot/bastle/app_window.ui")]
+    #[template(resource = "/io/github/cheviiot/alcove/app_window.ui")]
     pub struct AppWindow {
         pub shell: OnceCell<std::rc::Rc<WebAppShell>>,
         #[template_child]
@@ -328,7 +328,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for AppWindow {
-        const NAME: &'static str = "BastleAppWindow";
+        const NAME: &'static str = "AlcoveAppWindow";
         type Type = super::AppWindow;
         type ParentType = adw::ApplicationWindow;
 
@@ -360,7 +360,7 @@ mod imp {
                     maximized: self.obj().is_maximized(),
                 };
                 if let Err(error) = AppService::portal().save_runtime_state(&config.id, window) {
-                    eprintln!("Failed to save Bastle window state: {error:#}");
+                    eprintln!("Failed to save Alcove window state: {error:#}");
                 }
             }
             if self.policy.borrow().background.enabled && !self.stop_requested.get() {
@@ -999,7 +999,7 @@ impl AppWindow {
             notification.close();
             return true;
         };
-        let Some(application) = self.application().and_downcast::<BastleApplication>() else {
+        let Some(application) = self.application().and_downcast::<AlcoveApplication>() else {
             notification.close();
             self.toast(&gettext("System notifications are unavailable"));
             return true;

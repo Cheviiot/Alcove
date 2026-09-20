@@ -24,7 +24,7 @@
   @media(prefers-color-scheme:dark) { body{background:#242424;color:#fff} .card{background:#303030;border-color:#4a4a4a} p{color:#deddda} }
 </style>
 <main>
-  <div class="eyebrow">BASTLE · NATIVE CHROMIUM PROBE</div>
+  <div class="eyebrow">ALCOVE · NATIVE CHROMIUM PROBE</div>
   <h1>Chromium внутри GTK</h1>
   <p>Это тестовая веб-страница. Панель над ней создана настоящими элементами GTK и libadwaita.</p>
   <section class="card">
@@ -38,17 +38,17 @@
   <section class="card"><label>Прокрутка и доступность</label><p>Скринридер должен читать этот текст и находить поле ввода, кнопку и ссылку как отдельные элементы страницы.</p></section>
 </main>
 <script>
-document.addEventListener('keydown', event => console.log('BASTLE_KEY:' + JSON.stringify({key:event.key, target:event.target.id, shift:event.shiftKey, trusted:event.isTrusted})));
-document.addEventListener('focusin', event => console.log('BASTLE_FOCUS:' + event.target.id));
+document.addEventListener('keydown', event => console.log('ALCOVE_KEY:' + JSON.stringify({key:event.key, target:event.target.id, shift:event.shiftKey, trusted:event.isTrusted})));
+document.addEventListener('focusin', event => console.log('ALCOVE_FOCUS:' + event.target.id));
 document.querySelector('#button').onclick = event => {
   document.querySelector('#result').textContent = 'Нажатие получено';
-  console.log('BASTLE_CLICK:ok');
-  console.log('BASTLE_CLICK_TRUSTED:' + event.isTrusted);
+  console.log('ALCOVE_CLICK:ok');
+  console.log('ALCOVE_CLICK_TRUSTED:' + event.isTrusted);
 };
-document.querySelector('#input').oninput = event => console.log('BASTLE_INPUT:' + event.target.value);
+document.querySelector('#input').oninput = event => console.log('ALCOVE_INPUT:' + event.target.value);
 const gl = document.querySelector('#gpu').getContext('webgl');
 if (gl) { gl.clearColor(.2,.52,.89,1); gl.clear(gl.COLOR_BUFFER_BIT); }
 document.querySelector('#gpu-status').textContent = gl ? 'Контекст WebGL создан' : 'WebGL недоступен';
-console.log('BASTLE_WEBGL:' + !!gl);
+console.log('ALCOVE_WEBGL:' + !!gl);
 </script>
 </html>

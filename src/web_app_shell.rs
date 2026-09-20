@@ -73,9 +73,9 @@ impl WebAppShell {
         toolbar.set_extend_content_to_top_edge(true);
         let header = adw::HeaderBar::new();
         // Use an opaque native toolbar even when it overlays web content.
-        header.add_css_class("bastle-web-header");
+        header.add_css_class("alcove-web-header");
         let css = gtk::CssProvider::new();
-        css.load_from_string(".bastle-web-header { background-color: var(--window-bg-color); }");
+        css.load_from_string(".alcove-web-header { background-color: var(--window-bg-color); }");
         gtk::style_context_add_provider_for_display(
             &header.display(),
             &css,

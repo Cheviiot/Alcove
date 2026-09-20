@@ -14,7 +14,7 @@ output { position:fixed; left:36px; bottom:36px }
 </select>
 <output id="selected">Красный</output>
 <script>
-const log=(kind,value)=>console.log('BASTLE_SELECT:'+JSON.stringify({kind,value}));
+const log=(kind,value)=>console.log('ALCOVE_SELECT:'+JSON.stringify({kind,value}));
 const geometry=()=>log('geometry',{rect:(()=>{const r=choice.getBoundingClientRect();return [r.x,r.y,r.width,r.height]})(),viewport:[innerWidth,innerHeight],scale:devicePixelRatio});
 choice.addEventListener('change',e=>{selected.textContent=choice.selectedOptions[0].textContent;log('change',{value:choice.value,trusted:e.isTrusted})});
 edge.onclick=()=>{choice.style.left='calc(100% - 16px)';choice.style.top='calc(100% - 16px)';choice.style.transform='translate(-100%,-100%)';geometry()};

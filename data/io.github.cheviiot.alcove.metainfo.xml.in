@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- SPDX-License-Identifier: GPL-3.0-only -->
 <component type="desktop-application">
-  <id>io.github.cheviiot.bastle</id>
-  <name>Bastle</name>
+  <id>io.github.cheviiot.alcove</id>
+  <name>Alcove</name>
   <summary>Create isolated web applications for GNOME</summary>
   <developer id="io.github.cheviiot">
-    <name>Cheviiot and Bastle contributors</name>
+    <name>Cheviiot and Alcove contributors</name>
     <url>https://github.com/Cheviiot</url>
   </developer>
-  <icon type="stock">io.github.cheviiot.bastle</icon>
+  <icon type="stock">io.github.cheviiot.alcove</icon>
   <metadata_license>FSFAP</metadata_license>
   <project_license>GPL-3.0-only</project_license>
   <content_rating type="oars-1.1" />
@@ -26,15 +26,15 @@
   </branding>
   <description>
     <p>
-      Bastle is a GNOME-native manager for isolated web applications. WebKitGTK
+      Alcove is a GNOME-native manager for isolated web applications. WebKitGTK
       is the default engine, and Chromium is available as a Flatpak add-on for
       explicitly selected sites. Each website gets separate local data, cookies,
       cache, settings, and its own desktop launcher.
     </p>
     <p>
-      Bastle is an independent successor to Spider. The original work by
+      Alcove is an independent successor to Spider. The original work by
       Zaedus, Cameron Radmore's contribution, and their Git history remain
-      credited. Bastle is developed independently and does not claim their
+      credited. Alcove is developed independently and does not claim their
       endorsement or participation.
     </p>
     <ul>
@@ -43,14 +43,14 @@
       <li>Keep each application's configuration, policy, profile, and cache separate</li>
     </ul>
   </description>
-  <url type="homepage">https://github.com/Cheviiot/bastle</url>
-  <url type="bugtracker">https://github.com/Cheviiot/bastle/issues</url>
-  <url type="vcs-browser">https://github.com/Cheviiot/bastle</url>
+  <url type="homepage">https://github.com/Cheviiot/alcove</url>
+  <url type="bugtracker">https://github.com/Cheviiot/alcove/issues</url>
+  <url type="vcs-browser">https://github.com/Cheviiot/alcove</url>
   <categories>
     <category>Network</category>
     <category>WebBrowser</category>
   </categories>
-  <launchable type="desktop-id">io.github.cheviiot.bastle.desktop</launchable>
+  <launchable type="desktop-id">io.github.cheviiot.alcove.desktop</launchable>
   <releases>
     <release version="0.1.0" date="2026-09-20">
       <description>
@@ -61,7 +61,7 @@
           <li>Integrate with GNOME through desktop portals and encrypted backups</li>
         </ul>
       </description>
-      <url>https://github.com/Cheviiot/bastle/releases/tag/v0.1.0</url>
+      <url>https://github.com/Cheviiot/alcove/releases/tag/v0.1.0</url>
     </release>
   </releases>
 </component>

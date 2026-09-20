@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-only
 
-application_id = 'io.github.cheviiot.bastle'
+application_id = 'io.github.cheviiot.alcove'
 
 scalable_dir = 'hicolor' / 'scalable' / 'apps'
 install_data(

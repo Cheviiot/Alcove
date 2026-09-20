@@ -7,10 +7,10 @@ import signal
 import time
 from gi.repository import Gio, GLib
 
-if os.environ.get("WAYLAND_DISPLAY") != "bastle-probe" or not os.path.basename(
+if os.environ.get("WAYLAND_DISPLAY") != "alcove-probe" or not os.path.basename(
     os.environ.get("XDG_RUNTIME_DIR", "")
-).startswith("bastle-native-"):
-    raise SystemExit("Refusing input outside the isolated Bastle session")
+).startswith("alcove-native-"):
+    raise SystemExit("Refusing input outside the isolated Alcove session")
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--keyboard-check", action="store_true")

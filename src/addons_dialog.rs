@@ -6,7 +6,7 @@ use gtk::gio;
 
 use crate::chromium::EngineAvailability;
 
-const CHROMIUM_REF: &str = "https://cheviiot.github.io/bastle/bastle-chromium.flatpakref";
+const CHROMIUM_REF: &str = "https://cheviiot.github.io/alcove/alcove-chromium.flatpakref";
 
 pub fn present(parent: &gtk::Window, availability: &EngineAvailability) {
     let dialog = adw::PreferencesDialog::builder()
@@ -18,7 +18,7 @@ pub fn present(parent: &gtk::Window, availability: &EngineAvailability) {
     let group = adw::PreferencesGroup::builder()
         .title(gettext("Browser Engines"))
         .description(gettext(
-            "Optional engines are installed separately and become available after Bastle is restarted.",
+            "Optional engines are installed separately and become available after Alcove is restarted.",
         ))
         .build();
     let default_engine = adw::ActionRow::builder()
@@ -49,7 +49,7 @@ pub fn present(parent: &gtk::Window, availability: &EngineAvailability) {
         .use_markup(false)
         .title(gettext("Restart Required"))
         .subtitle(gettext(
-            "Close and reopen Bastle after installing or removing this add-on.",
+            "Close and reopen Alcove after installing or removing this add-on.",
         ))
         .build();
     restart.add_prefix(&gtk::Image::from_icon_name("view-refresh-symbolic"));

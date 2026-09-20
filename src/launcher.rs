@@ -49,7 +49,7 @@ impl PortalLauncher {
         let key_file = glib::KeyFile::new();
         key_file.set_string("Desktop Entry", "Type", "Application");
         key_file.set_string("Desktop Entry", "Name", &app.title);
-        key_file.set_string("Desktop Entry", "Exec", &format!("bastle {}", app.id));
+        key_file.set_string("Desktop Entry", "Exec", &format!("alcove {}", app.id));
         key_file.set_string("Desktop Entry", "Terminal", "false");
         key_file.set_string("Desktop Entry", "Categories", "Network;");
         key_file.set_string("Desktop Entry", "StartupNotify", "true");
@@ -154,7 +154,7 @@ mod tests {
         let desktop = PortalLauncher::desktop_entry(&app).unwrap();
         assert!(desktop.contains("Name=Example Exec=bad"));
         assert_eq!(desktop.matches("Exec=").count(), 2);
-        assert!(desktop.contains(&format!("Exec=bastle {}", app.id)));
+        assert!(desktop.contains(&format!("Exec=alcove {}", app.id)));
     }
 
     #[test]
@@ -162,12 +162,12 @@ mod tests {
         let ordinary: AppId = "abcdefghijkl".parse().unwrap();
         assert_eq!(
             PortalLauncher::desktop_id(&ordinary),
-            "io.github.cheviiot.bastle.abcdefghijkl.desktop"
+            "io.github.cheviiot.alcove.abcdefghijkl.desktop"
         );
         let leading_digit: AppId = "1bcdefghijkl".parse().unwrap();
         assert_eq!(
             PortalLauncher::desktop_id(&leading_digit),
-            "io.github.cheviiot.bastle.app1bcdefghijkl.desktop"
+            "io.github.cheviiot.alcove.app1bcdefghijkl.desktop"
         );
     }
 }

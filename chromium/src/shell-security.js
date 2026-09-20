@@ -56,7 +56,7 @@ function trustedShellSender(sender, expected) {
   if (!sender || sender !== expected || typeof sender.getURL !== 'function') return false;
   try {
     const url = new URL(sender.getURL());
-    return url.protocol === 'bastle-ui:' && url.hostname === 'shell';
+    return url.protocol === 'alcove-ui:' && url.hostname === 'shell';
   } catch {
     return false;
   }

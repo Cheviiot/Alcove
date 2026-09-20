@@ -3,7 +3,7 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $BastleAppPage: Adw.NavigationPage {
+template $AlcoveAppPage: Adw.NavigationPage {
   tag: "details";
   Adw.ToolbarView {
     [top]
@@ -31,7 +31,7 @@ template $BastleAppPage: Adw.NavigationPage {
           Box {
             spacing: 12;
             Image details_icon {
-              icon-name: "io.github.cheviiot.bastle";
+              icon-name: "io.github.cheviiot.alcove";
               pixel-size: 48;
             }
             Box {
@@ -89,7 +89,7 @@ template $BastleAppPage: Adw.NavigationPage {
             Adw.ExpanderRow icon_expander {
               title: _("Icon");
               [prefix]
-              Image icon_image { icon-name: "io.github.cheviiot.bastle"; pixel-size: 32; }
+              Image icon_image { icon-name: "io.github.cheviiot.alcove"; pixel-size: 32; }
               Adw.ActionRow {
                 title: _("Choose Icon File");
                 activatable: true;

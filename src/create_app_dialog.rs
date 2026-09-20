@@ -22,7 +22,7 @@ mod imp {
     use super::*;
 
     #[derive(Debug, Default, gtk::CompositeTemplate, glib::Properties)]
-    #[template(resource = "/io/github/cheviiot/bastle/create_app_dialog.ui")]
+    #[template(resource = "/io/github/cheviiot/alcove/create_app_dialog.ui")]
     #[properties(wrapper_type = super::CreateAppDialog)]
     pub struct CreateAppDialog {
         pub engine_availability: RefCell<Option<EngineAvailability>>,
@@ -80,7 +80,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for CreateAppDialog {
-        const NAME: &'static str = "BastleCreateAppDialog";
+        const NAME: &'static str = "AlcoveCreateAppDialog";
         type Type = super::CreateAppDialog;
         type ParentType = adw::Dialog;
 
@@ -527,7 +527,7 @@ impl CreateAppDialog {
 #[cfg(feature = "ui-tests")]
 pub(crate) fn run_ui_smoke_test<P: IsA<gtk::Application>>(application: &P) -> anyhow::Result<()> {
     use anyhow::ensure;
-    let window = crate::window::BastleWindow::new(application);
+    let window = crate::window::AlcoveWindow::new(application);
     window.set_default_size(800, 760);
     window.present();
     let dialog = CreateAppDialog::new(EngineAvailability::Missing);

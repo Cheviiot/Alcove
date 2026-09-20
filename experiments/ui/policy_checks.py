@@ -7,7 +7,7 @@ import time
 
 def run(nodes,find,wait,press,key,result,runtime):
     import pyatspi
-    path=runtime/'data/bastle/apps/library00000/policy.json'
+    path=runtime/'data/alcove/apps/library00000/policy.json'
     def policy(): return json.loads(path.read_text())
     def focus(node):
         for _ in range(80):

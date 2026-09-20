@@ -22,9 +22,9 @@ parser.add_argument('--output', type=pathlib.Path, required=True)
 parser.add_argument('--url', required=True)
 parser.add_argument('--scenario', required=True)
 args = parser.parse_args()
-if os.environ.get('WAYLAND_DISPLAY') != 'bastle-probe' or not os.path.basename(
-        os.environ.get('XDG_RUNTIME_DIR', '')).startswith('bastle-native-'):
-    raise SystemExit('Refusing UI control outside isolated Bastle session')
+if os.environ.get('WAYLAND_DISPLAY') != 'alcove-probe' or not os.path.basename(
+        os.environ.get('XDG_RUNTIME_DIR', '')).startswith('alcove-native-'):
+    raise SystemExit('Refusing UI control outside isolated Alcove session')
 result = {'url': args.url, 'scenario': args.scenario, 'checks': {}, 'snapshots': {}}
 def progress(stage):
     result['stage'] = stage
@@ -76,7 +76,7 @@ def events():
 
 def samples():
     return [json.loads(e['message'].split(':', 1)[1]) for e in events()
-            if e.get('message', '').startswith('BASTLE_SITE_STATE:')]
+            if e.get('message', '').startswith('ALCOVE_SITE_STATE:')]
 
 def latest():
     states = samples()
@@ -138,9 +138,9 @@ try:
     progress('loaded')
     expected = urllib.parse.urlsplit(args.url).hostname
     result['checks']['https_site_loaded'] = urllib.parse.urlsplit(state['url']).hostname == expected
-    find(lambda n: n.getRoleName() == 'document web' and n.getApplication().name == 'bastle-native-chromium', 'website attached to GTK accessibility')
+    find(lambda n: n.getRoleName() == 'document web' and n.getApplication().name == 'alcove-native-chromium', 'website attached to GTK accessibility')
     initial = snapshot('loaded')
-    result['checks']['site_document_in_gtk'] = any(n['role'] == 'document web' and n['app'] == 'bastle-native-chromium' for n in initial)
+    result['checks']['site_document_in_gtk'] = any(n['role'] == 'document web' and n['app'] == 'alcove-native-chromium' for n in initial)
     result['checks']['semantic_site_content'] = sum(n['role'] in ('link', 'heading', 'entry', 'text', 'button', 'paragraph') for n in initial) > 3
     if args.scenario == 'gnome':
         initial_scale = latest()['scale']

@@ -31,7 +31,7 @@ const { applyUserAgent } = require('./user-agent');
 const { validateConfig, webUrl } = require('./validate');
 const { persistWindowState } = require('./window-state');
 
-const SHELL_ORIGIN = 'bastle-ui://shell';
+const SHELL_ORIGIN = 'alcove-ui://shell';
 const TOOLBAR_HEIGHT = 52;
 const HOT_ZONE_HEIGHT = 6;
 const MENU_HEIGHT = 390;
@@ -119,16 +119,16 @@ function nativeStrings() {
 }
 
 protocol.registerSchemesAsPrivileged([{
-  scheme: 'bastle-ui',
+  scheme: 'alcove-ui',
   privileges: { standard: true, secure: true, supportFetchAPI: false, corsEnabled: false },
 }]);
 
 function readRequest() {
-  const prefix = '--bastle-config=';
+  const prefix = '--alcove-config=';
   const argument = process.argv.find((value) => value.startsWith(prefix));
   if (!argument) throw new Error('missing private runtime request');
   const filename = argument.slice(prefix.length);
-  const runtimeRoot = path.resolve(process.env.XDG_RUNTIME_DIR, 'bastle-chromium');
+  const runtimeRoot = path.resolve(process.env.XDG_RUNTIME_DIR, 'alcove-chromium');
   const resolved = path.resolve(filename);
   if (!resolved.startsWith(`${runtimeRoot}${path.sep}`)) throw new Error('unsafe request path');
   const stats = fs.lstatSync(resolved);
@@ -143,8 +143,8 @@ function readRequest() {
 }
 
 let current = readRequest();
-const profileRoot = path.join(process.env.XDG_DATA_HOME, 'bastle-chromium', 'profiles', current.id);
-const cacheRoot = path.join(process.env.XDG_CACHE_HOME, 'bastle-chromium', current.id);
+const profileRoot = path.join(process.env.XDG_DATA_HOME, 'alcove-chromium', 'profiles', current.id);
+const cacheRoot = path.join(process.env.XDG_CACHE_HOME, 'alcove-chromium', current.id);
 fs.mkdirSync(profileRoot, { recursive: true, mode: 0o700 });
 fs.mkdirSync(cacheRoot, { recursive: true, mode: 0o700 });
 app.setPath('userData', profileRoot);
@@ -190,7 +190,7 @@ function revealToolbar(runtime) {
   if (!runtime || runtime.shellView.webContents.isDestroyed()) return;
   runtime.toolbarVisible = true;
   updateRuntimeBounds(runtime);
-  if (runtime.shellReady) runtime.shellView.webContents.send('bastle:shell-reveal');
+  if (runtime.shellReady) runtime.shellView.webContents.send('alcove:shell-reveal');
 }
 
 async function promptNavigation(value, parentContents = mainRuntime?.siteView.webContents) {
@@ -390,7 +390,7 @@ function sendShellState(runtime) {
   const shellContents = runtime.shellView.webContents;
   if (!runtime.shellReady || shellContents.isDestroyed() || contents.isDestroyed()) return;
   const history = contents.navigationHistory;
-  shellContents.send('bastle:shell-state', {
+  shellContents.send('alcove:shell-state', {
     title: contents.getTitle() || current.title,
     canGoBack: history.canGoBack(),
     canGoForward: history.canGoForward(),
@@ -586,7 +586,7 @@ if (gotLock) {
   app.on('before-quit', () => { app.isQuitting = true; });
   app.on('window-all-closed', () => app.quit());
   app.whenReady().then(async () => {
-    protocol.handle('bastle-ui', (request) => {
+    protocol.handle('alcove-ui', (request) => {
       try {
         const url = new URL(request.url);
         if (request.method !== 'GET' || url.hostname !== 'shell') return new Response('', { status: 404 });
@@ -604,7 +604,7 @@ if (gotLock) {
         return new Response('', { status: 400 });
       }
     });
-    ipcMain.handle('bastle:shell-command', (event, rawMessage) => {
+    ipcMain.handle('alcove:shell-command', (event, rawMessage) => {
       const runtime = runtimeForShell(event.sender);
       if (!runtime || !trustedShellSender(event.sender, runtime.shellView.webContents)) {
         throw new Error('untrusted Chromium shell sender');
@@ -615,7 +615,7 @@ if (gotLock) {
     });
 
     const runtimeSocket = path.join(
-      process.env.XDG_RUNTIME_DIR, 'bastle-chromium', `${current.id}.sock`,
+      process.env.XDG_RUNTIME_DIR, 'alcove-chromium', `${current.id}.sock`,
     );
     fs.mkdirSync(path.dirname(runtimeSocket), { recursive: true, mode: 0o700 });
     try { fs.unlinkSync(runtimeSocket); } catch (error) {
@@ -629,7 +629,7 @@ if (gotLock) {
       }
     });
     Menu.setApplicationMenu(null);
-    isolatedSession = session.fromPartition(`persist:bastle-${current.id}`, { cache: true });
+    isolatedSession = session.fromPartition(`persist:alcove-${current.id}`, { cache: true });
     defaultUserAgent = isolatedSession.getUserAgent();
     configurePermissions(isolatedSession);
     configureDownloads(isolatedSession);

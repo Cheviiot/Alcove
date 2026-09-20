@@ -25,7 +25,7 @@ function validateOrigin(value) {
 function validatePolicy(policy) {
   if (!policy || typeof policy !== 'object' || Array.isArray(policy) ||
       policy.schema_version !== 2) {
-    throw new Error('unsupported Bastle policy');
+    throw new Error('unsupported Alcove policy');
   }
   const permissions = policy.permissions || {};
   for (const [origin, choices] of Object.entries(permissions)) {

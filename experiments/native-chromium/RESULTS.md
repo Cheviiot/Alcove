@@ -12,7 +12,7 @@ reads the document and input in an isolated Mutter session. Full website,
 input, notification and sandbox acceptance remains incomplete. Multiple native
 windows and local popup/OAuth flows now have dedicated accessibility checks.
 
-Environment: Fedora 44 Distrobox `bastle-dev`, GTK 4.22.5, libadwaita 1.9.4,
+Environment: Fedora 44 Distrobox `alcove-dev`, GTK 4.22.5, libadwaita 1.9.4,
 Weston 15 headless GL / Mutter 50.5 headless, Orca 50.2, CEF 152.0.7 / Chromium 152.0.7977.83, Linux x86_64.
 The GTK/CEF/session-bus runtimes and data directories are private. Weston is
 started without XWayland; GTK uses `GdkWaylandDisplay`, CEF uses Ozone Wayland.
@@ -200,7 +200,7 @@ Protocol-v2 regressions passed:
   WebGL remains unavailable and is not claimed by that test scope.
 
 CEF/C++ and Rust builds, five probe unit tests, warning-free probe Clippy, Rust
-formatting and Python syntax checks passed. Normal Bastle application tests are
+formatting and Python syntax checks passed. Normal Alcove application tests are
 still the earlier baseline; this iteration changed the isolated experiment.
 
 ## Independent native accessibility for multiple windows — 2026-09-20
@@ -338,7 +338,7 @@ The real-site test found two integration defects and now covers them:
   viewport 800×640 → 727×582, then reset to 800×640, including after history.
 - Adwaita's `background` class alone did not make the overlaid header opaque.
   A shared, theme-aware header rule now paints `--window-bg-color`; screenshots
-  show that website headers no longer bleed through Bastle's title/buttons.
+  show that website headers no longer bleed through Alcove's title/buttons.
 
 Audit corrections: wait for usable document content rather than every network
 asset; separately wait for the website's AT-SPI attachment; open the native
@@ -353,7 +353,7 @@ manager redesign. Broad browser certification remains deferred.
 ## Ordinary app launch — 2026-09-20
 
 The same Rust CEF runtime now lives in `src/native_chromium/` and serves both
-an isolated probe and the ordinary `bastle APP_ID` command. The latter requires
+an isolated probe and the ordinary `alcove APP_ID` command. The latter requires
 an optional build feature and an explicit, version-checked add-on manifest.
 Electron remains the default Chromium implementation.
 
@@ -363,7 +363,7 @@ repeated launch presents the existing window; no probe recording; graceful
 close removes temporary IPC; separate CEF profile; localStorage survives a
 restart; two apps have independent storage; native network-error retry;
 renderer-crash retry; worker-crash error; reopening after worker crash;
-public Wikipedia in the ordinary Bastle window; no XWayland dependency.
+public Wikipedia in the ordinary Alcove window; no XWayland dependency.
 All destructive crash checks target only descendants of disposable test apps.
 
 Fixed a lifetime issue during this check: GTK signal references could retain
@@ -394,7 +394,7 @@ the existing window, add-on installation/backup integration and Flatpak remain.
 
 ## Saved WebView policies — 2026-09-20
 
-The native adapter now uses the existing Bastle model, policy and atomic
+The native adapter now uses the existing Alcove model, policy and atomic
 repository updates for permission decisions and navigation allowlists.
 Permission choices match WebKit: Not Now, Always Block, Allow for This Session
 and Always Allow. Supported custom proxy settings are applied before CEF's
@@ -416,9 +416,9 @@ bodies. The host does not recreate an accepted request as a GET.
 Two integration bugs were reproduced and fixed:
 
 - CEF's permission acceptance persists a Chrome exception. Without startup
-  synchronization, an old grant could bypass a later Bastle block and a session
+  synchronization, an old grant could bypass a later Alcove block and a session
   grant survived a restart. The worker now resets only corresponding permission
-  exception preferences, then seeds saved Bastle choices through CEF's public
+  exception preferences, then seeds saved Alcove choices through CEF's public
   content-setting API before navigating. Cookies and site storage remain intact.
   Preference names are tied to the pinned Chromium version and require the
   startup/restart audit when upgrading.
@@ -464,7 +464,7 @@ shutdown lifetime.
 | Code / package checks | **27** library + **86** application tests; all-target Clippy with warnings denied; all **4** normal Meson checks including the existing WebKit background UI test; formatting, catalog and syntax checks pass |
 
 The background audit receives the actual GNotification payload in an isolated
-`org.gtk.Notifications` recorder and invokes Bastle's real application actions.
+`org.gtk.Notifications` recorder and invokes Alcove's real application actions.
 It verifies transport and actions; it does not certify the notification's visual
 presentation by GNOME Shell. All compositor input, profiles and notifications
 belong to the disposable session.

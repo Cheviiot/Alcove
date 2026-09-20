@@ -3,7 +3,7 @@
 [advisories]
 ignore = [
   # Transitive through the current glycin stack. Remove when upstream no longer
-  # depends on paste. Tracked in the Bastle issue tracker.
+  # depends on paste. Tracked in the Alcove issue tracker.
   "RUSTSEC-2024-0436",
 ]
 

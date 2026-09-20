@@ -21,7 +21,7 @@ pub async fn choose(
     eprintln!("file portal: parent exported");
     let connection = zbus::Connection::session().await?;
     let token = format!(
-        "bastle_{}_{}",
+        "alcove_{}_{}",
         std::process::id(),
         event["id"].as_u64().context("request id")?
     );

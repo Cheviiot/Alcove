@@ -6,7 +6,7 @@
 #include "include/cef_request_context.h"
 
 // CEF 152 maps ACCEPT/DENY to Chrome's persistent permission decisions, and
-// does not expose AcceptThisTime. Bastle owns the durable policy. Reset only
+// does not expose AcceptThisTime. Alcove owns the durable policy. Reset only
 // the corresponding Chrome permission exceptions before the first page loads;
 // cookies, site storage and unrelated preferences remain intact.
 // Names are pinned to Chromium 152 website_settings_registry/content_settings.
@@ -19,7 +19,7 @@ inline bool ApplyPermissionSettings(CefRefPtr<CefRequestContext> context,
     CefString error;
     if (!context->HasPreference(name) || !context->CanSetPreference(name) ||
         !context->SetPreference(name, nullptr, error)) {
-      failure = "Could not synchronize Bastle permissions: " + name + ": " + error.ToString();
+      failure = "Could not synchronize Alcove permissions: " + name + ": " + error.ToString();
       return false;
     }
   }
@@ -36,7 +36,7 @@ inline bool ApplyPermissionSettings(CefRefPtr<CefRequestContext> context,
   for (const auto& [origin, decisions] : permissions.items()) {
     for (const auto& [kind, decision] : decisions.items()) {
       const auto found = types.find(kind);
-      if (found == types.end() || !decision.is_string()) { failure = "Unknown Bastle permission"; return false; }
+      if (found == types.end() || !decision.is_string()) { failure = "Unknown Alcove permission"; return false; }
       const auto value = decision == "allow" ? CEF_CONTENT_SETTING_VALUE_ALLOW :
           decision == "block" ? CEF_CONTENT_SETTING_VALUE_BLOCK : CEF_CONTENT_SETTING_VALUE_ASK;
       context->SetContentSetting(origin, "", found->second, value);

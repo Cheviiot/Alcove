@@ -20,8 +20,8 @@ parser.add_argument('--native',action='store_true')
 parser.add_argument('--orca',action='store_true')
 parser.add_argument('--output',type=pathlib.Path,required=True)
 args=parser.parse_args()
-if os.environ.get('WAYLAND_DISPLAY')!='bastle-probe' or not os.path.basename(os.environ.get('XDG_RUNTIME_DIR','')).startswith('bastle-native-'):
-    raise SystemExit('Refusing UI control outside the isolated Bastle session')
+if os.environ.get('WAYLAND_DISPLAY')!='alcove-probe' or not os.path.basename(os.environ.get('XDG_RUNTIME_DIR','')).startswith('alcove-native-'):
+    raise SystemExit('Refusing UI control outside the isolated Alcove session')
 result={'scope':'popup transport and local OAuth' + (' with native website AT-SPI' if args.native else '; website screenreader support is not accepted'),'checks':{}}
 bus=Gio.bus_get_sync(Gio.BusType.SESSION,None)
 service='org.gnome.Mutter.RemoteDesktop'
@@ -44,7 +44,7 @@ def wait(predicate,description,timeout=6):
 def message(kind):
     for event in events():
         text=event.get('message','')
-        if text.startswith('BASTLE_POPUP:'):
+        if text.startswith('ALCOVE_POPUP:'):
             value=json.loads(text.split(':',1)[1])
             if value['kind']==kind:return value['value']
     return None
@@ -69,9 +69,9 @@ def native_close():
     key(0xffe9,True);press(0xffc1);key(0xffe9,False) # Alt+F4
 
 def native_document(title):
-    return any(n.name==title and n.getRoleName()=='document web' and n.getApplication().name=='bastle-native-chromium' for n in nodes())
+    return any(n.name==title and n.getRoleName()=='document web' and n.getApplication().name=='alcove-native-chromium' for n in nodes())
 def native_window(title):
-    return any(n.name==title and n.getRoleName()=='frame' and n.getApplication().name=='bastle-native-chromium' for n in nodes())
+    return any(n.name==title and n.getRoleName()=='frame' and n.getApplication().name=='alcove-native-chromium' for n in nodes())
 def title_loaded(title):return any(e.get('event')=='title' and e.get('title')==title for e in events())
 def allow_speech():
     if not args.orca:return
@@ -81,7 +81,7 @@ def allow_speech():
     time.sleep(2.5)
 try:
     call('Start');time.sleep(6)
-    if args.native: result['checks']['native_window_titles']=bool(wait(lambda:native_window('Bastle popup fixture'),'main window title'))
+    if args.native: result['checks']['native_window_titles']=bool(wait(lambda:native_window('Alcove popup fixture'),'main window title'))
     # Autofocused button in the fixture receives a real keyboard activation.
     allow_speech()
     press(0xff0d)
@@ -90,23 +90,23 @@ try:
     child=wait(lambda:message('child-session'),'child inherits opener and cookie')
     result['checks']['shared_session_and_opener']=child=={'opener':True,'cookie':True}
     wait(lambda:any(e.get('event')=='view-created' for e in events()),'native child created')
-    if args.native: result['checks']['native_child_document']=bool(wait(lambda:native_document('Bastle OAuth step'),'child website in GTK AT-SPI tree'))
-    if args.native: result['checks']['native_window_titles'] &= bool(wait(lambda:native_window('Bastle OAuth step'),'child window title'))
+    if args.native: result['checks']['native_child_document']=bool(wait(lambda:native_document('Alcove OAuth step'),'child website in GTK AT-SPI tree'))
+    if args.native: result['checks']['native_window_titles'] &= bool(wait(lambda:native_window('Alcove OAuth step'),'child window title'))
     allow_speech()
     time.sleep(1);press(0xff0d)
-    wait(lambda:title_loaded('Bastle local provider'),'cross-origin provider loaded')
-    if args.native: result['checks']['native_provider_document']=bool(wait(lambda:native_document('Bastle local provider'),'cross-origin website in GTK AT-SPI tree'))
-    if args.native: result['checks']['native_window_titles'] &= bool(wait(lambda:native_window('Bastle local provider'),'provider window title'))
+    wait(lambda:title_loaded('Alcove local provider'),'cross-origin provider loaded')
+    if args.native: result['checks']['native_provider_document']=bool(wait(lambda:native_document('Alcove local provider'),'cross-origin website in GTK AT-SPI tree'))
+    if args.native: result['checks']['native_window_titles'] &= bool(wait(lambda:native_window('Alcove local provider'),'provider window title'))
     result['checks']['cross_origin_security']=wait(lambda:message('cross-origin-opener-isolated'),'cross-origin access blocked') is True
     allow_speech()
     time.sleep(1);press(0xff0d)
     value=wait(lambda:message('oauth'),'callback delivered to original opener')
-    result['checks']['oauth_callback']=value=={'state':'bastle-local-state','code':'local-test-code','cookie':True,'opener':True}
+    result['checks']['oauth_callback']=value=={'state':'alcove-local-state','code':'local-test-code','cookie':True,'opener':True}
     wait(lambda:any(e.get('event')=='view-closed' and e.get('view')==2 for e in events()),'window.close closes native child')
     result['checks']['script_close']=True
     time.sleep(1);press(0xff0d)
     wait(lambda:message('close-window-returned'),'second native window created')
-    wait(lambda:title_loaded('Bastle close confirmation'),'close fixture loaded')
+    wait(lambda:title_loaded('Alcove close confirmation'),'close fixture loaded')
     time.sleep(1);press(0xff0d)
     wait(lambda:message('beforeunload-armed'),'beforeunload user activation')
     native_close();click('Остаться')

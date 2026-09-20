@@ -300,7 +300,7 @@ mod tests {
         config.user_agent = Some("é".repeat(MAX_USER_AGENT_BYTES / 2 + 1));
         assert!(config.normalize_and_validate().is_err());
 
-        config.user_agent = Some("Bastle\r\nInjected".to_owned());
+        config.user_agent = Some("Alcove\r\nInjected".to_owned());
         assert!(config.normalize_and_validate().is_err());
     }
 
@@ -332,7 +332,7 @@ mod tests {
         let bytes = br#"{
             "schema_version": 1,
             "id": "abcdefghijkl",
-            "title": "Legacy Bastle",
+            "title": "Legacy Alcove",
             "start_url": "https://example.org/",
             "imported_from": {"app_id": "ignored", "legacy_id": 1}
         }"#;

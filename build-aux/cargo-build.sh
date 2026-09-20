@@ -21,4 +21,4 @@ if [ -n "$features" ]; then
   set -- "$@" --features "$features"
 fi
 "$cargo_bin" "$@"
-cp "$target_dir/$profile/bastle" "$output"
+cp "$target_dir/$profile/alcove" "$output"

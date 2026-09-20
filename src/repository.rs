@@ -1124,7 +1124,7 @@ mod tests {
             r#"{
   "schema_version": 2,
   "id": "abcdefghijkl",
-  "title": "Bastle v2",
+  "title": "Alcove v2",
   "start_url": "https://example.org/",
   "user_agent": null,
   "use_theme_color": true,

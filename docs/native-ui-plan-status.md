@@ -6,9 +6,9 @@ profiles remain in use while the optional native adapter is integrated.
 
 ## Scope clarification — 2026-09-20
 
-Bastle is a simple website-as-an-application launcher. The user clarified that
+Alcove is a simple website-as-an-application launcher. The user clarified that
 CEF should repeat the existing WebKit WebView's behavior in the same window.
-GNOME HIG applies to the native Bastle shell; website content belongs to the
+GNOME HIG applies to the native Alcove shell; website content belongs to the
 engine. A separate browser UI or an exhaustive browser certification project
 is not the objective.
 
@@ -33,7 +33,7 @@ checks; this clarification does not authorize replacing Electron prematurely.
 | Popups / OAuth | Native multi-view transport, local OAuth mechanics and per-window AT-SPI association implemented; identical-document and Orca audits cover routing/lifetimes; see final run evidence |
 | In-page popup surfaces | Protocol v3 routes generation-checked PET_POPUP textures to a GTK overlay; real pointer/keyboard and native option actions tested at 100%/200%; see final evidence |
 | Real websites | Wikipedia search/article/scroll/native Back; GNOME documentation also covers shared menu Home/reload/zoom/history (13 checks); MDN WebM playback and Khronos WebGL verified in isolated native windows; broader web-app/identity-provider compatibility remains |
-| Saved policies | Existing Bastle permissions, session grants, navigation allowlist and explicit proxy settings integrated; startup permission state, restart, redirects, POST and popup decisions verified |
+| Saved policies | Existing Alcove permissions, session grants, navigation allowlist and explicit proxy settings integrated; startup permission state, restart, redirects, POST and popup decisions verified |
 | Background | Shared WebKit/CEF notification and application hold; authorized hidden start, close-to-background, same-page presentation, explicit Stop, before-unload and errors verified in private Mutter |
 | Notifications | Saved/temporary permission choices verified; native delivery/actions still unverified |
 | Performance / media | Equivalent scroll, animation, WebGL and video benchmarks against existing Electron still required |
@@ -91,10 +91,10 @@ closed dialog. See UI evidence for the exact scope; CEF packaging remains separa
 1. Share the web-app shell and WebKit/Chromium actions. The shared
    `src/web_app_shell.rs` now builds both windows’ navigation/header/menu/content
    layout and owns overlay visibility. The optional `native-chromium` feature
-   now connects the same runtime to `bastle APP_ID`, behind an explicit add-on
+   now connects the same runtime to `alcove APP_ID`, behind an explicit add-on
    manifest environment setting. Incompatible manifests/workers and unsupported
    proxy configurations fail explicitly. Saved permissions, background mode,
-   navigation and supported proxies now share the existing Bastle policy.
+   navigation and supported proxies now share the existing Alcove policy.
    Public commands, engine choice and default Electron behavior are preserved.
    Complete add-on/backup integration
    and establish a tested profile migration policy separately.

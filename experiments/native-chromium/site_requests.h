@@ -102,7 +102,7 @@ class SiteRequests final : public CefDialogHandler,
   }
   bool OnShowPermissionPrompt(CefRefPtr<CefBrowser>, uint64_t prompt,
       const CefString& origin, uint32_t permissions, CefRefPtr<CefPermissionPromptCallback> callback) override {
-    // Every download still requires Bastle's explicit destination portal.
+    // Every download still requires Alcove's explicit destination portal.
     // Match WebKit: that per-file confirmation also authorizes multiple files.
     if (permissions == CEF_PERMISSION_TYPE_MULTIPLE_DOWNLOADS) {
       callback->Continue(CEF_PERMISSION_RESULT_ACCEPT);

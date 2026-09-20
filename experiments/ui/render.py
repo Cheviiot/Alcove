@@ -23,7 +23,7 @@ def main():
     variant=(args.screen+'-' if args.screen!='library' else '')+('high-contrast' if args.high_contrast else 'normal')+('-large-text' if args.large_text else '')
     output=ROOT/'build/ui-renders'/(datetime.datetime.now().strftime('%Y%m%d-%H%M%S-')+variant)
     output.mkdir(parents=True)
-    with tempfile.TemporaryDirectory(prefix='bastle-ui-') as runtime:
+    with tempfile.TemporaryDirectory(prefix='alcove-ui-') as runtime:
         env=os.environ.copy()
         for key in ('DISPLAY','WAYLAND_DISPLAY','XAUTHORITY','AT_SPI_BUS_ADDRESS','DBUS_SESSION_BUS_ADDRESS',
                     'DBUS_STARTER_ADDRESS','DBUS_STARTER_BUS_TYPE','GTK_THEME','ADW_DEBUG_HIGH_CONTRAST'):
@@ -31,9 +31,9 @@ def main():
         env.update(XDG_RUNTIME_DIR=runtime,XDG_CONFIG_HOME=runtime+'/config',XDG_DATA_HOME=runtime+'/data',
             XDG_CACHE_HOME=runtime+'/cache',XDG_DATA_DIRS='/usr/local/share:/usr/share',
             GDK_BACKEND='x11',GSK_RENDERER='cairo',GSETTINGS_BACKEND='memory',
-            LANGUAGE='ru',LC_ALL='ru_RU.UTF-8',BASTLE_TEST_LOCALEDIR=str(ROOT/'build/po'),
-            BASTLE_TEST_RESOURCE=str(ROOT/'build/src/bastle.gresource'),
-            BASTLE_UI_SCREENSHOTS=str(output),GSETTINGS_SCHEMA_DIR=str(ROOT/'build/data'))
+            LANGUAGE='ru',LC_ALL='ru_RU.UTF-8',ALCOVE_TEST_LOCALEDIR=str(ROOT/'build/po'),
+            ALCOVE_TEST_RESOURCE=str(ROOT/'build/src/alcove.gresource'),
+            ALCOVE_UI_SCREENSHOTS=str(output),GSETTINGS_SCHEMA_DIR=str(ROOT/'build/data'))
         settings=Path(runtime,'config/gtk-4.0/settings.ini')
         settings.parent.mkdir(parents=True)
         settings.write_text('[Settings]\ngtk-xft-dpi=98304\n'+('gtk-font-name=Adwaita Sans 20\n' if args.large_text else ''))
@@ -43,7 +43,7 @@ def main():
         try:
             with (output/'render.log').open('w') as log:
                 process=subprocess.Popen(['xvfb-run','-a','-s','-screen 0 1600x1200x24','dbus-run-session','--',
-                    str(ROOT/'build/src/bastle'),'--ui-test-'+args.screen],env=env,stdout=log,
+                    str(ROOT/'build/src/alcove'),'--ui-test-'+args.screen],env=env,stdout=log,
                     stderr=subprocess.STDOUT,start_new_session=True)
                 try: process.wait(timeout=75)
                 except subprocess.TimeoutExpired: timed_out=True

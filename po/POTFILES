@@ -1,6 +1,6 @@
-data/io.github.cheviiot.bastle.desktop.in
-data/io.github.cheviiot.bastle.metainfo.xml.in
-data/io.github.cheviiot.bastle.gschema.xml
+data/io.github.cheviiot.alcove.desktop.in
+data/io.github.cheviiot.alcove.metainfo.xml.in
+data/io.github.cheviiot.alcove.gschema.xml
 src/app_page.blp
 src/app_page.rs
 src/app_window.blp

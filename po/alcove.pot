@@ -1,12 +1,12 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the bastle package.
+# This file is distributed under the same license as the alcove package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: bastle\n"
+"Project-Id-Version: alcove\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-09-20 18:09+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -17,262 +17,262 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/io.github.cheviiot.bastle.desktop.in:3
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:5 src/background.rs:24
+#: data/io.github.cheviiot.alcove.desktop.in:3
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:5 src/background.rs:24
 #: src/window.blp:7 src/window.blp:30
-msgid "Bastle"
+msgid "Alcove"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.desktop.in:4
+#: data/io.github.cheviiot.alcove.desktop.in:4
 msgid "Create isolated web applications"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:6
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:6
 msgid "Create isolated web applications for GNOME"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:8
-msgid "Cheviiot and Bastle contributors"
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:8
+msgid "Cheviiot and Alcove contributors"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:28
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:28
 msgid ""
-"Bastle is a GNOME-native manager for isolated web applications. WebKitGTK is "
+"Alcove is a GNOME-native manager for isolated web applications. WebKitGTK is "
 "the default engine, and Chromium is available as a Flatpak add-on for "
 "explicitly selected sites. Each website gets separate local data, cookies, "
 "cache, settings, and its own desktop launcher."
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:34
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:34
 msgid ""
-"Bastle is an independent successor to Spider. The original work by Zaedus, "
+"Alcove is an independent successor to Spider. The original work by Zaedus, "
 "Cameron Radmore's contribution, and their Git history remain credited. "
-"Bastle is developed independently and does not claim their endorsement or "
+"Alcove is developed independently and does not claim their endorsement or "
 "participation."
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:41
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:41
 msgid "Create, edit, repair, and remove portal-installed launchers"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:42
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:42
 msgid ""
 "Fetch and safely normalize website icons with an offline fallback; an "
 "optional Icon Horse request is made only by explicit user action"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:43
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:43
 msgid ""
 "Keep each application's configuration, policy, profile, and cache separate"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:58
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:58
 msgid ""
 "Replace the library grid with an adaptive GNOME list, search, sorting, and "
 "keyboard navigation"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:59
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:59
 msgid ""
 "Add a site-only Icon Horse favicon fallback with safe hostname checks, "
 "cache, and PNG normalization"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:60
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:60
 msgid ""
 "Add accessible application details actions and explicit site-icon controls "
 "for creation and editing"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:68
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:68
 msgid ""
 "Redesign the library as an adaptive card grid with search, sorting, and "
 "application details"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:69
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:69
 msgid ""
 "Keep WebKitGTK as the default and make Chromium an optional, manually "
 "installed add-on"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:70
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:70
 msgid ""
 "Add a trusted local Chromium toolbar built with secure WebContentsView "
 "isolation"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:71
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:71
 msgid ""
 "Add explicit add-on diagnostics, restart guidance, and one-time WebKit "
 "fallback"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:79
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:79
 msgid "Move the Chromium payload from the main app into a Flatpak add-on"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:80
-msgid "Publish the app and add-on together from the signed Bastle repository"
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:80
+msgid "Publish the app and add-on together from the signed Alcove repository"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:81
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:81
 msgid "Keep WebKitGTK usable when the Chromium add-on is not installed"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:82
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:82
 msgid "Add clear installation and compatibility diagnostics for the add-on"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:90
-msgid "Embed the Chromium engine into the single Bastle Flatpak"
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:90
+msgid "Embed the Chromium engine into the single Alcove Flatpak"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:91
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:91
 msgid "Remove the need to install or update a separate Chromium package"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:92
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:92
 msgid "Keep WebKitGTK as the default and retain separate per-engine profiles"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:93
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:93
 msgid ""
-"Activate Chromium through an internal service owned by the Bastle app ID"
+"Activate Chromium through an internal service owned by the Alcove app ID"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:94
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:94
 msgid "Publish a GPG-signed project Flatpak repository for x86_64 and aarch64"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:95
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:95
 msgid "Clarify the GPL-3.0-only license and preserved Spider authorship"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:103
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:103
 msgid ""
 "Add an explicit WebKitGTK or Chromium engine choice with local compatibility "
 "recommendations"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:104
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:104
 msgid ""
 "Integrate the separately sandboxed Chromium companion through an "
 "authenticated D-Bus protocol"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:105
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:105
 msgid ""
 "Keep engine profiles separate and safely retry deferred companion profile "
 "cleanup"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:106
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:106
 msgid ""
 "Diagnose Dynamic Launcher, File Chooser, and Documents portal capabilities "
 "independently"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:107
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:107
 msgid ""
 "Distinguish unavailable, unsupported, cancelled, denied, and failed portal "
 "operations"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:115
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:115
 msgid ""
 "Add opt-in navigation allowlists, proxy settings, background mode, "
 "autostart, and content filters"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:116
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:116
 msgid ""
 "Add a threat model for websites, profiles, portals, backups, and the future "
 "companion boundary"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:117
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:117
 msgid ""
 "Keep every new privacy and power feature disabled until the user enables it"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:118
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:118
 msgid ""
 "Serialize portal reconciliation and safely merge concurrent policy edits"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:119
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:119
 msgid ""
 "Require fresh background authorization after restore while preserving other "
 "policy"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:127
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:127
 msgid ""
 "Add versioned metadata backups with transactional per-application restore"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:128
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:128
 msgid "Add optional passphrase-encrypted transfer of cookies and site storage"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:129
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:129
 msgid ""
 "Add conflict preview, partial-failure reporting, and runtime profile locks"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:130
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:130
 msgid "Add portal capability diagnostics and native aarch64 release bundles"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:131
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:131
 msgid ""
 "Harden archive extraction, resource limits, and concurrent profile operations"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:139
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:139
 msgid "Add per-origin website permissions with session and persistent choices"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:140
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:140
 msgid ""
 "Add popup and OAuth windows, native notifications, and managed downloads"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:141
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:141
 msgid "Add navigation, zoom, and fullscreen runtime controls"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:142
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:142
 msgid ""
-"Migrate Bastle data to schema v2 and remove Spider runtime compatibility"
+"Migrate Alcove data to schema v2 and remove Spider runtime compatibility"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:150
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:150
 msgid "Prevent a crash when opening an application card for editing"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:151
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:151
 msgid "Add a headless regression test for editor state changes"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:159
-msgid "Introduce the Bastle identity and isolated JSON-based storage"
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:159
+msgid "Introduce the Alcove identity and isolated JSON-based storage"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:160
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:160
 msgid "Add transactional launcher operations and repair support"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:161
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:161
 msgid "Add an explicit, settings-only Spider importer"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.metainfo.xml.in:162
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:162
 msgid "Harden URL, metadata, icon, download, and theme-color handling"
 msgstr ""
 
-#: data/io.github.cheviiot.bastle.gschema.xml:19
+#: data/io.github.cheviiot.alcove.gschema.xml:19
 msgid "Application library sorting mode"
 msgstr ""
 
@@ -608,7 +608,7 @@ msgid "_Keyboard Shortcuts"
 msgstr ""
 
 #: src/backup_dialog.rs:24
-msgid "Back Up Bastle"
+msgid "Back Up Alcove"
 msgstr ""
 
 #: src/backup_dialog.rs:24 src/backup_dialog.rs:134
@@ -660,7 +660,7 @@ msgid "Passphrases must be non-empty and match"
 msgstr ""
 
 #: src/backup_dialog.rs:133
-msgid "Save Bastle Backup"
+msgid "Save Alcove Backup"
 msgstr ""
 
 #: src/backup_dialog.rs:142
@@ -688,11 +688,11 @@ msgid "The backup worker stopped unexpectedly"
 msgstr ""
 
 #: src/backup_dialog.rs:176
-msgid "Bastle Backups"
+msgid "Alcove Backups"
 msgstr ""
 
 #: src/backup_dialog.rs:181
-msgid "Open Bastle Backup"
+msgid "Open Alcove Backup"
 msgstr ""
 
 #: src/backup_dialog.rs:182 src/backup_dialog.rs:265
@@ -823,11 +823,11 @@ msgid "Stop"
 msgstr ""
 
 #: src/background.rs:41
-msgid "Bastle web apps are running"
+msgid "Alcove web apps are running"
 msgstr ""
 
 #: src/background.rs:126
-msgid "Keep selected Bastle web applications running in the background"
+msgid "Keep selected Alcove web applications running in the background"
 msgstr ""
 
 #: src/application.rs:584
@@ -1203,7 +1203,7 @@ msgid "Start at Login"
 msgstr ""
 
 #: src/privacy_dialog.rs:154
-msgid "Start all opted-in Bastle applications without opening windows"
+msgid "Start all opted-in Alcove applications without opening windows"
 msgstr ""
 
 #: src/privacy_dialog.rs:165
@@ -1236,7 +1236,7 @@ msgid "Enter valid HTTP or HTTPS origins, separated by commas."
 msgstr ""
 
 #: src/privacy_dialog.rs:511
-msgid "Keep this Bastle application running in the background"
+msgid "Keep this Alcove application running in the background"
 msgstr ""
 
 #: src/privacy_dialog.rs:519
@@ -1376,7 +1376,7 @@ msgid "System _Capabilities"
 msgstr ""
 
 #: src/window.blp:156
-msgid "_About Bastle"
+msgid "_About Alcove"
 msgstr ""
 
 #: src/window.rs:461
@@ -1393,7 +1393,7 @@ msgstr ""
 
 #: src/window.rs:495
 msgid ""
-"Bastle uses portals only and never writes launchers directly to the host."
+"Alcove uses portals only and never writes launchers directly to the host."
 msgstr ""
 
 #: src/window.rs:500
@@ -1520,7 +1520,7 @@ msgstr ""
 
 #: src/addons_dialog.rs:21
 msgid ""
-"Optional engines are installed separately and become available after Bastle "
+"Optional engines are installed separately and become available after Alcove "
 "is restarted."
 msgstr ""
 
@@ -1537,7 +1537,7 @@ msgid "Restart Required"
 msgstr ""
 
 #: src/addons_dialog.rs:52
-msgid "Close and reopen Bastle after installing or removing this add-on."
+msgid "Close and reopen Alcove after installing or removing this add-on."
 msgstr ""
 
 #: src/addons_dialog.rs:66

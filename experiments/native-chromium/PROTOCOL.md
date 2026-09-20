@@ -17,7 +17,7 @@ The host also requires `ready.multi_view: 1`, `ready.site_requests: 1`,
 The latter adds Home navigation, reload without cache and load-progress events.
 Ordinary app launches also require `ready.app_launch: 1`: independent persistent
 CEF profiles and disabled probe instrumentation. Before starting a worker,
-Bastle validates the optional add-on manifest (schema 1, worker protocol 4,
+Alcove validates the optional add-on manifest (schema 1, worker protocol 4,
 exact pinned CEF version, and paths contained within the add-on directory).
 
 | Command | Parameters |
@@ -36,9 +36,9 @@ exact pinned CEF version, and paths contained within the add-on directory).
 | `cancel-composition` | None |
 | `zoom` | CEF zoom `level` |
 | `theme` | `dark`; synchronizes native theme preference into page CSS |
-| `native-accessibility-inspect` | Read-only diagnostic snapshot of native ATK objects; requires `--bastle-diagnostics` |
+| `native-accessibility-inspect` | Read-only diagnostic snapshot of native ATK objects; requires `--alcove-diagnostics` |
 | `native-accessibility-focus-response` | Pending accessibility action `id`, actual GTK site `focused` result |
-| `evaluate` | Diagnostic-only `script`; rejected without `--bastle-diagnostics`, never a page API |
+| `evaluate` | Diagnostic-only `script`; rejected without `--alcove-diagnostics`, never a page API |
 | `request-response` | Pending request `id`, `allow`; JS `text`, chooser `paths`, download `path` as appropriate |
 | `download-control` | `download` id and `action`: `cancel`, `pause` or `resume` |
 
@@ -79,7 +79,7 @@ accessibility events; no renderer-private IPC is introduced for them.
 The `focus` command is replayed after the worker handshake and gates native
 accessibility focus on the actual GTK window and site-container focus.
 See [ACCESSIBILITY.md](ACCESSIBILITY.md) for lifetime and event ordering rules.
-WebKit and CEF use the shared Bastle window shell. Extended browser audits are
+WebKit and CEF use the shared Alcove window shell. Extended browser audits are
 deferred under the clarified WebView parity scope; website notification delivery,
 recovery and sandboxed packaging remain deployment work.
 
@@ -196,7 +196,7 @@ use the existing explicit save portal for every file.
 CEF 152 accepts/denies permissions through persistent Chrome decisions
 ([upstream implementation](https://github.com/chromiumembedded/cef/blob/83ffcba/libcef/browser/permission_prompt.cc)).
 Before the initial navigation, the worker resets only matching permission
-exception preferences and applies Bastle's saved grants/blocks with public CEF
+exception preferences and applies Alcove's saved grants/blocks with public CEF
 content-setting APIs. Cookies, local storage and unrelated preferences remain.
 The version pin and startup query tests are required when upgrading Chromium.
 
@@ -219,7 +219,7 @@ after the handshake; Chromium pauses OSR painting while hidden and resumes when
 the same window is presented. A never-mapped background window uses configured
 viewport dimensions until GTK allocates it, rather than resizing the site to 1×1.
 
-Only the main application window follows Bastle's background policy. Child
+Only the main application window follows Alcove's background policy. Child
 windows still close normally. WebKit and CEF share `BackgroundSession`, which
 owns the application hold and native show/stop notification. Dropping it removes
 the notification and releases the hold. Explicit Stop follows normal CEF close

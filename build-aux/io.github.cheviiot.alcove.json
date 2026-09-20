@@ -1,13 +1,13 @@
 {
-  "id": "io.github.cheviiot.bastle",
+  "id": "io.github.cheviiot.alcove",
   "runtime": "org.gnome.Platform",
   "runtime-version": "50",
   "sdk": "org.gnome.Sdk",
   "sdk-extensions": ["org.freedesktop.Sdk.Extension.rust-stable"],
-  "command": "bastle",
+  "command": "alcove",
   "separate-locales": false,
   "add-extensions": {
-    "io.github.cheviiot.bastle.Chromium": {
+    "io.github.cheviiot.alcove.Chromium": {
       "version": "master",
       "directory": "extensions/chromium",
       "bundle": true,
@@ -22,14 +22,14 @@
     "--device=dri",
     "--socket=wayland",
     "--socket=pulseaudio",
-    "--own-name=io.github.cheviiot.bastle.Chromium",
+    "--own-name=io.github.cheviiot.alcove.Chromium",
     "--env=GTK_USE_PORTAL=1"
   ],
   "build-options": {
     "append-path": "/usr/lib/sdk/rust-stable/bin",
     "env": {
       "RUST_BACKTRACE": "1",
-      "RUST_LOG": "bastle=debug"
+      "RUST_LOG": "alcove=debug"
     }
   },
   "modules": [
@@ -47,14 +47,14 @@
       ]
     },
     {
-      "name": "bastle-chromium-broker",
+      "name": "alcove-chromium-broker",
       "buildsystem": "simple",
       "build-commands": [
-        "cc -std=c17 -O2 -Wall -Wextra -Werror src/broker.c -o bastle-chromium-service $(pkg-config --cflags --libs gio-2.0 json-glib-1.0)",
-        "./bastle-chromium-service --self-test",
-        "install -Dm755 bastle-chromium-service /app/bin/bastle-chromium-service",
+        "cc -std=c17 -O2 -Wall -Wextra -Werror src/broker.c -o alcove-chromium-service $(pkg-config --cflags --libs gio-2.0 json-glib-1.0)",
+        "./alcove-chromium-service --self-test",
+        "install -Dm755 alcove-chromium-service /app/bin/alcove-chromium-service",
         "install -d /app/extensions/chromium /app/share/dbus-1/services",
-        "install -Dm644 data/io.github.cheviiot.bastle.Chromium.service /app/share/dbus-1/services/io.github.cheviiot.bastle.Chromium.service"
+        "install -Dm644 data/io.github.cheviiot.alcove.Chromium.service /app/share/dbus-1/services/io.github.cheviiot.alcove.Chromium.service"
       ],
       "sources": [{ "type": "dir", "path": "../chromium" }]
     },
@@ -76,15 +76,15 @@
       ]
     },
     {
-      "name": "bastle-chromium-addon",
+      "name": "alcove-chromium-addon",
       "buildsystem": "simple",
       "build-commands": [
         "cp -a electron/. /app/extensions/chromium/",
         "install -Dm644 src/main.js src/validate.js src/navigation-policy.js src/permission-policy.js src/proxy.js src/user-agent.js src/window-state.js src/shell-security.js src/shell-preload.js src/shell.html src/shell.css src/shell.js /app/extensions/chromium/",
-        "install -Dm644 data/io.github.cheviiot.bastle.Chromium.metainfo.xml -t /app/extensions/chromium/share/metainfo",
+        "install -Dm644 data/io.github.cheviiot.alcove.Chromium.metainfo.xml -t /app/extensions/chromium/share/metainfo",
         "install -d /app/extensions/chromium/share/licenses",
-        "mv /app/share/licenses/io.github.cheviiot.bastle/zypak /app/extensions/chromium/share/licenses/",
-        "rmdir --ignore-fail-on-non-empty /app/share/licenses/io.github.cheviiot.bastle /app/share/licenses"
+        "mv /app/share/licenses/io.github.cheviiot.alcove/zypak /app/extensions/chromium/share/licenses/",
+        "rmdir --ignore-fail-on-non-empty /app/share/licenses/io.github.cheviiot.alcove /app/share/licenses"
       ],
       "sources": [
         { "type": "dir", "path": "../chromium" },
@@ -107,31 +107,20 @@
       ]
     },
     {
-      "name": "bastle",
+      "name": "alcove",
       "builddir": true,
       "buildsystem": "meson",
-      "config-opts": ["-Dflatpak=true"],
       "build-options": {
         "env": {
-          "CARGO_HOME": "/run/build/bastle/cargo"
+          "CARGO_HOME": "/run/build/alcove/cargo"
         }
       },
+      "config-opts": ["-Dflatpak=true"],
       "sources": [
         {
-          "type": "dir",
-          "path": "..",
-          "skip": [
-            ".git",
-            ".flatpak-build",
-            ".flatpak-builder",
-            ".flatpak-build-v03",
-            ".flatpak-builder-v03",
-            ".flatpak-repo",
-            ".local-release",
-            "Bastle-x86_64.flatpak",
-            "build",
-            "target"
-          ]
+          "type": "git",
+          "url": "https://github.com/Cheviiot/alcove.git",
+          "commit": "v0.1.0"
         },
         "generated-sources.json"
       ]

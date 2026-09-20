@@ -21,7 +21,7 @@ impl BackgroundSession {
         let application = window.application()?;
         let hold = application.hold();
         window.set_visible(false);
-        let title = window.title().unwrap_or_else(|| gettext("Bastle").into());
+        let title = window.title().unwrap_or_else(|| gettext("Alcove").into());
         let notification = gio::Notification::new(&gettext("Web App Running in Background"));
         notification.set_body(Some(&format!(
             "{} {}",
@@ -38,7 +38,7 @@ impl BackgroundSession {
         let notification_id = format!("background-{id}");
         application.send_notification(Some(&notification_id), &notification);
         glib::spawn_future_local(async move {
-            if let Err(error) = set_status(&gettext("Bastle web apps are running")).await {
+            if let Err(error) = set_status(&gettext("Alcove web apps are running")).await {
                 eprintln!("Failed to update Background Portal status: {error:#}");
             }
         });
@@ -97,7 +97,7 @@ impl BackgroundBackend for PortalBackground {
         let options = background::BackgroundRequestOptions::default()
             .set_reason(reason)
             .set_auto_start(autostart)
-            .set_command(["bastle", "--background"])
+            .set_command(["alcove", "--background"])
             .set_dbus_activatable(false);
         let response = proxy
             .request_background(parent, options)
@@ -123,7 +123,7 @@ impl BackgroundBackend for PortalBackground {
         let granted = self
             .request_access(
                 parent,
-                &gettext("Keep selected Bastle web applications running in the background"),
+                &gettext("Keep selected Alcove web applications running in the background"),
                 enabled,
             )
             .await?

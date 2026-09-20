@@ -26,7 +26,7 @@ def main():
                 lock_path.parent.mkdir(parents=True,exist_ok=True)
                 lock=cleanup.enter_context(lock_path.open('a'))
                 fcntl.flock(lock,fcntl.LOCK_EX)
-            runtime=cleanup.enter_context(tempfile.TemporaryDirectory(prefix='bastle-library-'))
+            runtime=cleanup.enter_context(tempfile.TemporaryDirectory(prefix='alcove-library-'))
             (Path(runtime)/'bin').mkdir()
             env = os.environ.copy()
             for name in ('DISPLAY', 'WAYLAND_DISPLAY', 'XAUTHORITY', 'AT_SPI_BUS_ADDRESS',
@@ -34,12 +34,12 @@ def main():
                 env.pop(name, None)
             env.update(XDG_RUNTIME_DIR=runtime, XDG_DATA_HOME=runtime+'/data',
                        XDG_CONFIG_HOME=runtime+'/config', XDG_CACHE_HOME=runtime+'/cache',
-                       WAYLAND_DISPLAY='bastle-library', GDK_BACKEND='wayland', GTK_USE_PORTAL='1',
+                       WAYLAND_DISPLAY='alcove-library', GDK_BACKEND='wayland', GTK_USE_PORTAL='1',
                        GSETTINGS_BACKEND='memory', NO_AT_BRIDGE='0',
                        XDG_DATA_DIRS='/usr/local/share:/usr/share',
                        LANGUAGE='ru', LC_ALL='ru_RU.UTF-8',
-                       BASTLE_TEST_RESOURCE=str(ROOT/'build/src/bastle.gresource'),
-                       BASTLE_TEST_LOCALEDIR=str(ROOT/'build/po'),
+                       ALCOVE_TEST_RESOURCE=str(ROOT/'build/src/alcove.gresource'),
+                       ALCOVE_TEST_LOCALEDIR=str(ROOT/'build/po'),
                        GSETTINGS_SCHEMA_DIR=str(ROOT/'build/data'))
             env['PATH']=runtime+'/bin:'+env.get('PATH','')
             settings = Path(runtime, 'config/gtk-4.0/settings.ini')
@@ -54,7 +54,7 @@ def main():
                 while mount.is_mount() and time.monotonic()<deadline: time.sleep(.05)
                 if mount.is_mount(): subprocess.run(['fusermount3','-u',str(mount)],check=True,timeout=5)
     runtime = Path(os.environ['XDG_RUNTIME_DIR'])
-    assert runtime.name.startswith('bastle-library-') and os.environ['WAYLAND_DISPLAY'] == 'bastle-library'
+    assert runtime.name.startswith('alcove-library-') and os.environ['WAYLAND_DISPLAY'] == 'alcove-library'
     suffix='utilities' if '--utilities' in sys.argv else 'policy' if '--policy' in sys.argv else 'settings' if '--settings' in sys.argv else 'creation' if '--creation' in sys.argv else 'library'
     output = ROOT/'build/ui-runs'/datetime.datetime.now().strftime('%Y%m%d-%H%M%S-'+suffix)
     output.mkdir(parents=True)
@@ -69,7 +69,7 @@ def main():
                                   (1,'Бета','https://beta.example'),
                                   (2,'Очень длинное название приложения для проверки узкого окна','https://long.example')]:
             identifier = f'library{index:05}'
-            directory = runtime/'data/bastle/apps'/identifier
+            directory = runtime/'data/alcove/apps'/identifier
             directory.mkdir(parents=True)
             (directory/'app.json').write_text(json.dumps(dict(schema_version=3, id=identifier,
                 title=title, start_url=url, engine='webkit', sort_order=index*10, use_theme_color=True,
@@ -80,23 +80,23 @@ def main():
                 return struct.pack('!I',len(data))+kind+data+struct.pack('!I',zlib.crc32(kind+data))
             icon=(b'\x89PNG\r\n\x1a\n'+chunk(b'IHDR',struct.pack('!2I5B',32,32,8,2,0,0,0))+
                 chunk(b'IDAT',zlib.compress((b'\0'+bytes([0,180,90])*32)*32))+chunk(b'IEND',b''))
-            for directory in (runtime/'data/bastle/apps').iterdir():
+            for directory in (runtime/'data/alcove/apps').iterdir():
                 (directory/'icon.png').write_bytes(icon)
-            invalid = runtime/'data/bastle/apps/invalid00000'
+            invalid = runtime/'data/alcove/apps/invalid00000'
             invalid.mkdir()
             (invalid/'app.json').write_text('{invalid JSON')
-            (runtime/'bin/bastle').symlink_to(ROOT/'build/src/bastle')
+            (runtime/'bin/alcove').symlink_to(ROOT/'build/src/alcove')
         if '--policy' in sys.argv:
             policy=dict(schema_version=2, permissions={'https://alpha.example':{'camera':'ask','notifications':'allow'}},
                 navigation=dict(enabled=False,allowed_origins=[]),proxy=dict(mode='system',uri=None),
                 background=dict(enabled=False,autostart=False),content_filters={'policyfilter':dict(name='Проверочный фильтр',enabled=True,
                     source=[{'trigger':{'url-filter':'.*tracker.*'},'action':{'type':'block'}}])})
-            (runtime/'data/bastle/apps/library00000/policy.json').write_text(json.dumps(policy))
+            (runtime/'data/alcove/apps/library00000/policy.json').write_text(json.dumps(policy))
         with (output/'mutter.log').open('w') as log:
             compositor = subprocess.Popen(['mutter','--headless','--wayland','--no-x11',
-                '--virtual-monitor=1280x900','--wayland-display=bastle-library'], stdout=log,stderr=subprocess.STDOUT)
+                '--virtual-monitor=1280x900','--wayland-display=alcove-library'], stdout=log,stderr=subprocess.STDOUT)
         for _ in range(100):
-            if (runtime/'bastle-library').exists(): break
+            if (runtime/'alcove-library').exists(): break
             if compositor.poll() is not None: raise RuntimeError('Mutter failed')
             time.sleep(.05)
         else: raise RuntimeError('private Wayland socket not created')
@@ -158,7 +158,7 @@ def main():
             time.sleep(3)
             assert orca.poll() is None, 'isolated Orca did not start'
         with (output/'app.log').open('w') as log:
-            app=subprocess.Popen([str(ROOT/'build/src/bastle')],stdout=log,stderr=subprocess.STDOUT)
+            app=subprocess.Popen([str(ROOT/'build/src/alcove')],stdout=log,stderr=subprocess.STDOUT)
         find('Альфа')
         find('alpha.example')
         result['checks']['russian_title_and_domain_accessible']=True
@@ -218,7 +218,7 @@ def main():
         wait(lambda: len(row_names())==3 and row_names()[0].startswith('Очень длинное'),
              'descending sort rebinds the list')
         result['checks']['native_sort_menu_reorders_rows']=True
-        assert not (runtime/'data/bastle/profiles').exists(), 'manager navigation created an engine profile'
+        assert not (runtime/'data/alcove/profiles').exists(), 'manager navigation created an engine profile'
         result['checks']['settings_navigation_does_not_launch_engine']=True
         if '--creation' in sys.argv or '--settings' in sys.argv:
             from creation_checks import run

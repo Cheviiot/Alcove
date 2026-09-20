@@ -1,0 +1,9 @@
+[Flatpak Ref]
+Title=Chromium Engine for Alcove
+Name=io.github.cheviiot.alcove.Chromium
+Branch=master
+Url=https://cheviiot.github.io/alcove/repo/
+SuggestRemoteName=alcove
+Homepage=https://github.com/Cheviiot/alcove
+IsRuntime=true
+GPGKey=@GPG_KEY@

@@ -1,34 +1,34 @@
 <!-- SPDX-License-Identifier: GPL-3.0-only -->
 
-# Bastle Chromium add-on protocol v1
+# Alcove Chromium add-on protocol v1
 
 The Chromium engine is an optional Flatpak extension built and released from
-the Bastle repository. Flatpak mounts it inside the Bastle sandbox at
+the Alcove repository. Flatpak mounts it inside the Alcove sandbox at
 `/app/extensions/chromium`.
-Bastle talks to session-bus name `io.github.cheviiot.bastle.Chromium`, object
-`/io/github/cheviiot/bastle/Chromium/Engine1`, interface
-`io.github.cheviiot.bastle.Chromium.Engine1`. The main application owns the
+Alcove talks to session-bus name `io.github.cheviiot.alcove.Chromium`, object
+`/io/github/cheviiot/alcove/Chromium/Engine1`, interface
+`io.github.cheviiot.alcove.Chromium.Engine1`. The main application owns the
 private service and validates the extension before starting its runtime.
 
 ## Authentication and profile ownership
 
-The D-Bus boundary separates Bastle's manager process from the engine broker;
+The D-Bus boundary separates Alcove's manager process from the engine broker;
 it is not a separate sandbox trust boundary. A 256-bit random capability token
 is generated for each app ID. The engine binds an app ID to the first valid
 token it sees and requires an exact, constant-time token match for later calls.
-Tokens are never included in `.bastle-backup` archives. The host user remains
+Tokens are never included in `.alcove-backup` archives. The host user remains
 inside the trust boundary, as with other per-user D-Bus services.
 
 Each app ID owns a separate Electron `userData` directory and persistent
 partition. Switching engines does not copy or remove either engine's profile.
-Profile deletion failures are retained by Bastle and retried when the Chromium
+Profile deletion failures are retained by Alcove and retried when the Chromium
 add-on service next becomes available.
 
 ## Methods
 
 ```xml
 <node>
-  <interface name="io.github.cheviiot.bastle.Chromium.Engine1">
+  <interface name="io.github.cheviiot.alcove.Chromium.Engine1">
     <method name="GetCapabilities">
       <arg name="protocol_version" type="u" direction="out"/>
       <arg name="features" type="as" direction="out"/>
@@ -55,7 +55,7 @@ add-on service next becomes available.
 
 Protocol v1 features are `open-app`, `policy-v2`, `profile-delete`,
 `permissions`, `navigation-allowlist`, `proxy`, `background`,
-`download-dialog`, and `oauth-popups`. Bastle rejects a different protocol
+`download-dialog`, and `oauth-popups`. Alcove rejects a different protocol
 version and does not silently fall back to WebKitGTK.
 
 `policy_json` is a validated `AppPolicyV2` document with WebKit-only content

@@ -206,7 +206,7 @@ impl<L: LauncherBackend, B: BackgroundBackend, C: ChromiumBackend> AppService<L,
         let source = source.to_path_buf();
         let (sender, receiver) = oneshot::channel();
         std::thread::Builder::new()
-            .name("bastle-profile-restore".to_owned())
+            .name("alcove-profile-restore".to_owned())
             .spawn(move || {
                 let _ = sender.send(repository.stage_profile_from(&id, &source));
             })
@@ -220,7 +220,7 @@ impl<L: LauncherBackend, B: BackgroundBackend, C: ChromiumBackend> AppService<L,
         let repository = self.repository.clone();
         let (sender, receiver) = oneshot::channel();
         std::thread::Builder::new()
-            .name("bastle-background-lock".to_owned())
+            .name("alcove-background-lock".to_owned())
             .spawn(move || {
                 let _ = sender.send(repository.lock_background());
             })
@@ -767,7 +767,7 @@ mod tests {
             let protocol_version = self.protocol_version.get();
             if protocol_version != crate::chromium::PROTOCOL_VERSION {
                 bail!(
-                    "incompatible Chromium add-on protocol {protocol_version}; Bastle requires {}",
+                    "incompatible Chromium add-on protocol {protocol_version}; Alcove requires {}",
                     crate::chromium::PROTOCOL_VERSION
                 );
             }

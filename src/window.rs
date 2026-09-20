@@ -27,8 +27,8 @@ mod imp {
     use super::*;
 
     #[derive(Debug, Default, gtk::CompositeTemplate)]
-    #[template(resource = "/io/github/cheviiot/bastle/window.ui")]
-    pub struct BastleWindow {
+    #[template(resource = "/io/github/cheviiot/alcove/window.ui")]
+    pub struct AlcoveWindow {
         pub state: RefCell<LibraryState>,
         pub store: RefCell<Option<gio::ListStore>>,
         pub engine_availability: RefCell<Option<EngineAvailability>>,
@@ -49,9 +49,9 @@ mod imp {
     }
 
     #[glib::object_subclass]
-    impl ObjectSubclass for BastleWindow {
-        const NAME: &'static str = "BastleWindow";
-        type Type = super::BastleWindow;
+    impl ObjectSubclass for AlcoveWindow {
+        const NAME: &'static str = "AlcoveWindow";
+        type Type = super::AlcoveWindow;
         type ParentType = adw::ApplicationWindow;
 
         fn class_init(klass: &mut Self::Class) {
@@ -64,7 +64,7 @@ mod imp {
         }
     }
 
-    impl ObjectImpl for BastleWindow {
+    impl ObjectImpl for AlcoveWindow {
         fn constructed(&self) {
             self.parent_constructed();
             let window = self.obj();
@@ -77,8 +77,8 @@ mod imp {
             window.refresh();
         }
     }
-    impl WidgetImpl for BastleWindow {}
-    impl WindowImpl for BastleWindow {
+    impl WidgetImpl for AlcoveWindow {}
+    impl WindowImpl for AlcoveWindow {
         fn close_request(&self) -> glib::Propagation {
             if let Some(dialog) = self.obj().visible_dialog() {
                 dialog.close();
@@ -105,11 +105,11 @@ mod imp {
             glib::Propagation::Proceed
         }
     }
-    impl ApplicationWindowImpl for BastleWindow {}
-    impl AdwApplicationWindowImpl for BastleWindow {}
+    impl ApplicationWindowImpl for AlcoveWindow {}
+    impl AdwApplicationWindowImpl for AlcoveWindow {}
 
     #[gtk::template_callbacks]
-    impl BastleWindow {
+    impl AlcoveWindow {
         #[template_callback]
         fn on_diagnostics_clicked(&self, _banner: adw::Banner) {
             self.obj().show_repository_warnings();
@@ -118,13 +118,13 @@ mod imp {
 }
 
 glib::wrapper! {
-    pub struct BastleWindow(ObjectSubclass<imp::BastleWindow>)
+    pub struct AlcoveWindow(ObjectSubclass<imp::AlcoveWindow>)
         @extends gtk::Widget, gtk::Window, gtk::ApplicationWindow, adw::ApplicationWindow,
         @implements gio::ActionGroup, gio::ActionMap, gtk::Accessible, gtk::Buildable,
                     gtk::ConstraintTarget, gtk::Native, gtk::Root, gtk::ShortcutManager;
 }
 
-impl BastleWindow {
+impl AlcoveWindow {
     pub fn new<P: IsA<gtk::Application>>(application: &P) -> Self {
         glib::Object::builder()
             .property("application", application)
@@ -492,7 +492,7 @@ impl BastleWindow {
         let page = adw::PreferencesPage::new();
         let group = adw::PreferencesGroup::builder()
             .description(gettext(
-                "Bastle uses portals only and never writes launchers directly to the host.",
+                "Alcove uses portals only and never writes launchers directly to the host.",
             ))
             .build();
         let mut rows = Vec::new();
@@ -637,7 +637,7 @@ pub(crate) fn run_ui_smoke_test<P: IsA<gtk::Application>>(
 ) -> anyhow::Result<()> {
     use anyhow::ensure;
 
-    let window = BastleWindow::new(application);
+    let window = AlcoveWindow::new(application);
     window.set_default_size(360, 640);
     crate::ui_test_support::capture(&window, "library-empty", 800, 640)?;
     crate::ui_test_support::capture(&window, "library-empty-narrow", 360, 640)?;
@@ -786,7 +786,7 @@ pub(crate) fn run_ui_smoke_test<P: IsA<gtk::Application>>(
 
 #[cfg(feature = "ui-tests")]
 pub(crate) fn render_settings<P: IsA<gtk::Application>>(application: &P) -> anyhow::Result<()> {
-    let window = BastleWindow::new(application);
+    let window = AlcoveWindow::new(application);
     let page = AppPage::new(
         AppConfigV3::new("GNOME Discourse", "https://discourse.gnome.org", 0)?,
         EngineAvailability::Missing,
@@ -881,7 +881,7 @@ fn parse_action_id(parameter: Option<&glib::Variant>) -> Option<AppId> {
 #[cfg(feature = "ui-tests")]
 pub(crate) fn render_utilities<P: IsA<gtk::Application>>(application: &P) -> anyhow::Result<()> {
     use anyhow::ensure;
-    let window = BastleWindow::new(application);
+    let window = AlcoveWindow::new(application);
     window.present();
     let capture = |name: &str| -> anyhow::Result<()> {
         let deadline = std::time::Instant::now() + std::time::Duration::from_secs(10);
@@ -925,7 +925,7 @@ pub(crate) fn render_utilities<P: IsA<gtk::Application>>(application: &P) -> any
         .borrow_mut()
         .warnings
         .push(crate::repository::RepositoryWarning {
-            path: "/temporary-test-data/bastle/apps/invalid-application/app.json".into(),
+            path: "/temporary-test-data/alcove/apps/invalid-application/app.json".into(),
             message: "Invalid configuration: the application title is missing".into(),
         });
     window.show_repository_warnings();

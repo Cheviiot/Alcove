@@ -15,7 +15,7 @@ persistWindowState(window, 'abcdefghijkl', (...args) => {
 });
 
 assert.deepEqual(invocations, [[
-  '/app/bin/bastle',
+  '/app/bin/alcove',
   [
     '--save-chromium-window-state', 'abcdefghijkl',
     '--chromium-window-width', '1440',

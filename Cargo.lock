@@ -104,6 +104,33 @@ dependencies = [
 ]
 
 [[package]]
+name = "alcove"
+version = "0.1.0"
+dependencies = [
+ "age",
+ "anyhow",
+ "ashpd",
+ "async-trait",
+ "futures",
+ "gettext-rs",
+ "glycin",
+ "gtk4",
+ "image",
+ "isahc",
+ "libadwaita",
+ "rand",
+ "rustix",
+ "scraper",
+ "serde",
+ "serde_json",
+ "tar",
+ "tempfile",
+ "url",
+ "webkit6",
+ "zstd",
+]
+
+[[package]]
 name = "anyhow"
 version = "1.0.104"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -324,33 +351,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ba62675e8242a4c4e806d12f11d136e626e6c8361d6b829310732241652a178a"
 dependencies = [
  "serde",
-]
-
-[[package]]
-name = "bastle"
-version = "0.1.0"
-dependencies = [
- "age",
- "anyhow",
- "ashpd",
- "async-trait",
- "futures",
- "gettext-rs",
- "glycin",
- "gtk4",
- "image",
- "isahc",
- "libadwaita",
- "rand",
- "rustix",
- "scraper",
- "serde",
- "serde_json",
- "tar",
- "tempfile",
- "url",
- "webkit6",
- "zstd",
 ]
 
 [[package]]

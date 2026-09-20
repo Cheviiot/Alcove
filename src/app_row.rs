@@ -12,7 +12,7 @@ mod imp {
     use super::*;
 
     #[derive(Debug, Default, gtk::CompositeTemplate)]
-    #[template(resource = "/io/github/cheviiot/bastle/app_row.ui")]
+    #[template(resource = "/io/github/cheviiot/alcove/app_row.ui")]
     pub struct AppRow {
         pub generation: Cell<u64>,
         #[template_child]
@@ -27,7 +27,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for AppRow {
-        const NAME: &'static str = "BastleAppRow";
+        const NAME: &'static str = "AlcoveAppRow";
         type Type = super::AppRow;
         type ParentType = gtk::Box;
 
@@ -77,7 +77,7 @@ impl AppRow {
             .set_label(&gettext("Chromium · Add-on Required"));
         imp.engine_status.set_visible(missing);
         self.set_tooltip_text(Some(&format!("{}\n{}", config.title, host)));
-        imp.icon.set_icon_name(Some("io.github.cheviiot.bastle"));
+        imp.icon.set_icon_name(Some("io.github.cheviiot.alcove"));
 
         let id = config.id.clone();
         glib::spawn_future_local(glib::clone!(
@@ -101,7 +101,7 @@ impl AppRow {
         let imp = self.imp();
         // A recycled row must ignore an icon decoded for its previous item.
         imp.generation.set(imp.generation.get().wrapping_add(1));
-        imp.icon.set_icon_name(Some("io.github.cheviiot.bastle"));
+        imp.icon.set_icon_name(Some("io.github.cheviiot.alcove"));
         self.set_tooltip_text(None);
     }
 }

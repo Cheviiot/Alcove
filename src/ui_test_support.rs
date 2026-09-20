@@ -59,7 +59,7 @@ pub fn capture(window: &impl IsA<gtk::Window>, name: &str, width: i32, height: i
         dialog_width <= width,
         "{name}: dialog width {dialog_width} exceeds {width}"
     );
-    let Some(directory) = std::env::var_os("BASTLE_UI_SCREENSHOTS") else {
+    let Some(directory) = std::env::var_os("ALCOVE_UI_SCREENSHOTS") else {
         return Ok(());
     };
     std::fs::create_dir_all(&directory)?;

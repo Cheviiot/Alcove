@@ -1,6 +1,6 @@
 # Library verification — 2026-09-20
 
-Environment: Fedora 44 Distrobox `bastle-dev`, actual GTK4/libadwaita manager,
+Environment: Fedora 44 Distrobox `alcove-dev`, actual GTK4/libadwaita manager,
 disposable XDG directories and private graphical/session buses. Electron and
 native CEF code were not changed by this library work.
 
@@ -64,7 +64,7 @@ then exposes it through a private runtime symlink for the retry. No user
 launcher is installed. The audit excludes `.tmp-*` transaction directories
 when counting committed applications. The new app order follows the greatest
 existing order, so deleted entries cannot cause an incorrect newest position.
-The portal backend confirmation is in English in this test container; Bastle
+The portal backend confirmation is in English in this test container; Alcove
 itself is in Russian. This checks the Dynamic Launcher portal outside Flatpak;
 it does not claim Flatpak packaging acceptance.
 
@@ -177,8 +177,8 @@ manager results do not establish native CEF packaging or Flatpak acceptance.
 
 ## Installed UI review snapshot — 2026-09-20
 
-At the user's request, the current worktree was built in `bastle-dev` and
-installed as the user Flatpak `io.github.cheviiot.bastle//master` (0.7.0), commit
+At the user's request, the current worktree was built in `alcove-dev` and
+installed as the user Flatpak `io.github.cheviiot.alcove//master` (0.7.0), commit
 `59556f0b9b1538c489ab08ef099181eb98495cc5ce4503c03ee710f10c24c645`.
 The GNOME launcher is exported and ordinary desktop startup holds the application
 D-Bus name with an empty application error log. Permissions remain the existing

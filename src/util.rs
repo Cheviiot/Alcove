@@ -129,7 +129,7 @@ fn normalize_png_bytes(bytes: &[u8]) -> Result<Vec<u8>> {
 
 pub async fn default_icon() -> Result<Vec<u8>> {
     normalize_icon(
-        include_bytes!("../data/icons/hicolor/scalable/apps/io.github.cheviiot.bastle.svg")
+        include_bytes!("../data/icons/hicolor/scalable/apps/io.github.cheviiot.alcove.svg")
             .to_vec(),
     )
     .await

@@ -46,7 +46,7 @@ let dialogOpen = false;
 let hideTimer = null;
 
 function command(name, visible) {
-  window.bastleShell.command(name, visible).catch(() => {});
+  window.alcoveShell.command(name, visible).catch(() => {});
 }
 
 function showToolbar() {
@@ -103,7 +103,7 @@ document.addEventListener('click', (event) => {
   if (button.closest('#menu')) setMenu(false);
 });
 
-window.bastleShell.onState((state) => {
+window.alcoveShell.onState((state) => {
   applyStrings(state.strings);
   if (state.reveal) { showToolbar(); return; }
   if (typeof state.title === 'string') title.textContent = state.title;

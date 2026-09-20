@@ -8,7 +8,7 @@ import time
 def run(nodes,find,wait,press,key,result,runtime):
     import pyatspi
     checks=result['checks']
-    apps=runtime/'data/bastle/apps'
+    apps=runtime/'data/alcove/apps'
     def focus(node):
         for _ in range(90):
             node.clear_cache_single()
@@ -25,7 +25,7 @@ def run(nodes,find,wait,press,key,result,runtime):
         # focused object's name. Exercise the actual ordered keyboard menu;
         # each caller verifies the resulting dialog and Orca reads its labels.
         position=['Сортировка','Дополнения','Резервная копия…','Восстановить…',
-            'Системные возможности','Комбинации клавиш','О Bastle'].index(name)
+            'Системные возможности','Комбинации клавиш','О Alcove'].index(name)
         press(0xffc7);time.sleep(.25)
         press(0xff51);press(0xff50)
         for _ in range(position): press(0xff54)
@@ -81,7 +81,7 @@ def run(nodes,find,wait,press,key,result,runtime):
     find('Поиск приложений')
     checks['manager_help_exposes_its_shortcuts']=True
     close()
-    menu('О Bastle');find('Bastle');find('Cheviiot')
+    menu('О Alcove');find('Alcove');find('Cheviiot')
     checks['native_about_dialog_opens']=True
     close()
     click('Подробности')
@@ -102,7 +102,7 @@ def run(nodes,find,wait,press,key,result,runtime):
     wait(lambda: sensitive('Создать копию'),'matching password permits backup')
     checks['backup_encryption_validation_is_inline']=True
     click('Создать копию')
-    encrypted=runtime/'encrypted.bastle-backup';choose_path(encrypted)
+    encrypted=runtime/'encrypted.alcove-backup';choose_path(encrypted)
     wait(lambda: encrypted.exists(),'encrypted archive saved',30)
     assert encrypted.read_bytes().startswith(b'age-encryption.org/v1')
     menu('Восстановить…');choose_path(encrypted)
@@ -125,7 +125,7 @@ def run(nodes,find,wait,press,key,result,runtime):
     assert len(records())==3
     checks['backup_portal_cancellation_preserves_apps']=True
     menu('Резервная копия…');click('Создать копию')
-    archive=runtime/'roundtrip.bastle-backup';choose_path(archive)
+    archive=runtime/'roundtrip.alcove-backup';choose_path(archive)
     wait(lambda: archive.exists() and archive.stat().st_size>0,'real backup archive saved',20)
     checks['backup_uses_actual_file_portal']=True
     menu('Восстановить…');choose_path(archive)
@@ -135,7 +135,7 @@ def run(nodes,find,wait,press,key,result,runtime):
     close()
     # Keep one absent application, one ID conflict, and one identical record.
     (apps/'library00000').rename(runtime/'removed-alpha')
-    profile=runtime/'data/bastle/profiles/library00000'
+    profile=runtime/'data/alcove/profiles/library00000'
     if profile.exists(): profile.rename(runtime/'removed-alpha-profile')
     beta_path=apps/'library00001/app.json';beta=json.loads(beta_path.read_text())
     beta['title']='Изменённая Бета';beta_path.write_text(json.dumps(beta))

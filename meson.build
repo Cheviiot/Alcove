@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: GPL-3.0-only
 
 project(
-	'bastle',
+	'alcove',
 	'rust',
 	version: '0.1.0',
 	meson_version: '>= 0.62.0',
