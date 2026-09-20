@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ru"><meta charset="utf-8"><title>Запросы сайта</title><link rel="icon" href="data:,">
+<style>
+:root { color-scheme: light dark; font: 16px system-ui; } body { margin: 70px 24px; }
+button, input { font: inherit; padding: 10px; margin: 5px; } output { display:block; white-space:pre-wrap; }
+</style>
+<h1>Запросы сайта</h1>
+<button id="alert">Сообщение сайта</button><button id="confirm">Подтверждение сайта</button>
+<button id="prompt">Ответ сайту</button><button id="notification">Разрешение уведомлений</button>
+<button id="location">Разрешение местоположения</button>
+<button id="microphone">Разрешение микрофона</button><button id="camera">Разрешение камеры</button>
+<label>Выбрать тестовый файл <input type="file" id="file" accept=".txt,text/plain" multiple></label>
+<button id="download">Скачать тестовый файл</button>
+<button id="slow-download">Скачать большой файл</button>
+<button id="navigate">Отмена при переходе</button>
+<button id="navigate-file">Отмена выбора при переходе</button>
+<button id="before-unload">Проверка закрытия страницы</button>
+<output id="result" aria-live="polite"></output>
+<script>
+const log = (kind, value) => {
+ document.querySelector('#result').textContent += `${kind}: ${value}\n`;
+ console.log('BASTLE_REQUEST:' + JSON.stringify({kind,value}));
+};
+document.querySelector('#alert').onclick = () => { alert('Сообщение <b>без разметки</b>'); log('alert',true); };
+document.querySelector('#confirm').onclick = () => log('confirm',confirm('Продолжить проверку?'));
+document.querySelector('#prompt').onclick = () => log('prompt',prompt('Введите ответ','Начальное значение'));
+document.querySelector('#notification').onclick = async () => log('notification',await Notification.requestPermission());
+document.querySelector('#location').onclick = () => {
+ navigator.geolocation.getCurrentPosition(() => {}, error => log('location-error', error.code));
+ const timer = setInterval(async () => {
+  const permission = await navigator.permissions.query({name:'geolocation'});
+  if (permission.state !== 'prompt') { clearInterval(timer); log('location',permission.state); }
+ },200);
+};
+for (const [id, constraints] of [['microphone',{audio:true}],['camera',{video:true}]]) {
+ document.querySelector('#'+id).onclick = async () => {
+  try {
+   const stream = await navigator.mediaDevices.getUserMedia(constraints);
+   stream.getTracks().forEach(track => track.stop()); log(id,'granted');
+  } catch (error) { log(id,error.name); }
+ };
+}
+document.querySelector('#file').onchange = async event => {
+ log('files',await Promise.all([...event.target.files].map(async f => ({name:f.name,text:await f.text()}))));
+};
+document.querySelector('#file').oncancel = () => log('file-cancel',true);
+document.querySelector('#download').onclick = () => {
+ const link = document.createElement('a');
+ link.href = URL.createObjectURL(new Blob(['Bastle portal download\n'],{type:'text/plain'}));
+ link.download = 'bastle-test.txt'; link.click();
+};
+document.querySelector('#slow-download').onclick = () => location.href = '/slow-download';
+document.querySelector('#navigate').onclick = () => {
+ navigator.clipboard.readText().then(text => log('clipboard',text), () => log('clipboard','denied'));
+ setTimeout(() => location.href = '/requests.html?after-navigation=1', 2000);
+};
+document.querySelector('#navigate-file').onclick = () => {
+ setTimeout(() => location.href = '/requests.html?after-file=1', 2500);
+ document.querySelector('#file').showPicker();
+};
+document.querySelector('#before-unload').onclick = () => {
+ window.onbeforeunload = event => { event.preventDefault(); event.returnValue = ''; };
+ location.href = '/requests.html?before-unload=1';
+};
+if (new URLSearchParams(location.search).has('before-unload')) log('before-unload',true);
+</script></html>

@@ -1,0 +1,8 @@
+<!doctype html><meta charset="utf-8"><title>Bastle local provider</title>
+<style>body{font:20px sans-serif;padding:48px;background:#fff3cf}button{font:inherit;padding:16px}</style>
+<h1>Локальный провайдер</h1><button autofocus id="confirm">Подтвердить вход</button>
+<script>
+let isolated=false;try{void opener.document}catch(e){isolated=e.name==='SecurityError'}
+console.log('BASTLE_POPUP:'+JSON.stringify({kind:'cross-origin-opener-isolated',value:isolated}));
+document.getElementById('confirm').onclick=()=>{location.href='http://127.0.0.1:'+location.port+'/popup-callback.html'+location.search};
+</script>
