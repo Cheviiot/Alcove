@@ -7,7 +7,7 @@ Tagged releases publish a small OSTree repository to GitHub Pages without a
 by the dedicated Alcove release key:
 
 ```text
-A697 39CC 6673 77C3 A671  BD85 885E 0C5C 26BD 31E1
+FA64 0607 BEBF D82E 61EF  72EF 33AD DA41 5AF7 FE09
 ```
 
 The public key is tracked as `alcove-repository.gpg`. The private key is kept

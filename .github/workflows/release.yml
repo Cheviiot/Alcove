@@ -36,7 +36,7 @@ jobs:
         id: signing-key
         run: |
           fingerprint="$(gpg --batch --with-colons --list-secret-keys 'Alcove Flatpak Repository' | awk -F: '$1 == "fpr" { print $10; exit }')"
-          test "$fingerprint" = A69739CC667377C3A671BD85885E0C5C26BD31E1
+          test "$fingerprint" = FA640607BEBFD82E61EF72EF33ADDA415AF7FE09
           echo "fingerprint=$fingerprint" >> "$GITHUB_OUTPUT"
       - uses: flatpak/flatpak-github-actions/flatpak-builder@aa777012a985fe1b1fd3e66ea2173609cf0c9a70
         with:
@@ -78,7 +78,7 @@ jobs:
         id: signing-key
         run: |
           fingerprint="$(gpg --batch --with-colons --list-secret-keys 'Alcove Flatpak Repository' | awk -F: '$1 == "fpr" { print $10; exit }')"
-          test "$fingerprint" = A69739CC667377C3A671BD85885E0C5C26BD31E1
+          test "$fingerprint" = FA640607BEBFD82E61EF72EF33ADDA415AF7FE09
           echo "fingerprint=$fingerprint" >> "$GITHUB_OUTPUT"
       - name: Assemble signed Flatpak repository
         env:
