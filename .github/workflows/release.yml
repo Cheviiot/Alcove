@@ -137,18 +137,15 @@ jobs:
             --runtime-repo='https://dl.flathub.org/repo/flathub.flatpakrepo' \
             --gpg-keys=packaging/repo/alcove-repository.gpg \
             public/repo Alcove-aarch64.flatpak io.github.cheviiot.alcove master
+          # The add-on exists for x86_64 only; the repository check above
+          # requires that no aarch64 branch of it is published.
           flatpak build-bundle \
             --runtime \
             --arch=x86_64 \
             --repo-url='https://cheviiot.github.io/Alcove/repo/' \
             --gpg-keys=packaging/repo/alcove-repository.gpg \
-            public/repo Alcove-Chromium-x86_64.flatpak io.github.cheviiot.alcove.Chromium master
-          flatpak build-bundle \
-            --runtime \
-            --arch=aarch64 \
-            --repo-url='https://cheviiot.github.io/Alcove/repo/' \
-            --gpg-keys=packaging/repo/alcove-repository.gpg \
-            public/repo Alcove-Chromium-aarch64.flatpak io.github.cheviiot.alcove.Chromium master
+            public/repo Alcove-Chromium-x86_64.flatpak \
+            io.github.cheviiot.alcove.ChromiumNative master
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: Alcove-release-bundles
@@ -190,5 +187,5 @@ jobs:
         run: >-
           gh release create "$GITHUB_REF_NAME"
           Alcove-x86_64.flatpak Alcove-aarch64.flatpak
-          Alcove-Chromium-x86_64.flatpak Alcove-Chromium-aarch64.flatpak
+          Alcove-Chromium-x86_64.flatpak
           --repo "$GITHUB_REPOSITORY" --verify-tag --generate-notes
