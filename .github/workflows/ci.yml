@@ -39,9 +39,9 @@ jobs:
           blueprint-compiler gtk4-devel libadwaita-devel webkitgtk6.0-devel
           gettext openssl-devel appstream desktop-file-utils glib2-devel
           xorg-x11-server-Xvfb dbus-daemon
-      - run: meson setup build --fatal-meson-warnings -Dui_tests=true
-      - run: meson compile -C build
-      - run: meson test -C build --print-errorlogs
+      - run: meson setup build/meson --fatal-meson-warnings -Dui_tests=true
+      - run: meson compile -C build/meson
+      - run: meson test -C build/meson --print-errorlogs
 
   security:
     name: Security and licenses
@@ -56,12 +56,13 @@ jobs:
           forbidden_spdx='SPDX-License-Identifier: GPL-3.0-''or-later'
           ! git grep -n "$forbidden_spdx"
           test -s COPYING
-          test -s NOTICE
-          test -s AUTHORS.md
+          test -s docs/NOTICE
+          test -s docs/AUTHORS.md
           grep -q '<project_license>GPL-3.0-only</project_license>' \
             data/io.github.cheviiot.alcove.ChromiumNative.metainfo.xml
       - uses: EmbarkStudios/cargo-deny-action@c3bbe7e4e3f7baeee1a3dd9aec0a3b2aded580fb
         with:
+          arguments: --all-features --config .cargo/deny.toml
           command: check
 
   flatpak:
@@ -83,7 +84,7 @@ jobs:
       - uses: flatpak/flatpak-github-actions/flatpak-builder@aa777012a985fe1b1fd3e66ea2173609cf0c9a70
         with:
           bundle: Alcove-${{ matrix.variant.arch }}.flatpak
-          manifest-path: build-aux/io.github.cheviiot.alcove.Devel.json
+          manifest-path: packaging/flatpak/io.github.cheviiot.alcove.Devel.json
           arch: ${{ matrix.variant.arch }}
           run-tests: true
           artifact-name: Alcove-${{ matrix.variant.arch }}

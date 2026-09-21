@@ -1,8 +1,9 @@
 # Native Chromium accessibility experiment
 
 `--native-accessibility` enables an opt-in ATK/AT-SPI bridge in the CEF worker.
-It uses the CEF 152 SDK already pinned by this experiment. The production
-Electron extension, profiles and launch commands are unchanged.
+It uses the CEF 152 SDK this build pins. The notes below were written while the
+Electron add-on still existed; it was replaced by the native engine in
+`d1805b6`.
 
 ## Route
 

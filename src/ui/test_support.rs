@@ -2,7 +2,8 @@
 
 use adw::prelude::*;
 use anyhow::{ensure, Context, Result};
-use gtk::{gdk, glib};
+use glib::{OptionArg, OptionFlags};
+use gtk::{gdk, gio, glib};
 
 pub fn settle() {
     let context = glib::MainContext::default();
@@ -92,4 +93,145 @@ pub fn prepare() {
         gtk::IconTheme::for_display(&display)
             .add_search_path(concat!(env!("CARGO_MANIFEST_DIR"), "/data/icons"));
     }
+}
+
+/// The hidden `--ui-test-*` options the checks under `tests/ui` drive.
+pub(crate) fn register_options(app: &impl IsA<gio::Application>) {
+    app.add_main_option(
+        "ui-test-app-page",
+        glib::Char::from(0),
+        OptionFlags::HIDDEN,
+        OptionArg::None,
+        "Run the app-page UI regression test",
+        None,
+    );
+    app.add_main_option(
+        "ui-test-library",
+        glib::Char::from(0),
+        OptionFlags::HIDDEN,
+        OptionArg::None,
+        "Run the library UI regression test",
+        None,
+    );
+    app.add_main_option(
+        "ui-test-creation",
+        glib::Char::from(0),
+        OptionFlags::HIDDEN,
+        OptionArg::None,
+        "Run the creation UI regression test",
+        None,
+    );
+    app.add_main_option(
+        "ui-test-utilities",
+        glib::Char::from(0),
+        OptionFlags::HIDDEN,
+        OptionArg::None,
+        "Render supporting application dialogs",
+        None,
+    );
+    app.add_main_option(
+        "ui-test-policy",
+        glib::Char::from(0),
+        OptionFlags::HIDDEN,
+        OptionArg::None,
+        "Render permission and behavior settings",
+        None,
+    );
+    app.add_main_option(
+        "ui-test-settings",
+        glib::Char::from(0),
+        OptionFlags::HIDDEN,
+        OptionArg::None,
+        "Render the application settings page",
+        None,
+    );
+}
+
+/// Runs the screen the command line asked for, or returns `None` so the
+/// application starts normally.
+pub(crate) fn run(
+    app: &impl IsA<gtk::Application>,
+    command_line: &gio::ApplicationCommandLine,
+) -> Option<glib::ExitCode> {
+    let library_only = command_line
+        .options_dict()
+        .lookup::<bool>("ui-test-library")
+        .ok()
+        .flatten()
+        .unwrap_or(false);
+    let creation_only = command_line
+        .options_dict()
+        .lookup::<bool>("ui-test-creation")
+        .ok()
+        .flatten()
+        .unwrap_or(false);
+    let settings_only = command_line
+        .options_dict()
+        .lookup::<bool>("ui-test-settings")
+        .ok()
+        .flatten()
+        .unwrap_or(false);
+    let policy_only = command_line
+        .options_dict()
+        .lookup::<bool>("ui-test-policy")
+        .ok()
+        .flatten()
+        .unwrap_or(false);
+    let utilities_only = command_line
+        .options_dict()
+        .lookup::<bool>("ui-test-utilities")
+        .ok()
+        .flatten()
+        .unwrap_or(false);
+    if library_only
+        || creation_only
+        || settings_only
+        || policy_only
+        || utilities_only
+        || command_line
+            .options_dict()
+            .lookup::<bool>("ui-test-app-page")
+            .ok()
+            .flatten()
+            .unwrap_or(false)
+    {
+        prepare();
+        let result = if library_only {
+            crate::ui::library::ui_test::run_ui_smoke_test(app, true)
+        } else if creation_only {
+            crate::ui::creation::run_ui_smoke_test(app)
+        } else if policy_only {
+            crate::ui::dialogs::ui_test::permissions_smoke_test(app)
+                .and_then(|()| crate::ui::dialogs::ui_test::privacy_smoke_test(app))
+        } else if settings_only {
+            crate::ui::app_page::run_ui_smoke_test()
+                .and_then(|()| crate::ui::library::ui_test::render_settings(app))
+        } else if utilities_only {
+            crate::ui::dialogs::ui_test::backup_smoke_test(app)
+                .and_then(|()| crate::ui::library::ui_test::render_utilities(app))
+                .and_then(|()| crate::ui::dialogs::ui_test::downloads_smoke_test(app))
+        } else {
+            crate::ui::app_page::run_ui_smoke_test()
+                .and_then(|()| crate::ui::dialogs::ui_test::downloads_smoke_test(app))
+                .and_then(|()| crate::ui::dialogs::ui_test::backup_smoke_test(app))
+                .and_then(|()| crate::ui::dialogs::ui_test::privacy_smoke_test(app))
+                .and_then(|()| crate::ui::dialogs::ui_test::permissions_smoke_test(app))
+                .and_then(|()| crate::ui::library::ui_test::run_ui_smoke_test(app, false))
+                .and_then(|()| crate::ui::creation::run_ui_smoke_test(app))
+                .and_then(|()| crate::ui::shell::webkit::ui_test::run_background_ui_smoke_test(app))
+        };
+        // A failed assertion may leave a test window registered. Close
+        // it as well, so the diagnostic exits with the failure status.
+        for window in app.windows() {
+            window.destroy();
+        }
+        return Some(match result {
+            Ok(()) => glib::ExitCode::SUCCESS,
+            Err(error) => {
+                eprintln!("UI smoke test failed: {error:#}");
+                glib::ExitCode::FAILURE
+            }
+        });
+    }
+    None
 }

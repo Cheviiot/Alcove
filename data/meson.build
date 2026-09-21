@@ -4,7 +4,7 @@ desktop_file = i18n.merge_file(
         input: 'io.github.cheviiot.alcove.desktop.in',
        output: 'io.github.cheviiot.alcove.desktop',
          type: 'desktop',
-       po_dir: '../po',
+       po_dir: 'po',
       install: true,
   install_dir: get_option('datadir') / 'applications'
 )
@@ -17,7 +17,7 @@ endif
 appstream_file = i18n.merge_file(
         input: 'io.github.cheviiot.alcove.metainfo.xml.in',
        output: 'io.github.cheviiot.alcove.metainfo.xml',
-       po_dir: '../po',
+       po_dir: 'po',
       install: true,
   install_dir: get_option('datadir') / 'metainfo'
 )
@@ -56,3 +56,4 @@ test_schema = custom_target(
 )
 
 subdir('icons')
+subdir('po')

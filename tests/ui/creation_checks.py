@@ -170,7 +170,7 @@ def run(nodes, find, wait, press, key, result, runtime):
             assert len(app_records())==3 and read(field('Название'))=='Создано в проверке'
             checks['creation_install_failure_preserves_draft']=True
             from pathlib import Path
-            (runtime/'bin/alcove').symlink_to(Path(__file__).resolve().parents[2]/'build/src/alcove')
+            (runtime/'bin/alcove').symlink_to(Path(__file__).resolve().parents[2]/'build/meson/src/alcove')
             click('Создать')
             portal_button('Create')
             time.sleep(.3)

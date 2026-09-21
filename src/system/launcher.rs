@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
-use anyhow::Result;
+use anyhow::{Context, Result};
 use ashpd::{
     desktop::{
         dynamic_launcher::{DynamicLauncherProxy, LauncherType, PrepareInstallOptions},
@@ -11,6 +11,7 @@ use ashpd::{
 use async_trait::async_trait;
 use gettextrs::gettext;
 use gtk::glib;
+use std::process::Command;
 
 use crate::{
     domain::config,
@@ -18,6 +19,21 @@ use crate::{
     domain::model::AppId,
     system::portal::{current_desktop, PortalFailureKind, PortalOperationError},
 };
+
+/// Starts a second copy of Alcove that owns one application's window. The
+/// engine runs inside that process, so switching to it means starting it.
+pub(crate) fn spawn_app_process(id: &AppId, start_in_background: bool) -> Result<()> {
+    let executable = std::env::current_exe().unwrap_or_else(|_| "alcove".into());
+    let mut command = Command::new(executable);
+    command.arg(id.as_str());
+    if start_in_background {
+        command.arg("--start-background");
+    }
+    command
+        .spawn()
+        .context("failed to start the isolated app process")?;
+    Ok(())
+}
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum UninstallOutcome {

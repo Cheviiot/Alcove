@@ -57,9 +57,9 @@ test uses Xvfb with Wayland explicitly removed:
 
 ```sh
 distrobox enter alcove-dev -- bash -lc \
-  'meson setup --reconfigure build -Dui_tests=true && \
+  'meson setup --reconfigure build/meson -Dui_tests=true && \
    env -u WAYLAND_DISPLAY GDK_BACKEND=x11 \
-   meson test -C build --print-errorlogs'
+   meson test -C build/meson --print-errorlogs'
 ```
 
 The Meson `UI smoke` test itself wraps the test-only binary in `xvfb-run -a`

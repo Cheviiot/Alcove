@@ -7,12 +7,10 @@ use std::{
 };
 
 use anyhow::{anyhow, bail, Context, Result};
-use gtk::glib;
 use serde::Serialize;
 use tempfile::{Builder, NamedTempFile, TempDir};
 
 use crate::{
-    domain::config::DATA_DIR_NAME,
     domain::model::{decode_app_config, AppConfigV3, AppId},
     domain::policy::{decode_policy, AppPolicyV2, Origin, PermissionDecision, PermissionKind},
 };
@@ -112,13 +110,6 @@ impl StagedProfile {
 }
 
 impl AppRepository {
-    pub fn for_current_user() -> Self {
-        Self::new(
-            glib::user_data_dir().join(DATA_DIR_NAME),
-            glib::user_cache_dir().join(DATA_DIR_NAME),
-        )
-    }
-
     pub fn new(data_root: impl Into<PathBuf>, cache_root: impl Into<PathBuf>) -> Self {
         Self {
             data_root: data_root.into(),

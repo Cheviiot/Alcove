@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: GPL-3.0-only
+# Keep every build artifact under one ignored directory instead of scattering
+# `target/` and `.flatpak-builder/` beside the sources.
+[build]
+target-dir = "build/cargo"

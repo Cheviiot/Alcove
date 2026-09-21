@@ -1,9 +1,11 @@
 # Native Chromium gate — 2026-09-20
 
-**Decision: keep Electron while integrating the native adapter.**
-The user clarified that CEF should match the current WebView in a simple app
-window. Shared shell and product integration now take priority; the broader
-browser audits below are recorded limitations, not a block on all UI work.
+**Status: the native Chromium engine replaced the Electron add-on in `d1805b6`.**
+The records below were written while both existed; they are kept as the
+evidence behind that decision and are not edited to match later work. CEF was
+required to match the WebKit view in a simple app window. Shared shell and
+product integration took priority; the broader browser audits below are
+recorded limitations, not a block on all UI work.
 The prototype demonstrates real GTK4/libadwaita presentation of Chromium in
 native Wayland, including GPU transport. It does not meet the complete adoption
 criteria. The native accessibility adapter now exposes real website objects
@@ -55,7 +57,7 @@ Raw local runs are under `build/native-chromium/runs/`:
 - `20260920-063656-x11-715007`: explicit Xvfb surface-only check; passes, WebGL remains false.
 
 Each run contains logs, report, screenshots and an independent accessibility
-audit. A compact, source-controlled evidence snapshot is in `results.json`.
+audit under `build/native-chromium/runs/`.
 Reproduce using the commands in [README.md](README.md). Frame counters above
 are transport observations, **not** measured display FPS or Electron benchmarks.
 
@@ -238,9 +240,9 @@ document and native window title. The final child screenshot was inspected and
 shows the expected confirmation page.
 
 CEF/Rust builds, **5** probe tests, probe Clippy with warnings denied, Rust
-formatting and Python syntax checks pass. `results.json` retains older runs with
-their original limited scopes and adds this iteration separately. The full plan
-and Electron replacement remain unaccepted. At that point in-page select
+formatting and Python syntax checks pass. Older runs keep their original
+limited scopes; this iteration is recorded separately. At the time of writing
+the full plan and the Electron replacement were still unaccepted. At that point in-page select
 surfaces were still open; the following iteration covers them. Input/IME/
 clipboard, broader accessibility, media/performance, notifications, crash
 recovery and Flatpak remain separate acceptance work.

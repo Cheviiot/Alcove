@@ -38,9 +38,9 @@ def main():
                        GSETTINGS_BACKEND='memory', NO_AT_BRIDGE='0',
                        XDG_DATA_DIRS='/usr/local/share:/usr/share',
                        LANGUAGE='ru', LC_ALL='ru_RU.UTF-8',
-                       ALCOVE_TEST_RESOURCE=str(ROOT/'build/src/alcove.gresource'),
-                       ALCOVE_TEST_LOCALEDIR=str(ROOT/'build/po'),
-                       GSETTINGS_SCHEMA_DIR=str(ROOT/'build/data'))
+                       ALCOVE_TEST_RESOURCE=str(ROOT/'build/meson/src/alcove.gresource'),
+                       ALCOVE_TEST_LOCALEDIR=str(ROOT/'build/meson/data/po'),
+                       GSETTINGS_SCHEMA_DIR=str(ROOT/'build/meson/data'))
             env['PATH']=runtime+'/bin:'+env.get('PATH','')
             settings = Path(runtime, 'config/gtk-4.0/settings.ini')
             settings.parent.mkdir(parents=True)
@@ -85,7 +85,7 @@ def main():
             invalid = runtime/'data/alcove/apps/invalid00000'
             invalid.mkdir()
             (invalid/'app.json').write_text('{invalid JSON')
-            (runtime/'bin/alcove').symlink_to(ROOT/'build/src/alcove')
+            (runtime/'bin/alcove').symlink_to(ROOT/'build/meson/src/alcove')
         if '--policy' in sys.argv:
             policy=dict(schema_version=2, permissions={'https://alpha.example':{'camera':'ask','notifications':'allow'}},
                 navigation=dict(enabled=False,allowed_origins=[]),proxy=dict(mode='system',uri=None),
@@ -158,7 +158,7 @@ def main():
             time.sleep(3)
             assert orca.poll() is None, 'isolated Orca did not start'
         with (output/'app.log').open('w') as log:
-            app=subprocess.Popen([str(ROOT/'build/src/alcove')],stdout=log,stderr=subprocess.STDOUT)
+            app=subprocess.Popen([str(ROOT/'build/meson/src/alcove')],stdout=log,stderr=subprocess.STDOUT)
         find('Альфа')
         find('alpha.example')
         result['checks']['russian_title_and_domain_accessible']=True

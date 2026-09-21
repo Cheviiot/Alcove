@@ -4,9 +4,9 @@ Run inside the existing Fedora 44 Distrobox `alcove-dev`. Build the normal
 manager with its diagnostic feature:
 
 ```sh
-distrobox enter alcove-dev -- meson setup build --reconfigure -Dui_tests=true
-distrobox enter alcove-dev -- meson compile -C build
-distrobox enter alcove-dev -- meson test -C build --print-errorlogs
+distrobox enter alcove-dev -- meson setup build/meson --reconfigure -Dui_tests=true
+distrobox enter alcove-dev -- meson compile -C build/meson
+distrobox enter alcove-dev -- meson test -C build/meson --print-errorlogs
 ```
 
 Do not rebuild while a GUI audit is running: the build copies the executable.

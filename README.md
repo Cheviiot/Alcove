@@ -41,7 +41,7 @@ flatpak install --user https://cheviiot.github.io/Alcove/alcove.flatpakref
 ```
 
 Выпусков пока нет — до первого приложение собирается из исходников, см.
-[CONTRIBUTING.md](CONTRIBUTING.md).
+[CONTRIBUTING.md](docs/CONTRIBUTING.md).
 
 ## Приватность
 
@@ -51,16 +51,16 @@ flatpak install --user https://cheviiot.github.io/Alcove/alcove.flatpakref
 ## Участие
 
 [Issues](https://github.com/Cheviiot/Alcove/issues) ·
-[CONTRIBUTING.md](CONTRIBUTING.md) ·
+[CONTRIBUTING.md](docs/CONTRIBUTING.md) ·
 [Интерфейс](docs/gnome-hig.md) ·
 [Модель угроз](docs/threat-model.md) ·
-[История изменений](CHANGELOG.md)
+[История изменений](docs/CHANGELOG.md)
 
 ## Происхождение
 
 Независимое продолжение [Spider](https://github.com/Zaedus/spider) от коммита
 `dcf9d1080ce2bbd89c342b4766a94e18aaecf660`, созданного Zaedus при участии
 Cameron Radmore. История Git начинается заново; авторство унаследованного кода
-записано в [AUTHORS.md](AUTHORS.md). Прежние авторы в Alcove не участвуют.
+записано в [AUTHORS.md](docs/AUTHORS.md). Прежние авторы в Alcove не участвуют.
 
-Лицензия GPL-3.0-only — [NOTICE](NOTICE), [COPYING](COPYING).
+Лицензия GPL-3.0-only — [NOTICE](docs/NOTICE), [COPYING](COPYING).

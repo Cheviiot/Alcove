@@ -7,8 +7,8 @@ use gettextrs::gettext;
 use gtk::glib;
 
 use crate::{
-    domain::model::AppConfigV3, domain::util, engines::chromium::EngineAvailability,
-    system::service::AppService,
+    domain::model::AppConfigV3, engines::chromium::EngineAvailability, system::service::AppService,
+    ui::icons,
 };
 
 mod imp {
@@ -90,7 +90,7 @@ impl AppRow {
                 let Ok(bytes) = AppService::portal().read_icon(&id) else {
                     return;
                 };
-                let Ok(texture) = util::load_texture(bytes).await else {
+                let Ok(texture) = icons::load_texture(bytes).await else {
                     return;
                 };
                 if row.imp().generation.get() == generation {

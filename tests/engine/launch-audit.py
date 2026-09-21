@@ -33,8 +33,8 @@ def main():
                        XDG_CONFIG_HOME=runtime + '/config', XDG_CACHE_HOME=runtime + '/cache',
                        GSETTINGS_BACKEND='memory', NO_AT_BRIDGE='0', GDK_BACKEND='wayland',
                        WAYLAND_DISPLAY='alcove-launch', LANGUAGE='ru', LC_ALL='ru_RU.UTF-8',
-                       ALCOVE_TEST_RESOURCE=str(ROOT / 'build/src/alcove.gresource'),
-                       GSETTINGS_SCHEMA_DIR=str(ROOT / 'build/data'),
+                       ALCOVE_TEST_RESOURCE=str(ROOT / 'build/meson/src/alcove.gresource'),
+                       GSETTINGS_SCHEMA_DIR=str(ROOT / 'build/meson/data'),
                        ALCOVE_NATIVE_CHROMIUM_ADDON=str(ROOT / 'build/native-chromium/addon.json'))
             settings = pathlib.Path(runtime, 'config/gtk-4.0/settings.ini')
             settings.parent.mkdir(parents=True)
@@ -208,7 +208,7 @@ def main():
 
         def launch(identifier, background=False):
             with (output / f'{identifier}-{len(processes)}.log').open('w') as log:
-                proc = subprocess.Popen([str(ROOT / 'target/debug/alcove'), *(['--start-background'] if background else []), identifier],
+                proc = subprocess.Popen([str(ROOT / 'build/cargo/debug/alcove'), *(['--start-background'] if background else []), identifier],
                     stdout=log, stderr=subprocess.STDOUT)
             processes.append(proc)
             return proc
@@ -533,7 +533,7 @@ def main():
         wait(lambda: Fixture.page_requests > requests_before, 'F5 reloads website')
         result['checks']['keyboard_reload_from_site'] = True
         snapshot('saved')
-        repeat = subprocess.run([str(ROOT / 'target/debug/alcove'), 'ceflaunchone'],
+        repeat = subprocess.run([str(ROOT / 'build/cargo/debug/alcove'), 'ceflaunchone'],
             capture_output=True, timeout=10)
         assert repeat.returncode == 0 and proc.poll() is None
         assert len(list(runtime.glob('alcove-cef-*'))) == 1

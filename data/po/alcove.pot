@@ -1,0 +1,1455 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the alcove package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: alcove\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-21 19:05+1000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/io.github.cheviiot.alcove.desktop.in:3
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:5 src/system/background.rs:24
+#: src/ui/library/window.blp:7 src/ui/library/window.blp:30
+msgid "Alcove"
+msgstr ""
+
+#: data/io.github.cheviiot.alcove.desktop.in:4
+msgid "Create isolated web applications"
+msgstr ""
+
+#: data/io.github.cheviiot.alcove.gschema.xml:19
+msgid "Application library sorting mode"
+msgstr ""
+
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:6
+msgid "Create isolated web applications for GNOME"
+msgstr ""
+
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:8
+msgid "Cheviiot and Alcove contributors"
+msgstr ""
+
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:28
+msgid ""
+"Alcove is a GNOME-native manager for isolated web applications. WebKitGTK is "
+"the default engine, and Chromium is available as a Flatpak add-on for "
+"explicitly selected sites. Each website gets separate local data, cookies, "
+"cache, settings, and its own desktop launcher."
+msgstr ""
+
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:34
+msgid ""
+"Alcove is an independent successor to Spider. The original work by Zaedus, "
+"Cameron Radmore's contribution, and their Git history remain credited. "
+"Alcove is developed independently and does not claim their endorsement or "
+"participation."
+msgstr ""
+
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:41
+msgid "Create, edit, repair, and remove portal-installed launchers"
+msgstr ""
+
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:42
+msgid ""
+"Fetch and safely normalize website icons, with a working fallback when the "
+"site offers none"
+msgstr ""
+
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:43
+msgid ""
+"Keep each application's configuration, policy, profile, and cache separate"
+msgstr ""
+
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:58
+msgid "Turn any valid HTTP(S) address into an isolated desktop application"
+msgstr ""
+
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:59
+msgid "Keep each site's profile, cookies, cache and storage separate"
+msgstr ""
+
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:60
+msgid "Use WebKitGTK by default and offer Chromium as an optional add-on"
+msgstr ""
+
+#: data/io.github.cheviiot.alcove.metainfo.xml.in:61
+msgid "Integrate with GNOME through desktop portals and encrypted backups"
+msgstr ""
+
+#: src/app/application.rs:415
+msgid "Website Notification"
+msgstr ""
+
+#: src/app/application.rs:482
+msgid "Original Spider project"
+msgstr ""
+
+#: src/app/application.rs:483
+msgid "Zaedus — original Spider author"
+msgstr ""
+
+#: src/app/application.rs:484
+msgid "Cameron Radmore — Spider contributor"
+msgstr ""
+
+#: src/app/application.rs:489
+msgid "UX inspiration"
+msgstr ""
+
+#: src/app/application.rs:490
+msgid "Cartridges — interface inspiration"
+msgstr ""
+
+#: src/app/application.rs:511
+msgid ""
+"The Chromium add-on could not start. Install or update the add-on, or run "
+"this application once with WebKitGTK. Your engine choice and profiles will "
+"not be changed."
+msgstr ""
+
+#: src/app/application.rs:515
+msgid "Chromium Engine Unavailable"
+msgstr ""
+
+#. Leave room for the primary action with enlarged text. The icon has
+#. the same accessible name and dismissal behavior as the wide button.
+#: src/app/application.rs:517 src/ui/common.rs:119 src/ui/common.rs:120
+#: src/ui/dialogs/backup.rs:269 src/ui/library/window.rs:565
+msgid "Cancel"
+msgstr ""
+
+#: src/app/application.rs:518 src/ui/shell/webkit/window.rs:909
+msgid "Get Chromium Add-on"
+msgstr ""
+
+#: src/app/application.rs:519
+msgid "Report Problem"
+msgstr ""
+
+#: src/app/application.rs:520
+msgid "Run Once with WebKit"
+msgstr ""
+
+#: src/app/application.rs:534
+msgid "Could Not Open the Issue Tracker"
+msgstr ""
+
+#: src/app/application.rs:541 src/ui/dialogs/addons.rs:63
+#: src/ui/shell/webkit/window.rs:928
+msgid "Could Not Open the Add-on Installer"
+msgstr ""
+
+#: src/engines/compatibility.rs:79
+msgid ""
+"This site relies on WebRTC behavior that is usually more compatible with "
+"Chromium."
+msgstr ""
+
+#: src/engines/compatibility.rs:82
+msgid ""
+"This site commonly rejects or limits WebKit browsers. Chromium is "
+"recommended."
+msgstr ""
+
+#: src/engines/compatibility.rs:85
+msgid "This site is optimized for Chromium-specific browser behavior."
+msgstr ""
+
+#: src/engines/compatibility.rs:87
+msgid ""
+"Chromium is recommended for this site by the bundled compatibility catalog."
+msgstr ""
+
+#: src/system/background.rs:25
+msgid "Web App Running in Background"
+msgstr ""
+
+#: src/system/background.rs:29
+msgid "is still active. Use Stop to end its process."
+msgstr ""
+
+#: src/system/background.rs:34
+msgid "Stop"
+msgstr ""
+
+#: src/system/background.rs:41
+msgid "Alcove web apps are running"
+msgstr ""
+
+#: src/system/background.rs:126
+msgid "Keep selected Alcove web applications running in the background"
+msgstr ""
+
+#: src/system/launcher.rs:77 src/system/launcher.rs:85 src/system/portal.rs:151
+#: src/ui/library/window.rs:502
+msgid "Dynamic Launcher"
+msgstr ""
+
+#: src/system/launcher.rs:80 src/system/portal.rs:154
+msgid "Dynamic Launcher capabilities"
+msgstr ""
+
+#: src/system/launcher.rs:88
+msgid "Version"
+msgstr ""
+
+#: src/system/launcher.rs:90
+msgid "Application launcher type is not supported"
+msgstr ""
+
+#: src/system/launcher.rs:91
+msgid "desktop session"
+msgstr ""
+
+#: src/system/launcher.rs:119
+msgid "Open launcher confirmation"
+msgstr ""
+
+#: src/system/launcher.rs:123
+msgid "Confirm launcher installation"
+msgstr ""
+
+#: src/system/launcher.rs:134
+msgid "Install launcher"
+msgstr ""
+
+#: src/system/launcher.rs:150
+msgid "Remove launcher"
+msgstr ""
+
+#: src/system/portal.rs:54
+msgid "portal interface unavailable"
+msgstr ""
+
+#: src/system/portal.rs:55
+msgid "portal capability unsupported"
+msgstr ""
+
+#: src/system/portal.rs:56
+msgid "portal request cancelled"
+msgstr ""
+
+#: src/system/portal.rs:57
+msgid "portal request denied"
+msgstr ""
+
+#: src/system/portal.rs:58
+msgid "portal request failed"
+msgstr ""
+
+#: src/system/portal.rs:167 src/ui/library/window.rs:505
+msgid "File Chooser"
+msgstr ""
+
+#: src/system/portal.rs:174
+msgid "Documents"
+msgstr ""
+
+#: src/ui/app_page/page.blp:15 src/ui/common.rs:186 src/ui/common.rs:201
+#: src/ui/shell/web_app_shell.rs:93
+msgid "Back"
+msgstr ""
+
+#: src/ui/app_page/page.blp:57 src/ui/app_page/page.rs:571
+msgid "This application needs the optional Chromium add-on."
+msgstr ""
+
+#: src/ui/app_page/page.blp:58 src/ui/dialogs/addons.rs:11
+msgid "Add-ons"
+msgstr ""
+
+#: src/ui/app_page/page.blp:63 src/ui/dialogs/permissions.rs:44
+#: src/ui/dialogs/privacy.rs:91
+msgid "Changes take effect the next time you open this application."
+msgstr ""
+
+#: src/ui/app_page/page.blp:72 src/ui/shell/webkit/window.rs:678
+msgid "Website"
+msgstr ""
+
+#: src/ui/app_page/page.blp:74 src/ui/creation/dialog.blp:135
+msgid "Name"
+msgstr ""
+
+#: src/ui/app_page/page.blp:81 src/ui/creation/dialog.blp:65
+#: src/ui/creation/dialog.blp:141
+msgid "Website Address"
+msgstr ""
+
+#: src/ui/app_page/page.blp:88
+msgid "Appearance"
+msgstr ""
+
+#: src/ui/app_page/page.blp:90 src/ui/creation/dialog.blp:154
+msgid "Icon"
+msgstr ""
+
+#: src/ui/app_page/page.blp:94 src/ui/creation/dialog.blp:157
+msgid "Choose Icon File"
+msgstr ""
+
+#: src/ui/app_page/page.blp:102
+msgid "Website Titlebar Color"
+msgstr ""
+
+#: src/ui/app_page/page.blp:103
+msgid "Use a valid theme color supplied by the website"
+msgstr ""
+
+#: src/ui/app_page/page.blp:110 src/ui/dialogs/permissions.rs:36
+msgid "Permissions"
+msgstr ""
+
+#: src/ui/app_page/page.blp:111
+msgid "Camera, microphone, location and more"
+msgstr ""
+
+#: src/ui/app_page/page.blp:120 src/ui/dialogs/privacy.rs:84
+msgid "Privacy and Power"
+msgstr ""
+
+#: src/ui/app_page/page.blp:121
+msgid "Navigation, network and background activity"
+msgstr ""
+
+#: src/ui/app_page/page.blp:131 src/ui/creation/dialog.blp:190
+msgid "Advanced"
+msgstr ""
+
+#: src/ui/app_page/page.blp:133
+msgid "Engine"
+msgstr ""
+
+#: src/ui/app_page/page.blp:137
+msgid "Profiles and cookies are never transferred between engines"
+msgstr ""
+
+#: src/ui/app_page/page.blp:149 src/ui/creation/dialog.blp:176
+msgid "Chromium Recommended"
+msgstr ""
+
+#: src/ui/app_page/page.blp:151
+msgid "Custom User Agent"
+msgstr ""
+
+#: src/ui/app_page/page.blp:153
+msgid "User Agent"
+msgstr ""
+
+#: src/ui/app_page/page.blp:158
+msgid "Repair Launcher"
+msgstr ""
+
+#: src/ui/app_page/page.blp:159
+msgid "Restore the app in your desktop application menu"
+msgstr ""
+
+#: src/ui/app_page/page.blp:170
+msgid "Delete…"
+msgstr ""
+
+#: src/ui/app_page/page.rs:333 src/ui/creation/dialog.rs:320
+msgid "Chromium (add-on)"
+msgstr ""
+
+#: src/ui/app_page/page.rs:351
+msgid "Chromium · Ready"
+msgstr ""
+
+#: src/ui/app_page/page.rs:352 src/ui/creation/dialog.rs:327
+#: src/ui/library/app_row.rs:80
+msgid "Chromium · Add-on Required"
+msgstr ""
+
+#: src/ui/app_page/page.rs:411 src/ui/creation/dialog.blp:148
+msgid "Enter a name for the application."
+msgstr ""
+
+#: src/ui/app_page/page.rs:412 src/ui/creation/dialog.blp:74
+msgid "Enter a valid HTTP or HTTPS address."
+msgstr ""
+
+#: src/ui/app_page/page.rs:414
+msgid "Enter a user agent without line breaks (up to 4096 bytes)."
+msgstr ""
+
+#: src/ui/app_page/page.rs:646 src/ui/common.rs:21
+msgid "Changes could not be saved."
+msgstr ""
+
+#: src/ui/app_page/page.rs:740 src/ui/dialogs/privacy.rs:666
+msgid "Discard Unsaved Changes?"
+msgstr ""
+
+#: src/ui/app_page/page.rs:742 src/ui/dialogs/privacy.rs:668
+msgid "Your unsaved changes will be lost. Saved settings will be kept."
+msgstr ""
+
+#: src/ui/app_page/page.rs:746 src/ui/dialogs/privacy.rs:672
+msgid "Keep Editing"
+msgstr ""
+
+#: src/ui/app_page/page.rs:747 src/ui/dialogs/privacy.rs:673
+msgid "Discard"
+msgstr ""
+
+#: src/ui/common.rs:45 src/ui/dialogs/backup.rs:446
+msgid "Close"
+msgstr ""
+
+#: src/ui/common.rs:93 src/ui/creation/dialog.blp:34
+msgid "_Cancel"
+msgstr ""
+
+#: src/ui/common.rs:168
+msgid "General"
+msgstr ""
+
+#: src/ui/common.rs:169 src/ui/library/window.blp:37
+msgid "Main Menu"
+msgstr ""
+
+#: src/ui/common.rs:171
+msgid "Keyboard Shortcuts"
+msgstr ""
+
+#: src/ui/common.rs:175
+msgid "Quit"
+msgstr ""
+
+#: src/ui/common.rs:180 src/ui/dialogs/privacy.rs:102
+msgid "Navigation"
+msgstr ""
+
+#: src/ui/common.rs:182 src/ui/dialogs/backup.rs:325
+#: src/ui/library/window.blp:16
+msgid "Applications"
+msgstr ""
+
+#: src/ui/common.rs:187 src/ui/shell/web_app_shell.rs:99
+msgid "Forward"
+msgstr ""
+
+#: src/ui/common.rs:188 src/ui/shell/chromium/window.rs:204
+msgid "Reload"
+msgstr ""
+
+#: src/ui/common.rs:189 src/ui/shell/web_app_shell.rs:110
+msgid "Reload Without Cache"
+msgstr ""
+
+#: src/ui/common.rs:190
+msgid "Home"
+msgstr ""
+
+#: src/ui/common.rs:191
+msgid "Zoom In"
+msgstr ""
+
+#: src/ui/common.rs:192
+msgid "Zoom Out"
+msgstr ""
+
+#: src/ui/common.rs:193
+msgid "Reset Zoom"
+msgstr ""
+
+#: src/ui/common.rs:194
+msgid "Toggle Fullscreen"
+msgstr ""
+
+#: src/ui/common.rs:198 src/ui/library/window.blp:26
+msgid "Add Application"
+msgstr ""
+
+#: src/ui/common.rs:199
+msgid "Search Applications"
+msgstr ""
+
+#: src/ui/common.rs:200
+msgid "Close Search or Go Back"
+msgstr ""
+
+#: src/ui/creation/dialog.blp:11 src/ui/creation/dialog.blp:26
+msgid "New Application"
+msgstr ""
+
+#: src/ui/creation/dialog.blp:40
+msgid "Next"
+msgstr ""
+
+#: src/ui/creation/dialog.blp:58
+msgid "Open a website in its own window, with its own cookies and storage."
+msgstr ""
+
+#: src/ui/creation/dialog.blp:84
+msgid "Looking up the website name and icon…"
+msgstr ""
+
+#: src/ui/creation/dialog.blp:86
+msgid "Enter Manually"
+msgstr ""
+
+#: src/ui/creation/dialog.blp:99
+msgid "Review Application"
+msgstr ""
+
+#: src/ui/creation/dialog.blp:111 src/ui/creation/dialog.rs:104
+msgid "Create"
+msgstr ""
+
+#: src/ui/creation/dialog.blp:183
+msgid "Get Add-on"
+msgstr ""
+
+#: src/ui/creation/dialog.blp:184
+msgid "Install the Chromium add-on"
+msgstr ""
+
+#: src/ui/creation/dialog.blp:191
+msgid "Browser Engine"
+msgstr ""
+
+#: src/ui/creation/dialog.rs:172
+msgid "Website details were not checked. You can edit them below."
+msgstr ""
+
+#: src/ui/creation/dialog.rs:299
+msgid "The application could not be created."
+msgstr ""
+
+#: src/ui/creation/dialog.rs:406
+msgid ""
+"The website could not be reached. You can still create this application."
+msgstr ""
+
+#: src/ui/dialogs/addons.rs:17
+msgid "Browser Engines"
+msgstr ""
+
+#: src/ui/dialogs/addons.rs:19
+msgid ""
+"Optional engines are installed separately and become available after Alcove "
+"is restarted."
+msgstr ""
+
+#: src/ui/dialogs/addons.rs:25
+msgid "Built-in engine for GNOME"
+msgstr ""
+
+#: src/ui/dialogs/addons.rs:32
+msgid "Chromium Engine"
+msgstr ""
+
+#: src/ui/dialogs/addons.rs:48
+msgid "Restart Required"
+msgstr ""
+
+#: src/ui/dialogs/addons.rs:50
+msgid "Close and reopen Alcove after installing or removing this add-on."
+msgstr ""
+
+#: src/ui/dialogs/addons.rs:72
+msgid "Not installed — WebKitGTK remains the default"
+msgstr ""
+
+#: src/ui/dialogs/addons.rs:73
+msgid "Installed and ready"
+msgstr ""
+
+#: src/ui/dialogs/addons.rs:75
+msgid "Update required"
+msgstr ""
+
+#: src/ui/dialogs/addons.rs:78
+msgid "Installed but unavailable"
+msgstr ""
+
+#: src/ui/dialogs/addons.rs:85
+msgid "Install"
+msgstr ""
+
+#: src/ui/dialogs/addons.rs:86
+msgid "Manage"
+msgstr ""
+
+#: src/ui/dialogs/addons.rs:87
+msgid "Reinstall"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:26
+msgid "Back Up Alcove"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:26 src/ui/dialogs/backup.rs:136
+msgid "Back Up"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:29
+msgid "Backup Contents"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:31
+msgid "Configuration, icons, and permissions are always included."
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:35
+msgid "Include Website Data"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:37
+msgid "Back up cookies and storage in an encrypted archive"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:43
+msgid "Encryption"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:44
+msgid "Use a passphrase to protect your website data."
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:48 src/ui/dialogs/backup.rs:274
+#: src/ui/dialogs/backup.rs:278
+msgid "Passphrase"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:51
+msgid "Confirm Passphrase"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:56
+msgid "Passphrases do not match."
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:110
+msgid "There are no applications to back up"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:127
+msgid "Passphrases must be non-empty and match"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:135
+msgid "Save Alcove Backup"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:144
+msgid "Save backup"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:152
+msgid "The selected destination is not writable"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:160
+msgid "Creating Backup…"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:167
+msgid "Backup completed"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:168
+msgid "Backup failed"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:169
+msgid "The backup worker stopped unexpectedly"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:178
+msgid "Alcove Backups"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:183
+msgid "Open Alcove Backup"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:184 src/ui/dialogs/backup.rs:269
+msgid "Open"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:192
+msgid "Restore backup"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:200
+msgid "The selected backup cannot be read"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:220
+msgid "Opening Backup…"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:242
+msgid "Could not unlock this backup. Check the passphrase and try again."
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:248
+msgid "Backup could not be opened"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:253
+msgid "The restore worker stopped unexpectedly"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:266
+msgid "Encrypted Backup"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:267
+msgid "Enter the passphrase used to create this backup."
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:322
+msgid "Restore Applications"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:322
+msgid "Restore"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:335
+msgid "Restore this application"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:336
+msgid "Restore as a separate copy"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:337
+msgid "Identical application already exists"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:386
+msgid ""
+"This encrypted backup includes cookies and site storage. Select the "
+"applications to restore."
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:389
+msgid ""
+"This encrypted backup contains settings only. Select the applications to "
+"restore."
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:391
+msgid "Select the applications to restore."
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:396
+msgid "Background activity and autostart must be enabled again after restore."
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:404
+msgid "No applications were selected"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:408
+msgid "Restoring Applications…"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:416
+msgid "Restored"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:418
+msgid "Skipped"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:424 src/ui/dialogs/downloads.rs:145
+msgid "Failed"
+msgstr ""
+
+#: src/ui/dialogs/backup.rs:444
+msgid "Restore Finished with Errors"
+msgstr ""
+
+#: src/ui/dialogs/downloads.rs:41
+msgid "Waiting"
+msgstr ""
+
+#: src/ui/dialogs/downloads.rs:45
+msgid "Cancel Download"
+msgstr ""
+
+#: src/ui/dialogs/downloads.rs:50
+msgid "Retry Download"
+msgstr ""
+
+#: src/ui/dialogs/downloads.rs:56
+msgid "Choose a destination"
+msgstr ""
+
+#: src/ui/dialogs/downloads.rs:91
+msgid "Downloading to"
+msgstr ""
+
+#: src/ui/dialogs/downloads.rs:111
+msgid "Completed"
+msgstr ""
+
+#: src/ui/dialogs/downloads.rs:115
+msgid "Download completed"
+msgstr ""
+
+#: src/ui/dialogs/downloads.rs:116
+msgid "Saved to"
+msgstr ""
+
+#: src/ui/dialogs/downloads.rs:128
+msgid "Cancelled"
+msgstr ""
+
+#: src/ui/dialogs/downloads.rs:129
+msgid "Download cancelled"
+msgstr ""
+
+#: src/ui/dialogs/downloads.rs:147
+msgid "Download failed"
+msgstr ""
+
+#: src/ui/dialogs/downloads.rs:187
+msgid "Download"
+msgstr ""
+
+#: src/ui/dialogs/downloads.rs:294 src/ui/shell/chromium/window.rs:104
+msgid "Downloads"
+msgstr ""
+
+#: src/ui/dialogs/downloads.rs:305
+msgid "No Downloads"
+msgstr ""
+
+#: src/ui/dialogs/downloads.rs:306
+msgid "Downloads from this app will appear here."
+msgstr ""
+
+#: src/ui/dialogs/downloads.rs:341
+msgid "The download session is unavailable"
+msgstr ""
+
+#: src/ui/dialogs/downloads.rs:345
+msgid "The download could not be retried"
+msgstr ""
+
+#: src/ui/dialogs/permissions.rs:54
+msgid "Reset All"
+msgstr ""
+
+#: src/ui/dialogs/permissions.rs:70
+msgid "Ask"
+msgstr ""
+
+#: src/ui/dialogs/permissions.rs:70
+msgid "Allow"
+msgstr ""
+
+#: src/ui/dialogs/permissions.rs:70 src/ui/shell/chromium/site/requests.rs:184
+#: src/ui/shell/webkit/window.rs:591
+msgid "Block"
+msgstr ""
+
+#: src/ui/dialogs/permissions.rs:131
+msgid "No Saved Permissions"
+msgstr ""
+
+#: src/ui/dialogs/permissions.rs:133
+msgid "Websites will ask before using protected capabilities."
+msgstr ""
+
+#: src/ui/dialogs/permissions.rs:140
+msgid "Reset saved choices so websites ask again."
+msgstr ""
+
+#: src/ui/dialogs/permissions.rs:197 src/ui/shell/chromium/site/requests.rs:461
+msgid "Camera"
+msgstr ""
+
+#: src/ui/dialogs/permissions.rs:198 src/ui/shell/chromium/site/requests.rs:462
+msgid "Microphone"
+msgstr ""
+
+#: src/ui/dialogs/permissions.rs:199 src/ui/shell/chromium/site/requests.rs:463
+msgid "Location"
+msgstr ""
+
+#: src/ui/dialogs/permissions.rs:200 src/ui/shell/chromium/site/requests.rs:464
+msgid "Notifications"
+msgstr ""
+
+#: src/ui/dialogs/permissions.rs:201 src/ui/shell/chromium/site/requests.rs:465
+msgid "Clipboard"
+msgstr ""
+
+#: src/ui/dialogs/permissions.rs:202 src/ui/shell/chromium/site/requests.rs:466
+msgid "Pointer Lock"
+msgstr ""
+
+#: src/ui/dialogs/permissions.rs:203 src/ui/shell/chromium/site/requests.rs:467
+msgid "Third-Party Storage"
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:103
+msgid "Ask before opening an origin outside this list"
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:106
+msgid "Restrict Navigation"
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:110
+msgid "Allowed Origins"
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:120
+msgid "Proxy"
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:122
+msgid ""
+"Applies only to this application's selected engine. Credentials are never "
+"stored."
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:126
+msgid "System Settings"
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:127
+msgid "Direct Connection"
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:128
+msgid "Custom HTTP(S) or SOCKS"
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:131
+msgid "Proxy Mode"
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:137
+msgid "Proxy URI"
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:146
+msgid "Background"
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:147
+msgid ""
+"Background access is requested through the desktop portal. Normal launch "
+"keeps working if access is denied."
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:149
+msgid "Keep Running in Background"
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:151
+msgid "Closing the window keeps this web application active"
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:156
+msgid "Start at Login"
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:158
+msgid "Start all opted-in Alcove applications without opening windows"
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:169
+msgid "Content Filters"
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:171
+msgid ""
+"Import WebKit content-extension JSON. Filters affect only this application."
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:173
+msgid "Content filters are available only with the WebKitGTK engine."
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:179
+msgid "Import Filter List…"
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:181
+msgid "The list is validated by WebKit before it is added"
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:396
+msgid "Enter an HTTP(S) or SOCKS proxy address without credentials."
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:398
+msgid "Enter valid HTTP or HTTPS origins, separated by commas."
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:515
+msgid "Keep this Alcove application running in the background"
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:523
+msgid "Background access was not enabled"
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:599
+msgid "WebKit content-extension rules"
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:604
+msgid "Remove Filter"
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:778
+msgid "WebKit Content Filters"
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:784
+msgid "Import Content Filter"
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:785
+msgid "Import"
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:793 src/ui/dialogs/privacy.rs:800
+msgid "Import content filter"
+msgstr ""
+
+#: src/ui/dialogs/privacy.rs:813
+msgid "Imported Filter"
+msgstr ""
+
+#: src/ui/icons.rs:116
+msgid "Images"
+msgstr ""
+
+#: src/ui/icons.rs:121
+msgid "Select"
+msgstr ""
+
+#: src/ui/icons.rs:123
+msgid "App Icon"
+msgstr ""
+
+#: src/ui/icons.rs:130 src/ui/icons.rs:137
+msgid "Select application icon"
+msgstr ""
+
+#: src/ui/library/window.blp:44
+msgid "Search"
+msgstr ""
+
+#: src/ui/library/window.blp:58
+msgid "Search applications"
+msgstr ""
+
+#: src/ui/library/window.blp:59
+msgid "Search by title or domain"
+msgstr ""
+
+#: src/ui/library/window.blp:67
+msgid "Details"
+msgstr ""
+
+#: src/ui/library/window.blp:68 src/ui/library/window.rs:473
+msgid "Some application data could not be loaded"
+msgstr ""
+
+#: src/ui/library/window.blp:104
+msgid "No Applications Yet"
+msgstr ""
+
+#: src/ui/library/window.blp:105
+msgid "Add a website to give it an isolated space."
+msgstr ""
+
+#: src/ui/library/window.blp:109
+msgid "Add"
+msgstr ""
+
+#: src/ui/library/window.blp:122
+msgid "No Applications Found"
+msgstr ""
+
+#: src/ui/library/window.blp:123
+msgid "Try a different title or domain."
+msgstr ""
+
+#: src/ui/library/window.blp:126
+msgid "Clear Search"
+msgstr ""
+
+#: src/ui/library/window.blp:142
+msgid "Sort Applications"
+msgstr ""
+
+#: src/ui/library/window.blp:143
+msgid "A–Z"
+msgstr ""
+
+#: src/ui/library/window.blp:144
+msgid "Z–A"
+msgstr ""
+
+#: src/ui/library/window.blp:145
+msgid "Newest First"
+msgstr ""
+
+#: src/ui/library/window.blp:146
+msgid "Oldest First"
+msgstr ""
+
+#: src/ui/library/window.blp:148
+msgid "_Add-ons"
+msgstr ""
+
+#: src/ui/library/window.blp:150
+msgid "_Back Up…"
+msgstr ""
+
+#: src/ui/library/window.blp:151
+msgid "_Restore…"
+msgstr ""
+
+#: src/ui/library/window.blp:154
+msgid "System _Capabilities"
+msgstr ""
+
+#: src/ui/library/window.blp:155 src/ui/shell/webkit/window.rs:1023
+msgid "_Keyboard Shortcuts"
+msgstr ""
+
+#: src/ui/library/window.blp:156
+msgid "_About Alcove"
+msgstr ""
+
+#: src/ui/library/window.rs:462
+msgid "Application Created"
+msgstr ""
+
+#: src/ui/library/window.rs:467
+msgid "Application Data Diagnostics"
+msgstr ""
+
+#: src/ui/library/window.rs:489
+msgid "System Capabilities"
+msgstr ""
+
+#: src/ui/library/window.rs:496
+msgid ""
+"Alcove uses portals only and never writes launchers directly to the host."
+msgstr ""
+
+#: src/ui/library/window.rs:501
+msgid "Desktop session"
+msgstr ""
+
+#: src/ui/library/window.rs:503
+msgid "Application launchers"
+msgstr ""
+
+#: src/ui/library/window.rs:504
+msgid "Web application launchers"
+msgstr ""
+
+#: src/ui/library/window.rs:506
+msgid "Documents access"
+msgstr ""
+
+#: src/ui/library/window.rs:507
+msgid "Background activity"
+msgstr ""
+
+#: src/ui/library/window.rs:518
+msgid "Retry"
+msgstr ""
+
+#: src/ui/library/window.rs:559
+msgid "Delete this application?"
+msgstr ""
+
+#: src/ui/library/window.rs:561
+msgid ""
+"Its launcher, settings, and WebKit or Chromium add-on profile—including "
+"cookies and caches—will be removed."
+msgstr ""
+
+#: src/ui/library/window.rs:566
+msgid "Delete"
+msgstr ""
+
+#: src/ui/library/window.rs:585
+msgid "Application deleted"
+msgstr ""
+
+#: src/ui/library/window.rs:598
+msgid "Launcher repaired"
+msgstr ""
+
+#: src/ui/library/window.rs:656
+msgid "Checking…"
+msgstr ""
+
+#: src/ui/library/window.rs:661 src/ui/library/window.rs:686
+#: src/ui/library/window.rs:694
+msgid "Available"
+msgstr ""
+
+#: src/ui/library/window.rs:662
+msgid "Unavailable"
+msgstr ""
+
+#: src/ui/library/window.rs:687
+msgid "Unsupported"
+msgstr ""
+
+#: src/ui/library/window.rs:688
+msgid "Unknown (interface unavailable)"
+msgstr ""
+
+#: src/ui/shell/chromium/site/requests.rs:121 src/ui/shell/webkit/window.rs:638
+msgid "Unsupported website permission request"
+msgstr ""
+
+#: src/ui/shell/chromium/site/requests.rs:176 src/ui/shell/webkit/window.rs:589
+msgid "Open Another Origin?"
+msgstr ""
+
+#: src/ui/shell/chromium/site/requests.rs:179 src/ui/shell/webkit/window.rs:585
+msgid "This origin is outside the application's navigation allowlist."
+msgstr ""
+
+#: src/ui/shell/chromium/site/requests.rs:180 src/ui/shell/webkit/window.rs:586
+msgid "Destination"
+msgstr ""
+
+#: src/ui/shell/chromium/site/requests.rs:185 src/ui/shell/webkit/window.rs:592
+msgid "Open Externally"
+msgstr ""
+
+#: src/ui/shell/chromium/site/requests.rs:186 src/ui/shell/webkit/window.rs:593
+msgid "Open Once"
+msgstr ""
+
+#: src/ui/shell/chromium/site/requests.rs:187 src/ui/shell/webkit/window.rs:594
+msgid "Always Allow Origin"
+msgstr ""
+
+#: src/ui/shell/chromium/site/requests.rs:233 src/ui/shell/webkit/window.rs:679
+msgid "Website Permission"
+msgstr ""
+
+#: src/ui/shell/chromium/site/requests.rs:236 src/ui/shell/webkit/window.rs:681
+msgid "Not Now"
+msgstr ""
+
+#: src/ui/shell/chromium/site/requests.rs:237 src/ui/shell/webkit/window.rs:682
+msgid "Always Block"
+msgstr ""
+
+#: src/ui/shell/chromium/site/requests.rs:238 src/ui/shell/webkit/window.rs:683
+msgid "Allow for This Session"
+msgstr ""
+
+#: src/ui/shell/chromium/site/requests.rs:239 src/ui/shell/webkit/window.rs:684
+msgid "Always Allow"
+msgstr ""
+
+#: src/ui/shell/chromium/site/requests.rs:276 src/ui/shell/webkit/window.rs:610
+msgid "The origin could not be saved"
+msgstr ""
+
+#: src/ui/shell/chromium/site/requests.rs:317 src/ui/shell/webkit/window.rs:713
+msgid "Permission was allowed only for this session"
+msgstr ""
+
+#: src/ui/shell/chromium/site/requests.rs:326 src/ui/shell/webkit/window.rs:726
+msgid "Permission block could not be saved"
+msgstr ""
+
+#: src/ui/shell/chromium/window.rs:53
+msgid "Website Stopped Responding"
+msgstr ""
+
+#: src/ui/shell/chromium/window.rs:54
+msgid "Reload the website to continue."
+msgstr ""
+
+#: src/ui/shell/chromium/window.rs:56
+msgid "Could Not Load the Website"
+msgstr ""
+
+#: src/ui/shell/chromium/window.rs:57
+msgid "Check your connection and try again."
+msgstr ""
+
+#: src/ui/shell/chromium/window.rs:62
+msgid "Chromium Stopped"
+msgstr ""
+
+#: src/ui/shell/chromium/window.rs:64
+msgid "Close and reopen the application to try again."
+msgstr ""
+
+#: src/ui/shell/chromium/window.rs:115 src/ui/shell/webkit/window.rs:1022
+msgid "Stop Background Activity"
+msgstr ""
+
+#: src/ui/shell/chromium/window.rs:194
+msgid "Website content"
+msgstr ""
+
+#: src/ui/shell/web_app_shell.rs:109
+msgid "_Reload"
+msgstr ""
+
+#: src/ui/shell/web_app_shell.rs:111
+msgid "_Stop Loading"
+msgstr ""
+
+#: src/ui/shell/web_app_shell.rs:112
+msgid "_Home"
+msgstr ""
+
+#: src/ui/shell/web_app_shell.rs:115
+msgid "Zoom _In"
+msgstr ""
+
+#: src/ui/shell/web_app_shell.rs:116
+msgid "Zoom _Out"
+msgstr ""
+
+#: src/ui/shell/web_app_shell.rs:117
+msgid "_Reset Zoom"
+msgstr ""
+
+#: src/ui/shell/web_app_shell.rs:118
+msgid "_Fullscreen"
+msgstr ""
+
+#: src/ui/shell/web_app_shell.rs:130
+msgid "Menu"
+msgstr ""
+
+#: src/ui/shell/webkit/popups.rs:58
+msgid "The link could not be opened"
+msgstr ""
+
+#: src/ui/shell/webkit/popups.rs:107 src/ui/shell/webkit/popups.rs:127
+msgid "Web App Window"
+msgstr ""
+
+#: src/ui/shell/webkit/requests.rs:32
+msgid "Screen sharing is not available"
+msgstr ""
+
+#: src/ui/shell/webkit/requests.rs:42
+msgid "Allow this website to use the camera?"
+msgstr ""
+
+#: src/ui/shell/webkit/requests.rs:43
+msgid "Allow this website to use the microphone?"
+msgstr ""
+
+#: src/ui/shell/webkit/requests.rs:45
+msgid "Allow this website to use the camera and microphone?"
+msgstr ""
+
+#: src/ui/shell/webkit/requests.rs:47
+msgid "Unknown media device request"
+msgstr ""
+
+#: src/ui/shell/webkit/requests.rs:54
+msgid "Allow this website to access your location?"
+msgstr ""
+
+#: src/ui/shell/webkit/requests.rs:60
+msgid "Allow this website to send notifications?"
+msgstr ""
+
+#: src/ui/shell/webkit/requests.rs:66
+msgid "Allow this website to read the clipboard?"
+msgstr ""
+
+#: src/ui/shell/webkit/requests.rs:72
+msgid "Allow this website to lock the pointer?"
+msgstr ""
+
+#: src/ui/shell/webkit/requests.rs:78
+msgid "Allow this website to access third-party storage?"
+msgstr ""
+
+#: src/ui/shell/webkit/requests.rs:83
+msgid "This WebKit permission type is not supported"
+msgstr ""
+
+#: src/ui/shell/webkit/window.rs:372
+msgid "Privacy policy could not be loaded; web content was not started"
+msgstr ""
+
+#: src/ui/shell/webkit/window.rs:396
+msgid "Content filters could not be initialized"
+msgstr ""
+
+#: src/ui/shell/webkit/window.rs:400
+msgid "Some content filters could not be enabled"
+msgstr ""
+
+#: src/ui/shell/webkit/window.rs:620
+msgid "Navigation blocked"
+msgstr ""
+
+#: src/ui/shell/webkit/window.rs:649
+msgid "Website permission origin is unavailable"
+msgstr ""
+
+#: src/ui/shell/webkit/window.rs:750
+msgid "System notifications are unavailable"
+msgstr ""
+
+#: src/ui/shell/webkit/window.rs:884
+msgid "Address"
+msgstr ""
+
+#: src/ui/shell/webkit/window.rs:886
+msgid "WebKitGTK error"
+msgstr ""
+
+#: src/ui/shell/webkit/window.rs:898
+msgid "The Chromium add-on is not installed yet."
+msgstr ""
+
+#: src/ui/shell/webkit/window.rs:904
+msgid "Try This Application with Chromium?"
+msgstr ""
+
+#: src/ui/shell/webkit/window.rs:911
+msgid "Use Chromium"
+msgstr ""
+
+#: src/ui/shell/webkit/window.rs:914
+msgid "Keep WebKitGTK"
+msgstr ""
+
+#: src/ui/shell/webkit/window.rs:954
+msgid "Chromium could not be started"
+msgstr ""
+
+#: src/ui/shell/webkit/window.rs:1021
+msgid "_Downloads"
+msgstr ""

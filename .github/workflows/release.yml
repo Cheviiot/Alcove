@@ -41,7 +41,7 @@ jobs:
       - uses: flatpak/flatpak-github-actions/flatpak-builder@aa777012a985fe1b1fd3e66ea2173609cf0c9a70
         with:
           build-bundle: false
-          manifest-path: build-aux/io.github.cheviiot.alcove.json
+          manifest-path: packaging/flatpak/io.github.cheviiot.alcove.json
           arch: ${{ matrix.variant.arch }}
           gpg-sign: ${{ steps.signing-key.outputs.fingerprint }}
           repo-dir: repo-${{ matrix.variant.arch }}
@@ -118,36 +118,36 @@ jobs:
           ostree ls --repo=public/repo "$addon_commit" /files/addon.json
       - name: Create install descriptors and bundles
         run: |
-          gpg_key="$(base64 --wrap=0 packaging/alcove-repository.gpg)"
-          sed "s|@GPG_KEY@|$gpg_key|" packaging/alcove.flatpakrepo.in > public/alcove.flatpakrepo
-          sed "s|@GPG_KEY@|$gpg_key|" packaging/alcove.flatpakref.in > public/alcove.flatpakref
-          sed "s|@GPG_KEY@|$gpg_key|" packaging/alcove-chromium-native.flatpakref.in > public/alcove-chromium-native.flatpakref
-          install -Dm644 packaging/index.html public/index.html
-          install -Dm644 packaging/alcove-repository.gpg public/alcove-repository.gpg
+          gpg_key="$(base64 --wrap=0 packaging/repo/alcove-repository.gpg)"
+          sed "s|@GPG_KEY@|$gpg_key|" packaging/repo/alcove.flatpakrepo.in > public/alcove.flatpakrepo
+          sed "s|@GPG_KEY@|$gpg_key|" packaging/repo/alcove.flatpakref.in > public/alcove.flatpakref
+          sed "s|@GPG_KEY@|$gpg_key|" packaging/repo/alcove-chromium-native.flatpakref.in > public/alcove-chromium-native.flatpakref
+          install -Dm644 packaging/repo/index.html public/index.html
+          install -Dm644 packaging/repo/alcove-repository.gpg public/alcove-repository.gpg
           install -Dm644 data/icons/hicolor/scalable/apps/io.github.cheviiot.alcove.svg public/io.github.cheviiot.alcove.svg
           flatpak build-bundle \
             --arch=x86_64 \
             --repo-url='https://cheviiot.github.io/Alcove/repo/' \
             --runtime-repo='https://dl.flathub.org/repo/flathub.flatpakrepo' \
-            --gpg-keys=packaging/alcove-repository.gpg \
+            --gpg-keys=packaging/repo/alcove-repository.gpg \
             public/repo Alcove-x86_64.flatpak io.github.cheviiot.alcove master
           flatpak build-bundle \
             --arch=aarch64 \
             --repo-url='https://cheviiot.github.io/Alcove/repo/' \
             --runtime-repo='https://dl.flathub.org/repo/flathub.flatpakrepo' \
-            --gpg-keys=packaging/alcove-repository.gpg \
+            --gpg-keys=packaging/repo/alcove-repository.gpg \
             public/repo Alcove-aarch64.flatpak io.github.cheviiot.alcove master
           flatpak build-bundle \
             --runtime \
             --arch=x86_64 \
             --repo-url='https://cheviiot.github.io/Alcove/repo/' \
-            --gpg-keys=packaging/alcove-repository.gpg \
+            --gpg-keys=packaging/repo/alcove-repository.gpg \
             public/repo Alcove-Chromium-x86_64.flatpak io.github.cheviiot.alcove.Chromium master
           flatpak build-bundle \
             --runtime \
             --arch=aarch64 \
             --repo-url='https://cheviiot.github.io/Alcove/repo/' \
-            --gpg-keys=packaging/alcove-repository.gpg \
+            --gpg-keys=packaging/repo/alcove-repository.gpg \
             public/repo Alcove-Chromium-aarch64.flatpak io.github.cheviiot.alcove.Chromium master
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:

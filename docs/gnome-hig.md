@@ -75,18 +75,11 @@ and support native Tab/arrow/Enter navigation.
 
 ## Validation
 
-Use the Fedora 44 Distrobox `alcove-dev` documented in `CONTRIBUTING.md`.
-GUI runs use private Wayland or Xvfb sessions, isolated XDG directories and an
-in-memory settings backend. Tests must not use the person's installed apps.
-
-```sh
-distrobox enter alcove-dev -- cargo fmt --check
-distrobox enter alcove-dev -- cargo clippy --locked --all-targets --features ui-tests -- -D warnings
-distrobox enter alcove-dev -- cargo test --locked
-distrobox enter alcove-dev -- meson setup build -Dui_tests=true
-distrobox enter alcove-dev -- meson compile -C build
-distrobox enter alcove-dev -- meson test -C build --print-errorlogs
-```
+Run the gate from [CONTRIBUTING.md](CONTRIBUTING.md) in the Fedora 44
+Distrobox `alcove-dev`, configuring Meson with `-Dui_tests=true` so the
+interface checks are built. GUI runs use private Wayland or Xvfb sessions,
+isolated XDG directories and an in-memory settings backend. Tests must not use
+the person's installed apps.
 
 The `ui-tests` feature exercises real widgets: empty and populated libraries,
 search and clearing it, narrow forms, inline validation/navigation, encryption

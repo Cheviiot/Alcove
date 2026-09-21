@@ -1,6 +1,12 @@
 <!-- SPDX-License-Identifier: GPL-3.0-only -->
 
-# Alcove Flatpak repository
+# Packaging
+
+`flatpak/` holds the two Flatpak manifests and the vendored Cargo sources,
+`scripts/` the helpers Meson and the engine build call, and `repo/` the files
+that make up the published repository.
+
+## The Flatpak repository
 
 Tagged releases publish a small OSTree repository to GitHub Pages without a
 `gh-pages` branch. Both repository metadata and application commits are signed
@@ -10,8 +16,8 @@ by the dedicated Alcove release key:
 FA64 0607 BEBF D82E 61EF  72EF 33AD DA41 5AF7 FE09
 ```
 
-The public key is tracked as `alcove-repository.gpg`. The private key is kept
-only in the `ALCOVE_FLATPAK_GPG_PRIVATE_KEY` GitHub Actions secret and the
+The public key is tracked as `repo/alcove-repository.gpg`. The private key is
+kept only in the `ALCOVE_FLATPAK_GPG_PRIVATE_KEY` GitHub Actions secret and the
 owner's protected local release-key directory. Never commit or print it.
 
 GitHub Pages receives an Actions deployment artifact, so publishing does not

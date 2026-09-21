@@ -16,8 +16,10 @@ through `zypak`, which maps it onto Flatpak's portals.
 
 | Piece | Where |
 | --- | --- |
-| Worker (C++, CEF) | `engine/` |
-| Host and adapter (Rust) | `src/engines/native_chromium/`, `src/engines/native_chromium_launch.rs` |
+| Worker (C++, CEF) | `src/cpp/` |
+| Window and host (Rust) | `src/ui/shell/chromium/` |
+| Add-on discovery and wire contract | `src/engines/chromium/` |
+| Launch glue | `src/app/chromium.rs` |
 | Transport | [engine protocol](engine-protocol.md) |
 | Audits | `tests/engine/` |
 

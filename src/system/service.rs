@@ -5,8 +5,10 @@ use std::{path::PathBuf, time::Duration};
 use anyhow::{anyhow, Context, Result};
 use ashpd::WindowIdentifier;
 use futures::channel::oneshot;
+use gtk::glib;
 
 use crate::{
+    domain::config::DATA_DIR_NAME,
     domain::model::{AppConfigV3, AppId, Engine, WindowState},
     domain::policy::{AppPolicyV2, Origin, PermissionDecision, PermissionKind},
     domain::repository::{
@@ -575,9 +577,17 @@ impl<L: LauncherBackend, B: BackgroundBackend, C: ChromiumBackend> AppService<L,
     }
 }
 
+/// The store under the running user's XDG data and cache directories.
+pub(crate) fn user_repository() -> AppRepository {
+    AppRepository::new(
+        glib::user_data_dir().join(DATA_DIR_NAME),
+        glib::user_cache_dir().join(DATA_DIR_NAME),
+    )
+}
+
 impl AppService<PortalLauncher, PortalBackground, ChromiumClient> {
     pub fn portal() -> Self {
-        Self::new(AppRepository::for_current_user(), PortalLauncher)
+        Self::new(user_repository(), PortalLauncher)
     }
 }
 

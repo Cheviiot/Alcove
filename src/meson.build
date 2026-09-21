@@ -6,10 +6,10 @@ gnome = import('gnome')
 blueprints = custom_target('blueprints',
   input: files(
     'ui/library/window.blp',
-    'ui/creation/create_app_dialog.blp',
+    'ui/creation/dialog.blp',
     'ui/library/app_row.blp',
-    'ui/shell/app_window.blp',
-    'ui/app_page/app_page.blp',
+    'ui/shell/webkit/window.blp',
+    'ui/app_page/page.blp',
   ),
   output: '.',
   command: [find_program('blueprint-compiler'), 'batch-compile', '@OUTPUT@', '@CURRENT_SOURCE_DIR@', '@INPUT@'],
@@ -60,7 +60,7 @@ cargo_build = custom_target(
   install_dir: get_option('bindir'),
   command: [
     'env', cargo_env,
-    find_program('sh'), meson.project_source_root() / 'build-aux/cargo-build.sh',
+    find_program('sh'), meson.project_source_root() / 'packaging/scripts/cargo-build.sh',
     cargo_bin, meson.project_source_root(), meson.project_build_root() / 'src',
     rust_target, cargo_offline, cargo_features, '@OUTPUT@',
   ]

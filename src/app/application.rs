@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
-use std::{cell::RefCell, collections::HashMap, process::Command, str::FromStr};
+use std::{cell::RefCell, collections::HashMap, str::FromStr};
 
 use adw::prelude::*;
 use adw::subclass::prelude::*;
@@ -13,10 +13,11 @@ use crate::{
     domain::config,
     domain::model::{AppConfigV3, AppId, Engine},
     engines::chromium,
+    system::launcher::spawn_app_process,
     system::service::AppService,
-    ui::dialogs::common,
+    ui::common,
     ui::library::window::AlcoveWindow,
-    ui::shell::app_window::AppWindow,
+    ui::shell::webkit::AppWindow,
 };
 
 pub fn settings() -> gio::Settings {
@@ -28,19 +29,6 @@ fn command_app_id(arguments: &[std::ffi::OsString]) -> Option<AppId> {
         .iter()
         .skip(1)
         .find_map(|value| AppId::from_str(&value.to_string_lossy()).ok())
-}
-
-pub(crate) fn spawn_app_process(id: &AppId, start_in_background: bool) -> Result<()> {
-    let executable = std::env::current_exe().unwrap_or_else(|_| "alcove".into());
-    let mut command = Command::new(executable);
-    command.arg(id.as_str());
-    if start_in_background {
-        command.arg("--start-background");
-    }
-    command
-        .spawn()
-        .context("failed to start the isolated app process")?;
-    Ok(())
 }
 
 mod imp {
@@ -120,61 +108,9 @@ mod imp {
                 None,
             );
             #[cfg(feature = "ui-tests")]
-            app.add_main_option(
-                "ui-test-app-page",
-                glib::Char::from(0),
-                OptionFlags::HIDDEN,
-                OptionArg::None,
-                "Run the app-page UI regression test",
-                None,
-            );
+            crate::ui::test_support::register_options(&*app);
             app.set_accels_for_action("win.shortcuts", &["<primary>question"]);
-            #[cfg(feature = "ui-tests")]
-            app.add_main_option(
-                "ui-test-library",
-                glib::Char::from(0),
-                OptionFlags::HIDDEN,
-                OptionArg::None,
-                "Run the library UI regression test",
-                None,
-            );
-            #[cfg(feature = "ui-tests")]
-            app.add_main_option(
-                "ui-test-creation",
-                glib::Char::from(0),
-                OptionFlags::HIDDEN,
-                OptionArg::None,
-                "Run the creation UI regression test",
-                None,
-            );
             app.set_accels_for_action("app.quit", &["<primary>q"]);
-            #[cfg(feature = "ui-tests")]
-            app.add_main_option(
-                "ui-test-utilities",
-                glib::Char::from(0),
-                OptionFlags::HIDDEN,
-                OptionArg::None,
-                "Render supporting application dialogs",
-                None,
-            );
-            #[cfg(feature = "ui-tests")]
-            app.add_main_option(
-                "ui-test-policy",
-                glib::Char::from(0),
-                OptionFlags::HIDDEN,
-                OptionArg::None,
-                "Render permission and behavior settings",
-                None,
-            );
-            #[cfg(feature = "ui-tests")]
-            app.add_main_option(
-                "ui-test-settings",
-                glib::Char::from(0),
-                OptionFlags::HIDDEN,
-                OptionArg::None,
-                "Render the application settings page",
-                None,
-            );
         }
     }
 
@@ -189,106 +125,8 @@ mod imp {
 
         fn command_line(&self, command_line: &gio::ApplicationCommandLine) -> glib::ExitCode {
             #[cfg(feature = "ui-tests")]
-            let library_only = command_line
-                .options_dict()
-                .lookup::<bool>("ui-test-library")
-                .ok()
-                .flatten()
-                .unwrap_or(false);
-            #[cfg(feature = "ui-tests")]
-            let creation_only = command_line
-                .options_dict()
-                .lookup::<bool>("ui-test-creation")
-                .ok()
-                .flatten()
-                .unwrap_or(false);
-            #[cfg(feature = "ui-tests")]
-            let settings_only = command_line
-                .options_dict()
-                .lookup::<bool>("ui-test-settings")
-                .ok()
-                .flatten()
-                .unwrap_or(false);
-            #[cfg(feature = "ui-tests")]
-            let policy_only = command_line
-                .options_dict()
-                .lookup::<bool>("ui-test-policy")
-                .ok()
-                .flatten()
-                .unwrap_or(false);
-            #[cfg(feature = "ui-tests")]
-            let utilities_only = command_line
-                .options_dict()
-                .lookup::<bool>("ui-test-utilities")
-                .ok()
-                .flatten()
-                .unwrap_or(false);
-            #[cfg(feature = "ui-tests")]
-            if library_only
-                || creation_only
-                || settings_only
-                || policy_only
-                || utilities_only
-                || command_line
-                    .options_dict()
-                    .lookup::<bool>("ui-test-app-page")
-                    .ok()
-                    .flatten()
-                    .unwrap_or(false)
-            {
-                crate::ui::test_support::prepare();
-                let result = if library_only {
-                    crate::ui::library::window::run_ui_smoke_test(&*self.obj(), true)
-                } else if creation_only {
-                    crate::ui::creation::run_ui_smoke_test(&*self.obj())
-                } else if policy_only {
-                    crate::ui::dialogs::permissions_dialog::run_ui_smoke_test(&*self.obj())
-                        .and_then(|()| {
-                            crate::ui::dialogs::privacy_dialog::run_ui_smoke_test(&*self.obj())
-                        })
-                } else if settings_only {
-                    crate::ui::app_page::run_ui_smoke_test()
-                        .and_then(|()| crate::ui::library::window::render_settings(&*self.obj()))
-                } else if utilities_only {
-                    crate::ui::dialogs::backup_dialog::run_ui_smoke_test(&*self.obj())
-                        .and_then(|()| crate::ui::library::window::render_utilities(&*self.obj()))
-                        .and_then(|()| {
-                            crate::ui::dialogs::download_manager::run_ui_smoke_test(&*self.obj())
-                        })
-                } else {
-                    crate::ui::app_page::run_ui_smoke_test()
-                        .and_then(|()| {
-                            crate::ui::dialogs::download_manager::run_ui_smoke_test(&*self.obj())
-                        })
-                        .and_then(|()| {
-                            crate::ui::dialogs::backup_dialog::run_ui_smoke_test(&*self.obj())
-                        })
-                        .and_then(|()| {
-                            crate::ui::dialogs::privacy_dialog::run_ui_smoke_test(&*self.obj())
-                        })
-                        .and_then(|()| {
-                            crate::ui::dialogs::permissions_dialog::run_ui_smoke_test(&*self.obj())
-                        })
-                        .and_then(|()| {
-                            crate::ui::library::window::run_ui_smoke_test(&*self.obj(), false)
-                        })
-                        .and_then(|()| crate::ui::creation::run_ui_smoke_test(&*self.obj()))
-                        .and_then(|()| {
-                            crate::ui::shell::app_window::run_background_ui_smoke_test(&*self.obj())
-                        })
-                };
-                // A failed assertion may leave a test window registered. Close
-                // it as well, so the diagnostic exits with the failure status.
-                for window in self.obj().windows() {
-                    window.destroy();
-                }
-                return match result {
-                    Ok(()) => glib::ExitCode::SUCCESS,
-                    Err(error) => {
-                        eprintln!("UI smoke test failed: {error:#}");
-                        glib::ExitCode::FAILURE
-                    }
-                };
+            if let Some(code) = crate::ui::test_support::run(&*self.obj(), command_line) {
+                return code;
             }
 
             let service = AppService::portal();
@@ -408,9 +246,7 @@ mod imp {
                 return glib::ExitCode::FAILURE;
             }
             if let Some(id) = app_id {
-                if let Some(window) =
-                    crate::engines::native_chromium_launch::existing_window(&self.obj(), &id)
-                {
+                if let Some(window) = crate::app::chromium::existing_window(&self.obj(), &id) {
                     if !start_in_background {
                         let _ = gtk::prelude::WidgetExt::activate_action(
                             &window,
@@ -453,11 +289,8 @@ mod imp {
                         }
                     }
                     Engine::Chromium => {
-                        let result = crate::engines::native_chromium_launch::open(
-                            &self.obj(),
-                            &config,
-                            start_in_background,
-                        );
+                        let result =
+                            crate::app::chromium::open(&self.obj(), &config, start_in_background);
                         if let Err(error) = result {
                             if start_in_background {
                                 eprintln!("Error: {error:#}");
@@ -541,11 +374,7 @@ impl AlcoveApplication {
                     if let Some(window) = app.background_window(parameter) {
                         window.show_from_background();
                     }
-                    crate::engines::native_chromium_launch::background_action(
-                        app,
-                        parameter,
-                        "win.show-background",
-                    );
+                    crate::app::chromium::background_action(app, parameter, "win.show-background");
                 })
                 .build(),
             gio::ActionEntry::builder("stop-background")
@@ -554,11 +383,7 @@ impl AlcoveApplication {
                     if let Some(window) = app.background_window(parameter) {
                         window.stop_background();
                     }
-                    crate::engines::native_chromium_launch::background_action(
-                        app,
-                        parameter,
-                        "win.stop-background",
-                    );
+                    crate::app::chromium::background_action(app, parameter, "win.stop-background");
                 })
                 .build(),
         ]);

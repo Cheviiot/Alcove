@@ -26,7 +26,7 @@ Distrobox `alcove-dev`:
 
 ```sh
 distrobox enter alcove-dev -- sudo dnf install -y --allowerasing --setopt=install_weak_deps=False cmake gcc-c++ weston nlohmann-json-devel libXcomposite libXdamage libXrandr libXtst mesa-libgbm-devel mesa-libEGL-devel mesa-libGLES-devel libdrm-devel gtk3 alsa-lib nss atk-devel at-spi2-core-devel at-spi2-atk-devel python3-pyatspi mutter orca xorg-x11-server-Xvfb xauth gettext fuse3 xdg-desktop-portal xdg-desktop-portal-gtk
-distrobox enter alcove-dev -- bash engine/build.sh
+distrobox enter alcove-dev -- bash packaging/scripts/build-engine.sh
 ```
 
 For Orca, Fedora's minimal container may replace `systemd-standalone-tmpfiles`
@@ -37,22 +37,21 @@ The build also compiles the existing Russian catalog for the shared shell.
 The isolated harness selects it through `ALCOVE_PROBE_LOCALEDIR` and its own
 Russian locale; it does not change the desktop locale.
 
-The runtime lives in `src/engines/native_chromium/`; the probe binary is a thin entry
+The runtime lives in `src/ui/shell/chromium/`; the probe binary is a thin entry
 point behind `native-chromium-probe`. Normal Alcove builds and `cargo run`
 still select `alcove` and do not download or link CEF.
 
 ## Ordinary application launch
 
-The optional `native-chromium` Cargo feature (Meson `-Dnative_chromium=true`)
-enables the native adapter in the existing `alcove APP_ID` command. It is used
-only when `ALCOVE_NATIVE_CHROMIUM_ADDON` points to the versioned `addon.json`
-written by `build.sh`; otherwise the Chromium choice keeps using Electron.
+The `alcove APP_ID` command uses the native adapter when
+`ALCOVE_NATIVE_CHROMIUM_ADDON` points to the versioned `addon.json` written by
+`packaging/scripts/build-engine.sh`; no build feature gates it.
 The manifest verifies the CEF version, worker protocol and contained paths
 before starting the add-on. The worker then confirms `app_launch: 1`.
 
 The adapter uses the configured title, window size, maximized state and user
 agent. A repeated launch presents the existing window. Site storage lives in
-`profiles/<id>/chromium-cef`, separate from existing WebKit/Electron data;
+`profiles/<id>/chromium-cef`, separate from the WebKitGTK profile;
 there is no profile migration. Private IPC and frame files live in a temporary
 directory under `XDG_RUNTIME_DIR`, removed after CEF shuts down. The repository
 profile lock lasts through that shutdown. Ordinary windows do not execute
@@ -61,8 +60,8 @@ probe scripts, capture screenshots or record page console/events.
 The isolated end-to-end launch check runs the actual `alcove APP_ID` path:
 
 ```sh
-distrobox enter alcove-dev -- bash -c 'ALCOVE_LOCALEDIR="$PWD/build/native-chromium/locale" cargo build --locked --features native-chromium,ui-tests --bin alcove'
-distrobox enter alcove-dev -- python3 engine/launch-audit.py
+distrobox enter alcove-dev -- bash -c 'ALCOVE_LOCALEDIR="$PWD/build/native-chromium/locale" cargo build --locked --features ui-tests --bin alcove'
+distrobox enter alcove-dev -- python3 tests/engine/launch-audit.py
 ```
 
 It exercises site interaction, F5, data persistence, independent app storage,
@@ -92,15 +91,15 @@ add-on installation/backup integration and Flatpak deployment remain work.
 ## Run safely
 
 ```sh
-distrobox enter alcove-dev -- python3 engine/run.py --backend wayland
-distrobox enter alcove-dev -- python3 engine/run.py --backend x11 --surface-only
-distrobox enter alcove-dev -- python3 engine/run.py --backend wayland --gpu
-distrobox enter alcove-dev -- python3 engine/run.py --backend wayland --gpu --layout --seconds 32
-distrobox enter alcove-dev -- python3 engine/run.py --backend wayland --compositor weston --gpu --scale 2 --theme dark --surface-only
+distrobox enter alcove-dev -- python3 tests/engine/run.py --backend wayland
+distrobox enter alcove-dev -- python3 tests/engine/run.py --backend x11 --surface-only
+distrobox enter alcove-dev -- python3 tests/engine/run.py --backend wayland --gpu
+distrobox enter alcove-dev -- python3 tests/engine/run.py --backend wayland --gpu --layout --seconds 32
+distrobox enter alcove-dev -- python3 tests/engine/run.py --backend wayland --compositor weston --gpu --scale 2 --theme dark --surface-only
 # Native accessibility, cross-page lifetimes and real Orca event handling:
-distrobox enter alcove-dev -- python3 engine/run.py --backend wayland --compositor mutter --gpu --native-accessibility --accessibility-navigation --orca --seconds 28
+distrobox enter alcove-dev -- python3 tests/engine/run.py --backend wayland --compositor mutter --gpu --native-accessibility --accessibility-navigation --orca --seconds 28
 # Shift+Tab, Tab, Enter through the private compositor while Orca reads the site:
-distrobox enter alcove-dev -- python3 engine/run.py --backend wayland --compositor mutter --gpu --native-accessibility --orca --orca-keyboard --seconds 28
+distrobox enter alcove-dev -- python3 tests/engine/run.py --backend wayland --compositor mutter --gpu --native-accessibility --orca --orca-keyboard --seconds 28
 ```
 
 The harness starts a separate session bus, a loopback-only fixture HTTP server,
@@ -208,7 +207,7 @@ actions wait for real GTK site focus and are rejected behind modal surfaces. No 
 automatically granted. Desktop capture still needs a source-selection portal.
 
 ```sh
-distrobox enter alcove-dev -- python3 engine/run.py --gpu --native-accessibility --site-requests --seconds 75
+distrobox enter alcove-dev -- python3 tests/engine/run.py --gpu --native-accessibility --site-requests --seconds 75
 ```
 
 This mode has its own fixture and uses external AT-SPI actions plus private
@@ -222,7 +221,7 @@ The whole approved plan is tracked in [engine-status.md](../../docs/engine-statu
 ## Native popup / local OAuth diagnostic
 
 ```sh
-distrobox enter alcove-dev -- python3 engine/run.py --gpu --popups --seconds 38
+distrobox enter alcove-dev -- python3 tests/engine/run.py --gpu --popups --seconds 38
 ```
 
 This opens real libadwaita child windows in one worker, with independent frame
@@ -245,8 +244,8 @@ title and DOM, then checks independent actions, selections, a cross-origin
 iframe, navigation, history and closure:
 
 ```sh
-distrobox enter alcove-dev -- python3 engine/run.py --gpu --native-accessibility --accessibility-windows --orca --seconds 38
-distrobox enter alcove-dev -- python3 engine/run.py --gpu --native-accessibility --popups --orca --seconds 45
+distrobox enter alcove-dev -- python3 tests/engine/run.py --gpu --native-accessibility --accessibility-windows --orca --seconds 38
+distrobox enter alcove-dev -- python3 tests/engine/run.py --gpu --native-accessibility --popups --orca --seconds 45
 ```
 
 This association is tied to the validated CEF release; native capability v3
@@ -272,9 +271,9 @@ menu. The native Chromium options supply AT-SPI names/actions. Its native option
 action can leave the menu open; Escape dismisses it without reverting selection.
 
 ```sh
-distrobox enter alcove-dev -- python3 engine/run.py --gpu --native-accessibility --dropdowns --seconds 40
-distrobox enter alcove-dev -- python3 engine/run.py --compositor mutter --scale 2 --gpu --native-accessibility --dropdowns --seconds 40
-distrobox enter alcove-dev -- python3 engine/run.py --compositor mutter --scale 2 --native-accessibility --dropdowns --seconds 40
+distrobox enter alcove-dev -- python3 tests/engine/run.py --gpu --native-accessibility --dropdowns --seconds 40
+distrobox enter alcove-dev -- python3 tests/engine/run.py --compositor mutter --scale 2 --gpu --native-accessibility --dropdowns --seconds 40
+distrobox enter alcove-dev -- python3 tests/engine/run.py --compositor mutter --scale 2 --native-accessibility --dropdowns --seconds 40
 ```
 
 For explicit Mutter scale 2, the harness sets its private virtual monitor to
@@ -298,10 +297,10 @@ synthetic IM commit is disabled for external sites. Public pages are used withou
 accounts, submissions of personal data or desktop input access.
 
 ```sh
-distrobox enter alcove-dev -- python3 engine/run.py --gpu --native-accessibility --url https://www.wikipedia.org/ --site-scenario wikipedia --seconds 65
-distrobox enter alcove-dev -- python3 engine/run.py --gpu --native-accessibility --url https://developer.gnome.org/hig/ --site-scenario gnome --seconds 90
-distrobox enter alcove-dev -- python3 engine/run.py --gpu --native-accessibility --url https://interactive-examples.mdn.mozilla.net/pages/tabbed/video.html --site-scenario video --seconds 90
-distrobox enter alcove-dev -- python3 engine/run.py --gpu --native-accessibility --url https://get.webgl.org/ --site-scenario webgl --seconds 40
+distrobox enter alcove-dev -- python3 tests/engine/run.py --gpu --native-accessibility --url https://www.wikipedia.org/ --site-scenario wikipedia --seconds 65
+distrobox enter alcove-dev -- python3 tests/engine/run.py --gpu --native-accessibility --url https://developer.gnome.org/hig/ --site-scenario gnome --seconds 90
+distrobox enter alcove-dev -- python3 tests/engine/run.py --gpu --native-accessibility --url https://interactive-examples.mdn.mozilla.net/pages/tabbed/video.html --site-scenario video --seconds 90
+distrobox enter alcove-dev -- python3 tests/engine/run.py --gpu --native-accessibility --url https://get.webgl.org/ --site-scenario webgl --seconds 40
 ```
 
 `--url URL` without a scenario checks initial document/rendering only.
