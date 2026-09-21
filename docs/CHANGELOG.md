@@ -5,6 +5,21 @@ Changelog and versions follow Semantic Versioning.
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-09-22
+
+### Fixed
+
+- The Chromium add-on's install reference carries `RuntimeRepo`, so an
+  installer asked to add the add-on first knows where its application comes
+  from. Flatpak warned `Flatpakref file does not contain a RuntimeRepo` and
+  software centres could refuse the reference outright.
+
+### Changed
+
+- The README states what the release actually costs and requires: download and
+  installed sizes, the `org.gnome.Platform` runtime, the supported
+  architectures, the first-run steps, and the add-on's own size and terms.
+
 ## [0.1.0] - 2026-09-20
 
 ### Added
@@ -29,5 +44,6 @@ Changelog and versions follow Semantic Versioning.
   separately installed Flatpak add-on for x86_64.
 - Add reproducible interface and engine audit harnesses under `tests/`.
 
-[Unreleased]: https://github.com/Cheviiot/Alcove/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/Cheviiot/Alcove/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/Cheviiot/Alcove/releases/tag/v0.1.1
 [0.1.0]: https://github.com/Cheviiot/Alcove/releases/tag/v0.1.0

@@ -5,5 +5,7 @@ Branch=master
 Url=https://cheviiot.github.io/Alcove/repo/
 SuggestRemoteName=alcove
 Homepage=https://github.com/Cheviiot/Alcove
+Icon=https://cheviiot.github.io/Alcove/io.github.cheviiot.alcove.svg
+RuntimeRepo=https://cheviiot.github.io/Alcove/alcove.flatpakrepo
 IsRuntime=true
 GPGKey=@GPG_KEY@

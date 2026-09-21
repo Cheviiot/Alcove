@@ -52,6 +52,14 @@
   </categories>
   <launchable type="desktop-id">io.github.cheviiot.alcove.desktop</launchable>
   <releases>
+    <release version="0.1.1" date="2026-09-22">
+      <description>
+        <ul>
+          <li>Tell installers where the Chromium add-on's application comes from</li>
+        </ul>
+      </description>
+      <url>https://github.com/Cheviiot/Alcove/releases/tag/v0.1.1</url>
+    </release>
     <release version="0.1.0" date="2026-09-20">
       <description>
         <ul>
