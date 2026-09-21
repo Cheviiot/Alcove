@@ -1,16 +1,10 @@
-# Native manager UI checks
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
 
-Run inside the existing Fedora 44 Distrobox `alcove-dev`. Build the normal
-manager with its diagnostic feature:
+# Manager interface checks
 
-```sh
-distrobox enter alcove-dev -- meson setup build/meson --reconfigure -Dui_tests=true
-distrobox enter alcove-dev -- meson compile -C build/meson
-distrobox enter alcove-dev -- meson test -C build/meson --print-errorlogs
-```
-
-Do not rebuild while a GUI audit is running: the build copies the executable.
-The normal Meson checks cover supporting dialogs as well as the library.
+Build the manager with its diagnostic feature first: run the gate from
+[CONTRIBUTING.md](../../docs/CONTRIBUTING.md) with `-Dui_tests=true`. Do not
+rebuild while a GUI audit is running — the build copies the executable.
 
 ## Library rendering
 
@@ -49,7 +43,7 @@ not claim Russian keyboard-layout or IME coverage.
 
 With `--orca`, unmodified Orca processes focus events and its generated speech
 is recorded in a debug log. Speech output is disconnected from the user's audio
-service. The audit shares the native CEF experiment's test lock and never uses
+service. The audit shares the engine audits' test lock and never uses
 Orca's replacement option. GTK list items expose `listitem.scroll-to` as an
 AT-SPI action; opening a row is tested using its keyboard focus and Enter.
 
@@ -79,8 +73,8 @@ and filter groups. Each appearance run produces thirteen screenshots, including
 light/dark themes and 360-pixel width. Scroll checks include groups below the
 initial viewport. The audit records Orca's announcements of the actual settings.
 
-Additional Fedora packages used by these audits (see also the native Chromium
-experiment's setup):
+Additional Fedora packages used by these audits (the engine audits need the
+same ones):
 
 ```sh
 distrobox enter alcove-dev -- sudo dnf install -y mutter python3-pyatspi orca fuse3

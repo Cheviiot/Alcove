@@ -1,16 +1,13 @@
-# GNOME interface
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
 
-The library now follows the accepted design. Creation has the two-step flow
-described below, verified with the real portal and Orca. The main application
-settings, policy pages and supporting dialogs also pass their interaction audits.
-The engine itself is described in [engine status](engine-status.md).
-Alcove remains a simple website-as-an-application launcher: the shared native
-shell hosts either engine, and the engine displays the website.
+# Interface
 
-Alcove uses GTK 4.22 and libadwaita 1.9 for its interface. The redesign follows
-[GNOME HIG](https://developer.gnome.org/hig/) and uses the platform's spacing,
-typography, colors, focus indicators, dialogs, and symbolic icons. It does not
-ship a custom GTK theme.
+Alcove is a website-as-an-application launcher: a shared native shell hosts
+either engine, and the engine displays the website. The interface uses GTK 4.22
+and libadwaita 1.9, follows the [GNOME HIG](https://developer.gnome.org/hig/),
+and takes the platform's spacing, typography, colors, focus indicators, dialogs
+and symbolic icons. It ships no custom GTK theme. The engine itself is
+described in [the Chromium engine](chromium-engine.md).
 
 ## Screen structure
 
@@ -73,34 +70,18 @@ allocation and scrolling to the final item. Search and sorting replace the
 visible model in one splice. List items expose their title and domain to AT-SPI
 and support native Tab/arrow/Enter navigation.
 
-## Validation
+## Checking it
 
-Run the gate from [CONTRIBUTING.md](CONTRIBUTING.md) in the Fedora 44
-Distrobox `alcove-dev`, configuring Meson with `-Dui_tests=true` so the
-interface checks are built. GUI runs use private Wayland or Xvfb sessions,
-isolated XDG directories and an in-memory settings backend. Tests must not use
-the person's installed apps.
+The `ui-tests` feature builds the interface checks; run them through the gate
+in [CONTRIBUTING.md](CONTRIBUTING.md) with `-Dui_tests=true`. What each screen
+is driven through, at which widths, themes and text sizes, and what the checks
+deliberately do not establish, is recorded in
+[the UI audit instructions](../tests/ui/README.md).
 
-The `ui-tests` feature exercises real widgets: empty and populated libraries,
-search and clearing it, narrow forms, inline validation/navigation, encryption
-requirements, busy creation, and supporting dialogs. The test binary includes
-an optional `ALCOVE_UI_SCREENSHOTS` output directory for rendering actual GTK
-windows to PNG. Set this when invoking `--ui-test-app-page`. Use a virtual
-screen of at least `1600x1200x24` so normal-size windows are not inadvertently
-constrained by Xvfb's default screen. Screenshots are test artifacts, never
-bundled with the application.
-
-Review wide and 360-pixel layouts, 360×294 creation, light/dark themes and the
-Russian translation. Native widgets provide platform accessibility semantics;
-manual screen-reader and real touchscreen evaluation are still required before
-claiming complete accessibility conformance. Flatpak portals require a desktop
-session for end-to-end integration testing; Xvfb verifies the UI, not portal
-availability.
-
-Each manager screen has reproducible Russian rendering, high-contrast, doubled
-text and independent keyboard/AT-SPI/Orca checks. See
-[the UI audit instructions](../tests/ui/README.md) and its results for
-the exact coverage and limits. These checks do not establish CEF packaging acceptance.
+Native widgets provide platform accessibility semantics; manual screen-reader
+and real touchscreen evaluation are still required before claiming complete
+accessibility conformance. Xvfb verifies the interface, not portal
+availability — that needs a real desktop session.
 
 ## References
 

@@ -1,18 +1,15 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+
 # Chromium engine audits
 
 Reproducible checks for Alcove's Chromium engine. The host is a Rust
-GTK4/libadwaita application and the worker uses the official C++ CEF API.
-The separate worker currently uses the official C++ CEF API (not `cef-rs`). Its
+GTK4/libadwaita application; the worker uses the official C++ CEF API. Its
 private, versioned transport makes the language binding replaceable without
-changing the GTK window. The test harnesses use disposable Alcove applications
-and profiles; the ordinary launch adapter is an explicit opt-in.
+changing the GTK window. The harnesses use disposable Alcove applications and
+profiles, and never touch the person's installed applications.
 
-**Status: rendering works; native adapter integration is in progress.** See
-[measured results and remaining gaps](RESULTS.md). Following the user's scope
-clarification, CEF should mirror the existing WebView in a simple app window.
-Both hosts now use `src/ui/shell/web_app_shell.rs` for the same header, content layout,
-menu and autohide behavior. Broad browser audits are deferred rather than a
-prerequisite for shared-shell and manager work; release readiness remains separate.
+What the engine does and where its limits are is described in
+[the Chromium engine](../../docs/chromium-engine.md).
 
 CEF is pinned to `152.0.7+g83ffcba+chromium-152.0.7977.83`. The SDK is downloaded
 from CEF's official binary distribution into ignored `build/native-chromium/`
@@ -82,11 +79,10 @@ authorization. Website dialogs and engine errors reveal a hidden window when
 they need attention. Run `launch-audit.py --background` to verify this in a
 private Mutter session, including notification payloads and before-unload.
 
-**Still experimental:** HTTP(S), SOCKS4 and SOCKS5 proxies are supported; other proxy schemes
-fail explicitly. WebKit content filters remain inapplicable to Chromium, as
-with the existing Electron adapter.
-Theme-color customization, notification delivery, complete engine restart,
-add-on installation/backup integration and Flatpak deployment remain work.
+HTTP(S), SOCKS4 and SOCKS5 proxies are supported; other proxy schemes fail
+explicitly. WebKit content filters do not apply to Chromium. Theme-color
+customization, notification delivery and restarting the engine in place are
+not implemented.
 
 ## Run safely
 
@@ -155,7 +151,7 @@ the adapter’s actual deployment requirements are demonstrated.
 - `--native-accessibility` uses Chromium's actual ATK objects, public ATK
   interface proxies, `AtkPlug` and `GtkAtSpiSocket` to place the document inside
   the GTK window's AT-SPI tree. Text, actions, focus, links and text events are
-  exercised by an independent client. See [implementation and limits](ACCESSIBILITY.md).
+  exercised by an independent client. See [the Chromium engine](../../docs/chromium-engine.md).
   Without that flag, the original tree-only diagnostic remains available.
 - Popups create real CEF browsers and native GTK child windows in one worker,
   with independent frames, focus and accessibility trees. Local OAuth mechanics,
@@ -166,8 +162,8 @@ the adapter’s actual deployment requirements are demonstrated.
 - The timed fixture check uses the GTK IM context commit signal to exercise
   Unicode delivery. This does not certify physical keyboard layout, IME
   composition, clipboard, or screen-reader operation.
-- The `evaluate` command exists only in this experimental parent's private
-  transport for deterministic fixture inspection. It is not a production API.
+- The `evaluate` command exists only in the diagnostic parent's private
+  transport, for deterministic fixture inspection. It is not a production API.
 - The harness has no GNOME settings daemon. Its private GTK settings supply
   96 DPI; this avoids a Chromium 152 GTK4 startup crash in the missing-DPI
   fallback. No host settings are changed. CSS color-scheme is synchronized
@@ -177,7 +173,7 @@ The native header overlays the site and hides after 1.5 seconds. Pointer,
 keyboard focus, its menu and native dialogs hold it open. Dialogs use a hold
 count so overlapping About/site/download surfaces cannot hide the panel early. F10 reveals
 it and moves focus into the header. Shared shell and policy choices use Alcove's
-gettext catalog. Remaining prototype-only labels still use Russian text.
+gettext catalog; labels that exist only in the diagnostic are Russian text.
 
 ## Checks
 
@@ -186,13 +182,9 @@ distrobox enter alcove-dev -- cargo test --locked --features native-chromium-pro
 distrobox enter alcove-dev -- cargo clippy --locked --features native-chromium-probe --bin alcove-native-chromium -- -D warnings
 ```
 
-The migration gate requires native Wayland rendering, GPU presentation, real
-input and accessibility, popups/OAuth, portals, profile isolation and Flatpak
-sandbox verification. Results and architectural blockers must be recorded
-before replacing Electron or advancing the dependent manager redesign.
-
-The experimental contract is documented in [PROTOCOL.md](../../docs/engine-protocol.md). It is
-not yet a new production add-on ABI or a shared WebKit/Chromium adapter.
+The transport between the host and the worker is documented in
+[the engine protocol](../../docs/engine-protocol.md). It is private to this
+build, not a stable add-on ABI.
 
 ## Native site requests
 
@@ -216,7 +208,8 @@ file portal. It writes `site-requests.json`. It does not claim the ordinary
 input/WebGL/Orca checks ran against this different fixture. Portal services and
 their permission store use the same private bus and XDG directories.
 
-The whole approved plan is tracked in [engine-status.md](../../docs/engine-status.md).
+What the engine does and where its limits are is described in
+[the Chromium engine](../../docs/chromium-engine.md).
 
 ## Native popup / local OAuth diagnostic
 
@@ -248,19 +241,9 @@ distrobox enter alcove-dev -- python3 tests/engine/run.py --gpu --native-accessi
 distrobox enter alcove-dev -- python3 tests/engine/run.py --gpu --native-accessibility --popups --orca --seconds 45
 ```
 
-This association is tied to the validated CEF release; native capability v3
-rejects other runtime versions. See [the ordering contract](ACCESSIBILITY.md).
-
-## cef-rs assessment (2026-09-20)
-
-The current worker uses official C++ CEF; the GTK host uses Rust. The user asked
-whether cef-rs already provides the missing adapters. Inspected
-[tauri-apps/cef-rs at 4e566e6](https://github.com/tauri-apps/cef-rs/tree/4e566e628a361f3ade6f9a211cb33ea3c7a9153f):
-its `osr_texture_import` module supplies DMA-BUF → Vulkan/wgpu import on Linux,
-and its OSR example uses winit/wgpu. These are useful GPU building blocks.
-No ready GTK4/libadwaita widget, portal adapter or native AT-SPI embedding layer
-was found in that revision. Moving the worker to Rust remains possible but does
-not by itself resolve these integration gates. No migration has been performed.
+This association is tied to the validated CEF release and rejects other runtime
+versions. The ordering it depends on is documented in
+[the Chromium engine](../../docs/chromium-engine.md).
 
 ## In-page dropdowns and real websites
 

@@ -1,11 +1,53 @@
-# Native Chromium accessibility experiment
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
 
-`--native-accessibility` enables an opt-in ATK/AT-SPI bridge in the CEF worker.
-It uses the CEF 152 SDK this build pins. The notes below were written while the
-Electron add-on still existed; it was replaced by the native engine in
-`d1805b6`.
+# The Chromium engine
 
-## Route
+Alcove renders websites with WebKitGTK by default. Chromium is available for
+sites WebKitGTK cannot serve. Both engines share one GTK 4 window built by
+`src/ui/shell/web_app_shell.rs`: the same header, navigation, menu and
+auto-hiding toolbar. The website is drawn by the engine; everything around it
+belongs to the application.
+
+## How it works
+
+A CEF worker process renders the page and hands frames to the host, which
+presents them inside the application's own window. The worker and the host
+speak a private, versioned transport, so the language binding can be replaced
+without touching the window. The Chromium sandbox is kept: the worker starts
+through `zypak`, which maps it onto Flatpak's portals.
+
+| Piece | Where |
+| --- | --- |
+| Worker (C++, CEF) | `src/cpp/` |
+| Window and host (Rust) | `src/ui/shell/chromium/` |
+| Add-on discovery and wire contract | `src/engines/chromium/` |
+| Launch glue | `src/app/chromium.rs` |
+| Transport | [engine protocol](engine-protocol.md) |
+
+The engine ships as the Flatpak extension
+`io.github.cheviiot.alcove.ChromiumNative`, mounted at
+`/app/extensions/chromium-native`. It is installed separately, never appears
+on its own, and is removed together with the application.
+
+## Limits
+
+- The worker is built for `x86_64` only. On `aarch64` Alcove ships with
+  WebKitGTK alone.
+- A crashed worker is recovered by reopening the window; restarting it in
+  place does not exist.
+- Notification delivery through the engine is not implemented.
+- There are no scroll, animation, WebGL or video benchmarks, and no claim that
+  the engine matches Chromium's performance.
+
+## Accessibility
+
+WebKitGTK exposes its own accessibility tree through GTK. The Chromium engine
+renders off-screen, so it has none by default: `--native-accessibility` turns
+on an ATK/AT-SPI bridge in the CEF worker that puts the website's real objects
+inside the application's GTK hierarchy. It uses the CEF 152 SDK this build
+pins.
+
+### Route
 
 1. Chromium runs with complete accessibility and `STATE_DEFAULT`; explicitly
    enabling CEF's OSR accessibility would instead select TreeOnly mode.
@@ -20,7 +62,7 @@ Electron add-on still existed; it was replaced by the native engine in
    actions. The fixture verifies a trusted browser click; no JavaScript click
    or mouse-coordinate substitution implements the accessibility action.
 
-## Implemented surface
+### Implemented surface
 
 - Accessible names, roles, descriptions, attributes, states, parents, children
   and mapped relations; the per-object toolkit hint selects Orca's Chromium script.
@@ -37,34 +79,7 @@ Electron add-on still existed; it was replaced by the native engine in
   distinct. Remote clients may observe either `DEFUNCT` or a removed endpoint;
   the audit accepts both forms of stale-reference invalidation.
 
-## Reproducible checks
-
-Use the two Mutter commands in [README.md](README.md). The first checks
-document embedding, text, focus, caret, selection, trusted button action, link
-identity, navigation, return and stale actions. The second checks keyboard
-focus traversal and button activation through Mutter with Orca running.
-
-The harness creates virtual pointer/keyboard devices in its own Mutter session.
-The input helper refuses to run outside the private Alcove runtime/display.
-Orca receives genuine AT-SPI and compositor events; its speech-generation log
-is retained. Audio playback and hardware Braille are not tested.
-
-## Adoption limits
-
-This is a prototype, not complete screen-reader support. Table/TableCell,
-Selection, Value and document-wide text selections are not forwarded yet.
-Native Chromium text fields do not expose AtkEditableText; ordinary input uses
-the browser's keyboard/IME path. Rich editors, extended iframe workflows, live-region
-speech policy, clipboard, magnification coordinates, long-lived dynamic trees
-and all physical keyboard/IME workflows still need acceptance tests.
-
-The focus scan is bounded to 2048 nodes and the deferred text queue to 1024
-events; overflow is a diagnostic error. Proxy retention is scoped to the
-current document, with navigation/shutdown cleanup. Long-running applications
-with continual DOM churn need additional retention/stress work before adoption.
-Window recovery and Flatpak accessibility-bus permissions remain unverified.
-
-### GTK focus acknowledgement (native capability v2)
+### GTK focus acknowledgement
 
 CEF native `AtkAction.do_action` and `AtkComponent.grab_focus` now queue a bounded
 focus request through the parent pipe. The GTK host focuses the site widget before
@@ -74,11 +89,11 @@ checked again when the deferred operation runs. This preserves native trusted
 actions while supporting the transition from header/dialog focus into web content.
 
 In this runtime, generated GtkPopoverMenu items exposed empty AT-SPI names, even
-with their labels set. The prototype therefore uses public custom menu slots with
+with their labels set. The bridge therefore uses public custom menu slots with
 real GTK buttons, explicit MenuItem roles and accessible labels. Keyboard opening
 and semantic activation are checked by the external site-request audit.
 
-## Multi-window association (native capability v3)
+### Multi-window association
 
 The bridge relies on a verified ordering in the pinned Chromium/CEF release:
 
@@ -118,5 +133,21 @@ ancestors and selections, trusted per-view actions including a cross-origin
 iframe, inactive-window rejection, navigation/history retirement and child
 closure while the main window remains usable. `--popups --native-accessibility`
 also checks local OAuth child/provider documents; both modes can run with Orca.
-This supersedes the earlier missing-association blocker, while the broader
-adoption limits above remain open.
+
+### What the bridge does not cover
+
+This is not complete screen-reader support. Table/TableCell, Selection, Value
+and document-wide text selections are not forwarded.
+Native Chromium text fields do not expose AtkEditableText; ordinary input uses
+the browser's keyboard/IME path. Rich editors, extended iframe workflows, live-region
+speech policy, clipboard, magnification coordinates, long-lived dynamic trees
+and physical keyboard/IME workflows are not covered.
+
+The focus scan is bounded to 2048 nodes and the deferred text queue to 1024
+events; overflow is a diagnostic error. Proxy retention is scoped to the
+current document, with navigation/shutdown cleanup. Long-running applications
+with continual DOM churn are untested, as are window recovery and the Flatpak
+accessibility-bus permissions.
+
+What has been exercised, how, and with which recorded limitations lives in
+[`tests/engine/`](../tests/engine/README.md).

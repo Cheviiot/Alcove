@@ -49,7 +49,7 @@ files is split into subsystems rather than flattened.
 | --- | --- |
 | `src/` | All source: the `alcove` Rust crate with its two binaries, and the CEF worker in C++ under `cpp/`. |
 | `data/` | Desktop entry, AppStream metadata, GSettings schema, icons and the translation catalogs under `po/`. |
-| `docs/` | Project documents and the interface, protocol, portal and threat-model references. |
+| `docs/` | The project's own documents, and the interface, engine, protocol and threat-model references. |
 | `packaging/` | How Alcove is built and published: `flatpak/` manifests, `scripts/` that Meson and the engine build call, and `repo/`, the signed Flatpak repository with its landing page. |
 | `tests/` | Reproducible interface and engine audit harnesses. |
 
@@ -85,7 +85,7 @@ name with the directory beside it. Blueprint files sit next to the widgets they
 describe, and code built only for the `ui-tests` feature lives in a `ui_test.rs`
 beside the module it drives.
 
-The interface structure and UI checks are documented in [GNOME interface](gnome-hig.md).
+The interface is documented in [Interface](interface.md).
 
 Run production GUI checks on a virtual X11 display. The engine audits provide
 their own headless Wayland compositor; see
@@ -95,6 +95,26 @@ Never allow a GUI check to fall back to the active desktop session:
 ```sh
 distrobox enter alcove-dev -- dbus-run-session -- env -u WAYLAND_DISPLAY xvfb-run -a timeout 10s flatpak run --nosocket=wayland --socket=x11 --env=GDK_BACKEND=x11 io.github.cheviiot.alcove
 ```
+
+## Before a release
+
+The automated checks run under Xvfb and cannot stand in for a selected GNOME
+or KDE portal backend. Run this matrix in a disposable GNOME Wayland or KDE
+Plasma session — never on the developer's active display:
+
+1. Record desktop and portal package versions.
+2. Open **System Capabilities** and record all reported interface versions and
+   launcher types.
+3. Create an offline application, approve its launcher, repair it, and remove
+   it.
+4. Cancel one launcher confirmation and verify that no application data is
+   committed.
+5. Deny one launcher request by desktop policy and verify that the diagnostic
+   says `Denied`, not `Cancelled`.
+6. Create a backup, cancel restore once, then restore it and verify that the
+   File Chooser and Documents paths work.
+7. Confirm that no launcher appears in the host filesystem except through the
+   portal-managed location.
 
 Use English for code, identifiers, and technical documentation. User-facing
 strings must be translatable; update the Russian catalog when adding UI text.

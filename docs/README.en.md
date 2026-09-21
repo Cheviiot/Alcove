@@ -54,7 +54,7 @@ The only thing Alcove reaches out to is the websites you opened yourself.
 
 [Issues](https://github.com/Cheviiot/Alcove/issues) ·
 [CONTRIBUTING.md](CONTRIBUTING.md) ·
-[Interface](gnome-hig.md) ·
+[Interface](interface.md) ·
 [Threat model](threat-model.md) ·
 [Changelog](CHANGELOG.md)
 

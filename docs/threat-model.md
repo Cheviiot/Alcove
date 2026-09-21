@@ -47,6 +47,38 @@ compatible.
 - Ship compatibility recommendations locally without telemetry or remote
   catalog updates.
 
+## Portal interfaces
+
+| Operation | Required interface | Interface version required |
+| --- | --- | --- |
+| Create, repair, or remove a launcher | [`org.freedesktop.portal.DynamicLauncher`](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.DynamicLauncher.html) with the `Application` launcher type | 1 |
+| Choose a backup, icon, filter list, download, or backup destination | [`org.freedesktop.portal.FileChooser`](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.FileChooser.html) | 4 |
+| Make a selected backup available inside Flatpak | [`org.freedesktop.portal.Documents`](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Documents.html) | 5 |
+| Optional background/autostart | `org.freedesktop.portal.Background` | Reported at runtime |
+
+The System Capabilities dialog probes each interface independently, records
+the version exposed by the active session, and displays the Dynamic Launcher
+type bitmask as `Application` and `Web application` support. An unavailable
+File Chooser does not hide a working Dynamic Launcher, and vice versa.
+
+Portal operation failures have distinct meanings:
+
+- **Unavailable** — the D-Bus interface or selected backend is absent.
+- **Unsupported** — the interface exists but lacks the required launcher type
+  or version.
+- **Cancelled** — the user dismissed the request; no failure recovery is
+  required.
+- **Denied** — desktop policy or the user rejected the operation.
+- **Failed** — the portal returned another operational error.
+
+Create and restore remain staged transactions. A failed launcher installation
+is rolled back; a failed launcher removal preserves local metadata and profile
+data, except that an already missing launcher is accepted. No diagnostic path
+grants direct host filesystem access.
+
+GNOME is the supported target. KDE remains best-effort and receives actionable
+capability diagnostics rather than a promise of native integration.
+
 ## Principal threats and controls
 
 | Threat | Control |

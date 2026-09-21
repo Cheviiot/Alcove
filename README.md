@@ -52,7 +52,7 @@ flatpak install --user https://cheviiot.github.io/Alcove/alcove.flatpakref
 
 [Issues](https://github.com/Cheviiot/Alcove/issues) ·
 [CONTRIBUTING.md](docs/CONTRIBUTING.md) ·
-[Интерфейс](docs/gnome-hig.md) ·
+[Интерфейс](docs/interface.md) ·
 [Модель угроз](docs/threat-model.md) ·
 [История изменений](docs/CHANGELOG.md)
 
