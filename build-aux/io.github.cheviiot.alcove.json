@@ -194,6 +194,9 @@
           "commit": "v0.1.0"
         },
         "generated-sources.json"
+      ],
+      "post-install": [
+        "install -d /app/extensions/chromium-native"
       ]
     }
   ]

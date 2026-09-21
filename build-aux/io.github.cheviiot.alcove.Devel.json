@@ -205,6 +205,9 @@
           ]
         },
         "generated-sources.json"
+      ],
+      "post-install": [
+        "install -d /app/extensions/chromium-native"
       ]
     }
   ]
