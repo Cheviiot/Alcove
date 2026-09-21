@@ -64,7 +64,10 @@
         padding: .9rem 1.1rem; margin: 0 0 .9rem; font-size: .88rem;
         white-space: pre-wrap; overflow-wrap: anywhere;
       }
+      .install h3 { font-size: 1.05rem; font-weight: 600; margin: 2rem 0 .8rem; }
       .install p { margin: 0; color: var(--muted); font-size: .93rem; }
+      .install p + p { margin-top: .5rem; }
+      .install code { font-size: .86rem; }
 
       footer { border-top: 1px solid var(--line); padding: 1.75rem 0 3rem; color: var(--muted); font-size: .88rem; }
       footer a { color: inherit; }
@@ -97,8 +100,8 @@
           <a class="btn" href="https://github.com/Cheviiot/Alcove"><span lang="ru">Исходный код</span><span lang="en">Source</span></a>
         </div>
         <p class="note">
-          <span lang="ru">Flatpak · x86_64 и aarch64</span>
-          <span lang="en">Flatpak · x86_64 and aarch64</span>
+          <span lang="ru">Flatpak · x86_64 и aarch64 · GNOME 50</span>
+          <span lang="en">Flatpak · x86_64 and aarch64 · GNOME 50</span>
         </p>
       </header>
 
@@ -138,8 +141,17 @@
       <section class="install">
         <h2><span lang="ru">Установка</span><span lang="en">Install</span></h2>
         <pre><code>flatpak install --user https://cheviiot.github.io/Alcove/alcove.flatpakref</code></pre>
-        <p lang="ru">Дополнение Chromium — <a href="alcove-chromium-native.flatpakref">отдельно</a>, только по вашему решению.</p>
-        <p lang="en">The Chromium add-on installs <a href="alcove-chromium-native.flatpakref">separately</a>, only if you choose it.</p>
+        <p lang="ru">5 МБ загрузки, 13 МБ на диске. Нужен Flatpak и среда <code>org.gnome.Platform</code> 50 — если её нет, Flatpak поставит её с Flathub сам.</p>
+        <p lang="en">A 5 MB download, 13 MB installed. You need Flatpak and the <code>org.gnome.Platform</code> 50 runtime; if it is missing, Flatpak pulls it from Flathub for you.</p>
+        <p lang="ru">Репозиторий и все сборки подписаны ключом проекта. Есть и готовые пакеты — на <a href="https://github.com/Cheviiot/Alcove/releases">странице выпусков</a>.</p>
+        <p lang="en">The repository and every build are signed with the project key. Ready-made bundles are on the <a href="https://github.com/Cheviiot/Alcove/releases">releases page</a>.</p>
+
+        <h3><span lang="ru">Движок Chromium</span><span lang="en">The Chromium engine</span></h3>
+        <pre><code>flatpak install --user https://cheviiot.github.io/Alcove/alcove-chromium-native.flatpakref</code></pre>
+        <p lang="ru">По умолчанию работает WebKitGTK, он уже внутри. Chromium — для сайтов, которым WebKitGTK не хватает: <a href="alcove-chromium-native.flatpakref">ставится отдельно</a> и только по вашему решению.</p>
+        <p lang="en">WebKitGTK is the default and is already inside. Chromium is for sites WebKitGTK cannot serve: it <a href="alcove-chromium-native.flatpakref">installs separately</a>, only if you choose it.</p>
+        <p lang="ru">150 МБ загрузки, 364 МБ на диске, только x86_64. После установки закройте и откройте Alcove заново.</p>
+        <p lang="en">A 150 MB download, 364 MB installed, x86_64 only. Close and reopen Alcove afterwards.</p>
       </section>
 
       <footer>
