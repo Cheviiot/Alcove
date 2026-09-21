@@ -38,7 +38,7 @@ jobs:
           fingerprint="$(gpg --batch --with-colons --list-secret-keys 'Alcove Flatpak Repository' | awk -F: '$1 == "fpr" { print $10; exit }')"
           test "$fingerprint" = FA640607BEBFD82E61EF72EF33ADDA415AF7FE09
           echo "fingerprint=$fingerprint" >> "$GITHUB_OUTPUT"
-      - uses: flatpak/flatpak-github-actions/flatpak-builder@aa777012a985fe1b1fd3e66ea2173609cf0c9a70
+      - uses: flatpak/flatpak-github-actions/flatpak-builder@79327416609af08178ad73b352877e51450790b3
         with:
           build-bundle: false
           manifest-path: packaging/flatpak/io.github.cheviiot.alcove.json
