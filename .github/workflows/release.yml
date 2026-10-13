@@ -47,7 +47,7 @@ jobs:
           repo-dir: repo-${{ matrix.variant.arch }}
       - name: Pack signed architecture repository
         run: tar -C "repo-${{ matrix.variant.arch }}" -cf "Alcove-repo-${{ matrix.variant.arch }}.tar" .
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: Alcove-repo-${{ matrix.variant.arch }}
           path: Alcove-repo-${{ matrix.variant.arch }}.tar
@@ -146,7 +146,7 @@ jobs:
             --gpg-keys=packaging/repo/alcove-repository.gpg \
             public/repo Alcove-Chromium-x86_64.flatpak \
             io.github.cheviiot.alcove.ChromiumNative master
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: Alcove-release-bundles
           path: Alcove-*.flatpak
